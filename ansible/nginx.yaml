@@ -10,6 +10,7 @@
     gitops_namespace: nginx
     gitops_output_dir: "../model/nginx/"
     gitops_service_name: nginx
+    gitops_service_port: 80
     gitops_service_replicas: 5
 
     # homelab_k8s_namespace: nginx

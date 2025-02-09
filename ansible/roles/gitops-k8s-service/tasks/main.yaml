@@ -1,30 +1,14 @@
 ## AHL
 ---
-# - name: Create the k8s namespace.
-#   kubernetes.core.k8s:
-#     state: present
-#     template: homelab-k8s-namespace.yaml.j2
-
-# - name: Create the k8s deployment.
-#   kubernetes.core.k8s:
-#     state: "{{ homelab_k8s_state }}"
-#     template: homelab-k8s-deployment.yaml.j2
-
-- name: Create an Ansibile config file.
+- name: Write a k8s manifest for the deployment.
   ansible.builtin.template:
     src: gitops-k8s-deployment.yaml.j2
     dest: "{{ gitops_output_dir }}/gitops-k8s-deployment-{{ gitops_service_name }}.yaml"
 
-# - name: Create the k8s service.
-#   kubernetes.core.k8s:
-#     state: "{{ homelab_k8s_state }}"
-#     template: "{{ homelab_k8s_service_template | default('homelab-k8s-service-cluster-ip.yaml.j2') }}"
-
-
-# - name: Create an Ansibile config file.
-#   ansible.builtin.template:
-#     src: homelab-k8s-service-cluster-ip.yaml.j2
-#     dest: "/tmp/homelab-k8s-service-{{ homelab_k8s_service_name }}.yaml"
+- name: Write a k8s manifest for the service.
+  ansible.builtin.template:
+    src: gitops-k8s-service-cluster-ip.yaml.j2
+    dest: "/tmp/gitops-k8s-service-cluster-ip-{{ gitops_service_name }}.yaml"
 
 # - name: Create the Traefik ingress(es).
 #   kubernetes.core.k8s:

@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ gitops_service_name }}
+  namespace: {{ gitops_namespace }}
+spec:
+  selector:
+    app: {{ gitops_application_name | default(gitops_service_name) }}
+  ports:
+  - name: http
+    targetPort: {{ gitops_service_target_port | default(gitops_service_port) }}
+    port: {{ gitops_service_port }}
