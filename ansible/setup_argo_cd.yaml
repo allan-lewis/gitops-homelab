@@ -1,0 +1,24 @@
+---
+- name: Setup Argo CD.
+  hosts: argocd_setup_nodes
+  become: no
+  gather_facts: no
+
+  tasks:
+  - name: Setup the Argo CD namespace.
+    kubernetes.core.k8s:
+      name: argocd
+      kind: namespace
+      state: present
+
+  - name: Download the Argo CD manifest.
+    ansible.builtin.get_url:
+      url: https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+      dest: /tmp/argo-cd-install.yaml
+      mode: '0664'
+
+  - name: Setup Argo CD.
+    kubernetes.core.k8s:
+      name: argocd
+      src: /tmp/argo-cd-install.yaml
+      state: present
