@@ -1,5 +1,10 @@
 ## AHL
 ---
+- name: Write a k8s manifest for the namespace.
+  ansible.builtin.template:
+    src: gitops-k8s-namespace.yaml.j2
+    dest: "{{ gitops_output_dir }}/gitops-k8s-namespace-{{ gitops_service_name }}.yaml"
+
 - name: Write a k8s manifest for the deployment.
   ansible.builtin.template:
     src: gitops-k8s-deployment.yaml.j2
