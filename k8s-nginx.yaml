@@ -1,1 +1,15 @@
 ---
+- name: Install nginx.
+  hosts: localhost
+  become: no
+  gather_facts: no
+  vars:
+    homelab_k8s_namespace: nginx
+    homelab_k8s_service_name: nginx
+    homelab_k8s_service_port: 80
+
+  tasks:
+    - name: Write the k8s manifest for a Cluster IP service.
+      ansible.builtin.template:
+        src: homelab-k8s-service-cluster-ip.yaml.j2
+        dest: "nginx/k8s-service-cluster-ip.yaml.yaml"
