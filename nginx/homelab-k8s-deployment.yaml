@@ -22,9 +22,10 @@ spec:
         app: nginx
     spec:
       containers:
-      - name: nginx
-        image: nginx:1.27.4
+      - name: nginx 
+        image: nginx:1.26.3 
         imagePullPolicy: "Always"
         env:
         volumeMounts:
       volumes:
+ 

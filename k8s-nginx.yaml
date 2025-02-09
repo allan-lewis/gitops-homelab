@@ -4,11 +4,20 @@
   become: no
   gather_facts: no
   vars:
+    homelab_k8s_container_image: nginx
+    homelab_k8s_container_name: nginx
+    homelab_k8s_container_version: 1.26.3
     homelab_k8s_namespace: nginx
     homelab_k8s_service_name: nginx
     homelab_k8s_service_port: 80
+    homelab_k8s_service_replicas: 5
 
   tasks:
+    - name: Write the k8s manifest for a deployment.
+      ansible.builtin.template:
+        src: homelab-k8s-deployment.yaml.j2
+        dest: "nginx/homelab-k8s-deployment.yaml"
+
     - name: Write the k8s manifest for a Cluster IP service.
       ansible.builtin.template:
         src: homelab-k8s-service-cluster-ip.yaml.j2
