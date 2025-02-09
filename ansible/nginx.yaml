@@ -1,0 +1,21 @@
+---
+- name: Install nginx.
+  hosts: localhost
+  become: no
+  gather_facts: no
+  vars:
+    container_image: nginx
+    container_name: nginx
+    container_version: 1.27.4
+    deployment_namespace: nginx
+    output_dir: "../model/nginx/"
+    service_name: nginx
+    service_replicas: 5
+
+    # homelab_k8s_namespace: nginx
+    # homelab_k8s_service_port: 80
+    # homelab_k8s_traefik_routes:
+    #   - host: nginx.nonprod.allanshomelab.com
+    
+  roles:
+    - role: k8s-service
