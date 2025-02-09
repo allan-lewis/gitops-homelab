@@ -5,6 +5,6 @@
     ":dependencyDashboard"
   ],
   "kubernetes": {
-    "fileMatch": ["k8s/.+\\.yaml$"]
+    "fileMatch": ["\\.yaml$"]
   }
 }
