@@ -8,7 +8,7 @@
 - name: Write a k8s manifest for the service.
   ansible.builtin.template:
     src: gitops-k8s-service-cluster-ip.yaml.j2
-    dest: "/tmp/gitops-k8s-service-cluster-ip-{{ gitops_service_name }}.yaml"
+    dest: "{{ gitops_output_dir }}/gitops-k8s-service-cluster-ip-{{ gitops_service_name }}.yaml"
 
 # - name: Create the Traefik ingress(es).
 #   kubernetes.core.k8s:
