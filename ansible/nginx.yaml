@@ -12,11 +12,8 @@
     gitops_service_name: nginx
     gitops_service_port: 80
     gitops_service_replicas: 5
+    gitops_traefik_routes:
+      - host: nginx.nonprod.allanshomelab.com
 
-    # homelab_k8s_namespace: nginx
-    # homelab_k8s_service_port: 80
-    # homelab_k8s_traefik_routes:
-    #   - host: nginx.nonprod.allanshomelab.com
-    
   roles:
     - role: gitops-k8s-service

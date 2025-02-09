@@ -10,13 +10,7 @@
     src: gitops-k8s-service-cluster-ip.yaml.j2
     dest: "{{ gitops_output_dir }}/gitops-k8s-service-cluster-ip-{{ gitops_service_name }}.yaml"
 
-# - name: Create the Traefik ingress(es).
-#   kubernetes.core.k8s:
-#     state: "{{ homelab_k8s_state }}"
-#     template: homelab-k8s-traefik-ingress-route.yaml.j2
-#   when: homelab_k8s_traefik_routes is defined
-
-# - name: Create an Ansibile config file.
-#   ansible.builtin.template:
-#     src: homelab-k8s-traefik-ingress-route.yaml.j2
-#     dest: "/tmp/homelab-k8s-ingress-{{ homelab_k8s_service_name }}.yaml"
+- name: Write a k8s manifest for the Traefik ingress.
+  ansible.builtin.template:
+    src: gitops-k8s-traefik-ingress.yaml.j2
+    dest: "{{ gitops_output_dir }}/gitops-k8s-traefik-ingress-{{ gitops_service_name }}.yaml"
