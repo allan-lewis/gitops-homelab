@@ -11,6 +11,8 @@
     homelab_k8s_service_name: nginx
     homelab_k8s_service_port: 80
     homelab_k8s_service_replicas: 5
+    homelab_k8s_traefik_routes:
+      - host: nginx.nonprod.allanshomelab.com
 
   tasks:
     - name: Write the k8s manifest for a deployment.
@@ -21,4 +23,9 @@
     - name: Write the k8s manifest for a Cluster IP service.
       ansible.builtin.template:
         src: homelab-k8s-service-cluster-ip.yaml.j2
-        dest: "nginx/k8s-service-cluster-ip.yaml.yaml"
+        dest: "nginx/k8s-service-cluster-ip.yaml"
+
+    - name: Write the k8s manifest for a Traefik ingress.
+      ansible.builtin.template:
+        src: homelab-k8s-traefik-ingress-route.yaml.j2
+        dest: "nginx/homelab-k8s-traefik-ingress-route.yaml"
