@@ -3,5 +3,8 @@
   "extends": [
     "config:recommended",
     ":dependencyDashboard"
-  ]
+  ],
+  "kubernetes": {
+    "fileMatch": ["raw/.+\\.yaml"]
+  }
 }
