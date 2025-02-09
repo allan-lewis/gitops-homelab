@@ -4,13 +4,13 @@
   become: no
   gather_facts: no
   vars:
-    container_image: nginx
-    container_name: nginx
-    container_version: 1.27.4
-    deployment_namespace: nginx
-    output_dir: "../model/nginx/"
-    service_name: nginx
-    service_replicas: 5
+    gitops_container_image: nginx
+    gitops_container_name: nginx
+    gitops_container_version: 1.27.4
+    gitops_namespace: nginx
+    gitops_output_dir: "../model/nginx/"
+    gitops_service_name: nginx
+    gitops_service_replicas: 5
 
     # homelab_k8s_namespace: nginx
     # homelab_k8s_service_port: 80
@@ -18,4 +18,4 @@
     #   - host: nginx.nonprod.allanshomelab.com
     
   roles:
-    - role: k8s-service
+    - role: gitops-k8s-service

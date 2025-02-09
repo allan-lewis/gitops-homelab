@@ -12,8 +12,8 @@
 
 - name: Create an Ansibile config file.
   ansible.builtin.template:
-    src: k8s-deployment.yaml.j2
-    dest: "{{ output_dir }}/k8s-deployment-{{ service_name }}.yaml"
+    src: gitops-k8s-deployment.yaml.j2
+    dest: "{{ gitops_output_dir }}/gitops-k8s-deployment-{{ gitops_service_name }}.yaml"
 
 # - name: Create the k8s service.
 #   kubernetes.core.k8s:
