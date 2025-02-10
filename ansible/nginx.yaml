@@ -8,12 +8,29 @@
     gitops_container_name: nginx
     gitops_container_version: 1.27.4
     gitops_namespace: nginx
-    gitops_output_dir: "../model/nginx/"
     gitops_service_name: nginx
     gitops_service_port: 80
-    gitops_service_replicas: 5
-    gitops_traefik_routes:
-      - host: nginx.nonprod.allanshomelab.com
 
   roles:
     - role: gitops-k8s-service
+      vars:
+        gitops_output_dir: "../model/nginx/nonprod/"
+        gitops_traefik_routes:
+          - host: nginx.nonprod.allanshomelab.com
+    - role: gitops-k8s-service
+      vars:
+        gitops_output_dir: "../model/nginx/production/"
+        gitops_service_replicas: 5
+        gitops_traefik_routes:
+          - host: 129monroe.com
+            authentik: true
+          - host: www.129monroe.com
+            authentik: true
+          - host: www.allanandvaia.com
+            authentik: true
+          - host: allanandvaia.com
+            authentik: true
+          - host: allanshomelab.com
+            authentik: true
+          - host: www.allanshomelab.com
+            authentik: true
