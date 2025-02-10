@@ -8,11 +8,17 @@
     gitops_container_name: it-tools
     gitops_container_version: 2024.10.22-7ca5933
     gitops_namespace: it-tools
-    gitops_output_dir: "../model/it-tools/"
     gitops_service_name: it-tools
     gitops_service_port: 80
-    gitops_traefik_routes:
-      - host: tools.nonprod.allanshomelab.com
 
   roles:
     - role: gitops-k8s-service
+      vars:
+        gitops_output_dir: "../model/it-tools/nonprod/"
+        gitops_traefik_routes:
+          - host: tools.nonprod.allanshomelab.com
+    - role: gitops-k8s-service
+      vars:
+        gitops_output_dir: "../model/it-tools/production/"
+        gitops_traefik_routes:
+          - host: tools.k8s.allanshomelab.com
