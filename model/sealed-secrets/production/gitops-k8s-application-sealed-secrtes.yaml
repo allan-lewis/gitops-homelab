@@ -1,11 +1,4 @@
 ---
-kind: Namespace
-apiVersion: v1
-metadata:
-  name: kubeseal
-  labels:
-    name: kubeseal
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -21,4 +14,4 @@ spec:
       releaseName: sealed-secrets
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: kubeseal
+    namespace: kube-system
