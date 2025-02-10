@@ -1,5 +1,5 @@
 ---
-- name: Install nginx.
+- name: Generate k8s manifests for nginx.
   hosts: localhost
   become: no
   gather_facts: no

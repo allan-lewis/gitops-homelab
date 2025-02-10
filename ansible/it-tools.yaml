@@ -1,5 +1,5 @@
 ---
-- name: Install IT Tools.
+- name: Generate k8s manifests for IT Tools.
   hosts: localhost
   become: no
   gather_facts: no
