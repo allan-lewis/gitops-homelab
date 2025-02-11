@@ -13,14 +13,12 @@
     gitops_helm_namespace: "traefik"
 
   roles:
-    # Start from scratch
     - role: gitops-clean-output
       vars:
         gitops_output_dir: "../model/traefik/nonprod/"
     - role: gitops-clean-output
       vars:
         gitops_output_dir: "../model/traefik/production/"
-    # Write manifests from the Helm chart
     - role: gitops-helm-template
       vars:
         gitops_traefik_load_balancer_ip: "192.168.86.49"
@@ -29,7 +27,6 @@
         gitops_helm_value_files:
           - template: "gitops-traefik-values.yaml.j2"
             dest: "{{ gitops_temp_values_location }}/gitops-traefik-values.yaml"
-    # Separately write manifests for CRDs.
     - role: gitops-static-yaml
       vars:
         gitops_output_dir: "../model/traefik/nonprod/"
