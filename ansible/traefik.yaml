@@ -36,12 +36,14 @@
         gitops_file_dest: "gitops-crds-traefik.yaml"
 
   tasks:
-    - name: Write an ingress for the Traefik dashboard.
+    - name: Write a manifest for the ingress for the Traefik dashboard.
       ansible.builtin.template:
-        src: "gitops-traefik-dashboard-ingress.yaml.j2"
-        dest: "{{ item.dest }}"
-      vars: 
-        gitops_traefik_host: "{{ item.host }}"
-      with_items:
-        - dest: "../model/traefik/nonprod/gitops-ingress-traefik-dashboard.yaml"
-          host: "traefik.nonprod.allanshomelab.com"
+        src: "gitops-traefik-ingress-dashboard.yaml.j2"
+        dest: "../model/traefik/nonprod/gitops-traefik-ingress-dashboard.yaml"
+      vars:
+        gitops_traefik_host: "traefik.nonprod.allanshomelab.com"
+
+    - name: Write a manifest for the custom Traefik middleware.
+      ansible.builtin.template:
+        src: "gitops-traefik-middleware-custom.yaml.j2"
+        dest: "../model/traefik/nonprod/gitops-traefik-middleware-custom.yaml"
