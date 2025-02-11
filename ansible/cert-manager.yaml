@@ -1,0 +1,16 @@
+---
+- name: Generate k8s manifests for Cert Manager.
+  hosts: localhost
+  become: no
+  gather_facts: no
+  vars:
+    gitops_file_url: "https://github.com/cert-manager/cert-manager/releases/download/v1.17.0/cert-manager.yaml"
+    gitops_file_dest: "gitops-k8s-cert-manager-install.yaml"
+
+  roles:
+    - role: gitops-get-file
+      vars:
+        gitops_output_dir: "../model/cert-manager/nonprod/"
+    - role: gitops-get-file
+      vars:
+        gitops_output_dir: "../model/cert-manager/production/"
