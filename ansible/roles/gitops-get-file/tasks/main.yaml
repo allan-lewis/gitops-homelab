@@ -1,0 +1,5 @@
+---
+- name: Download remote file.
+  ansible.builtin.get_url:
+    url: "{{ gitops_file_url }}"
+    dest: "{{ gitops_output_dir }}/{{ gitops_file_dest }}"

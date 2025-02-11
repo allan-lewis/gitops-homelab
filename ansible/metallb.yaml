@@ -1,0 +1,41 @@
+---
+- name: Generate k8s manifests for Metal LB.
+  hosts: localhost
+  become: no
+  gather_facts: no
+  vars:
+    gitops_file_url: "https://raw.githubusercontent.com/metallb/metallb/v0.14.9/config/manifests/metallb-native.yaml"
+    gitops_file_dest: "gitops-k8s-metallb-install.yaml"
+
+  roles:
+    - role: gitops-get-file
+      vars:
+        gitops_output_dir: "../model/metallb/nonprod/"
+    - role: gitops-get-file
+      vars:
+        gitops_output_dir: "../model/metallb/production/"
+
+  tasks:
+    - name: Ignore load balancer exclusion for control nodes.
+      ansible.builtin.lineinfile:
+        dest: "{{ item }}"
+        insertafter: '        - --port=7472'
+        line: "        - --ignore-exclude-lb=true"
+        state: present
+      with_items: 
+        - "../model/metallb/nonprod/{{ gitops_file_dest }}"
+        - "../model/metallb/production/{{ gitops_file_dest }}"
+    - name: Write the config file for MetalLB.
+      ansible.builtin.template:
+        src: "gitops-k8s-metallb-config.yaml.j2"
+        dest: "{{ item.dest }}"
+      vars:
+        metallb_range_start: "{{ item.start }}"
+        metallb_range_end: "{{ item.end }}"
+      with_items: 
+        - dest: "../model/metallb/nonprod/gitops-k8s-metallb-config.yaml"
+          start: 192.168.86.40
+          end: 192.168.86.60
+        - dest: "../model/metallb/production/gitops-k8s-metallb-config.yaml"
+          start: 192.168.86.181
+          end: 192.168.86.199
