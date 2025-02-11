@@ -1,0 +1,13 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: certificate-production
+  namespace: default
+spec:
+  secretName: production-tls
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: '{{ cert_manager_common_name }}'
+  dnsNames: {{ cert_manager_dns_names }}
