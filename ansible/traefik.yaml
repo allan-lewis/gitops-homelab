@@ -4,6 +4,7 @@
   become: no
   gather_facts: no
   vars:
+    gitops_file_url: "https://raw.githubusercontent.com/traefik/traefik/v3.3/docs/content/reference/dynamic-configuration/kubernetes-crd-definition-v1.yml"
     gitops_helm_repo_name: "traefik"
     gitops_helm_repo_url: "https://traefik.github.io/charts"
     gitops_helm_chart_ref: "traefik/traefik"
@@ -12,6 +13,14 @@
     gitops_helm_namespace: "traefik"
 
   roles:
+    # Start from scratch
+    - role: gitops-clean-output
+      vars:
+        gitops_output_dir: "../model/traefik/nonprod/"
+    - role: gitops-clean-output
+      vars:
+        gitops_output_dir: "../model/traefik/production/"
+    # Write manifests from the Helm chart
     - role: gitops-helm-template
       vars:
         gitops_traefik_load_balancer_ip: "192.168.86.49"
@@ -20,13 +29,11 @@
         gitops_helm_value_files:
           - template: "gitops-traefik-values.yaml.j2"
             dest: "{{ gitops_temp_values_location }}/gitops-traefik-values.yaml"
-        # gitops_traefik_routes:
-        #   - host: tools.nonprod.allanshomelab.com
-    # - role: gitops-helm-template
-    #   vars:
-    #     gitops_output_dir: "../model/it-tools/production/"
-    #     gitops_traefik_routes:
-    #       - host: tools.k8s.allanshomelab.com
+    # Separately write manifests for CRDs.
+    - role: gitops-static-yaml
+      vars:
+        gitops_output_dir: "../model/traefik/nonprod/"
+        gitops_file_dest: "gitops-crds-traefik.yaml"
 
   tasks:
     - name: Write an ingress for the Traefik dashboard.
@@ -36,5 +43,5 @@
       vars: 
         gitops_traefik_host: "{{ item.host }}"
       with_items:
-        - dest: "../model/traefik/nonprod/gitops-traefik-dashboard-ingress.yaml"
+        - dest: "../model/traefik/nonprod/gitops-ingress-traefik-dashboard.yaml"
           host: "traefik.nonprod.allanshomelab.com"

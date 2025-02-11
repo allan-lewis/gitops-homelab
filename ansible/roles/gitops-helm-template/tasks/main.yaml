@@ -1,7 +1,4 @@
 ---
-- ansible.builtin.include_role:
-    name: gitops-clean-output
-
 - name: Setup the Helm respository.
   kubernetes.core.helm_repository:
     name: "{{ gitops_helm_repo_name }}"
