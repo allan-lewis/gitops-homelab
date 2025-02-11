@@ -27,3 +27,14 @@
     #     gitops_output_dir: "../model/it-tools/production/"
     #     gitops_traefik_routes:
     #       - host: tools.k8s.allanshomelab.com
+
+  tasks:
+    - name: Write an ingress for the Traefik dashboard.
+      ansible.builtin.template:
+        src: "gitops-traefik-dashboard-ingress.yaml.j2"
+        dest: "{{ item.dest }}"
+      vars: 
+        gitops_traefik_host: "{{ item.host }}"
+      with_items:
+        - dest: "../model/traefik/nonprod/gitops-traefik-dashboard-ingress.yaml"
+          host: "traefik.nonprod.allanshomelab.com"
