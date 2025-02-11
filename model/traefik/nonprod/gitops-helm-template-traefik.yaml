@@ -4,10 +4,10 @@ kind: ServiceAccount
 apiVersion: v1
 metadata:
   name: release-name-traefik
-  namespace: default
+  namespace: traefik
   labels:
     app.kubernetes.io/name: traefik
-    app.kubernetes.io/instance: release-name-default
+    app.kubernetes.io/instance: release-name-traefik
     helm.sh/chart: traefik-34.3.0
     app.kubernetes.io/managed-by: Helm
   annotations:
@@ -17,10 +17,10 @@ automountServiceAccountToken: false
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: release-name-traefik-default
+  name: release-name-traefik-traefik
   labels:
     app.kubernetes.io/name: traefik
-    app.kubernetes.io/instance: release-name-default
+    app.kubernetes.io/instance: release-name-traefik
     helm.sh/chart: traefik-34.3.0
     app.kubernetes.io/managed-by: Helm
 rules:
@@ -94,30 +94,30 @@ rules:
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: release-name-traefik-default
+  name: release-name-traefik-traefik
   labels:
     app.kubernetes.io/name: traefik
-    app.kubernetes.io/instance: release-name-default
+    app.kubernetes.io/instance: release-name-traefik
     helm.sh/chart: traefik-34.3.0
     app.kubernetes.io/managed-by: Helm
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: release-name-traefik-default
+  name: release-name-traefik-traefik
 subjects:
   - kind: ServiceAccount
     name: release-name-traefik
-    namespace: default
+    namespace: traefik
 ---
 # Source: traefik/templates/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
   name: release-name-traefik
-  namespace: default
+  namespace: traefik
   labels:
     app.kubernetes.io/name: traefik
-    app.kubernetes.io/instance: release-name-default
+    app.kubernetes.io/instance: release-name-traefik
     helm.sh/chart: traefik-34.3.0
     app.kubernetes.io/managed-by: Helm
   annotations:
@@ -126,7 +126,7 @@ spec:
   loadBalancerIP: 192.168.86.49
   selector:
     app.kubernetes.io/name: traefik
-    app.kubernetes.io/instance: release-name-default
+    app.kubernetes.io/instance: release-name-traefik
   ports:
   - port: 80
     name: "web"
@@ -142,10 +142,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: release-name-traefik
-  namespace: default
+  namespace: traefik
   labels:
     app.kubernetes.io/name: traefik
-    app.kubernetes.io/instance: release-name-default
+    app.kubernetes.io/instance: release-name-traefik
     helm.sh/chart: traefik-34.3.0
     app.kubernetes.io/managed-by: Helm
   annotations:
@@ -154,7 +154,7 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: traefik
-      app.kubernetes.io/instance: release-name-default
+      app.kubernetes.io/instance: release-name-traefik
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -169,7 +169,7 @@ spec:
         prometheus.io/port: "9100"
       labels:
         app.kubernetes.io/name: traefik
-        app.kubernetes.io/instance: release-name-default
+        app.kubernetes.io/instance: release-name-traefik
         helm.sh/chart: traefik-34.3.0
         app.kubernetes.io/managed-by: Helm
     spec:
@@ -280,7 +280,7 @@ metadata:
     ingressclass.kubernetes.io/is-default-class: "true"
   labels:
     app.kubernetes.io/name: traefik
-    app.kubernetes.io/instance: release-name-default
+    app.kubernetes.io/instance: release-name-traefik
     helm.sh/chart: traefik-34.3.0
     app.kubernetes.io/managed-by: Helm
   name: release-name-traefik

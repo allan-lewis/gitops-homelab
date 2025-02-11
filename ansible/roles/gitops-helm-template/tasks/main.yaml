@@ -39,7 +39,7 @@
   kubernetes.core.helm_template:
     chart_ref: "{{ gitops_helm_chart_ref }}"
     chart_version: "{{ gitops_helm_chart_version }}"
-    # output_dir: "{{ gitops_output_dir }}"
+    release_namespace: "{{ gitops_helm_namespace }}"
     values_files: "{{ gitops_helm_value_file_destinations }}"
   register: helm_template_output
 
