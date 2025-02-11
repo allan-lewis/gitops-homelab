@@ -14,3 +14,12 @@
     - role: gitops-get-file
       vars:
         gitops_output_dir: "../model/cert-manager/production/"
+
+  tasks:
+    - name: Write the cluster issuer for Metal LB.
+      ansible.builtin.template:
+        src: "gitops-k8s-cert-manager-cluster-issuer.yaml.j2"
+        dest: "{{ item }}"
+      with_items:
+        - "../model/cert-manager/nonprod/gitops-k8s-cert-manager-cluster-issuer.yaml"
+        - "../model/cert-manager/production/gitops-k8s-cert-manager-cluster-issuer.yaml"
