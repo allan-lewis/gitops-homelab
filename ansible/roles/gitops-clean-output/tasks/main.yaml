@@ -1,0 +1,8 @@
+---
+- name: Clean output directory.
+  ansible.builtin.file:
+    state: "{{ item }}"
+    path: "{{ gitops_output_dir }}"
+  with_items:
+    - absent
+    - directory
