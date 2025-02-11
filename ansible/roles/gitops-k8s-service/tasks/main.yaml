@@ -1,4 +1,3 @@
-## AHL
 ---
 - name: Write a k8s manifest for the namespace.
   ansible.builtin.template:
