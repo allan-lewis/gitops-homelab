@@ -5,34 +5,36 @@
   gather_facts: no
   vars:
     gitops_file_url: "https://github.com/cert-manager/cert-manager/releases/download/v1.17.0/cert-manager.yaml"
-    gitops_file_dest: "gitops-k8s-cert-manager-install.yaml"
+    gitops_file_dest: "gitops-cert-manager-install.yaml"
+    model_nonprod: "../model/cert-manager/nonprod/"
+    model_production: "../model/cert-manager/production/"
 
   roles:
-    - role: gitops-get-file
+    # Don't delete because secrets need to be manually created.
+    - role: gitops-static-yaml
       vars:
-        gitops_output_dir: "../model/cert-manager/nonprod/"
-    - role: gitops-get-file
+        gitops_output_dir: "{{ model_nonprod }}"
+    - role: gitops-static-yaml
       vars:
-        gitops_output_dir: "../model/cert-manager/production/"
+        gitops_output_dir: "{{ model_production }}"
 
   tasks:
     - name: Write the cluster issuer for Cert Manager
       ansible.builtin.template:
-        src: "gitops-k8s-cert-manager-cluster-issuer.yaml.j2"
+        src: "gitops-cert-manager-cluster-issuer.yaml.j2"
         dest: "{{ item }}"
       with_items:
-        - "../model/cert-manager/nonprod/gitops-k8s-cert-manager-cluster-issuer.yaml"
-        - "../model/cert-manager/production/gitops-k8s-cert-manager-cluster-issuer.yaml"
-
+        - "{{ model_nonprod }}/gitops-cert-manager-cluster-issuer.yaml"
+        - "{{ model_production }}/gitops-cert-manager-cluster-issuer.yaml"
     - name: Write the certificate for Cert Manager.
       ansible.builtin.template:
-        src: "gitops-k8s-cert-manager-certificate.yaml.j2"
+        src: "gitops-cert-manager-certificate.yaml.j2"
         dest: "{{ item.dest }}"
       vars:
         cert_manager_common_name: "{{ item.common_name }}"
         cert_manager_dns_names: "{{ item.dns_names }}"
       with_items: 
-        - dest: "../model/cert-manager/nonprod/gitops-k8s-cert-manager-certificate.yaml"
+        - dest: "{{ model_nonprod }}/gitops-cert-manager-certificate.yaml"
           common_name: "traefik.nonprod.allanshomelab.com"
           dns_names:
             - "traefik.nonprod.allanshomelab.com"
@@ -44,4 +46,11 @@
             - "argocd.nonprod.allanshomelab.com"
             - "tools.nonprod.allanshomelab.com"
             - "*.nonprodhosts.allanshomelab.com"
-
+        - dest: "{{ model_production }}/gitops-cert-manager-certificate.yaml"
+          common_name: "*.local.allanshomelab.com"
+          dns_names:
+            - "*.local.allanshomelab.com"
+            - "*.hosts.allanshomelab.com"
+            - "*.k8s.allanshomelab.com"
+            - "*.syncthing.allanshomelab.com"
+            - "*.docker.allanshomelab.com"
