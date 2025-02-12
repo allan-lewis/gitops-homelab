@@ -42,5 +42,5 @@
 
 - name: Write the Helm templates to a file
   copy:
-    dest: "{{ gitops_output_dir }}/gitops-helm-template-{{ gitops_service_name }}.yaml"
+    dest: "{{ gitops_output_dir }}/gitops-{{ gitops_service_name }}-helm-template.yaml"
     content: "{{ helm_template_output.stdout }}"

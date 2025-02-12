@@ -1,0 +1,13 @@
+{% for endpoint in gitops_traefik_services %}
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: {{ endpoint.service_name }}
+  namespace: {{ gitops_namespace }}
+subsets:
+  - addresses:
+      - ip: {{ endpoint.service_endpoint }}
+    ports:
+      - port: {{ endpoint.service_port }}
+{% endfor %}
