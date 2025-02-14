@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: https://github.com/allan-lewis/gitops-homelab
     targetRevision: HEAD
-    path: kustomizations/external-secrets/overlays/base
+    path: kustomizations/external-secrets/base
   destination: 
     server: https://kubernetes.default.svc
     namespace: external-secrets
