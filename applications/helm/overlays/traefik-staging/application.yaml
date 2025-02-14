@@ -13,6 +13,6 @@ spec:
     helm:
       releaseName: traefik
       valueFiles: 
-        - kustomizations/traefik/values.yaml
+        - values.yaml
   destination:
     namespace: traefik
