@@ -1,7 +1,8 @@
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: external-secrets
+  name: default-application-name
   namespace: argocd
   finalizers:
     - "resources-finalizer.argocd.argoproj.io"
@@ -11,10 +12,10 @@ spec:
   source:
     repoURL: https://github.com/allan-lewis/gitops-homelab
     targetRevision: HEAD
-    path: kustomizations/external-secrets/base
+    # path: manifests/external-secrets-doppler
   destination: 
     server: https://kubernetes.default.svc
-    namespace: external-secrets
+    # namespace: default
 
   syncPolicy:
     syncOptions:
