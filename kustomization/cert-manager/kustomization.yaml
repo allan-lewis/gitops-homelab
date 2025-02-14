@@ -4,3 +4,4 @@ kind: Kustomization
 
 resources:
   - https://github.com/cert-manager/cert-manager/releases/download/v1.17.1/cert-manager.yaml
+  - ../../manifests/cert-manager/external-secret.yaml
