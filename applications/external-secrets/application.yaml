@@ -5,16 +5,18 @@ metadata:
   name: external-secrets
   namespace: argocd
   finalizers:
-  - resources-finalizer.argocd.argoproj.io
+    - "resources-finalizer.argocd.argoproj.io"
 spec:
+  project: default
+  source:
+    chart: external-secrets
+    repoURL: https://charts.external-secrets.io
+    targetRevision: 0.14.2
+    helm:
+      releaseName: external-secrets
   destination:
     server: "https://kubernetes.default.svc"
     namespace: external-secrets
-  project: default
-  source:
-    path: manifests/external-secrets-doppler
-    repoURL: https://github.com/allan-lewis/gitops-homelab
-    targetRevision: HEAD
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
