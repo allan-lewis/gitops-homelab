@@ -9,5 +9,3 @@ spec:
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
-  commonName: ''
-  dnsNames: []
