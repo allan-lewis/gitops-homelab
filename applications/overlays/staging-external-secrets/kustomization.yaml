@@ -19,7 +19,7 @@ patches:
   patch: |-
     - op: add
       path: /spec/source/path
-      value: kustomizations/external-secrets/staging
+      value: kustomizations/external-secrets/overlays/staging
 - target:
     kind: Application
     name: .*
