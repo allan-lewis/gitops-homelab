@@ -6,3 +6,12 @@ resources:
   - https://raw.githubusercontent.com/metallb/metallb/v0.14.9/config/manifests/metallb-native.yaml
   - ip-address-pool.yaml
   - l2-advertisement.yaml
+
+patches:
+- target:
+    kind: DaemonSet
+    name: speaker
+  patch: |-
+    - op: add
+      path: /spec/template/spec/containers/0/args/0
+      value: --ignore-exclude-lb=true
