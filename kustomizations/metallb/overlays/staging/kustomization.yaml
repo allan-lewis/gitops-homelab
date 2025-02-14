@@ -3,3 +3,12 @@ kind: Kustomization
 
 resources:
   - ../../base
+
+patches:
+- target:
+    kind: DaemonSet
+    name: speaker
+  patch: |-
+    - op: add
+      path: /spec/template/spec/containers/0/args/0
+      value: --ignore-exclude-lb=true
