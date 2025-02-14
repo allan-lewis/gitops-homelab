@@ -1,0 +1,6 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+spec:
+  commonName: 'traefik.nonprod.allanshomelab.com'
+  dnsNames: ['traefik.nonprod.allanshomelab.com', 'longhorn.nonprod.allanshomelab.com', 'cloud.nonprod.allanshomelab.com', 'auth.nonprod.allanshomelab.com', 'nginx.nonprod.allanshomelab.com', 'wiki.nonprod.allanshomelab.com', 'argocd.nonprod.allanshomelab.com', 'tools.nonprod.allanshomelab.com', '*.nonprodhosts.allanshomelab.com']
