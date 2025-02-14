@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cert-manager
+  name: external-secrets-doppler
   namespace: argocd
   finalizers:
     - "resources-finalizer.argocd.argoproj.io"
@@ -11,10 +11,10 @@ spec:
   source:
     repoURL: https://github.com/allan-lewis/gitops-homelab
     targetRevision: HEAD
-    path: cert-manager
+    path: manifests/external-secrets-doppler
   destination: 
     server: https://kubernetes.default.svc
-    namespace: cert-manager
+    namespace: default
 
   syncPolicy:
     automated:
