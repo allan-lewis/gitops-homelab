@@ -1,0 +1,12 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-dashboard
+  namespace: default
+spec:
+  routes:
+    - kind: Rule
+      match: Host(`traefik.k8s.allanshomelab.com`)
+      services:
+        - name: api@internal
+          kind: TraefikService

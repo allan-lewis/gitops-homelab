@@ -15,7 +15,7 @@ patches:
       value: traefik
     - op: add
       path: /spec/source/path
-      value: kustomizations/traefik/staging
+      value: kustomizations/traefik/production
     - op: add
       path: /spec/destination/namespace
       value: traefik
