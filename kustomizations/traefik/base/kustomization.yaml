@@ -5,7 +5,7 @@ kind: Kustomization
 resources:
 - middleware.yaml
 - ingress-route-dashboard.yaml
-- ingress-routes.yaml
+- ingress-route.yaml
 
 helmCharts:
 - name: traefik
