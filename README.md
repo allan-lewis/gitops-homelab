@@ -11,7 +11,9 @@
 
 Run the command below to install ArgoCD into the k8s cluster.  This will enable ArgoCD to build Helm charts, and, finally, will manually create a secret containing a Doppler service token for later use with External Secrets. 
 
-<code>./argocd/bootstrap-argo-cd.sh</code>
+```
+./argocd/bootstrap-argo-cd.sh
+```
 
 ## Install ArgoCD Applications
 
