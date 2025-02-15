@@ -7,3 +7,6 @@ spec:
   routes:
     - kind: Rule
       match: Host(`traefik.nonprod.allanshomelab.com`)
+      services:
+        - name: api@internal
+          kind: TraefikService

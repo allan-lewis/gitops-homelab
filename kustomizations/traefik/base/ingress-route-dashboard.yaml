@@ -8,11 +8,6 @@ metadata:
 spec:
   entryPoints:
     - websecure
-  routes:
-    - kind: Rule
-      # match: Host(`traefik.nonprod.allanshomelab.com`)
-      services:
-        - name: api@internal
-          kind: TraefikService
+
   tls:
     secretName: production-tls
