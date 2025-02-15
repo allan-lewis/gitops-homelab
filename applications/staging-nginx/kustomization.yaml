@@ -13,17 +13,9 @@ patches:
     - op: replace
       path: /metadata/name
       value: nginx
-- target:
-    kind: Application
-    name: .*
-  patch: |-
     - op: add
       path: /spec/source/path
       value: kustomizations/boilerplate/environments/staging-nginx
-- target:
-    kind: Application
-    name: .*
-  patch: |-
     - op: add
       path: /spec/destination/namespace
       value: nginx
