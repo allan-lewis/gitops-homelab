@@ -53,3 +53,22 @@ patches:
     - op: replace
       path: /spec/ports/0/targetPort
       value: 80
+- target:
+    kind: IngressRoute
+    name: .*
+  patch: |-
+    - op: replace
+      path: /metadata/name
+      value: nginx
+    - op: replace
+      path: /spec/routes/0/match
+      value: Host(`nginx.nonprod.allanshomelab.com`)
+    - op: replace
+      path: /spec/routes/0/services/0/name
+      value: nginx
+    - op: replace
+      path: /spec/routes/0/services/0/namespace
+      value: nginx
+    - op: replace
+      path: /spec/routes/0/services/0/port
+      value: 80
