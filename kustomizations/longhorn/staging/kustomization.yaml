@@ -4,3 +4,10 @@ kind: Kustomization
 
 resources:
 - ../base/
+
+helmCharts:
+- name: longhorn
+  repo: https://traefik.github.io/charts
+  releaseName: longhorn
+  namespace: longhorn-system
+  version: 1.8.0
