@@ -11,3 +11,4 @@ helmCharts:
   releaseName: longhorn
   namespace: longhorn-system
   version: 1.8.0
+  valuesFile: values.yaml
