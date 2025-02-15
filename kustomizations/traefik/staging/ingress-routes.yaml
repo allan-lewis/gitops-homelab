@@ -3,8 +3,6 @@ kind: IngressRoute
 metadata:
   name: traefik-service-ingresses
   namespace: default
-  annotations: 
-    kubernetes.io/ingress.class: traefik-external
 spec:
   entryPoints:
     - websecure
@@ -20,5 +18,3 @@ spec:
           namespace:  argocd
           port: 443
           scheme: https        
-  tls:
-    secretName: production-tls
