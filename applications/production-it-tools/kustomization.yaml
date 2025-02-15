@@ -15,7 +15,7 @@ patches:
       value: it-tools
     - op: add
       path: /spec/source/path
-      value: kustomizations/boilerplate/environments/production-it-tools
+      value: kustomizations/boilerplate/environments/staging-it-tools
     - op: add
       path: /spec/destination/namespace
       value: it-tools
