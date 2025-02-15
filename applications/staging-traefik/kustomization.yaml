@@ -19,7 +19,7 @@ patches:
   patch: |-
     - op: add
       path: /spec/source/path
-      value: kustomizations/traefik/base
+      value: kustomizations/traefik/staging
 - target:
     kind: Application
     name: .*

@@ -9,8 +9,8 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`traefik.nonprod.allanshomelab.com`)
-      kind: Rule
+    - kind: Rule
+      # match: Host(`traefik.nonprod.allanshomelab.com`)
       services:
         - name: api@internal
           kind: TraefikService
