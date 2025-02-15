@@ -10,12 +10,12 @@ patches:
     kind: Application
     name: .*
   patch: |-
-    - op: replace
-      path: /metadata/name
-      value: metallb
     - op: add
       path: /spec/source/path
-      value: kustomizations/metallb/staging
+      value: kustomizations/metallb/production
     - op: add
       path: /spec/destination/namespace
       value: metallb-system
+    - op: replace
+      path: /metadata/name
+      value: metallb
