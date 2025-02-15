@@ -13,17 +13,9 @@ patches:
     - op: replace
       path: /metadata/name
       value: external-secrets
-- target:
-    kind: Application
-    name: .*
-  patch: |-
     - op: add
       path: /spec/source/path
-      value: kustomizations/external-secrets/overlays/staging
-- target:
-    kind: Application
-    name: .*
-  patch: |-
+      value: kustomizations/external-secrets/staging
     - op: add
       path: /spec/destination/namespace
       value: external-secrets
