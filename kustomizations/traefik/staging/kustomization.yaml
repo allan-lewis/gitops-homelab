@@ -7,3 +7,4 @@ resources:
 
 patches:
 - path: ingress-route-dashboard.yaml
+- path: ingress-routes.yaml
