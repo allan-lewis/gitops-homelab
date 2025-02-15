@@ -17,4 +17,15 @@ spec:
         - name: argocd-server
           namespace: argocd
           port: 443
-          scheme: https    
+          scheme: https   
+    - match: Host(`tools.k8s.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: it-tools
+          namespace: it-tools
+          port: 80
+          scheme: http   
