@@ -5,4 +5,4 @@ kind: Kustomization
 resources:
   - deployment.yaml
   - service-cluster-ip.yaml
-  # - ingress-route.yaml
+  - ingress-route.yaml
