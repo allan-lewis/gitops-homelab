@@ -2,10 +2,10 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: nginx
-  namespace: nginx
+  name: kustomize-default
+  namespace: ""
   labels:
-    app: nginx
+    app: ""
 spec:
   replicas: 1
   progressDeadlineSeconds: 600
@@ -14,16 +14,16 @@ spec:
     type: Recreate
   selector:
     matchLabels:
-      app: nginx
+      app: ""
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: nginx
-        app: nginx
+        app.kubernetes.io/name: ""
+        app: ""
     spec:
       containers:
-      - name: nginx 
-        image: nginx:1.27.4 
+      - name: "" 
+        image: ""
         imagePullPolicy: "Always"
         env:
         volumeMounts:

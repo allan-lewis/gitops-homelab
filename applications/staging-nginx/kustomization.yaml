@@ -19,7 +19,7 @@ patches:
   patch: |-
     - op: add
       path: /spec/source/path
-      value: kustomizations/boilerplate/staging-nginx
+      value: kustomizations/boilerplate/environments/staging-nginx
 - target:
     kind: Application
     name: .*
