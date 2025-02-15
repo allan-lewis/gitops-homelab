@@ -4,6 +4,8 @@ metadata:
   name: traefik-service-ingresses
   namespace: default
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`argocd.nonprod.allanshomelab.com`)
       kind: Rule
