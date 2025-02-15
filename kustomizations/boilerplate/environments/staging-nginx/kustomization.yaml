@@ -13,10 +13,3 @@ patches:
     - op: replace
       path: /spec/replicas
       value: 3
-- target:
-    kind: IngressRoute
-    name: .*
-  patch: |-
-    - op: replace
-      path: /spec/routes/0/match
-      value: Host(`nginx.nonprod.allanshomelab.com`)

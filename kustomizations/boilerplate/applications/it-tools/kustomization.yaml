@@ -53,19 +53,3 @@ patches:
     - op: replace
       path: /spec/ports/0/targetPort
       value: 80
-- target:
-    kind: IngressRoute
-    name: .*
-  patch: |-
-    - op: replace
-      path: /metadata/name
-      value: it-tools
-    - op: replace
-      path: /spec/routes/0/services/0/name
-      value: it-tools
-    - op: replace
-      path: /spec/routes/0/services/0/namespace
-      value: it-tools
-    - op: replace
-      path: /spec/routes/0/services/0/port
-      value: 80

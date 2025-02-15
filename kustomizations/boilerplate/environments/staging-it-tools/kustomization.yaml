@@ -4,12 +4,3 @@ kind: Kustomization
 
 resources:
 - ../../applications/it-tools
-
-patches:
-- target:
-    kind: IngressRoute
-    name: .*
-  patch: |-
-    - op: replace
-      path: /spec/routes/0/match
-      value: Host(`tools.nonprod.allanshomelab.com`)
