@@ -7,7 +7,7 @@ resources:
 
 helmCharts:
 - name: longhorn
-  repo: https://traefik.github.io/charts
+  repo: https://charts.longhorn.io
   releaseName: longhorn
   namespace: longhorn-system
   version: 1.8.0
