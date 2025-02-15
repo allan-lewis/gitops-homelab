@@ -3,7 +3,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-- ../../base
+- ../base
 
 patches:
 - target:
@@ -12,18 +12,18 @@ patches:
   patch: |-
     - op: replace
       path: /metadata/name
-      value: metallb
+      value: traefik
 - target:
     kind: Application
     name: .*
   patch: |-
     - op: add
       path: /spec/source/path
-      value: kustomizations/metallb/overlays/staging
+      value: kustomizations/traefik/base
 - target:
     kind: Application
     name: .*
   patch: |-
     - op: add
       path: /spec/destination/namespace
-      value: metallb-system
+      value: traefik
