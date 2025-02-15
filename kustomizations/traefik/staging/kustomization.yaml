@@ -4,7 +4,7 @@ kind: Kustomization
 
 resources:
 - ../base/
-- ingress-routes.yaml
+- ingress-route-services.yaml
 
 patches:
 - path: ingress-route-dashboard.yaml

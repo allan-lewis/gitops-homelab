@@ -4,17 +4,17 @@ metadata:
   name: traefik-ingresses
   namespace: default
 spec:
-  routes: []
-    # - match: Host(`argocd.nonprod.allanshomelab.com`)
-    #   kind: Rule
-    #   middlewares:
-    #     - name: traefik-custom-headers
-    #       namespace: default
-    #   priority: 10
-    #   services:
-    #     - name: argocd-server
-    #       namespace:  argocd
-    #       port: 443
-    #       scheme: https        
+  routes:
+    - match: Host(`argocd.nonprod.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: argocd-server
+          namespace:  argocd
+          port: 443
+          scheme: https        
   tls:
     secretName: production-tls
