@@ -19,7 +19,7 @@ Run the command below to install ArgoCD into the k8s cluster.  This will enable 
 
 ### Applications
 
-Installing applications should be something done relatively infrequently, ideally just once following ArgoCD installation.  After that, ArgoCD will keep things up-to-date based on Git.
+Installing applications should be something done relatively infrequently, ideally just once following ArgoCD setup.  After that, ArgoCD will keep things up-to-date based on Git.
 
 Applications are written as Kustomize manifests, for example:
 
