@@ -15,7 +15,7 @@ spec:
       priority: 10
       services:
         - name: argocd-server
-          namespace:  argocd
+          namespace: argocd
           port: 443
           scheme: https    
     - match: Host(`longhorn.nonprod.allanshomelab.com`)
@@ -26,7 +26,7 @@ spec:
       priority: 10
       services:
         - name: longhorn-frontend
-          namespace:  longhorn-system
+          namespace: longhorn-system
           port: 80
           scheme: http   
     - match: Host(`nginx.nonprod.allanshomelab.com`)
@@ -36,7 +36,7 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: longhorn-frontend
-          namespace:  longhorn-system
+        - name: nginx
+          namespace: nginx
           port: 80
           scheme: http    
