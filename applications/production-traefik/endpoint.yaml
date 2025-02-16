@@ -1,0 +1,121 @@
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: gitops-traefik-endpoint-homeassistant
+  namespace: traefik
+subsets:
+  - addresses:
+      - ip: 192.168.86.124
+    ports:
+      - port: 8123
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: gitops-traefik-endpoint-canopus
+  namespace: traefik
+subsets:
+  - addresses:
+      - ip: 192.168.86.102
+    ports:
+      - port: 8000
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: gitops-traefik-endpoint-polaris
+  namespace: traefik
+subsets:
+  - addresses:
+      - ip: 192.168.86.101
+    ports:
+      - port: 8006
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: gitops-traefik-endpoint-rigel
+  namespace: traefik
+subsets:
+  - addresses:
+      - ip: 192.168.86.104
+    ports:
+      - port: 80
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: gitops-traefik-endpoint-procyon
+  namespace: traefik
+subsets:
+  - addresses:
+      - ip: 100.85.197.89
+    ports:
+      - port: 80
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: gitops-traefik-endpoint-syncthing-bellatrix
+  namespace: traefik
+subsets:
+  - addresses:
+      - ip: 192.168.86.160
+    ports:
+      - port: 8384
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: gitops-traefik-endpoint-syncthing-mimosa
+  namespace: traefik
+subsets:
+  - addresses:
+      - ip: 192.168.86.161
+    ports:
+      - port: 8384
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: gitops-traefik-endpoint-syncthing-rigel
+  namespace: traefik
+subsets:
+  - addresses:
+      - ip: 192.168.86.104
+    ports:
+      - port: 20910
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: gitops-traefik-endpoint-immich
+  namespace: traefik
+subsets:
+  - addresses:
+      - ip: 192.168.86.112
+    ports:
+      - port: 2283
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: gitops-traefik-endpoint-radarr
+  namespace: traefik
+subsets:
+  - addresses:
+      - ip: 192.168.86.111
+    ports:
+      - port: 31300
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: gitops-traefik-endpoint-sonarr
+  namespace: traefik
+subsets:
+  - addresses:
+      - ip: 192.168.86.111
+    ports:
+      - port: 31200
