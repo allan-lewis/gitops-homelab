@@ -168,7 +168,7 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: gitops-traefik-endpoint-homeassistant
+        - name: gitops-traefik-ingress-homeassistant
           namespace:  traefik
           port: 8123
           scheme: http        
@@ -179,7 +179,7 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: gitops-traefik-endpoint-canopus
+        - name: gitops-traefik-ingress-canopus
           namespace:  traefik
           port: 8000
           scheme: http        
@@ -190,7 +190,7 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: gitops-traefik-endpoint-polaris
+        - name: gitops-traefik-ingress-polaris
           namespace:  traefik
           port: 8006
           scheme: https        
