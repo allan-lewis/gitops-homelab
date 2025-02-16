@@ -86,17 +86,17 @@ subsets:
 #       - ip: 192.168.86.104
 #     ports:
 #       - port: 20910
-# ---
-# kind: Endpoints
-# apiVersion: v1
-# metadata:
-#   name: gitops-traefik-endpoint-immich
-#   namespace: traefik
-# subsets:
-#   - addresses:
-#       - ip: 192.168.86.112
-#     ports:
-#       - port: 2283
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: traefik-endpoint-immich
+  namespace: traefik
+subsets:
+  - addresses:
+      - ip: 192.168.86.112
+    ports:
+      - port: 2283
 # ---
 # kind: Endpoints
 # apiVersion: v1

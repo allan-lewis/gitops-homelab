@@ -205,17 +205,17 @@ spec:
           namespace:  traefik
           port: 80
           scheme: http        
-    - match: Host(`procyon.hosts.allanshomelab.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: gitops-traefik-endpoint-procyon
-          namespace:  traefik
-          port: 80
-          scheme: http        
+    # - match: Host(`procyon.hosts.allanshomelab.com`)
+    #   kind: Rule
+    #   middlewares:
+    #     - name: traefik-custom-headers
+    #       namespace: default
+    #   priority: 10
+    #   services:
+    #     - name: gitops-traefik-endpoint-procyon
+    #       namespace:  traefik
+    #       port: 80
+    #       scheme: http        
     - match: Host(`bellatrix.syncthing.allanshomelab.com`)
       kind: Rule
       middlewares:
@@ -256,7 +256,7 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: gitops-traefik-endpoint-immich
+        - name: traefik-endpoint-immich
           namespace:  traefik
           port: 2283
           scheme: http        
