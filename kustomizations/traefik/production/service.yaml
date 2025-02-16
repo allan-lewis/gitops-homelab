@@ -1,0 +1,11 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: gitops-traefik-service-polaris
+  namespace: traefik
+spec:
+  ports:
+    - protocol: TCP
+      port: 8006
+      targetPort: 8006

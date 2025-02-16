@@ -5,6 +5,7 @@ kind: Kustomization
 resources:
 - ../base/
 - endpoints.yaml
+- service.yaml
 
 helmCharts:
 - name: traefik
