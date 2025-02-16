@@ -51,3 +51,14 @@ spec:
           namespace: it-tools
           port: 80
           scheme: http  
+    - match: Host(`portainer.nonprod.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: portainer
+          namespace: portainer
+          port: 9000
+          scheme: http  
