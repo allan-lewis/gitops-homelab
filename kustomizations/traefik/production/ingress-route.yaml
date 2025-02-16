@@ -7,6 +7,17 @@ spec:
   entryPoints:
     - websecure
   routes:
+    - match: Host(`portainer.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: portainer
+          namespace: portainer
+          port: 9000
+          scheme: http 
     - match: Host(`gitops.allanshomelab.com`)
       kind: Rule
       middlewares:
