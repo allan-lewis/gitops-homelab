@@ -204,18 +204,7 @@ spec:
         - name: traefik-endpoint-rigel
           namespace:  traefik
           port: 80
-          scheme: http        
-    # - match: Host(`procyon.hosts.allanshomelab.com`)
-    #   kind: Rule
-    #   middlewares:
-    #     - name: traefik-custom-headers
-    #       namespace: default
-    #   priority: 10
-    #   services:
-    #     - name: gitops-traefik-endpoint-procyon
-    #       namespace:  traefik
-    #       port: 80
-    #       scheme: http        
+          scheme: http               
     - match: Host(`bellatrix.syncthing.allanshomelab.com`)
       kind: Rule
       middlewares:
@@ -269,7 +258,7 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: gitops-traefik-endpoint-radarr
+        - name: traefik-endpoint-radarr
           namespace:  traefik
           port: 31300
           scheme: http        
@@ -291,7 +280,7 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: gitops-traefik-endpoint-sonarr
+        - name: traefik-endpoint-sonarr
           namespace:  traefik
           port: 31200
           scheme: http        

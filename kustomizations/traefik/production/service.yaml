@@ -53,3 +53,25 @@ spec:
     - protocol: TCP
       port: 2283
       targetPort: 2283
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: traefik-endpoint-radarr
+  namespace: traefik
+spec:
+  ports:
+    - protocol: TCP
+      port: 31300
+      targetPort: 31300
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: traefik-endpoint-sonarr
+  namespace: traefik
+spec:
+  ports:
+    - protocol: TCP
+      port: 31200
+      targetPort: 31200

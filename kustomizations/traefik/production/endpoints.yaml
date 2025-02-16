@@ -46,17 +46,6 @@ subsets:
 # kind: Endpoints
 # apiVersion: v1
 # metadata:
-#   name: gitops-traefik-endpoint-procyon
-#   namespace: traefik
-# subsets:
-#   - addresses:
-#       - ip: 100.85.197.89
-#     ports:
-#       - port: 80
-# ---
-# kind: Endpoints
-# apiVersion: v1
-# metadata:
 #   name: gitops-traefik-endpoint-syncthing-bellatrix
 #   namespace: traefik
 # subsets:
@@ -97,25 +86,25 @@ subsets:
       - ip: 192.168.86.112
     ports:
       - port: 2283
-# ---
-# kind: Endpoints
-# apiVersion: v1
-# metadata:
-#   name: gitops-traefik-endpoint-radarr
-#   namespace: traefik
-# subsets:
-#   - addresses:
-#       - ip: 192.168.86.111
-#     ports:
-#       - port: 31300
-# ---
-# kind: Endpoints
-# apiVersion: v1
-# metadata:
-#   name: gitops-traefik-endpoint-sonarr
-#   namespace: traefik
-# subsets:
-#   - addresses:
-#       - ip: 192.168.86.111
-#     ports:
-#       - port: 31200
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: traefik-endpoint-radarr
+  namespace: traefik
+subsets:
+  - addresses:
+      - ip: 192.168.86.111
+    ports:
+      - port: 31300
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: traefik-endpoint-sonarr
+  namespace: traefik
+subsets:
+  - addresses:
+      - ip: 192.168.86.111
+    ports:
+      - port: 31200
