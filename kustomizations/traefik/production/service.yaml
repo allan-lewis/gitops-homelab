@@ -75,3 +75,14 @@ spec:
     - protocol: TCP
       port: 31200
       targetPort: 31200
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: traefik-endpoint-syncthing-rigel
+  namespace: traefik
+spec:
+  ports:
+    - protocol: TCP
+      port: 20910
+      targetPort: 20910

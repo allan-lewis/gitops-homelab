@@ -212,7 +212,7 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: gitops-traefik-endpoint-syncthing-bellatrix
+        - name: traefik-endpoint-syncthing-bellatrix
           namespace:  traefik
           port: 8384
           scheme: http        
@@ -223,7 +223,7 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: gitops-traefik-endpoint-syncthing-mimosa
+        - name: traefik-endpoint-syncthing-mimosa
           namespace:  traefik
           port: 8384
           scheme: http        
@@ -234,7 +234,7 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: gitops-traefik-endpoint-syncthing-rigel
+        - name: traefik-endpoint-syncthing-rigel
           namespace:  traefik
           port: 20910
           scheme: http        
