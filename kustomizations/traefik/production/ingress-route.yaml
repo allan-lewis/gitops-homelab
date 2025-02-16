@@ -201,7 +201,7 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: gitops-traefik-endpoint-rigel
+        - name: traefik-endpoint-rigel
           namespace:  traefik
           port: 80
           scheme: http        

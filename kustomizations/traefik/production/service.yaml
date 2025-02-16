@@ -31,3 +31,14 @@ spec:
     - protocol: TCP
       port: 8000
       targetPort: 8000
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: traefik-endpoint-rigel
+  namespace: traefik
+spec:
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
