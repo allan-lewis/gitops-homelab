@@ -190,7 +190,7 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: gitops-traefik-ingress-polaris
+        - name: traefik-service-polaris
           namespace:  traefik
           port: 8006
           scheme: https        
