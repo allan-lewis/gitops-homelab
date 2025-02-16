@@ -1,14 +1,14 @@
-# ---
-# kind: Endpoints
-# apiVersion: v1
-# metadata:
-#   name: gitops-traefik-endpoint-homeassistant
-#   namespace: traefik
-# subsets:
-#   - addresses:
-#       - ip: 192.168.86.124
-#     ports:
-#       - port: 8123
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: traefik-endpoint-homeassistant
+  namespace: traefik
+subsets:
+  - addresses:
+      - ip: 192.168.86.124
+    ports:
+      - port: 8123
 # ---
 # kind: Endpoints
 # apiVersion: v1

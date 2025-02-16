@@ -168,7 +168,7 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: gitops-traefik-ingress-homeassistant
+        - name: traefik-endpoint-homeassistant
           namespace:  traefik
           port: 8123
           scheme: http        
