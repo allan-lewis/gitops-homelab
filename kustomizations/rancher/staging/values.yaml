@@ -1,0 +1,2 @@
+hostname: rancher.nonprod.allanshomelab.com
+tls: external
