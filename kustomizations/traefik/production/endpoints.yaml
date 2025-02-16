@@ -20,17 +20,17 @@
 #       - ip: 192.168.86.102
 #     ports:
 #       - port: 8000
-# # ---
-# # kind: Endpoints
-# # apiVersion: v1
-# # metadata:
-# #   name: gitops-traefik-endpoint-polaris
-# #   namespace: traefik
-# # subsets:
-# #   - addresses:
-# #       - ip: 192.168.86.101
-# #     ports:
-# #       - port: 8006
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: traefik-endpoint-polaris
+  namespace: traefik
+subsets:
+  - addresses:
+      - ip: 192.168.86.101
+    ports:
+      - port: 8006
 # ---
 # kind: Endpoints
 # apiVersion: v1
