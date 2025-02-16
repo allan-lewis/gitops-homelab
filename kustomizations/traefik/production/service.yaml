@@ -20,3 +20,14 @@ spec:
     - protocol: TCP
       port: 8123
       targetPort: 8123
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: traefik-endpoint-canopus
+  namespace: traefik
+spec:
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000

@@ -179,7 +179,7 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: gitops-traefik-ingress-canopus
+        - name: traefik-endpoint-canopus
           namespace:  traefik
           port: 8000
           scheme: http        
