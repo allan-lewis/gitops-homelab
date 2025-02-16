@@ -190,7 +190,7 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: traefik-service-polaris
+        - name: traefik-endpoint-polaris
           namespace:  traefik
           port: 8006
           scheme: https        
