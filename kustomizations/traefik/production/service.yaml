@@ -2,7 +2,7 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: traefik-service-polaris
+  name: traefik-endpoint-polaris
   namespace: traefik
 spec:
   ports:
