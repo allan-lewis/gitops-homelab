@@ -9,7 +9,7 @@
 
 ### Bootstrap the k8s cluster
 
-Run the command below to install ArgoCD into the k8s cluster.  This will enable ArgoCD to build Helm charts, and, finally, will manually create a secret containing a Doppler service token for later use with External Secrets. 
+Run the command below to install ArgoCD into the k8s cluster.  This will enable ArgoCD to build Helm charts, and will manually create a secret containing a Doppler service token for later use with External Secrets. Finally, port forwarding will be enabled that exposes ArgoCD on address <code>0.0.0.0:8181</code>
 
 ```
 ./argocd/bootstrap-argo-cd.sh
