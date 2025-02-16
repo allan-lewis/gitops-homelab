@@ -86,3 +86,25 @@ spec:
     - protocol: TCP
       port: 20910
       targetPort: 20910
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: traefik-endpoint-syncthing-bellatrix
+  namespace: traefik
+spec:
+  ports:
+    - protocol: TCP
+      port: 8384
+      targetPort: 8384
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: traefik-endpoint-syncthing-mimosa
+  namespace: traefik
+spec:
+  ports:
+    - protocol: TCP
+      port: 8384
+      targetPort: 8384
