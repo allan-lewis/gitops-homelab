@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`portainer.allanshomelab.com`)
+    - match: Host(`portainer.k8s.allanshomelab.com`)
       kind: Rule
       middlewares:
         - name: traefik-custom-headers
