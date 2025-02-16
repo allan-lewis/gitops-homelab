@@ -9,3 +9,14 @@ spec:
     - protocol: TCP
       port: 8006
       targetPort: 8006
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: gitops-traefik-endpoint-homeassistant
+  namespace: traefik
+spec:
+  ports:
+    - protocol: TCP
+      port: 8123
+      targetPort: 8123
