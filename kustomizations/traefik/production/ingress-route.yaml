@@ -29,3 +29,135 @@ spec:
           namespace: it-tools
           port: 80
           scheme: http   
+    - match: Host(`129monroe.com`)
+      kind: Rule
+      middlewares:
+        - name: authentik
+          namespace: default
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: nginx
+          namespace:  nginx
+          port: 80
+          scheme: http        
+    - kind: Rule
+      match: "Host(`129monroe.com`) && PathPrefix(`/outpost.goauthentik.io/`)"
+      priority: 15
+      services:
+        - kind: Service
+          # Or, to use an external Outpost, create an ExternalName service and reference that here.
+          # See https://kubernetes.io/docs/concepts/services-networking/service/#externalname
+          name: ak-outpost-authentik-embedded-outpost
+          port: 9000
+    - match: Host(`www.129monroe.com`)
+      kind: Rule
+      middlewares:
+        - name: authentik
+          namespace: default
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: nginx
+          namespace:  nginx
+          port: 80
+          scheme: http        
+    - kind: Rule
+      match: "Host(`www.129monroe.com`) && PathPrefix(`/outpost.goauthentik.io/`)"
+      priority: 15
+      services:
+        - kind: Service
+          # Or, to use an external Outpost, create an ExternalName service and reference that here.
+          # See https://kubernetes.io/docs/concepts/services-networking/service/#externalname
+          name: ak-outpost-authentik-embedded-outpost
+          port: 9000
+    - match: Host(`www.allanandvaia.com`)
+      kind: Rule
+      middlewares:
+        - name: authentik
+          namespace: default
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: nginx
+          namespace:  nginx
+          port: 80
+          scheme: http        
+    - kind: Rule
+      match: "Host(`www.allanandvaia.com`) && PathPrefix(`/outpost.goauthentik.io/`)"
+      priority: 15
+      services:
+        - kind: Service
+          # Or, to use an external Outpost, create an ExternalName service and reference that here.
+          # See https://kubernetes.io/docs/concepts/services-networking/service/#externalname
+          name: ak-outpost-authentik-embedded-outpost
+          port: 9000
+    - match: Host(`allanandvaia.com`)
+      kind: Rule
+      middlewares:
+        - name: authentik
+          namespace: default
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: nginx
+          namespace:  nginx
+          port: 80
+          scheme: http        
+    - kind: Rule
+      match: "Host(`allanandvaia.com`) && PathPrefix(`/outpost.goauthentik.io/`)"
+      priority: 15
+      services:
+        - kind: Service
+          # Or, to use an external Outpost, create an ExternalName service and reference that here.
+          # See https://kubernetes.io/docs/concepts/services-networking/service/#externalname
+          name: ak-outpost-authentik-embedded-outpost
+          port: 9000
+    - match: Host(`allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: authentik
+          namespace: default
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: nginx
+          namespace:  nginx
+          port: 80
+          scheme: http        
+    - kind: Rule
+      match: "Host(`allanshomelab.com`) && PathPrefix(`/outpost.goauthentik.io/`)"
+      priority: 15
+      services:
+        - kind: Service
+          # Or, to use an external Outpost, create an ExternalName service and reference that here.
+          # See https://kubernetes.io/docs/concepts/services-networking/service/#externalname
+          name: ak-outpost-authentik-embedded-outpost
+          port: 9000
+    - match: Host(`www.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: authentik
+          namespace: default
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: nginx
+          namespace:  nginx
+          port: 80
+          scheme: http        
+    - kind: Rule
+      match: "Host(`www.allanshomelab.com`) && PathPrefix(`/outpost.goauthentik.io/`)"
+      priority: 15
+      services:
+        - kind: Service
+          # Or, to use an external Outpost, create an ExternalName service and reference that here.
+          # See https://kubernetes.io/docs/concepts/services-networking/service/#externalname
+          name: ak-outpost-authentik-embedded-outpost
+          port: 9000
