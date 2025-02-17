@@ -2,7 +2,7 @@
 kind: Namespace
 apiVersion: v1
 metadata:
-  name: monitoring
+  name: kube-prometheus-stack
   labels:
-    name: monitoring
+    name: kube-prometheus-stack
     pod-security.kubernetes.io/enforce: privileged

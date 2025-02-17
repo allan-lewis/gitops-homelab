@@ -12,10 +12,14 @@ patches:
   patch: |-
     - op: replace
       path: /metadata/name
-      value: monitoring
+      value: kube-prometheus-stack
     - op: add
       path: /spec/source/path
-      value: kustomizations/monitoring/staging
+      value: kustomizations/kube-prometheus-stack/staging
     - op: add
       path: /spec/destination/namespace
-      value: monitoring
+      value: kube-prometheus-stack
+    - op: add
+      path: /spec/syncPolicy/syncOptions/0
+      value: ServerSideApply=true
+    
