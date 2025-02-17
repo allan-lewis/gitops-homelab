@@ -38,8 +38,8 @@ patches:
     - op: add
       path: "/spec/template/spec/containers/0/envFrom"
       value:
-        secretRef:
-          name: admin-password
+        - secretRef:
+            name: admin-password
     - op: add
       path: "/spec/template/spec/containers/0/volumeMounts"
       value:
