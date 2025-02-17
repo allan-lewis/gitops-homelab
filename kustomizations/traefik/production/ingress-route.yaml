@@ -18,7 +18,18 @@ spec:
           namespace: cattle-system
           port: 80
           scheme: http 
-    - match: Host(`vault.k8s.allanshomelab.com`)
+    - match: Host(`vault.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: vaultwarden
+          namespace: vaultwarden
+          port: 35550
+          scheme: http 
+    - match: Host(`vault.129monroe.com`)
       kind: Rule
       middlewares:
         - name: traefik-custom-headers
