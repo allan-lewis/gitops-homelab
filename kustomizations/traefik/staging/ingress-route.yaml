@@ -62,3 +62,14 @@ spec:
           namespace: portainer
           port: 9000
           scheme: http  
+    - match: Host(`rancher.nonprod.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: rancher
+          namespace: cattle-system
+          port: 80
+          scheme: http  
