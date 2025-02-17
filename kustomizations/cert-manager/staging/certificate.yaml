@@ -6,4 +6,4 @@ metadata:
   namespace: default
 spec:
   commonName: 'traefik.nonprod.allanshomelab.com'
-  dnsNames: ['portainer.nonprod.allanshomelab.com', 'traefik.nonprod.allanshomelab.com', 'longhorn.nonprod.allanshomelab.com', 'cloud.nonprod.allanshomelab.com', 'auth.nonprod.allanshomelab.com', 'nginx.nonprod.allanshomelab.com', 'wiki.nonprod.allanshomelab.com', 'argocd.nonprod.allanshomelab.com', 'tools.nonprod.allanshomelab.com', '*.nonprodhosts.allanshomelab.com']
+  dnsNames: ['rancher.nonprod.allanshomelab.com', 'portainer.nonprod.allanshomelab.com', 'traefik.nonprod.allanshomelab.com', 'longhorn.nonprod.allanshomelab.com', 'cloud.nonprod.allanshomelab.com', 'auth.nonprod.allanshomelab.com', 'nginx.nonprod.allanshomelab.com', 'wiki.nonprod.allanshomelab.com', 'argocd.nonprod.allanshomelab.com', 'tools.nonprod.allanshomelab.com', '*.nonprodhosts.allanshomelab.com']
