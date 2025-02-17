@@ -1,2 +1,4 @@
 hostname: rancher.nonprod.allanshomelab.com
 tls: external
+ingress:
+  enabled: false
