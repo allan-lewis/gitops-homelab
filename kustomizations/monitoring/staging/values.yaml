@@ -35,6 +35,11 @@ defaultRules:
     prometheus: true
     prometheusOperator: true
 
+crds:
+  enabled: true
+  upgradeJob:
+    enabled: true
+
 prometheus:    
     prometheusSpec:
       storageSpec:
