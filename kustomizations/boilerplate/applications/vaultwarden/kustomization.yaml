@@ -4,6 +4,7 @@ kind: Kustomization
 
 resources:
 - ../../base/
+- external-secret.yaml
 
 patches:
 - target:
@@ -34,6 +35,22 @@ patches:
     - op: replace
       path: /spec/template/spec/containers/0/image
       value: vaultwarden/server:1.33.0
+    - op: add
+      path: "/spec/template/spec/containers/0/envFrom"
+      value:
+        secretRef:
+          name: admin-password
+    - op: add
+      path: "/spec/template/spec/containers/0/volumeMounts"
+      value:
+        - mountPath: /data
+          name: vaultwarden-data
+    - op: add
+      path: "/spec/template/spec/volumes"
+      value:
+        - name: vaultwarden-data
+          persistentVolumeClaim:
+            claimName: vaultwarden
 - target:
     kind: Service
     name: .*

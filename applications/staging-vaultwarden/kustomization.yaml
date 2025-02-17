@@ -15,7 +15,7 @@ patches:
       value: vaultwarden
     - op: add
       path: /spec/source/path
-      value: kustomizations/vaultwarden/staging
+      value: kustomizations/boilerplate/environments/staging-vaultwarden
     - op: add
       path: /spec/destination/namespace
       value: vaultwarden
