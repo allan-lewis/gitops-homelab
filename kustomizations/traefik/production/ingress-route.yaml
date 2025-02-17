@@ -40,6 +40,17 @@ spec:
           namespace: vaultwarden
           port: 35550
           scheme: http 
+    - match: Host(`vault.allanandvaia.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: vaultwarden
+          namespace: vaultwarden
+          port: 35550
+          scheme: http 
     - match: Host(`portainer.k8s.allanshomelab.com`)
       kind: Rule
       middlewares:
