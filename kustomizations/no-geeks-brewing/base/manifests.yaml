@@ -1,0 +1,53 @@
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: ngb
+  labels:
+    name: ngb
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:  
+  name: no-geeks-brewing-external-secret
+  namespace: ngb
+spec:  
+  secretStoreRef:    
+    kind: ClusterSecretStore    
+    name: doppler-secret-store
+  target:    
+    name: no-geeks-brewing-secrets
+  data:    
+    - secretKey: NOGEEKSBREWING_BREWFATHER_AUTHTOKEN     
+      remoteRef:        
+        key: NO_GEEKS_BREWING_BREWFATHER_AUTH_TOKEN
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: no-geeks-brewing-graphql-api
+  namespace: ngb
+  labels:
+    app: no-geeks-brewing-graphql-api
+spec:
+  replicas: 1
+  progressDeadlineSeconds: 600
+  revisionHistoryLimit: 2
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: no-geeks-brewing-graphql-api
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: no-geeks-brewing-graphql-api
+        app: no-geeks-brewing-graphql-api
+    spec:
+      containers:
+      - name: no-geeks-brewing-graphql-api
+        image: allanelewis/ngb-graphql:latest
+        imagePullPolicy: "Always"
+        envFrom:
+        - secretRef:
+            name: no-geeks-brewing-secrets
