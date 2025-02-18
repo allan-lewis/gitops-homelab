@@ -64,38 +64,51 @@ spec:
   - name: http
     targetPort: 8080
     port: 8080
-# ---
-# kind: Deployment
-# apiVersion: apps/v1
-# metadata:
-#   name: no-geeks-brewing-nextjs-gui
-#   namespace: ngb
-#   labels:
-#     app: no-geeks-brewing-nextjs-gui
-# spec:
-#   replicas: 1
-#   progressDeadlineSeconds: 600
-#   revisionHistoryLimit: 2
-#   strategy:
-#     type: Recreate
-#   selector:
-#     matchLabels:
-#       app: no-geeks-brewing-nextjs-gui
-#   template:
-#     metadata:
-#       labels:
-#         app.kubernetes.io/name: no-geeks-brewing-nextjs-gui
-#         app: no-geeks-brewing-nextjs-gui
-#     spec:
-#       containers:
-#       - name: no-geeks-brewing-nextjs-gui
-#         image: allanelewis/ngb-nextjs:latest
-#         imagePullPolicy: "Always"
-#         env:
-#           - name: AUTH_URL
-#             value: "https://nogeeksbrewing.com/api/auth"
-#           - name: GRAPHQL_URL
-#             value: "https://api.nogeeksbrewing.com/graphql"
-#         envFrom:
-#         - secretRef:
-#             name: no-geeks-brewing-secrets
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: no-geeks-brewing-nextjs-gui
+  namespace: ngb
+  labels:
+    app: no-geeks-brewing-nextjs-gui
+spec:
+  replicas: 1
+  progressDeadlineSeconds: 600
+  revisionHistoryLimit: 2
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: no-geeks-brewing-nextjs-gui
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: no-geeks-brewing-nextjs-gui
+        app: no-geeks-brewing-nextjs-gui
+    spec:
+      containers:
+      - name: no-geeks-brewing-nextjs-gui
+        image: allanelewis/ngb-nextjs:latest
+        imagePullPolicy: "Always"
+        envFrom:
+        - secretRef:
+            name: no-geeks-brewing-secrets
+        env:
+          - name: AUTH_URL
+            value: "https://ngb-gui.nonprod.allanshomelab.com/api/auth"
+          - name: GRAPHQL_URL
+            value: "https://ngb-api.nonprod.allanshomelab.com/graphql"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: no-geeks-brewing-nextjs-gui
+  namespace: ngb
+spec:
+  selector:
+    app: no-geeks-brewing-nextjs-gui
+  ports:
+  - name: http
+    targetPort: 3000
+    port: 3000
