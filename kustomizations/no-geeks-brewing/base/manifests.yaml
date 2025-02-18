@@ -24,6 +24,15 @@ spec:
     - secretKey: AUTH_SECRET     
       remoteRef:        
         key: NO_GEEKS_BREWING_AUTH_SECRET
+    - secretKey: AUTH_AUTHENTIK_SECRET     
+      remoteRef:        
+        key: NO_GEEKS_BREWING_AUTH_AUTHENTIK_SECRET
+    - secretKey: AUTH_AUTHENTIK_ISSUER     
+      remoteRef:        
+        key: NO_GEEKS_BREWING_AUTH_AUTHENTIK_ISSUER
+    - secretKey: AUTH_AUTHENTIK_ID     
+      remoteRef:        
+        key: NO_GEEKS_BREWING_AUTH_AUTHENTIK_ID
 ---
 kind: Deployment
 apiVersion: apps/v1
