@@ -21,6 +21,9 @@ spec:
     - secretKey: NOGEEKSBREWING_BREWFATHER_AUTHTOKEN     
       remoteRef:        
         key: NO_GEEKS_BREWING_BREWFATHER_AUTH_TOKEN
+    - secretKey: AUTH_SECRET     
+      remoteRef:        
+        key: NO_GEEKS_BREWING_AUTH_SECRET
 ---
 kind: Deployment
 apiVersion: apps/v1
