@@ -36,9 +36,9 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: tautulli
+        - name: no-geeks-brewing-graphql-api
           namespace: ngb
-          port: no-geeks-brewing-graphql-api
+          port: 8080
           scheme: http  
     - match: Host(`longhorn.nonprod.allanshomelab.com`)
       kind: Rule
