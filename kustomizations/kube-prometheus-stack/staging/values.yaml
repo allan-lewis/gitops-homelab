@@ -36,9 +36,9 @@ defaultRules:
     prometheusOperator: true
 
 crds:
-  enabled: true
+  enabled: false
   upgradeJob:
-    enabled: true
+    enabled: false
 
 prometheus:    
     prometheusSpec:
