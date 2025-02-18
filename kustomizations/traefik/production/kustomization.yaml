@@ -18,3 +18,10 @@ helmCharts:
 patches:
 - path: ingress-route-dashboard.yaml
 - path: ingress-route.yaml
+- target:
+    kind: Deployment
+    name: .*
+  patch: |-
+    - op: replace
+      path: /spec/replicas
+      value: 5
