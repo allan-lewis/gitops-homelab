@@ -108,9 +108,9 @@ spec:
             name: no-geeks-brewing-secrets
         env:
           - name: AUTH_URL
-            value: "https://ngb-gui.nonprod.allanshomelab.com/api/auth"
+            value: "https://api.nogeeksbrewing.com/graphql"
           - name: GRAPHQL_URL
-            value: "https://ngb-api.nonprod.allanshomelab.com/graphql"
+            value: "https://api.nogeeksbrewing.com/graphql"
 ---
 apiVersion: v1
 kind: Service
