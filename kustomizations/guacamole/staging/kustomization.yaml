@@ -11,5 +11,5 @@ patches:
     name: guacd
   patch: |-
     - op: add
-      path: /spec/loadBalancerIploadBalancerIP
+      path: /spec/loadBalancerIP
       value: 192.168.86.43
