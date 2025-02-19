@@ -2,9 +2,9 @@
 kind: Namespace
 apiVersion: v1
 metadata:
-  name: gucamole
+  name: guacamole
   labels:
-    name: gucamole
+    name: guacamole
 ---
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
@@ -30,7 +30,7 @@ spec:
     - secretKey: OPENID_CLIENT_ID     
       remoteRef:        
         key: GUACAMOLE_OPENID_CLIENT_ID
-    - secretKey: OPENID_OPENID_AUTHORIZATION_ENDPOINT    
+    - secretKey: OPENID_AUTHORIZATION_ENDPOINT    
       remoteRef:        
         key: GUACAMOLE_OPENID_AUTHORIZATION_ENDPOINT
     - secretKey: MYSQL_PASSWORD    
