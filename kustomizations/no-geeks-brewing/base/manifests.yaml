@@ -33,9 +33,12 @@ spec:
     - secretKey: AUTH_AUTHENTIK_ID     
       remoteRef:        
         key: NO_GEEKS_BREWING_AUTH_AUTHENTIK_ID
-    - secretKey: GRAPHQL_URL     
+    - secretKey: GRAPHQL_URL
       remoteRef:        
         key: NO_GEEKS_BREWING_GRAPHQL_URL
+    - secretKey: AUTH_URL
+      remoteRef:        
+        key: NO_GEEKS_BREWING_AUTH_URL
 ---
 kind: Deployment
 apiVersion: apps/v1
@@ -109,9 +112,6 @@ spec:
         envFrom:
         - secretRef:
             name: no-geeks-brewing-secrets
-        env:
-          - name: AUTH_URL
-            value: "https://nogeeksbrewing.com/api/auth"
 ---
 apiVersion: v1
 kind: Service
