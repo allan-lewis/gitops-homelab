@@ -4,3 +4,12 @@ kind: Kustomization
 
 resources:
 - ../base
+
+patches:
+- target:
+    kind: Service
+    name: guacd
+  patch: |-
+    - op: add
+      path: /spec/loadBalancerIploadBalancerIP
+      value: 192.168.86.43
