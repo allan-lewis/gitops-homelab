@@ -120,3 +120,16 @@ spec:
     - port: 35101
       targetPort: 4822
   type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: guacamole
+  namespace: guacamole
+spec:
+  selector:
+    app: guacamole
+  ports:
+  - name: http
+    targetPort: 8080
+    port: 35100

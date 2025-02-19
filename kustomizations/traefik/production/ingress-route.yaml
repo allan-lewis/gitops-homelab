@@ -7,6 +7,17 @@ spec:
   entryPoints:
     - websecure
   routes:
+    - match: Host(`guacamole.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: guacamole
+          namespace: guacamole
+          port: 35100
+          scheme: http 
     - match: Host(`api.nogeeksbrewing.com`)
       kind: Rule
       middlewares:
