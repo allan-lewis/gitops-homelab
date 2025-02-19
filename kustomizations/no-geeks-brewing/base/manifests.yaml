@@ -108,7 +108,7 @@ spec:
             name: no-geeks-brewing-secrets
         env:
           - name: AUTH_URL
-            value: "https://api.nogeeksbrewing.com/graphql"
+            value: "https://nogeeksbrewing.com/api/auth"
           - name: GRAPHQL_URL
             value: "https://api.nogeeksbrewing.com/graphql"
 ---
