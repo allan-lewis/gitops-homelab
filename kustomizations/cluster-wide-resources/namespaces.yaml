@@ -28,3 +28,31 @@ metadata:
   name: ngb
   labels:
     name: ngb
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: portainer
+  labels:
+    name: portainer
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: tautulli
+  labels:
+    name: tautulli
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: vaultwarden
+  labels:
+    name: vaultwarden
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: wikijs
+  labels:
+    name: wikijs

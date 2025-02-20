@@ -12,7 +12,7 @@ patches:
   patch: |-
     - op: replace
       path: /metadata/name
-      value: cluster
+      value: cluster-wide-resources
     - op: add
       path: /spec/source/path
       value: kustomizations/cluster-wide-resources
