@@ -36,7 +36,7 @@ spec:
     - secretKey: MYSQL_PASSWORD    
       remoteRef:        
         key: GUACAMOLE_MYSQL_PASSWORD
-    - secretKey: root-password
+    - secretKey: mariadb-root-password
       remoteRef:        
         key: MARIADB_PASSWORD
     - secretKey: replication-password
