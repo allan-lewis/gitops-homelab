@@ -173,9 +173,30 @@ spec:
         - secretRef:
             name: guacamole-secrets
         volumeMounts:
-        - mountPath: /bitnami/mariadb/data
-          name: mariadb-persistence
+        - mountPath: /bitnami/mariadb
+          name: data
+        - mountPath: /opt/bitnami/mariadb/conf/my.cnf
+          name: config
+          subPath: my.cnf
+        - mountPath: /tmp
+          name: empty-dir
+          subPath: tmp-dir
+        - mountPath: /opt/bitnami/mariadb/conf
+          name: empty-dir
+          subPath: app-conf-dir
+        - mountPath: /opt/bitnami/mariadb/tmp
+          name: empty-dir
+          subPath: app-tmp-dir
+        - mountPath: /opt/bitnami/mariadb/logs
+          name: empty-dir
+          subPath: app-logs-dir
       volumes:
-      - name: mariadb-persistence
+      - emptyDir: {}
+        name: empty-dir
+      - configMap:
+          defaultMode: 420
+          name: mariadb
+        name: config
+      - name: data
         persistentVolumeClaim:
           claimName: mariadb
