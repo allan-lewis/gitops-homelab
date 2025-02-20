@@ -193,9 +193,6 @@ spec:
       volumes:
       - emptyDir: {}
         name: empty-dir
-      - configMap:
-          defaultMode: 420
-          name: mariadb
         name: config
       - name: data
         persistentVolumeClaim:
