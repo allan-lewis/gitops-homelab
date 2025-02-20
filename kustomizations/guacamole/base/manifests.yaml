@@ -193,7 +193,6 @@ spec:
       volumes:
       - emptyDir: {}
         name: empty-dir
-        name: config
       - name: data
         persistentVolumeClaim:
           claimName: mariadb
