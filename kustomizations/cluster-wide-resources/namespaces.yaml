@@ -23,6 +23,13 @@ metadata:
 kind: Namespace
 apiVersion: v1
 metadata:
+  name: it-tools
+  labels:
+    name: it-tools
+---
+kind: Namespace
+apiVersion: v1
+metadata:
   name: kube-prometheus-stack
   labels:
     name: kube-prometheus-stack
