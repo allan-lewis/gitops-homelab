@@ -1,5 +1,5 @@
 auth:
-  existing-secret: guacamole-secrets
+  existingSecret: guacamole-secrets
 
 primary:
   service:
