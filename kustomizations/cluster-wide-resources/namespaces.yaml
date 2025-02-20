@@ -2,6 +2,20 @@
 kind: Namespace
 apiVersion: v1
 metadata:
+  name: cert-manager
+  labels:
+    name: cert-manager
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: external-secrets
+  labels:
+    name: external-secrets
+---
+kind: Namespace
+apiVersion: v1
+metadata:
   name: guacamole
   labels:
     name: guacamole
@@ -21,6 +35,13 @@ metadata:
   labels:
     name: longhorn-system
     pod-security.kubernetes.io/enforce: privileged
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: metallb-system
+  labels:
+    name: metallb-system
 ---
 kind: Namespace
 apiVersion: v1
