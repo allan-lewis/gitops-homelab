@@ -6,6 +6,7 @@ commonAnnotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 
 resources:
+- https://raw.githubusercontent.com/traefik/traefik/v3.3/docs/content/reference/dynamic-configuration/kubernetes-crd-definition-v1.yml
 - middleware.yaml
 - ingress-route-dashboard.yaml
 - ingress-route.yaml
