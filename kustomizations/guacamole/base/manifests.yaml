@@ -36,6 +36,15 @@ spec:
     - secretKey: MYSQL_PASSWORD    
       remoteRef:        
         key: GUACAMOLE_MYSQL_PASSWORD
+    - secretKey: MARIADB_PASSWORD    
+      remoteRef:        
+        key: MARIADB_PASSWORD
+    - secretKey: MARIADB_ROOT_PASSWORD    
+      remoteRef:        
+        key: MARIADB_PASSWORD
+    - secretKey: MARIADB_REPLICATION_PASSWORD    
+      remoteRef:        
+        key: MARIADB_PASSWORD
 ---
 kind: Deployment
 apiVersion: apps/v1
@@ -133,3 +142,40 @@ spec:
   - name: http
     targetPort: 8080
     port: 35100
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: mariadb
+  namespace: guacamole
+  labels:
+    app: mariadb
+spec:
+  replicas: 1
+  progressDeadlineSeconds: 600
+  revisionHistoryLimit: 2
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: mariadb
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: mariadb
+        app: mariadb
+    spec:
+      containers:
+      - name: mariadb
+        image: bitnami/mariadb:11.4.5
+        imagePullPolicy: "Always"
+        envFrom:
+        - secretRef:
+            name: guacamole-secrets
+        volumeMounts:
+        - mountPath: /bitnami/mariadb
+          name: mariadb-persistence
+      volumes:
+      - name: mariadb-persistence
+        persistentVolumeClaim:
+          claimName: mariadb
