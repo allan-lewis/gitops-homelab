@@ -52,7 +52,7 @@ spec:
   progressDeadlineSeconds: 600
   revisionHistoryLimit: 2
   strategy:
-    type: RollingUpgrade
+    type: RollingUpdate
   selector:
     matchLabels:
       app: no-geeks-brewing-graphql-api
@@ -95,7 +95,7 @@ spec:
   progressDeadlineSeconds: 600
   revisionHistoryLimit: 2
   strategy:
-    type: RollingUpgrade
+    type: RollingUpdate
   selector:
     matchLabels:
       app: no-geeks-brewing-nextjs-gui
