@@ -1,10 +1,10 @@
----
-kind: Namespace
-apiVersion: v1
-metadata:
-  name: cert-manager
-  labels:
-    name: cert-manager
+# ---
+# kind: Namespace
+# apiVersion: v1
+# metadata:
+#   name: cert-manager
+#   labels:
+#     name: cert-manager
 ---
 kind: Namespace
 apiVersion: v1
