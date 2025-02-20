@@ -21,4 +21,8 @@ patches:
       value: ngb
     - op: add
       path: /metadata/annotations/argocd-image-updater.argoproj.io~1image-list
-      value: allanelewis/ngb-nextjs, allanelewis/ngb-graphql
+      value: allanelewis/ngb-nextjs:latest, allanelewis/ngb-graphql:latest
+    - op: add
+      path: /metadata/annotations/argocd-image-updater.argoproj.io~1update-strategy
+      value: digest
+      
