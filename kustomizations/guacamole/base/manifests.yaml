@@ -173,7 +173,7 @@ spec:
         - secretRef:
             name: guacamole-secrets
         volumeMounts:
-        - mountPath: /bitnami/mariadb
+        - mountPath: /bitnami/mariadb/data
           name: mariadb-persistence
       volumes:
       - name: mariadb-persistence
