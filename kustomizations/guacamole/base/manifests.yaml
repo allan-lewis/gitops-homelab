@@ -1,11 +1,4 @@
 ---
-kind: Namespace
-apiVersion: v1
-metadata:
-  name: guacamole
-  labels:
-    name: guacamole
----
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:  

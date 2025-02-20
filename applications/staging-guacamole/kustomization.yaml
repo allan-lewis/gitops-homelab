@@ -19,3 +19,5 @@ patches:
     - op: add
       path: /spec/destination/namespace
       value: guacamole
+    - op: remove
+      path: /spec/syncPolicy
