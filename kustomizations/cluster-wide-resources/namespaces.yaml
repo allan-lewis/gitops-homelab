@@ -49,6 +49,12 @@ metadata:
   name: ngb
   labels:
     name: ngb
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: nginx
+  labels:
+    name: nginx
 ---
 kind: Namespace
 apiVersion: v1
@@ -63,6 +69,13 @@ metadata:
   name: tautulli
   labels:
     name: tautulli
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: traefik
+  labels:
+    name: traefik
 ---
 kind: Namespace
 apiVersion: v1
