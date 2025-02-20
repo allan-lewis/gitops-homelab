@@ -49,6 +49,7 @@ metadata:
   name: ngb
   labels:
     name: ngb
+---
 kind: Namespace
 apiVersion: v1
 metadata:
