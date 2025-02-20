@@ -7,10 +7,10 @@ resources:
 
 helmCharts:
 - name: bitnami/mariadb
-  repo: https://charts.bitnami.com/bitnami
+  repo: oci://registry-1.docker.io/bitnamicharts
   releaseName: mariadb
   namespace: guacamole
-  version: 20.2.4
+  version: 20.2.2
   valuesFile: values.yaml
 
 patches:
