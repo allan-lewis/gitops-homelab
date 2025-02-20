@@ -1,8 +1,0 @@
----
-kind: Namespace
-apiVersion: v1
-metadata:
-  name: kube-prometheus-stack
-  labels:
-    name: kube-prometheus-stack
-    pod-security.kubernetes.io/enforce: privileged

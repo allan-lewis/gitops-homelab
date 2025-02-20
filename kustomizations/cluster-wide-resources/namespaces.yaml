@@ -1,0 +1,30 @@
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: guacamole
+  labels:
+    name: guacamole
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: kube-prometheus-stack
+  labels:
+    name: kube-prometheus-stack
+    pod-security.kubernetes.io/enforce: privileged
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: longhorn-system
+  labels:
+    name: longhorn-system
+    pod-security.kubernetes.io/enforce: privileged
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: ngb
+  labels:
+    name: ngb
