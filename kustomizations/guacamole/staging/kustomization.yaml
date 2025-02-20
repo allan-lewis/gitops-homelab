@@ -5,6 +5,14 @@ kind: Kustomization
 resources:
 - ../base
 
+helmCharts:
+- name: mariadb
+  repo: https://charts.bitnami.com/bitnami
+  releaseName: mariadb
+  namespace: guacamole
+  version: 20.2.4
+  valuesFile: values.yaml
+
 patches:
 - target:
     kind: Service
