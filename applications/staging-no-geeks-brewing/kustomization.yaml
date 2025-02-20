@@ -19,3 +19,6 @@ patches:
     - op: add
       path: /spec/destination/namespace
       value: ngb
+    - op: add
+      path: /metadata/annotations/argocd-image-updater.argoproj.io~1image-list
+      value: allanelewis/ngb-nextjs, allanelewis/ngb-graphql
