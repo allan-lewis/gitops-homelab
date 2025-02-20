@@ -36,6 +36,15 @@ spec:
     - secretKey: MYSQL_PASSWORD    
       remoteRef:        
         key: GUACAMOLE_MYSQL_PASSWORD
+    - secretKey: mariadb-root-password    
+      remoteRef:        
+        key: MARIADB_PASSWORD
+    - secretKey: mariadb-replication-password    
+      remoteRef:        
+        key: MARIADB_PASSWORD
+    - secretKey: mariadb-password    
+      remoteRef:        
+        key: MARIADB_PASSWORD
 ---
 kind: Deployment
 apiVersion: apps/v1

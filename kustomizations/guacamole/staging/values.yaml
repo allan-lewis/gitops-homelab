@@ -1,5 +1,5 @@
 auth:
-  existing-secret: guacamole-mariadb-secret
+  existing-secret: guacamole-secrets
 
 primary:
   service:
