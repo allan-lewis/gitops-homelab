@@ -35,13 +35,13 @@ metadata:
   labels:
     name: longhorn-system
     pod-security.kubernetes.io/enforce: privileged
----
-kind: Namespace
-apiVersion: v1
-metadata:
-  name: metallb-system
-  labels:
-    name: metallb-system
+# ---
+# kind: Namespace
+# apiVersion: v1
+# metadata:
+#   name: metallb-system
+#   labels:
+#     name: metallb-system
 ---
 kind: Namespace
 apiVersion: v1
