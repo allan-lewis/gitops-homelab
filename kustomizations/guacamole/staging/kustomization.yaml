@@ -6,7 +6,7 @@ resources:
 - ../base
 
 helmCharts:
-- name: bitnami/mariadb
+- name: mariadb
   repo: registry-1.docker.io/bitnamicharts
   releaseName: mariadb
   namespace: guacamole
