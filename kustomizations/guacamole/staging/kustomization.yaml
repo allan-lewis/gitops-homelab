@@ -6,8 +6,7 @@ resources:
 - ../base
 
 helmCharts:
-- name: mariadb
-  repo: registry-1.docker.io/bitnamicharts/mariadb
+- repo: oci://registry-1.docker.io/bitnamicharts/mariadb
   releaseName: mariadb
   namespace: guacamole
   version: 20.2.2
