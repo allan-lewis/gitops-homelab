@@ -178,6 +178,17 @@ data:
               type: authentik
               url: https://auth.allanshomelab.com
               key: {{HOMEPAGE_VAR_AUTHENTIK_KEY}}
+        - Cloudflared:
+            icon: cloudflare.png
+            href: {{HOMEPAGE_VAR_CLOUDFLARE_URL}}
+            description: Zero trust tunnel
+            namespace: cloudflare
+            app: cf-tunnel-allans-home-lab
+            widget:
+              type: cloudflared
+              key: {{HOMEPAGE_VAR_CLOUDFLARE_KEY}}
+              accountid: {{HOMEPAGE_VAR_CLOUDFLARE_ACCOUTNT_ID}}
+              tunnelid: {{HOMEPAGE_VAR_CLOUDFLARE_TUNNEL_ID}}
 
   widgets.yaml: |
     - greeting:

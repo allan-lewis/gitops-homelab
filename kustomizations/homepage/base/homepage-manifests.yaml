@@ -213,3 +213,15 @@ spec:
     - secretKey: HOMEPAGE_VAR_GRAFANA_PASSWORD      
       remoteRef:        
         key: HOMEPAGE_VAR_GRAFANA_PASSWORD
+    - secretKey: HOMEPAGE_VAR_CLOUDFLARE_URL      
+      remoteRef:        
+        key: HOMEPAGE_VAR_CLOUDFLARE_URL
+    - secretKey: HOMEPAGE_VAR_CLOUDFLARE_KEY      
+      remoteRef:        
+        key: HOMEPAGE_VAR_CLOUDFLARE_KEY
+    - secretKey: HOMEPAGE_VAR_CLOUDFLARE_ACCOUTNT_ID      
+      remoteRef:        
+        key: HOMEPAGE_VAR_CLOUDFLARE_ACCOUTNT_ID
+    - secretKey: HOMEPAGE_VAR_CLOUDFLARE_TUNNEL_ID      
+      remoteRef:        
+        key: HOMEPAGE_VAR_CLOUDFLARE_TUNNEL_ID
