@@ -14,13 +14,16 @@ data:
     headerStyle: underlined
     useEqualHeights: true
     layout:
-      GitOps:
+      Dev Ops:
         style: "row"
         columns: 4
       Hosts:
         style: "row"
         columns: 4
-      GitOps Links:
+      GitOps:
+        style: "row"
+        columns: 2
+      GitHub:
         style: "row"
         columns: 2
     theme: "dark"
@@ -28,24 +31,21 @@ data:
   custom.css: ""
   custom.js: ""
   bookmarks.yaml: |
-    - GitOps Links:
+    - GitHub:
+        - Allan's Home Lab:
+          - abbr: AHL
+            href: https://github.com/allan-lewis/allans-home-lab
+        - Gitops Home Lab:
+          - abbr: GOH
+            href: https://github.com/allan-lewis/gitops-homelab
+    - GitOps:
         - Doppler:
-          - abbr: DO
+          - abbr: DOP
             href: https://dashboard.doppler.com/workplace/f4e646dd70eec9c4d331/projects/default
         - Renovate:
-          - abbr: RE
+          - abbr: REN
             href: https://developer.mend.io/github/allan-lewis
   services.yaml: |
-    - GitOps:
-        - Argo CD:
-            icon: argo-cd.png
-            href: https://argocd.nonprod.allanshomelab.com
-            description: Foo
-            widget:
-              type: argocd
-              url: https://argocd.nonprod.allanshomelab.com
-              key: "{{HOMEPAGE_VAR_ARGO_CD_KEY}}"
-              fields: ['apps', 'healthy', 'synced']
     - Hosts:
         - Canopus:
             icon: https://styles.redditmedia.com/t5_23wawa/styles/communityIcon_4dwn4v5j0f641.png?width=256&v=enabled&s=27560fbcc6159fe0c23f4a3e5366223954d32509
@@ -87,6 +87,18 @@ data:
               url: https://rigel.hosts.allanshomelab.com
               username: root
               password: "{{HOMEPAGE_VAR_TRUENAS_PASSWORD}}"
+    - Dev Ops:
+        - Argo CD:
+            icon: argo-cd.png
+            href: https://argocd.nonprod.allanshomelab.com
+            description: CD tool for Kubernetes
+            namespace: argocd
+            app: argocd-server
+            widget:
+              type: argocd
+              url: https://argocd.nonprod.allanshomelab.com
+              key: "{{HOMEPAGE_VAR_ARGO_CD_KEY}}"
+              fields: ['apps', 'healthy', 'synced']
   widgets.yaml: |
     - greeting:
         text_size: xl
