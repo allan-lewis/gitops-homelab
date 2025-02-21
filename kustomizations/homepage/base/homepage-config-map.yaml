@@ -16,10 +16,10 @@ data:
     layout:
       Home Lab Management:
         style: "row"
-        columns: 2
+        columns: 4
       Dev Ops:
         style: "row"
-        columns: 2
+        columns: 4
       GitHub:
         style: "row"
         columns: 2
@@ -151,6 +151,17 @@ data:
               username: {{HOMEPAGE_VAR_GRAFANA_USERNAME}}
               password: {{HOMEPAGE_VAR_GRAFANA_PASSWORD}}
               fields: ['dashboards', 'datasources']
+        - Prometheus:
+            icon: prometheus.png
+            href: https://prometheus.k8s.allanshomelab.com
+            description: Monitoring/alerting toolkit
+            namespace: monitoring
+            app: prometheus
+            server: 
+            container: 
+            widget:
+              type: prometheus
+              url: https://prometheus.k8s.allanshomelab.com
 
   widgets.yaml: |
     - greeting:
