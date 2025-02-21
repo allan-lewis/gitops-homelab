@@ -77,10 +77,10 @@ data:
           showLabel: true
           label: "homelab-cluster"
         nodes:
-      show: true
-        cpu: true
-        memory: true
-        showLabel: true
+          show: true
+          cpu: true
+          memory: true
+          showLabel: true
     - datetime:
         text_size: xl
         format:
