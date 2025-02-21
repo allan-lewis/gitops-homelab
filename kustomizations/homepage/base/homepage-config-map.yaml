@@ -165,7 +165,7 @@ data:
             widget:
               type: prometheus
               url: https://prometheus.k8s.allanshomelab.com
-    - Networking and Authentication
+    - Networking and Authentication:
         - Authentik (k8s):
             icon: authentik.png
             href: https://auth.allanshomelab.com
