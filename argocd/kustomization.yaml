@@ -9,4 +9,6 @@ metadata:
     app.kubernetes.io/part-of: argocd
 data:
   kustomize.buildOptions: --enable-helm
-  
+  admin.enabled: "true"
+  accounts.homepage: apiKey
+  accounts.homepage.enabled: "true"
