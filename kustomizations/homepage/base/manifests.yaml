@@ -71,17 +71,12 @@ data:
         text: "Allan's Home Lab"
     - kubernetes:
         cluster:
-          # Shows cluster-wide statistics
           show: true
-          # Shows the aggregate CPU stats
           cpu: true
-          # Shows the aggregate memory stats
           memory: true
-          # Shows a custom label
           showLabel: true
           label: "cluster"
         nodes:
-          # Shows node-specific statistics
           show: false
     - datetime:
         text_size: xl
