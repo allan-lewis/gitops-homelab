@@ -68,7 +68,7 @@ data:
               type: proxmox
               url: https://polaris.hosts.allanshomelab.com
               username: {{HOMEPAGE_VAR_POLARIS_USERNAME}}
-              password: {{ HOMEPAGE_VAR_POLARIS_PASSWORD}}
+              password: {{HOMEPAGE_VAR_POLARIS_PASSWORD}}
               key:
               accountid:
               tunnelid:
