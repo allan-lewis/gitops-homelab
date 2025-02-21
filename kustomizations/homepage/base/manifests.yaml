@@ -38,12 +38,15 @@ data:
       Hosts:
         style: "row"
         columns: 4
+      GitOps Links:
+        style: "row"
+        columns: 2
     theme: "dark"
     color: "slate"
   custom.css: ""
   custom.js: ""
   bookmarks.yaml: |
-    - GitOps:
+    - GitOps Links:
         - Doppler:
           - abbr: DO
             href: https://dashboard.doppler.com/workplace/f4e646dd70eec9c4d331/projects/default
