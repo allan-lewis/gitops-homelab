@@ -64,7 +64,7 @@ data:
             app: argocd-server
             widget:
               type: argocd
-              url: http://argocd.host.or.ip:port
+              url: https://gitops.allanshomelab.com
               key: HOMEPAGE_VAR_ARGO_CD_KEY
 # {% for group in  (homelab_k8s_homepage_service_groups | default([])) %}
 #     - {{ group.name }}:
