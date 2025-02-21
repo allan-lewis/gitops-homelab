@@ -225,6 +225,15 @@ spec:
       automountServiceAccountToken: true
       dnsPolicy: ClusterFirst
       enableServiceLinks: true
+      initContainers:
+        - name: copy-config-to-emptydir
+          image: busybox  # or any other lightweight image with basic tools
+          command: ["sh", "-c", "cp /app/staging/services.yaml /app/config/services.yaml"]
+          volumeMounts:
+            - name: staging-volume
+              mountPath: /app/staging
+            - name: empty-dir-volume
+              mountPath: /app/config
       containers:
         - name: homepage
           image: "ghcr.io/gethomepage/homepage:v0.10.9"
@@ -241,7 +250,7 @@ spec:
               value: debug
           volumeMounts:
             - mountPath: /app/config
-              name: longhorn-storage
+              name: homepage-storage
             - mountPath: /staging/config/custom.js
               name: homepage-config
               subPath: custom.js
@@ -274,7 +283,7 @@ spec:
             name: homepage
         - name: logs
           emptyDir: {}
-        - name: longhorn-storage
+        - name: homepage-storage
           emptyDir: {}
 ---
 apiVersion: networking.k8s.io/v1
