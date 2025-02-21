@@ -14,7 +14,7 @@ data:
     headerStyle: underlined
     useEqualHeights: true
     layout:
-      Hosts:
+      Home Lab Management:
         style: "row"
         columns: 4
       Dev Ops:
@@ -46,11 +46,23 @@ data:
           - abbr: REN
             href: https://developer.mend.io/github/allan-lewis
   services.yaml: |
-    - Hosts:
+    - Home Lab Management:
         - Canopus:
             icon: https://styles.redditmedia.com/t5_23wawa/styles/communityIcon_4dwn4v5j0f641.png?width=256&v=enabled&s=27560fbcc6159fe0c23f4a3e5366223954d32509
             href: https://canopus.hosts.allanshomelab.com
             description: NAS (local backup)
+        - Guacamole:
+            icon: guacamole.png
+            href: https://guacamole.allanshomelab.com/guacamole
+            description: Remote connection gateway
+            namespace: guacamole
+            app: guacamole
+        - Longhorn:
+            icon: longhorn.png
+            href: https://longhorn.k8s.allanshomelab.com
+            description: Distributed k8s storage
+            namespace: longhorn-system
+            app: longhorn
         - Polaris:
             icon: proxmox.png
             href: https://polaris.hosts.allanshomelab.com
@@ -61,6 +73,14 @@ data:
               username: {{HOMEPAGE_VAR_POLARIS_USERNAME}}
               password: {{HOMEPAGE_VAR_POLARIS_PASSWORD}}
               fields: ['vms', 'resources.cpu', 'resources.mem']
+        - Portainer:
+            icon: portainer.png
+            href: https://portainer.k8s.allanshomelab.com
+            description: Container management
+            namespace: portainer
+            app: portainer
+            server: 
+            container:
         - Procyon:
             icon: truenas.png
             href: https://procyon.hosts.allanshomelab.com
@@ -74,6 +94,15 @@ data:
               url: https://procyon.hosts.allanshomelab.com
               username: admin
               password: "{{HOMEPAGE_VAR_TRUENAS_PASSWORD}}"
+        - Rancher:
+            icon: rancher.png
+            href: https://rancher.k8s.allanshomelab.com
+            description: Kubernetes management platform
+            namespace: cattle-system
+            app: rancher
+            server: 
+            container: 
+            podSelector: app = rancher
         - Rigel:
             icon: truenas.png
             href: https://rigel.hosts.allanshomelab.com
@@ -110,9 +139,9 @@ data:
           timeStyle: short
           hour12: false
   docker.yaml: |
-  #   mizar:
-  #     host: 192.168.86.112
-  #     port: 2375
-  #   regulus:
-  #     host: 192.168.86.111
-  #     port: 2375
+    mizar:
+      host: 192.168.86.112
+      port: 2375
+    regulus:
+      host: 192.168.86.111
+      port: 2375
