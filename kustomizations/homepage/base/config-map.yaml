@@ -1,0 +1,106 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homepage
+  namespace: default
+  labels:
+    app.kubernetes.io/name: homepage
+data:
+  kubernetes.yaml: |
+    mode: cluster
+  settings.yaml: |
+    title: "Allan's Home Lab"
+    headerStyle: underlined
+    useEqualHeights: true
+    layout:
+      GitOps:
+        style: "row"
+        columns: 4
+      Hosts:
+        style: "row"
+        columns: 4
+      GitOps Links:
+        style: "row"
+        columns: 2
+    theme: "dark"
+    color: "slate"
+  custom.css: ""
+  custom.js: ""
+  bookmarks.yaml: |
+    - GitOps Links:
+        - Doppler:
+          - abbr: DO
+            href: https://dashboard.doppler.com/workplace/f4e646dd70eec9c4d331/projects/default
+        - Renovate:
+          - abbr: RE
+            href: https://developer.mend.io/github/allan-lewis
+  services.yaml: |
+    - GitOps:
+        - Argo CD:
+            icon: argo-cd.png
+            href: https://argocd.nonprod.allanshomelab.com
+            description: Foo
+            widget:
+              type: argocd
+              url: https://argocd.nonprod.allanshomelab.com
+              key: "{{HOMEPAGE_VAR_ARGO_CD_KEY}}"
+              fields: ['apps', 'healthy', 'synced']
+    - Hosts:
+        - Canopus:
+            icon: https://styles.redditmedia.com/t5_23wawa/styles/communityIcon_4dwn4v5j0f641.png?width=256&v=enabled&s=27560fbcc6159fe0c23f4a3e5366223954d32509
+            href: https://canopus.hosts.allanshomelab.com
+            description: NAS (local backup)
+        - Polaris:
+            icon: proxmox.png
+            href: https://polaris.hosts.allanshomelab.com
+            description: Hypervisor
+            widget:
+              type: proxmox
+              url: https://polaris.hosts.allanshomelab.com
+              username: {{HOMEPAGE_VAR_POLARIS_USERNAME}}
+              password: {{HOMEPAGE_VAR_POLARIS_PASSWORD}}
+              fields: ['vms', 'resources.cpu', 'resources.mem']
+        - Procyon:
+            icon: truenas.png
+            href: https://procyon.hosts.allanshomelab.com
+            description: NAS (offsite backup)
+            namespace:
+            app:
+            server:
+            container:
+            widget:
+              type: truenas
+              url: https://procyon.hosts.allanshomelab.com
+              username: admin
+              password: "{{HOMEPAGE_VAR_TRUENAS_PASSWORD}}"
+        - Rigel:
+            icon: truenas.png
+            href: https://rigel.hosts.allanshomelab.com
+            description: NAS
+            namespace:
+            app:
+            server:
+            container:
+            widget:
+              type: truenas
+              url: https://rigel.hosts.allanshomelab.com
+              username: root
+              password: "{{HOMEPAGE_VAR_TRUENAS_PASSWORD}}"
+  widgets.yaml: |
+    - greeting:
+        text_size: xl
+        text: "Allan's Home Lab"
+    - datetime:
+        text_size: xl
+        format:
+          dateStyle: full
+          timeStyle: short
+          hour12: false
+  docker.yaml: |
+  #   mizar:
+  #     host: 192.168.86.112
+  #     port: 2375
+  #   regulus:
+  #     host: 192.168.86.111
+  #     port: 2375
