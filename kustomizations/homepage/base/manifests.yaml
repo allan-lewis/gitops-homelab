@@ -35,7 +35,7 @@ data:
     headerStyle: clean
     useEqualHeights: true
     layout:
-      GitOps Services:
+      Hosts:
         style: "row"
         columns: 4
       GitOps:
@@ -55,17 +55,34 @@ data:
 # {% endfor %}
 # {% endfor %}
   services.yaml: |
-    - GitOps Services:
-        - Argo CD:
-            icon: "argo-cd.png"
-            href: "https://gitops.allanshomelab.com"
-            description: "Gitops CD Tool for Kubernetes"
-            namespace: argocd
-            app: argocd-server
+    - Hosts:
+        - Polaris:
+            icon: proxmox.png
+            href: https://polaris.hosts.allanshomelab.com
+            description: Hypervisor
+            namespace:
+            app:
+            server:
+            container:
             widget:
-              type: argocd
-              url: https://argocd.nonprod.allanshomelab.com
-              key: "{{HOMEPAGE_VAR_ARGO_CD_KEY}}"
+              type: proxmox
+              url: https://polaris.hosts.allanshomelab.com
+              username: "{{ HOMEPAGE_VAR_POLARIS_USERNAME }}"
+              password: "{{ HOMEPAGE_VAR_POLARIS_PASSWORD }}"
+              key:
+              accountid:
+              tunnelid:
+              fields: ['vms', 'resources.cpu', 'resources.mem']
+# - Argo CD:
+#     icon: "argo-cd.png"
+#     href: "https://gitops.allanshomelab.com"
+#     description: "Gitops CD Tool for Kubernetes"
+#     namespace: argocd
+#     app: argocd-server
+#     widget:
+#       type: argocd
+#       url: https://argocd.nonprod.allanshomelab.com
+#       key: "{{HOMEPAGE_VAR_ARGO_CD_KEY}}"
 # {% for group in  (homelab_k8s_homepage_service_groups | default([])) %}
 #     - {{ group.name }}:
 # {% for service in group.services | default([]) %}
