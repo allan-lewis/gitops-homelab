@@ -116,9 +116,9 @@ data:
 # {% endfor %}
 # {% endfor %}
   widgets.yaml: |
-    - greeting:
-      text_size: xl
-      text: Greeting Text
+      - greeting:
+        text_size: xl
+        text: Greeting Text
 # - greeting:
 #     text_size: xl
 #     text: "Allan's Home Lab"
