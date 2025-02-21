@@ -59,7 +59,7 @@ data:
         - Argo CD:
             icon: "argo-cd.png"
             href: "https://gitops.allanshomelab.com"
-            description: "Gitops CD tool for Kubernetes"
+            description: "Gitops CD Tool for Kubernetes"
 # namespace: argocd
 # app: argocd-server
 # {% for group in  (homelab_k8s_homepage_service_groups | default([])) %}
