@@ -79,8 +79,6 @@ data:
             description: Container management
             namespace: portainer
             app: portainer
-            server: 
-            container:
         - Procyon:
             icon: truenas.png
             href: https://procyon.hosts.allanshomelab.com
@@ -100,8 +98,6 @@ data:
             description: Kubernetes management platform
             namespace: cattle-system
             app: rancher
-            server: 
-            container: 
             podSelector: app = rancher
         - Rigel:
             icon: truenas.png
@@ -117,6 +113,12 @@ data:
               username: root
               password: "{{HOMEPAGE_VAR_TRUENAS_PASSWORD}}"
     - Dev Ops:
+        - Alertmanager:
+            icon: alertmanager.png
+            href: https://alerts.k8s.allanshomelab.com
+            description: Monitoring system
+            namespace: kube-prometheus-stack
+            app: alertmanager
         - Argo CD:
             icon: argo-cd.png
             href: https://argocd.nonprod.allanshomelab.com
@@ -128,6 +130,28 @@ data:
               url: https://argocd.nonprod.allanshomelab.com
               key: "{{HOMEPAGE_VAR_ARGO_CD_KEY}}"
               fields: ['apps', 'healthy', 'synced']
+          - Gatus:
+            icon: gatus.png
+            href: https://gatus.docker.allanshomelab.com
+            description: Health dashboard
+            server: mizar
+            container: gatus
+            widget:
+              type: gatus
+              url: https://gatus.docker.allanshomelab.com
+        - Grafana:
+            icon: grafana.png
+            href: https://grafana.allanshomelab.com
+            description: Operational dashboards
+            namespace: kube-prometheus-stack
+            app: grafana
+            widget:
+              type: grafana
+              url: https://grafana.allanshomelab.com
+              username: {{HOMEPAGE_VAR_GRAFANA_USERNAME}}
+              password: {{HOMEPAGE_VAR_GRAFANA_PASSWORD}}
+              fields: ['dashboards', 'datasources']
+
   widgets.yaml: |
     - greeting:
         text_size: xl
