@@ -19,3 +19,87 @@ metadata:
     app.kubernetes.io/name: homepage
   annotations:
     kubernetes.io/service-account.name: homepage
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homepage
+  namespace: default
+  labels:
+    app.kubernetes.io/name: homepage
+data:
+  kubernetes.yaml: |
+    mode: cluster
+  settings.yaml: |
+    title: "Allan's Home Lab"
+    headerStyle: clean
+    useEqualHeights: true
+    layout:
+      GitOps Services:
+        style: "row"
+        columns: 4
+      GitOps:
+        style: "row"
+        columns: 2
+    theme: "dark"
+    color: "slate"
+  custom.css: ""
+  custom.js: ""
+  bookmarks.yaml: |
+# {% for group in  (homelab_k8s_homepage_bookmark_groups | default([])) %}
+#     - {{ group.name }}:
+# {% for bookmark in group.bookmarks | default([]) %}
+#         - {{ bookmark.name }}:
+#            - abbr: {{ bookmark.abbr }}
+#              href: {{ bookmark.href }}
+# {% endfor %}
+# {% endfor %}
+  services.yaml: |
+# {% for group in  (homelab_k8s_homepage_service_groups | default([])) %}
+#     - {{ group.name }}:
+# {% for service in group.services | default([]) %}
+#         - {{ service.name }}:
+#             icon: {{ service.icon | default('') }}
+#             href: {{ service.href }}
+#             description: {{ service.description }}
+#             namespace: {{ service.namespace | default('') }}
+#             app: {{ service.app | default('') }}
+#             server: {{ service.server | default('') }}
+#             container: {{ service.container | default('') }}
+# {% if service.podSelector is defined %}
+#             podSelector: {{ service.podSelector | default('') }}
+# {% endif %}
+# {% if service.widget is defined %}
+#             widget:
+#               type: {{ service.widget.type }}
+#               url: {{ service.widget.url | default('') }}
+#               username: {{ service.widget.username | default('') }}
+#               password: {{ service.widget.password | default('') }}
+#               key: {{ service.widget.key | default('') }}
+#               accountid: {{ service.widget.accountid | default('') }}
+#               tunnelid: {{ service.widget.tunnelid | default('') }}
+# {% if service.widget.fields is defined %}
+#               fields: {{ service.widget.fields }}
+# {% endif %}
+# {% if service.widget.version is defined %}
+#               version: {{ service.widget.version }}
+# {% endif %}
+# {% endif %}
+# {% endfor %}
+# {% endfor %}
+  widgets.yaml: |
+    - greeting:
+        text_size: xl
+        text: "Allan's Home Lab"
+    - datetime:
+        text_size: xl
+        format:
+          dateStyle: full
+          timeStyle: short
+          hour12: false
+  docker.yaml: |
+# {%for docker_node in groups['homelab_docker_nodes'] %}
+#     {{ docker_node }}:
+#       host: {{ hostvars[docker_node].ansible_host  }}
+#       port: {{ homelab_ports.docker_proxy }}
+# {% endfor %}
