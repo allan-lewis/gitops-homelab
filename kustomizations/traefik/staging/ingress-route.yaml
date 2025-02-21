@@ -62,6 +62,17 @@ spec:
           namespace: longhorn-system
           port: 80
           scheme: http   
+    - match: Host(`wiki.nonprod.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: wikijs
+          namespace: wikijs
+          port: 80
+          scheme: http 
     - match: Host(`vaultwarden.nonprod.allanshomelab.com`)
       kind: Rule
       middlewares:
