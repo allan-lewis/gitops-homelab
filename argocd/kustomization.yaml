@@ -10,4 +10,4 @@ metadata:
 data:
   kustomize.buildOptions: --enable-helm
   admin.enabled: "true"
-  accounts.admin.capabilities: login, apiKey
+  accounts.admin: apiKey
