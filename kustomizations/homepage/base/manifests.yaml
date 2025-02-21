@@ -57,7 +57,7 @@ data:
           - abbr: RE
             href: https://developer.mend.io/github/allan-lewis
   services.yaml: |
-    - GitOps
+    - GitOps:
         - Argo CD:
             icon: argo-cd.png
             href: https://argocd.nonprod.allanshomelab.com
