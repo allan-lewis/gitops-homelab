@@ -314,7 +314,13 @@ spec:
     name: doppler-secret-store
   target:    
     name: homepage-secrets
-  data:    
+  data:
     - secretKey: HOMEPAGE_VAR_ARGO_CD_KEY      
       remoteRef:        
         key: HOMEPAGE_VAR_ARGO_CD_KEY
+    - secretKey: HOMEPAGE_VAR_POLARIS_USERNAME      
+      remoteRef:        
+        key: HOMEPAGE_VAR_POLARIS_USERNAME
+    - secretKey: HOMEPAGE_VAR_POLARIS_PASSWORD      
+      remoteRef:        
+        key: HOMEPAGE_VAR_POLARIS_PASSWORD
