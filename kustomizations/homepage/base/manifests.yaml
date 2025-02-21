@@ -258,7 +258,7 @@ spec:
             #   name: homepage-config
             #   subPath: kubernetes.yaml
             - mountPath: /app/config/services.yaml
-              name: homepage-config
+              name: longhorn-storage
               subPath: services.yaml
             # - mountPath: /app/config/settings.yaml
             #   name: homepage-config
