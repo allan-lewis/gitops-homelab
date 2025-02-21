@@ -232,7 +232,7 @@ spec:
           volumeMounts:
             - name: staging-volume
               mountPath: /app/staging
-            - name: empty-dir-volume
+            - name: homepage-storage
               mountPath: /app/config
       containers:
         - name: homepage
