@@ -42,7 +42,7 @@ data:
     color: "slate"
   custom.css: ""
   custom.js: ""
-  bookmarks.yaml: |
+# bookmarks.yaml: |
 # {% for group in  (homelab_k8s_homepage_bookmark_groups | default([])) %}
 #     - {{ group.name }}:
 # {% for bookmark in group.bookmarks | default([]) %}
@@ -125,7 +125,7 @@ data:
 #       dateStyle: full
 #       timeStyle: short
 #       hour12: false
-  docker.yaml: |
+  # docker.yaml: |
 # {%for docker_node in groups['homelab_docker_nodes'] %}
 #     {{ docker_node }}:
 #       host: {{ hostvars[docker_node].ansible_host  }}
