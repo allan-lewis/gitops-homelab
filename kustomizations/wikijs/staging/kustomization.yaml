@@ -6,8 +6,8 @@ resources:
 - ../base/
 
 helmCharts:
-- name: requarks/wiki
-  repo: https://charts.js.wiki
+- name: wiki
+  repo: https://charts.js.wiki/requarks
   releaseName: wikijs
   namespace: wikijs
   version: 2.2.22
