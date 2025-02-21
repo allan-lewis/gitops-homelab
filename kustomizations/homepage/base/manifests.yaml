@@ -75,7 +75,7 @@ data:
           dateStyle: full
           timeStyle: short
           hour12: false
-  # docker.yaml: |
+  docker.yaml: |
   #   mizar:
   #     host: 192.168.86.112
   #     port: 2375
