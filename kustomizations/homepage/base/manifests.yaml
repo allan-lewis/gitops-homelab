@@ -40,9 +40,6 @@ data:
         columns: 4
     theme: "dark"
     color: "slate"
-# GitOps:
-#   style: "row"
-#   columns: 2
   custom.css: ""
   custom.js: ""
   bookmarks.yaml: |
