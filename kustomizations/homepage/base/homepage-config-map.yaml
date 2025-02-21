@@ -16,10 +16,10 @@ data:
     layout:
       Home Lab Management:
         style: "row"
-        columns: 4
+        columns: 2
       Dev Ops:
         style: "row"
-        columns: 4
+        columns: 2
       GitHub:
         style: "row"
         columns: 2
