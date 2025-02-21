@@ -14,16 +14,16 @@ data:
     headerStyle: underlined
     useEqualHeights: true
     layout:
-      Dev Ops:
-        style: "row"
-        columns: 4
       Hosts:
         style: "row"
         columns: 4
-      GitOps:
+      Dev Ops:
+        style: "row"
+        columns: 4
+      GitHub:
         style: "row"
         columns: 2
-      GitHub:
+      GitOps:
         style: "row"
         columns: 2
     theme: "dark"
