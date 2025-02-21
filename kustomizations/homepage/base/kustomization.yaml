@@ -4,5 +4,5 @@ kind: Kustomization
 
 resources:
   - metrics-server.yaml
-  - manifests.yaml
-  - config-map.yaml
+  - homepage-manifests.yaml
+  - homepage-config-map.yaml
