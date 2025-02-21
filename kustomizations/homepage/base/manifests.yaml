@@ -81,7 +81,7 @@ data:
               type: truenas
               url: https://procyon.hosts.allanshomelab.com
               username: admin
-              password: "{{HOMELAB_VAR_TRUENAS_PASSWORD}}"
+              password: "{{HOMEPAGE_VAR_TRUENAS_PASSWORD}}"
         - Rigel:
             icon: truenas.png
             href: https://rigel.hosts.allanshomelab.com
@@ -94,7 +94,7 @@ data:
               type: truenas
               url: https://rigel.hosts.allanshomelab.com
               username: root
-              password: "{{HOMELAB_VAR_TRUENAS_PASSWORD}}"
+              password: "{{HOMEPAGE_VAR_TRUENAS_PASSWORD}}"
   widgets.yaml: |
     - greeting:
         text_size: xl
@@ -294,6 +294,6 @@ spec:
     - secretKey: HOMEPAGE_VAR_POLARIS_PASSWORD      
       remoteRef:        
         key: HOMEPAGE_VAR_POLARIS_PASSWORD
-    - secretKey: HOMELAB_VAR_TRUENAS_PASSWORD      
+    - secretKey: HOMEPAGE_VAR_TRUENAS_PASSWORD      
       remoteRef:        
-        key: HOMELAB_VAR_TRUENAS_PASSWORD
+        key: HOMEPAGE_VAR_TRUENAS_PASSWORD
