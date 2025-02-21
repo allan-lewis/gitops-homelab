@@ -59,10 +59,6 @@ data:
             icon: proxmox.png
             href: https://polaris.hosts.allanshomelab.com
             description: Hypervisor
-            namespace:
-            app:
-            server:
-            container:
             widget:
               type: proxmox
               url: https://polaris.hosts.allanshomelab.com
@@ -79,13 +75,13 @@ data:
           dateStyle: full
           timeStyle: short
           hour12: false
-  docker.yaml: |
-    mizar:
-      host: 192.168.86.112
-      port: 2375
-    regulus:
-      host: 192.168.86.111
-      port: 2375
+  # docker.yaml: |
+  #   mizar:
+  #     host: 192.168.86.112
+  #     port: 2375
+  #   regulus:
+  #     host: 192.168.86.111
+  #     port: 2375
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
