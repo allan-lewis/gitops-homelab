@@ -230,7 +230,7 @@ spec:
           image: busybox  # or any other lightweight image with basic tools
           command: ["sh", "-c", "cp /app/staging/services.yaml /app/config/services.yaml"]
           volumeMounts:
-            - name: staging-volume
+            - name: homepage-config
               mountPath: /app/staging
             - name: homepage-storage
               mountPath: /app/config
