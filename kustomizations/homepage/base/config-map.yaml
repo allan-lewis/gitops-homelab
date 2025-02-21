@@ -130,7 +130,7 @@ data:
               url: https://argocd.nonprod.allanshomelab.com
               key: "{{HOMEPAGE_VAR_ARGO_CD_KEY}}"
               fields: ['apps', 'healthy', 'synced']
-          - Gatus:
+        - Gatus:
             icon: gatus.png
             href: https://gatus.docker.allanshomelab.com
             description: Health dashboard
