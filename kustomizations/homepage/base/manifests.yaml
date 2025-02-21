@@ -66,7 +66,7 @@ data:
               type: argocd
               url: https://argocd.nonprod.allanshomelab.com
               key: "{{HOMEPAGE_VAR_ARGO_CD_KEY}}"
-              fields: ['apps', 'healthy', 'synced', 'outOfSync']
+              fields: ['apps', 'healthy', 'synced']
     - Hosts:
         - Canopus:
             icon: https://styles.redditmedia.com/t5_23wawa/styles/communityIcon_4dwn4v5j0f641.png?width=256&v=enabled&s=27560fbcc6159fe0c23f4a3e5366223954d32509
