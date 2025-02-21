@@ -66,62 +66,23 @@ data:
               accountid:
               tunnelid:
               fields: ['vms', 'resources.cpu', 'resources.mem']
-# - Argo CD:
-#     icon: "argo-cd.png"
-#     href: "https://gitops.allanshomelab.com"
-#     description: "Gitops CD Tool for Kubernetes"
-#     namespace: argocd
-#     app: argocd-server
-#     widget:
-#       type: argocd
-#       url: https://argocd.nonprod.allanshomelab.com
-#       key: "{{HOMEPAGE_VAR_ARGO_CD_KEY}}"
-# {% for group in  (homelab_k8s_homepage_service_groups | default([])) %}
-#     - {{ group.name }}:
-# {% for service in group.services | default([]) %}
-#         - {{ service.name }}:
-#             icon: {{ service.icon | default('') }}
-#             href: {{ service.href }}
-#             description: {{ service.description }}
-#             namespace: {{ service.namespace | default('') }}
-#             app: {{ service.app | default('') }}
-#             server: {{ service.server | default('') }}
-#             container: {{ service.container | default('') }}
-# {% if service.podSelector is defined %}
-#             podSelector: {{ service.podSelector | default('') }}
-# {% endif %}
-# {% if service.widget is defined %}
-#             widget:
-#               type: {{ service.widget.type }}
-#               url: {{ service.widget.url | default('') }}
-#               username: {{ service.widget.username | default('') }}
-#               password: {{ service.widget.password | default('') }}
-#               key: {{ service.widget.key | default('') }}
-#               accountid: {{ service.widget.accountid | default('') }}
-#               tunnelid: {{ service.widget.tunnelid | default('') }}
-# {% if service.widget.fields is defined %}
-#               fields: {{ service.widget.fields }}
-# {% endif %}
-# {% if service.widget.version is defined %}
-#               version: {{ service.widget.version }}
-# {% endif %}
-# {% endif %}
-# {% endfor %}
-# {% endfor %}
   widgets.yaml: |
     - greeting:
-      text_size: xl
-      text: Greeting Text
-# - greeting:
-#     text_size: xl
-#     text: "Allan's Home Lab"
-# - datetime:
-#     text_size: xl
-#     format:
-#       dateStyle: full
-#       timeStyle: short
-#       hour12: false
-  # docker.yaml: |
+        text_size: xl
+        text: "Allan's Home Lab"
+    - datetime:
+        text_size: xl
+        format:
+          dateStyle: full
+          timeStyle: short
+          hour12: false
+  docker.yaml: |
+    mizar:
+      host: 192.168.86.112
+      port: 2375
+    regulus:
+      host: 192.168.86.111
+      port: 2375
 # {%for docker_node in groups['homelab_docker_nodes'] %}
 #     {{ docker_node }}:
 #       host: {{ hostvars[docker_node].ansible_host  }}
