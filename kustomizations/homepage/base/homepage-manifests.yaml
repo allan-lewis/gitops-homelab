@@ -192,6 +192,9 @@ spec:
   target:    
     name: homepage-secrets
   data:
+    - secretKey: HOMEPAGE_VAR_AUTHENTIK_KEY      
+      remoteRef:        
+        key: HOMEPAGE_VAR_AUTHENTIK_KEY
     - secretKey: HOMEPAGE_VAR_ARGO_CD_KEY      
       remoteRef:        
         key: HOMEPAGE_VAR_ARGO_CD_KEY
