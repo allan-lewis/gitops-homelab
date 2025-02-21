@@ -4,3 +4,12 @@ kind: Kustomization
 
 resources:
 - ../base
+
+patches:
+- target:
+    kind: Ingress
+    name: homepage
+  patch: |-
+    - op: replace
+      path: /spec/rules/0/host
+      value: homepage.nonprod.allanshomelab.com
