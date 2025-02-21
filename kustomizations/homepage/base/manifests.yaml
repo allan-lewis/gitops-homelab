@@ -65,7 +65,7 @@ data:
             widget:
               type: argocd
               url: http://argocd.host.or.ip:port
-              key: "{{ HOMEPAGE_VAR_ARGO_CD_KEY }}"
+              key: HOMEPAGE_VAR_ARGO_CD_KEY
 # {% for group in  (homelab_k8s_homepage_service_groups | default([])) %}
 #     - {{ group.name }}:
 # {% for service in group.services | default([]) %}
