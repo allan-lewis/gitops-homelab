@@ -32,17 +32,17 @@ data:
     mode: cluster
   settings.yaml: |
     title: "Allan's Home Lab"
-    headerStyle: clean
+    headerStyle: underlined
     useEqualHeights: true
     layout:
       Hosts:
         style: "row"
         columns: 4
-      GitOps:
-        style: "row"
-        columns: 2
     theme: "dark"
     color: "slate"
+# GitOps:
+#   style: "row"
+#   columns: 2
   custom.css: ""
   custom.js: ""
   bookmarks.yaml: |
@@ -116,9 +116,9 @@ data:
 # {% endfor %}
 # {% endfor %}
   widgets.yaml: |
-      - greeting:
-        text_size: xl
-        text: Greeting Text
+    - greeting:
+      text_size: xl
+      text: Greeting Text
 # - greeting:
 #     text_size: xl
 #     text: "Allan's Home Lab"
