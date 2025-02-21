@@ -47,6 +47,9 @@ data:
         - Doppler:
           - abbr: DO
             href: https://dashboard.doppler.com/workplace/f4e646dd70eec9c4d331/projects/default
+        - Renovate:
+          - abbr: RE
+            href: https://developer.mend.io/github/allan-lewis
   services.yaml: |
     - Hosts:
         - Polaris:
