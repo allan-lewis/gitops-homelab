@@ -55,13 +55,13 @@ data:
 # {% endfor %}
 # {% endfor %}
   services.yaml: |
-    - Gitops Services:
+    - GitOps Services:
         - Argo CD:
             icon: "argo-cd.png"
             href: "https://gitops.allanshomelab.com"
             description: "Gitops CD Tool for Kubernetes"
-# namespace: argocd
-# app: argocd-server
+            namespace: argocd
+            app: argocd-server
 # {% for group in  (homelab_k8s_homepage_service_groups | default([])) %}
 #     - {{ group.name }}:
 # {% for service in group.services | default([]) %}
