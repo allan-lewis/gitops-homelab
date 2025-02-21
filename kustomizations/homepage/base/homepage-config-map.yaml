@@ -20,6 +20,9 @@ data:
       Dev Ops:
         style: "row"
         columns: 4
+      Networking and Authentication:
+        style: "row"
+        columns: 4
       GitHub:
         style: "row"
         columns: 2
@@ -162,6 +165,19 @@ data:
             widget:
               type: prometheus
               url: https://prometheus.k8s.allanshomelab.com
+    - Networking and Authentication
+        - Authentik (k8s):
+            icon: authentik.png
+            href: https://auth.allanshomelab.com
+            description: Identity provider
+            namespace: authentik
+            app: authentik
+            server: 
+            container: 
+            widget:
+              type: authentik
+              url: https://auth.allanshomelab.com
+              key: {{HOMEPAGE_VAR_AUTHENTIK_KEY}}
 
   widgets.yaml: |
     - greeting:
