@@ -189,7 +189,45 @@ data:
               key: {{HOMEPAGE_VAR_CLOUDFLARE_KEY}}
               accountid: {{HOMEPAGE_VAR_CLOUDFLARE_ACCOUTNT_ID}}
               tunnelid: {{HOMEPAGE_VAR_CLOUDFLARE_TUNNEL_ID}}
-
+        - Pi-hole (k8s):
+            icon: pi-hole.png
+            href: https://dns.k8s.allanshomelab.com/admin
+            description: Primary DNS server
+            namespace: pihole
+            app: pihole
+            podSelector: app = pihole
+            widget:
+              type: pihole
+              url: https://dns.k8s.allanshomelab.com
+              key: {{HOMEPAGE_VAR_PIHOLE_KEY}}
+        - Pi-hole (Docker):
+            icon: pi-hole.png
+            href: https://dns.docker.allanshomelab.com/admin
+            description: Backup DNS server
+            server: mizar
+            container: pihole
+            widget:
+              type: pihole
+              url: https://dns.docker.allanshomelab.com
+              key: {{HOMEPAGE_VAR_PIHOLE_KEY}}
+        - Traefik (k8s):
+            icon: traefik.png
+            href: https://traefik.k8s.allanshomelab.com
+            description: Reverse proxy/load balancer
+            namespace: traefik
+            app: traefik
+            widget:
+              type: traefik
+              url: https://traefik.k8s.allanshomelab.com
+        - Traefik (Docker):
+            icon: traefik.png
+            href: https://traefik.docker.allanshomelab.com
+            description: Reverse proxy/load balancer
+            server: mizar
+            container: traefik
+            widget:
+              type: traefik
+              url: https://traefik.docker.allanshomelab.com
   widgets.yaml: |
     - greeting:
         text_size: xl

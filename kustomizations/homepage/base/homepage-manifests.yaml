@@ -225,3 +225,6 @@ spec:
     - secretKey: HOMEPAGE_VAR_CLOUDFLARE_TUNNEL_ID      
       remoteRef:        
         key: HOMEPAGE_VAR_CLOUDFLARE_TUNNEL_ID
+    - secretKey: HOMEPAGE_VAR_PIHOLE_KEY      
+      remoteRef:        
+        key: HOMEPAGE_VAR_PIHOLE_KEY
