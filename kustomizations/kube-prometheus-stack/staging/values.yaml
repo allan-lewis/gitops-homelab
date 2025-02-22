@@ -76,6 +76,9 @@ grafana:
 
 alertmanager:
   alertmanagerSpec:
+    persistentVolumeClaimRetentionPolicy:
+      whenDeleted: Retain
+      whenScaled: Retain
     storage: 
       volumeClaimTemplate:
         spec:
