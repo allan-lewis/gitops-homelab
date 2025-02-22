@@ -20,6 +20,7 @@ patches:
       path: /spec/destination/namespace
       value: kube-prometheus-stack
     - op: add
-      path: /spec/syncPolicy/syncOptions/0
-      value: ServerSideApply=true
+      path: /spec/syncPolicy/syncOptions
+      value:
+        - ServerSideApply=true
     
