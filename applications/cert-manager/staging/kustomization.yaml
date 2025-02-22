@@ -3,7 +3,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-- ../base
+- ../../base
 
 patches:
 - target:
@@ -12,10 +12,10 @@ patches:
   patch: |-
     - op: replace
       path: /metadata/name
-      value: external-secrets
+      value: cert-manager
     - op: add
       path: /spec/source/path
-      value: kustomizations/external-secrets/staging
+      value: kustomizations/cert-manager/staging
     - op: add
       path: /spec/destination/namespace
-      value: external-secrets
+      value: cert-manager
