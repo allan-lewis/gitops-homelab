@@ -180,7 +180,7 @@ data:
             widget:
               type: healthchecks
               url: https://healthchecks.io
-              key: {{HOMEPAGE_VAR_HEALTHCHECKS_KEY}}
+              key: "{{HOMEPAGE_VAR_HEALTHCHECKS_KEY}}"
         - Prometheus:
             icon: prometheus.png
             href: https://prometheus.k8s.allanshomelab.com
