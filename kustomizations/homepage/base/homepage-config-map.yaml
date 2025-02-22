@@ -47,6 +47,9 @@ data:
           - abbr: GHL
             href: https://github.com/allan-lewis/gitops-homelab
     - GitOps:
+        - Docker Hub:
+          - abbr: DHB
+            href: https://hub.docker.com/search?q=allanelewis
         - Doppler:
           - abbr: DOP
             href: https://dashboard.doppler.com/workplace/f4e646dd70eec9c4d331/projects/default
@@ -328,6 +331,15 @@ data:
             description: Wiki
             namespace: wikijs
             app: wiki
+    - Home Automation:
+        - Homeassistant:
+            icon: home-assistant.png
+            href: https://home.allanandvaia.com
+            description: Home automation server
+            widget:
+              type: homeassistant
+              url: https://home.allanandvaia.com
+              key: {{HOMEPAGE_VAR_HOMEASSIST_KEY}}
   widgets.yaml: |
     - greeting:
         text_size: xl

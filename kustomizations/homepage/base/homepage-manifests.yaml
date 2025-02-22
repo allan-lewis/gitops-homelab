@@ -252,3 +252,6 @@ spec:
     - secretKey: HOMEPAGE_VAR_NEXTCLOUD_PASSWORD      
       remoteRef:        
         key: HOMEPAGE_VAR_NEXTCLOUD_PASSWORD
+    - secretKey: HOMEPAGE_VAR_HOMEASSIST_KEY      
+      remoteRef:        
+        key: HOMEPAGE_VAR_HOMEASSIST_KEY
