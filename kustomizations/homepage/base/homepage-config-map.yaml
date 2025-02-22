@@ -47,7 +47,7 @@ data:
         - Argo CD Image Updater:
           - abbr: AIU
             href: https://argocd-image-updater.readthedocs.io/en/stable/    
-        - Homepage
+        - Homepage:
           - abbr: HPG
             href: https://gethomepage.dev/
     - GitHub:
