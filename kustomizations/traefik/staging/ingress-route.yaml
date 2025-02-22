@@ -14,7 +14,7 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: prometheus-grafana
+        - name: kube-prometheus-stack-grafana
           namespace: kube-prometheus-stack
           port: 80
           scheme: http 
