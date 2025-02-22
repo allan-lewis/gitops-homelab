@@ -26,6 +26,12 @@ data:
       Media:
         style: "row"
         columns: 4
+      Productivity:
+        style: "row"
+        columns: 4
+      Home Automation:
+        style: "row"
+        columns: 4
       GitHub:
         style: "row"
         columns: 2
@@ -301,6 +307,31 @@ data:
             widget:
               type: transmission
               url: https://transmission.docker.allanshomelab.com
+    - Productivity:
+        - Nextcloud:
+            icon: nextcloud.png
+            href: https://cloud.allanandvaia.com
+            description: Online collaboration platform
+            namespace: nextcloud
+            app: nextcloud 
+            widget:
+              type: nextcloud
+              url: https://cloud.allanandvaia.com
+              username: {{HOMEPAGE_VAR_NEXTCLOUD_USERNAME}}
+              password: {{HOMEPAGE_VAR_NEXTCLOUD_PASSWORD}}
+              fields: ['freespace', 'activeusers']
+        - Vaultwarden:
+            icon: bitwarden.png
+            href: https://vault.allanshomelab.com
+            description: Secrets management
+            namespace: vaultwarden
+            app: vaultwarden
+        - WikiJS:
+            icon: wikijs.png
+            href: https://wiki.allanshomelab.com
+            description: Wiki
+            namespace: wikijs
+            app: wiki
   widgets.yaml: |
     - greeting:
         text_size: xl
