@@ -32,6 +32,7 @@ data:
       Home Automation:
         style: "row"
         columns: 4
+      Documentation:
       GitHub:
       GitOps:
     theme: "dark"
@@ -39,6 +40,16 @@ data:
   custom.css: ""
   custom.js: ""
   bookmarks.yaml: |
+    - Documentation:
+        - Argo CD:
+          - abbr: ACD
+            href: https://argo-cd.readthedocs.io/en/stable/
+        - Argo CD Image Updater:
+          - abbr: AIU
+            href: https://argocd-image-updater.readthedocs.io/en/stable/    
+        - Homepage
+          - abbr: HPG
+            href: https://gethomepage.dev/
     - GitHub:
         - Allan's Home Lab:
           - abbr: AHL
