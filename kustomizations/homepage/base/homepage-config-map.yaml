@@ -173,6 +173,14 @@ data:
               username: {{HOMEPAGE_VAR_GRAFANA_USERNAME}}
               password: {{HOMEPAGE_VAR_GRAFANA_PASSWORD}}
               fields: ['dashboards', 'datasources']
+        - Healthchecks:
+            icon: healthchecks.png
+            href: https://healthchecks.io/projects/b3a1c76e-e685-4823-a69c-d509dcd1c2cc/checks/
+            description: Job minitoring service
+            widget:
+              type: healthchecks
+              url: https://healthchecks.io
+              key: {{HOMEPAGE_VAR_HEALTHCHECKS_KEY}}
         - Prometheus:
             icon: prometheus.png
             href: https://prometheus.k8s.allanshomelab.com

@@ -255,3 +255,6 @@ spec:
     - secretKey: HOMEPAGE_VAR_HOMEASSIST_KEY      
       remoteRef:        
         key: HOMEPAGE_VAR_HOMEASSIST_KEY
+    - secretKey: HOMEPAGE_VAR_HEALTHCHECKS_KEY      
+      remoteRef:        
+        key: HOMEPAGE_VAR_HEALTHCHECKS_KEY
