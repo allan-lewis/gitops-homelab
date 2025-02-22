@@ -7,6 +7,17 @@ spec:
   entryPoints:
     - websecure
   routes:
+    - match: Host(`dns.nonprod.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: pihole-web
+          namespace: pihole
+          port: 80
+          scheme: http 
     - match: Host(`grafana.nonprod.allanshomelab.com`)
       kind: Rule
       middlewares:
