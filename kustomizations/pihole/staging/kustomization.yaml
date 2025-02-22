@@ -5,7 +5,7 @@ kind: Kustomization
 helmCharts:
 - name: pihole
   repo: https://mojo2600.github.io/pihole-kubernetes/
-  releaseName: rancher
+  releaseName: pihole
   namespace: pihole
   version: v2.27.0
   valuesFile: values.yaml
