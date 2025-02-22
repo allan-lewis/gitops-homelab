@@ -233,7 +233,7 @@ spec:
         key: HOMEPAGE_VAR_PLEX_KEY
     - secretKey: HOMEPAGE_VAR_IMMICH_KEY      
       remoteRef:        
-        key: HOMEPAGE_VAR_SONARR_KEY
+        key: HOMEPAGE_VAR_IMMICH_KEY
     - secretKey: HOMEPAGE_VAR_SONARR_KEY      
       remoteRef:        
         key: HOMEPAGE_VAR_SONARR_KEY
