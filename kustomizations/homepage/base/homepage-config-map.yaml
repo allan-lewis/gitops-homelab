@@ -177,7 +177,7 @@ data:
             icon: prometheus.png
             href: https://prometheus.k8s.allanshomelab.com
             description: Monitoring/alerting toolkit
-            namespace: monitoring
+            namespace: kube-prometheus-stack
             app: prometheus
             server: 
             container: 
@@ -201,8 +201,6 @@ data:
             icon: cloudflare.png
             href: {{HOMEPAGE_VAR_CLOUDFLARE_URL}}
             description: Zero trust tunnel
-            namespace: cloudflare
-            app: cf-tunnel-allans-home-lab
             widget:
               type: cloudflared
               key: {{HOMEPAGE_VAR_CLOUDFLARE_KEY}}
