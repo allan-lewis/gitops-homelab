@@ -198,6 +198,9 @@ spec:
     - secretKey: HOMEPAGE_VAR_ARGO_CD_KEY      
       remoteRef:        
         key: HOMEPAGE_VAR_ARGO_CD_KEY
+    - secretKey: HOMEPAGE_VAR_ARGO_CD_URL   
+      remoteRef:        
+        key: HOMEPAGE_VAR_ARGO_CD_URL
     - secretKey: HOMEPAGE_VAR_POLARIS_USERNAME      
       remoteRef:        
         key: HOMEPAGE_VAR_POLARIS_USERNAME

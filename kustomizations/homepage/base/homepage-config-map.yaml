@@ -127,13 +127,13 @@ data:
             app: alertmanager
         - Argo CD:
             icon: argo-cd.png
-            href: https://argocd.nonprod.allanshomelab.com
+            href: {{HOMEPAGE_VAR_ARGO_CD_URL}}
             description: CD tool for Kubernetes
             namespace: argocd
             app: argocd-server
             widget:
               type: argocd
-              url: https://argocd.nonprod.allanshomelab.com
+              url: {{HOMEPAGE_VAR_ARGO_CD_URL}}
               key: "{{HOMEPAGE_VAR_ARGO_CD_KEY}}"
               fields: ['apps', 'healthy', 'synced']
         - Gatus:
