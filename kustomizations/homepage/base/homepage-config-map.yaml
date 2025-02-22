@@ -262,6 +262,45 @@ data:
               type: plex
               url: https://plex.docker.allanshomelab.com
               key: {{HOMEPAGE_VAR_PLEX_KEY}}
+        - Radarr:
+            icon: radarr.png
+            href: https://radarr.docker.allanshomelab.com
+            description: Movie management
+            server: regulus
+            container: radarr
+            widget:
+              type: radarr
+              url: http://192.168.86.111:31300
+              key: {{HOMEPAGE_VAR_RADARR_KEY}}
+        - Sonarr:
+            icon: sonarr.png
+            href: https://sonarr.docker.allanshomelab.com
+            description: Show management
+            server: regulus
+            container: sonarr
+            widget:
+              type: sonarr
+              url: http://192.168.86.111:31200
+              key: {{HOMEPAGE_VAR_SONARR_KEY}}
+        - Tautulli:
+            icon: tautulli.png
+            href: https://tautulli.k8s.allanshomelab.com
+            description: Plex monitoring and analytics
+            namespace: tautulli
+            app: tautulli
+            widget:
+              type: tautulli
+              url: https://tautulli.k8s.allanshomelab.com
+              key: {{HOMEPAGE_VAR_TAUTULLI_KEY}}
+        - Transmission:
+            icon: transmission.png
+            href: https://transmission.docker.allanshomelab.com
+            description: Torrent download client
+            server: regulus
+            container: transmission
+            widget:
+              type: transmission
+              url: https://transmission.docker.allanshomelab.com
   widgets.yaml: |
     - greeting:
         text_size: xl
