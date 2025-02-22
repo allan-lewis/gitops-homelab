@@ -41,14 +41,17 @@ crds:
     enabled: false
 
 prometheus:    
-    prometheusSpec:
-      storageSpec:
-        volumeClaimTemplate:
-          spec:
-            storageClassName: longhorn
-            resources:
-              requests:
-                storage: 16Gi
+  prometheusSpec:
+    persistentVolumeClaimRetentionPolicy:
+      whenDeleted: Retain
+      whenScaled: Retain
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: longhorn
+          resources:
+            requests:
+              storage: 20Gi
 
 #       additionalScrapeConfigs:
 # ## {{ homelab_k8s_monitoring_prometheus_scrape_configs }}
