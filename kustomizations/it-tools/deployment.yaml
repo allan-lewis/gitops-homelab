@@ -1,0 +1,31 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: kustomize-default
+  namespace: it-tools
+  labels:
+    app: it-tools
+spec:
+  replicas: 1
+  progressDeadlineSeconds: 600
+  revisionHistoryLimit: 2
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: it-tools
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: it-tools
+        app: it-tools
+    spec:
+      containers:
+      - name: it-tools
+        image: ghcr.io/corentinth/it-tools:2024.10.22-7ca5933
+        imagePullPolicy: "Always"
+        env:
+        volumeMounts:
+      volumes:
+ 
