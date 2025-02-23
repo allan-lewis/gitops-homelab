@@ -12,3 +12,9 @@ helmCharts:
   namespace: twingate
   version: 0.1.29
   valuesFile: values-valiant-stingray.yaml
+- name: connector
+  repo: https://twingate.github.io/helm-charts
+  releaseName: modest-anteater
+  namespace: twingate
+  version: 0.1.29
+  valuesFile: values-modest-anteater.yaml

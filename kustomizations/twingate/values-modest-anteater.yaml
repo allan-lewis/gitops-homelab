@@ -1,0 +1,3 @@
+connector:
+  network: allanshomelab
+  existingSecret: twingate-modest-anteater-secret
