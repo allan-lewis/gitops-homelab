@@ -88,6 +88,13 @@ metadata:
 kind: Namespace
 apiVersion: v1
 metadata:
+  name: twingate
+  labels:
+    name: twingate
+---
+kind: Namespace
+apiVersion: v1
+metadata:
   name: vaultwarden
   labels:
     name: vaultwarden
