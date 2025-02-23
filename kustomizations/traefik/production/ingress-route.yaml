@@ -7,6 +7,17 @@ spec:
   entryPoints:
     - websecure
   routes:
+    - match: Host(`cloud.allanandvaia.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: nextcloud
+          namespace: nextcloud
+          port: 8080
+          scheme: http 
     - match: Host(`dns.k8s.allanshomelab.com`)
       kind: Rule
       middlewares:
