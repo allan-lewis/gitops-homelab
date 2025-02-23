@@ -3,7 +3,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-- ../base
+- ../../base
 
 patches:
 - target:
@@ -12,10 +12,15 @@ patches:
   patch: |-
     - op: replace
       path: /metadata/name
-      value: metallb
+      value: kube-prometheus-stack
     - op: add
       path: /spec/source/path
-      value: kustomizations/metallb/staging
+      value: kustomizations/kube-prometheus-stack/production
     - op: add
       path: /spec/destination/namespace
-      value: metallb-system
+      value: kube-prometheus-stack
+    - op: add
+      path: /spec/syncPolicy/syncOptions
+      value:
+        - ServerSideApply=true
+    
