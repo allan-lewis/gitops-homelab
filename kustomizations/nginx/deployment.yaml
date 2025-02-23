@@ -2,10 +2,10 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: it-tools
-  namespace: it-tools
+  name: nginx
+  namespace: nginx
   labels:
-    app: it-tools
+    app: nginx
 spec:
   replicas: 1
   progressDeadlineSeconds: 600
@@ -14,16 +14,16 @@ spec:
     type: Recreate
   selector:
     matchLabels:
-      app: it-tools
+      app: nginx
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: it-tools
-        app: it-tools
+        app.kubernetes.io/name: nginx
+        app: nginx
     spec:
       containers:
-      - name: it-tools
-        image: ghcr.io/corentinth/it-tools:2024.10.22-7ca5933
+      - name: nginx
+        image: nginx:1.27.4
         imagePullPolicy: "Always"
         env:
         volumeMounts:
