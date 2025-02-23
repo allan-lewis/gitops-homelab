@@ -15,7 +15,7 @@ patches:
       value: tautulli
     - op: add
       path: /spec/source/path
-      value: kustomizations/boilerplate/environments/staging-tautulli
+      value: kustomizations/tautulli
     - op: add
       path: /spec/destination/namespace
       value: tautulli
