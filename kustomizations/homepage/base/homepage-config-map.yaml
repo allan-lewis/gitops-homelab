@@ -209,8 +209,6 @@ data:
             icon: cloudflare.png
             href: {{HOMEPAGE_VAR_CLOUDFLARE_URL}}
             description: Zero trust tunnel
-            namespace: cloudflare
-            app: cloudflared-allans-home-lab
             widget:
               type: cloudflared
               key: {{HOMEPAGE_VAR_CLOUDFLARE_KEY}}
