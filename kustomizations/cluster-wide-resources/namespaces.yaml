@@ -2,6 +2,13 @@
 kind: Namespace
 apiVersion: v1
 metadata:
+  name: authentik-utils
+  labels:
+    name: authentik-utils
+---
+kind: Namespace
+apiVersion: v1
+metadata:
   name: external-secrets
   labels:
     name: external-secrets
