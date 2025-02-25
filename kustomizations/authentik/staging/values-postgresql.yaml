@@ -1,3 +1,8 @@
+auth:
+  username: authentik
+  database: authentik
+  existingSecret: authentic-auth-secret
+
 primary:
   persistence:
     existingClaim: authentik-postgresql-pvc
