@@ -1,0 +1,3 @@
+primary:
+  persistence:
+    existingClaim: authentik-postgresql-pvc
