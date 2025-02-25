@@ -6,5 +6,5 @@ helmCharts:
 - name: redis
   repo: oci://registry-1.docker.io/bitnamicharts
   namespace: authentik
-  version: 7.4.1-debian-12-r0
+  version: 7.4.1
   valuesFile: values.yaml
