@@ -10,4 +10,9 @@ helmCharts:
   repo: oci://registry-1.docker.io/bitnamicharts
   namespace: authentik-utils
   version: 20.9.0
-  valuesFile: values.yaml
+  valuesFile: values-redis.yaml
+- name: postgresql
+  repo: oci://registry-1.docker.io/bitnamicharts
+  namespace: authentik-utils
+  version: 16.0.4
+  valuesFile: values-postgresql.yaml
