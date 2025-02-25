@@ -6,3 +6,8 @@ auth:
 primary:
   persistence:
     existingClaim: authentik-postgresql-pvc
+
+image:
+  registry: docker.io
+  repository: bitnami/postgresql
+  tag: 15.8.0-debian-12-r18
