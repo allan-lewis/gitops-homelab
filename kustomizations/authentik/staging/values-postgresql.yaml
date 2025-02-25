@@ -1,7 +1,7 @@
 auth:
   username: authentik
   database: authentik
-  existingSecret: authentic-auth-secret
+  existingSecret: authentik-postgresql-auth-secret
 
 primary:
   persistence:
