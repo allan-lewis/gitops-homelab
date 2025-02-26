@@ -24,7 +24,7 @@ server:
           readOnly: true
     ingress:
         ingressClassName: traefik-external
-        enabled: true
+        enabled: false
         hosts:
             - auth.nonprod.allanshomelab.com
 
