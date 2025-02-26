@@ -7,6 +7,17 @@ spec:
   entryPoints:
     - websecure
   routes:
+    - match: Host(`auth.nonprod.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: authentik-server
+          namespace: authentik
+          port: 80
+          scheme: http 
     - match: Host(`cloud.nonprod.allanshomelab.com`)
       kind: Rule
       middlewares:
