@@ -1,0 +1,36 @@
+global:
+    envFrom:
+        - secretRef:
+            name: authentik-secrets
+
+authentik:
+    error_reporting:
+        enabled: false
+    postgresql:
+        host: 192.168.86.196
+        user: file:///postgres-creds/username
+        password: file:///postgres-creds/password
+    redis:
+        host: 192.168.86.194
+
+server:
+    volumes:
+        - name: postgres-creds
+          secret:
+            secretName: authentik-secrets
+    volumeMounts:
+        - name: postgres-creds
+          mountPath: /postgres-creds
+          readOnly: true
+    ingress:
+        enabled: false
+
+worker:
+    volumes:
+        - name: postgres-creds
+          secret:
+            secretName: authentik-secrets
+    volumeMounts:
+        - name: postgres-creds
+          mountPath: /postgres-creds
+          readOnly: true
