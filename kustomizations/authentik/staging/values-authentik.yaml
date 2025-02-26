@@ -1,7 +1,7 @@
 global:
     envFrom:
         - secretRef:
-            name: authentik-postgres-secret-key
+            name: authentik-secrets
 
 authentik:
     error_reporting:
@@ -17,7 +17,7 @@ server:
     volumes:
         - name: postgres-creds
           secret:
-            secretName: authentik-postgres-credentials
+            secretName: authentik-secrets
     volumeMounts:
         - name: postgres-creds
           mountPath: /postgres-creds
@@ -32,7 +32,7 @@ worker:
     volumes:
         - name: postgres-creds
           secret:
-            secretName: authentik-postgres-credentials
+            secretName: authentik-secrets
     volumeMounts:
         - name: postgres-creds
           mountPath: /postgres-creds

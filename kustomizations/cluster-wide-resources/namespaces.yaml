@@ -2,9 +2,9 @@
 kind: Namespace
 apiVersion: v1
 metadata:
-  name: authentik-utils
+  name: authentik
   labels:
-    name: authentik-utils
+    name: authentik
 ---
 kind: Namespace
 apiVersion: v1
