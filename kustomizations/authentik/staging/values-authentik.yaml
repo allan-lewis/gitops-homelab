@@ -23,7 +23,7 @@ server:
           mountPath: /postgres-creds
           readOnly: true
     ingress:
-        ingressClassName: traefik
+        ingressClassName: traefik-external
         enabled: true
         hosts:
             - auth.nonprod.allanshomelab.com
