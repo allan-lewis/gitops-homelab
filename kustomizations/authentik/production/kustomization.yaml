@@ -1,0 +1,24 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ../base
+
+# helmCharts:
+# - name: redis
+#   repo: oci://registry-1.docker.io/bitnamicharts
+#   namespace: authentik
+#   version: 20.9.0
+#   valuesFile: values-redis.yaml
+# - name: postgresql
+#   repo: oci://registry-1.docker.io/bitnamicharts
+#   namespace: authentik
+#   version: 16.0.4
+#   valuesFile: values-postgresql.yaml
+# - name: authentik
+#   repo: https://charts.goauthentik.io
+#   releaseName: authentik
+#   namespace: authentik
+#   version: 2024.12.3
+#   valuesFile: values-authentik.yaml
