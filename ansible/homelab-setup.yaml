@@ -8,3 +8,5 @@
     - tz
     - user
     - ssh
+    - apt
+    - reboot
