@@ -1,0 +1,19 @@
+---
+- name: Create user and add to sudo group.
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    password: "!"
+    password_lock: no
+    shell: /bin/bash
+    groups:
+      - sudo
+    append: yes
+    state: present
+  register: homelab_user_data
+
+- name: Add user to the sudoers list.
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    regexp: '^{{ ansible_user }}'
+    line: '{{ ansible_user }} ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'
