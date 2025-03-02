@@ -1,0 +1,9 @@
+variable vm_name {}
+variable proxmox_node {}
+variable cpu_cores {}
+variable memory_dedicated {}
+variable ipv4_address {}
+variable datastore_id {}
+variable disk_size {}
+variable tags {}
+variable user_account_keys {}
