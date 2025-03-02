@@ -1,4 +1,5 @@
 [homelab_ansible_hosts]
+alcor ansible_host=192.168.86.123
 procyon ansible_host=192.168.86.125
 
 [all:vars]
