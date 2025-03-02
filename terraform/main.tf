@@ -67,3 +67,45 @@ resource "proxmox_virtual_environment_vm" "ubuntu_vm" {
 
   tags = ["terraform", "production", "ubuntu", "openvpn"]
 }
+
+resource "proxmox_virtual_environment_vm" "ubuntu_vm" {
+  name      = "procyon"
+  node_name = "polaris"
+
+  cpu {
+    cores = 2
+  }
+
+  memory {
+    dedicated = 2048
+  }
+
+  initialization {
+    ip_config {
+      ipv4 {
+        address = "192.168.86.125/24"
+        gateway = "192.168.86.1"
+      }
+    }
+
+    user_account {
+      username = "lab"
+      keys = [var.PROXMOX_VM_PUBLIC_KEY]
+    }
+  }
+
+  disk {
+    datastore_id = "local-ssd"
+    file_id      = "local:iso/ubuntu-24.04-server-cloudimg-amd64.img"
+    interface    = "virtio0"
+    iothread     = true
+    discard      = "on"
+    size         = 64
+  }
+
+  network_device {
+    bridge = "vmbr0"
+  }
+
+  tags = ["terraform", "production", "ubuntu", "ops"]
+}
