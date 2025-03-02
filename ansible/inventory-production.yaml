@@ -1,0 +1,26 @@
+all:
+  hosts:
+    alcor:
+      ansible_host: 192.168.86.123
+    procyon:
+      ansible_host: 192.168.86.125
+
+  children:
+    homelab_ansible_hosts:
+      hosts:
+        alcor:
+        procyon:
+      children:
+        homelab_openvpn_hosts:
+          hosts:
+            alcor:
+          vars:
+            homelab_openvpn_config: "/etc/openvpn/config.ovpn"
+            homelab_openvpn_config_contents: "{{ lookup('env', 'OPEN_VPN_CONFIG') }}"
+            homelab_openvpn_network: "192.168.86.0/24"
+            homelab_openvpn_username: "{{ lookup('env', 'OPEN_VPN_USERNAME') }}"
+            homelab_openvpn_password: "{{ lookup('env', 'OPEN_VPN_PASSWORD') }}"
+
+  vars:
+    ansible_python_interpreter: "/usr/bin/python3.12"
+    ansible_user: lab

@@ -10,3 +10,11 @@
     - ssh
     - apt
     - reboot
+
+- name: Setup OpenVPN hosts.
+  hosts: homelab_openvpn_hosts
+  become: yes
+  gather_facts: yes
+
+  roles:
+    - openvpn

@@ -1,0 +1,13 @@
+all:
+  hosts:
+    procyon:
+      ansible_host: 192.168.86.125
+
+  children:
+    homelab_ansible_hosts:
+      hosts:
+        procyon:
+
+  vars:
+    ansible_python_interpreter: "/usr/bin/python3.12"
+    ansible_user: lab
