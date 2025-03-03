@@ -1,5 +1,14 @@
 # Allan's GitOps Homelab
 
+## Tenets (mostly plagarized from any site listing key GitOps principles)
+
+1. The homelab's desired state should be expressed declaratively
+1. The homelab's desired state should be stored in GitHub
+1. Secrets and other sensitive information are stored securely and remotely
+1. All changes to the homelab are driven off of a discrete/immutable GitHub version
+1. Changes to the homelab's state are applied automatically wherever possible
+1. Homelab state is continually reconciled wherever possible
+
 ## Setup ArgoCD
 
 ### Prerequisites

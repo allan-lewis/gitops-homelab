@@ -1,0 +1,63 @@
+---
+- name: Install Ansible and other required dependencies.
+  ansible.builtin.apt:
+    pkg:
+      - ansible-core
+      - unzip
+    state: latest
+    update_cache: true
+
+- name: Verify Ansible installation
+  command: ansible --version
+  register: ansible_version
+  changed_when: false
+
+- name: Download Terraform binary
+  get_url:
+    url: "https://releases.hashicorp.com/terraform/1.11.0/terraform_1.11.0_linux_amd64.zip"
+    dest: "/tmp/terraform.zip"
+    checksum: sha256:069e531fd4651b9b510adbd7e27dd648b88d66d5f369a2059aadbb4baaead1c1
+
+- name: Unzip Terraform binary
+  unarchive:
+    src: "/tmp/terraform.zip"
+    dest: "/usr/local/bin/"
+    remote_src: yes
+
+- name: Set correct permissions
+  file:
+    path: "/usr/local/bin/terraform"
+    mode: '0755'
+
+- name: Verify Terraform installation
+  command: terraform version
+  register: terraform_version
+  changed_when: false
+
+- name: Download Doppler CLI installation script
+  get_url:
+    url: "https://cli.doppler.com/install.sh"
+    dest: "/tmp/doppler-install.sh"
+    mode: "0755"
+
+- name: Run Doppler CLI installation script
+  command: "/tmp/doppler-install.sh"
+  args:
+    creates: "/usr/local/bin/doppler"
+
+- name: Verify Doppler installation
+  command: "doppler --version"
+  register: doppler_version
+  changed_when: false
+
+- name: Display Ansible version
+  debug:
+    msg: "Ansible: {{ ansible_version }}"
+
+- name: Display Terraform version
+  debug:
+    msg: "Terraform: {{ terraform_version.stdout }}"
+
+- name: Display installed Doppler version
+  debug:
+    msg: "Doppler: {{ doppler_version.stdout }}"

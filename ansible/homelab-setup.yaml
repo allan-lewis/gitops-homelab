@@ -1,4 +1,12 @@
 ---
+- name: Get the local host ready for DevOps work.
+  hosts: localhost
+  become: no
+  gather_facts: yes
+  
+  roles:
+    - known_hosts
+
 - name: Setup homelab hosts.
   hosts: homelab_ansible_hosts
   become: yes
@@ -10,6 +18,22 @@
     - ssh
     - apt
     - reboot
+
+- name: Setup DevOps hosts.
+  hosts: homelab_devops_hosts
+  become: yes
+  gather_facts: yes
+
+  roles:
+    - devops_tools
+
+- name: Setup DevOps environment.
+  hosts: homelab_devops_hosts
+  become: no
+  gather_facts: yes   
+
+  roles: 
+    - devops_setup
 
 - name: Setup OpenVPN hosts.
   hosts: homelab_openvpn_hosts

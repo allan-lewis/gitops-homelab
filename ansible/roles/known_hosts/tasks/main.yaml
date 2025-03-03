@@ -1,0 +1,16 @@
+---
+- name: Retrieve SSH host keys
+  command: "ssh-keyscan -T 5 {{ hostvars[item].ansible_host }}"
+  register: ssh_keys
+  with_items: "{{ groups['homelab_ansible_hosts'] }}"
+  ignore_errors: yes
+  failed_when: ssh_keys.rc != 0  # Ensure failures don't stop execution
+  no_log: true
+
+- name: Add host keys to known_hosts
+  ansible.builtin.known_hosts:
+    name: "{{ hostvars[item.item].ansible_host }}"
+    key: "{{ item.stdout }}"
+  with_items: "{{ ssh_keys.results }}"
+  when: item.stdout is defined and item.stdout | length > 0
+  no_log: true

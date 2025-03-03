@@ -7,6 +7,10 @@ all:
     homelab_ansible_hosts:
       hosts:
         procyon:
+      children:
+        homelab_devops_hosts:
+          hosts:
+            procyon:
 
   vars:
     ansible_python_interpreter: "/usr/bin/python3.12"
