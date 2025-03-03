@@ -6,6 +6,7 @@
   
   roles:
     - known_hosts
+    - doppler
 
 - name: Setup homelab hosts.
   hosts: homelab_ansible_hosts
