@@ -3,6 +3,7 @@
   command: "doppler whoami"
   register: doppler_whoami
   ignore_errors: yes
+  no_log: true
   changed_when: false
 
 - name: Display current Doppler login status
