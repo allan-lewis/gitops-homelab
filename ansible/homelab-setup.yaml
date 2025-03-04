@@ -1,12 +1,11 @@
 ---
-- name: Get the local host ready for DevOps work.
+- name: Get the local host ready for DevOps.
   hosts: localhost
   become: no
   gather_facts: yes
   
   roles:
     - known_hosts
-    - doppler
 
 - name: Setup homelab hosts.
   hosts: homelab_ansible_hosts
@@ -15,6 +14,7 @@
   
   roles:
     - tz
+    - dependencies
     - user
     - ssh
     - apt

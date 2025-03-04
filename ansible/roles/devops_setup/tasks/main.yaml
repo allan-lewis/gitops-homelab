@@ -8,3 +8,15 @@
   ansible.builtin.git:
     repo: "https://github.com/allan-lewis/dotfiles.git"
     dest: "{{ ansible_env.HOME }}/dotfiles"
+
+- name: Create an Ansible config directory
+  file:
+    path: "{{ ansible_env.HOME }}/.config/ansible"
+    state: directory
+    mode: '0755'
+
+- name: Use stow to create Ansible config file.
+  command: "stow -d {{ ansible_env.HOME }}/dotfiles/lab-production -t {{ ansible_env.HOME }}/.config/ansible ansible"
+
+- name: Use stow to create a .zshrc config file.
+  command: "stow -d {{ ansible_env.HOME }}/dotfiles/lab-production -t {{ ansible_env.HOME }} zsh"

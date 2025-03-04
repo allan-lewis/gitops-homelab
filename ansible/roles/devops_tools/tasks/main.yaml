@@ -3,7 +3,7 @@
   ansible.builtin.apt:
     pkg:
       - ansible-core
-      - unzip
+      - stow
     state: latest
     update_cache: true
 
