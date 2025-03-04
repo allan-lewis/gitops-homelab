@@ -5,4 +5,4 @@ master:
     
 auth:
   enabled: false
-  # usePasswordFiles: false
+  usePasswordFiles: false
