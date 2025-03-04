@@ -11,6 +11,9 @@ all:
         alcor:
         procyon:
       children:
+        homelab_devops_hosts:
+          hosts:
+            procyon:
         homelab_openvpn_hosts:
           hosts:
             alcor:

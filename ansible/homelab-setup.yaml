@@ -1,5 +1,5 @@
 ---
-- name: Get the local host ready for DevOps.
+- name: Setup local host state.
   hosts: localhost
   become: no
   gather_facts: yes
