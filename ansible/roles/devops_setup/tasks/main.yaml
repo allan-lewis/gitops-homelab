@@ -20,3 +20,23 @@
 
 - name: Use stow to create a .zshrc config file.
   command: "stow -d {{ ansible_env.HOME }}/dotfiles/lab-production -t {{ ansible_env.HOME }} zsh"
+
+- name: Ensure that the SSH directory exists.
+  file:
+    path: "~/.ssh"
+    state: directory
+    mode: '0700'
+
+- name: Write private key from base-64-encoded environment variable
+  copy:
+    content: "{{ lookup('env', 'SSH_PRIVATE_KEY') | b64decode }}"
+    dest: "~/.ssh/id_rsa"
+    mode: '0600'
+  when: lookup('env', 'SSH_PRIVATE_KEY') | length > 0
+
+- name: Write public key from base-64-encoded environment variable
+  copy:
+    content: "{{ lookup('env', 'SSH_PUBLIC_KEY') | b64decode }}"
+    dest: "~/.ssh/id_rsa.pub"
+    mode: '0644'
+  when: lookup('env', 'SSH_PUBLIC_KEY') | length > 0
