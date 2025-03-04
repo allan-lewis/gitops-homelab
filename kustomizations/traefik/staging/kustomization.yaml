@@ -10,7 +10,7 @@ helmCharts:
   repo: https://traefik.github.io/charts
   releaseName: traefik
   namespace: traefik
-  version: 34.4.0
+  version: 34.4.1
   valuesFile: values.yaml
 
 patches:
