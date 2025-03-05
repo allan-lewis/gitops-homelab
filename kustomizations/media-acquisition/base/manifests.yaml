@@ -30,5 +30,6 @@ spec:
       volumes:
       tolerations:
       - key: "openvpn"
-        operator: "Exists"
+        operator: "Equals"
+        value: "true"
         effect: "NoSchedule"
