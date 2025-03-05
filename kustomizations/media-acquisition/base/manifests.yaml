@@ -28,7 +28,8 @@ spec:
         imagePullPolicy: "Always"
         env:
         volumeMounts:
-      tolerations:
-      - effect: NoSchedule
-        operator: Exists
       volumes:
+      tolerations:
+      - key: "openvpn"
+        operator: "Exists"
+        effect: "NoSchedule"
