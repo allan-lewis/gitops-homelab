@@ -32,5 +32,5 @@ spec:
       - key: "openvpn"
         operator: "Equal"
         value: "true"
-        effect: "NoSchedule"
+        effect: "Schedule"
       volumes:
