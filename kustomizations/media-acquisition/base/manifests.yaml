@@ -51,3 +51,16 @@ spec:
         operator: "Equal"
         value: "true"
         effect: "NoSchedule"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  namespace: nginx
+spec:
+  selector:
+    app: nginx
+  ports:
+  - name: http
+    targetPort: 9117
+    port: 9117
