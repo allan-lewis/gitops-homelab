@@ -28,6 +28,15 @@ spec:
         env:
         volumeMounts:
       volumes:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: "node-role"
+                    operator: "In"
+                    values:
+                      - "openvpn"
       tolerations:
       - key: "openvpn"
         operator: "Equal"
