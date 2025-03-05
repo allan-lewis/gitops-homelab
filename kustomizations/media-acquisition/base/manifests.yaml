@@ -29,8 +29,6 @@ spec:
         env:
         volumeMounts:
       tolerations:
-      - key: "openvpn"
-        operator: "Equal"
-        value: "true"
-        effect: "NoSchedule"
+      - effect: NoSchedule
+        operator: Exists
       volumes:
