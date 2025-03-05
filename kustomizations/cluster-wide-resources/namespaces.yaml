@@ -46,6 +46,13 @@ metadata:
 kind: Namespace
 apiVersion: v1
 metadata:
+  name: media
+  labels:
+    name: media
+---
+kind: Namespace
+apiVersion: v1
+metadata:
   name: nextcloud
   labels:
     name: nextcloud
