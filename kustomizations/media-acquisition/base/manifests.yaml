@@ -27,7 +27,16 @@ spec:
         imagePullPolicy: "Always"
         env:
         volumeMounts:
+          - mountPath: /config
+            name: jackett-config
+          - mountPath: /downloads
+            name: jackett-downloads
       volumes:
+        - name: jackett-config
+          persistentVolumeClaim:
+            claimName: media-jackett
+        - name: jackett-downloads
+          emptyDir: {}
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
