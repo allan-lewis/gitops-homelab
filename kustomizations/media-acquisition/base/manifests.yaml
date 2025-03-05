@@ -55,11 +55,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx
-  namespace: nginx
+  name: jackett
+  namespace: media
 spec:
   selector:
-    app: nginx
+    app: jackett
   ports:
   - name: http
     targetPort: 9117
