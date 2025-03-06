@@ -194,3 +194,88 @@ spec:
         operator: "Equal"
         value: "true"
         effect: "NoSchedule"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: radarr
+  namespace: media
+spec:
+  selector:
+    app: radarr
+  ports:
+  - name: http
+    targetPort: 7878
+    port: 7878
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: sonarr
+  namespace: media
+  labels:
+    app: sonarr
+spec:
+  replicas: 1
+  progressDeadlineSeconds: 600
+  revisionHistoryLimit: 2
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: sonarr
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: sonarr
+        app: sonarr
+    spec:
+      containers:
+      - name: sonarr
+        image: "lscr.io/linuxserver/sonarr:4.0.12"
+        imagePullPolicy: "Always"
+        env:
+        volumeMounts:
+          - mountPath: /config
+            name: sonarr-config
+          - mountPath: /downloads
+            name: media-downloads
+          - mountPath: /movies
+            name: sonarr-tv
+      volumes:
+        - name: sonarr-config
+          persistentVolumeClaim:
+            claimName: media-sonarr
+        - name: media-downloads
+          persistentVolumeClaim:
+            claimName: media-downloads
+        - name: sonarr-tv
+          persistentVolumeClaim:
+            claimName: media-sonarr-tv
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: "node-role"
+                    operator: "In"
+                    values:
+                      - "openvpn"
+      tolerations:
+      - key: "openvpn"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sonarr
+  namespace: media
+spec:
+  selector:
+    app: sonarr
+  ports:
+  - name: http
+    targetPort: 8989
+    port: 8989
