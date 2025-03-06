@@ -20,10 +20,20 @@ spec:
         args:
         - |
           while true; do
-            kubectl taint nodes mintaka openvpn=true:NoSchedule --overwrite
-            kubectl label nodes mintaka node-role=openvpn --overwrite
+            NODE_NAME=$(cat /etc/hostname)
+            echo "$OPENVPN_HOSTS :: $NODE_NAME"
+            if echo "$OPENVPN_HOSTS" | grep -wq "$NODE_NAME"; then
+              kubectl taint nodes $NODE_NAME openvpn=true:NoSchedule --overwrite
+              kubectl label nodes $NODE_NAME node-role=openvpn --overwrite
+            else
+              kubectl taint nodes $NODE_NAME openvpn=true:NoSchedule- || true
+              kubectl label nodes $NODE_NAME node-role- || true
+            fi
             sleep 600
           done
+        env:
+        - name: OPENVPN_HOSTS
+          value: ""
         securityContext:
           runAsUser: 0
       tolerations:
