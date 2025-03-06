@@ -122,3 +122,16 @@ spec:
         operator: "Equal"
         value: "true"
         effect: "NoSchedule"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: transmission
+  namespace: media
+spec:
+  selector:
+    app: transmission
+  ports:
+  - name: http
+    targetPort: 9091
+    port: 9091
