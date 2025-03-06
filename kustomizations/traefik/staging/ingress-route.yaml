@@ -7,6 +7,28 @@ spec:
   entryPoints:
     - websecure
   routes:
+    - match: Host(`radarr.nonprod.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: radarr
+          namespace: media
+          port: 7878
+          scheme: http 
+    - match: Host(`sonarr.nonprod.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: sonarr
+          namespace: media
+          port: 8989
+          scheme: http 
     - match: Host(`transmission.nonprod.allanshomelab.com`)
       kind: Rule
       middlewares:

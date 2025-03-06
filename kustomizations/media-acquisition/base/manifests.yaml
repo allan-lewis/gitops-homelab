@@ -96,16 +96,16 @@ spec:
           - mountPath: /config
             name: transmission-config
           - mountPath: /downloads
-            name: transmission-downloads
+            name: media-downloads
           - mountPath: /watch
             name: transmission-watch
       volumes:
         - name: transmission-config
           persistentVolumeClaim:
             claimName: media-transmission
-        - name: transmission-downloads
+        - name: media-downloads
           persistentVolumeClaim:
-            claimName: media-transmission-dl
+            claimName: media-downloads
         - name: transmission-watch
           emptyDir: {}
       affinity:
