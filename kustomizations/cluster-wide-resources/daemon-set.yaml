@@ -20,7 +20,6 @@ spec:
         args:
         - |
           while true; do
-            NODE_NAME=$(cat /etc/hostname)
             echo "$OPENVPN_HOSTS :: $NODE_NAME"
             if echo "$OPENVPN_HOSTS" | grep -wq "$NODE_NAME"; then
               kubectl taint nodes $NODE_NAME openvpn=true:NoSchedule --overwrite
@@ -33,7 +32,11 @@ spec:
           done
         env:
         - name: OPENVPN_HOSTS
-          value: ""
+          value: ""        
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
         securityContext:
           runAsUser: 0
       tolerations:
