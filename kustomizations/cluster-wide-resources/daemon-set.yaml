@@ -20,7 +20,6 @@ spec:
         args:
         - |
           while true; do
-            NODE_NAME=$(cat /etc/hostname)
             kubectl taint nodes mintaka openvpn=true:NoSchedule --overwrite
             kubectl label nodes mintaka node-role=openvpn --overwrite
             sleep 600
