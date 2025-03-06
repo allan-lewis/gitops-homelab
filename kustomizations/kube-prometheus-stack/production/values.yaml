@@ -51,7 +51,7 @@ prometheus:
           storageClassName: longhorn
           resources:
             requests:
-              storage: 20Gi
+              storage: 128Gi
     additionalScrapeConfigs:
       - job_name: 'gatus'
         scheme: http

@@ -34,7 +34,7 @@ spec:
       volumes:
         - name: jackett-config
           persistentVolumeClaim:
-            claimName: media-jackett
+            claimName: jackett-config
         - name: jackett-downloads
           emptyDir: {}
       affinity:
@@ -102,7 +102,7 @@ spec:
       volumes:
         - name: transmission-config
           persistentVolumeClaim:
-            claimName: media-transmission
+            claimName: transmission-config
         - name: media-downloads
           persistentVolumeClaim:
             claimName: media-downloads
@@ -173,13 +173,13 @@ spec:
       volumes:
         - name: radarr-config
           persistentVolumeClaim:
-            claimName: media-radarr
+            claimName: radarr-config
         - name: media-downloads
           persistentVolumeClaim:
             claimName: media-downloads
         - name: radarr-movies
           persistentVolumeClaim:
-            claimName: media-radarr-movies
+            claimName: radarr-movies
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -245,13 +245,13 @@ spec:
       volumes:
         - name: sonarr-config
           persistentVolumeClaim:
-            claimName: media-sonarr
+            claimName: sonarr-config
         - name: media-downloads
           persistentVolumeClaim:
             claimName: media-downloads
         - name: sonarr-tv
           persistentVolumeClaim:
-            claimName: media-sonarr-tv
+            claimName: sonarr-tv
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
