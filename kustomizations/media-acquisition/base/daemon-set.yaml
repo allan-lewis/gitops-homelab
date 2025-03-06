@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: openvpn-node-configurer
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      name: openvpn-node-configurer
+  template:
+    metadata:
+      labels:
+        name: openvpn-node-configurer
+    spec:
+      serviceAccountName: openvpn-configurer
+      containers:
+      - name: taint-label-container
+        image: bitnami/kubectl:latest
+        command: ["/bin/sh", "-c"]
+        args:
+        - |
+          while true; do
+            NODE_NAME=$(cat /etc/hostname)
+            kubectl taint nodes mintaka openvpn=true:NoSchedule --overwrite
+            kubectl label nodes mintaka node-role=openvpn --overwrite
+            sleep 600
+          done
+        securityContext:
+          runAsUser: 0
+      tolerations:
+      - operator: "Exists"
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: openvpn-configurer
+  namespace: kube-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: openvpn-node-configurer-role
+rules:
+- apiGroups: [""]
+  resources: ["nodes"]
+  verbs: ["get", "list", "patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: openvpn-node-configurer-binding
+subjects:
+- kind: ServiceAccount
+  name: openvpn-configurer
+  namespace: kube-system
+roleRef:
+  kind: ClusterRole
+  name: openvpn-node-configurer-role
+  apiGroup: rbac.authorization.k8s.io
