@@ -64,3 +64,61 @@ spec:
   - name: http
     targetPort: 9117
     port: 9117
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: transmission
+  namespace: media
+  labels:
+    app: transmission
+spec:
+  replicas: 1
+  progressDeadlineSeconds: 600
+  revisionHistoryLimit: 2
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: transmission
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: transmission
+        app: transmission
+    spec:
+      containers:
+      - name: transmission
+        image: "lscr.io/linuxserver/transmission:0.22.1368"
+        imagePullPolicy: "Always"
+        env:
+        volumeMounts:
+          - mountPath: /config
+            name: transmission-config
+          - mountPath: /downloads
+            name: transmission-downloads
+          - mountPath: /watch
+            name: transmission-watch
+      volumes:
+        - name: transmission-config
+          persistentVolumeClaim:
+            claimName: media-transmission
+        - name: transmission-downloads
+          persistentVolumeClaim:
+            claimName: media-transmission-dl
+        - name: transmission-watch
+          emptyDir: {}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: "node-role"
+                    operator: "In"
+                    values:
+                      - "openvpn"
+      tolerations:
+      - key: "openvpn"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
