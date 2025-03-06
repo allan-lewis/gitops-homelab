@@ -25,8 +25,10 @@ spec:
               kubectl taint nodes $NODE_NAME openvpn=true:NoSchedule --overwrite
               kubectl label nodes $NODE_NAME node-role=openvpn --overwrite
             else
-              kubectl taint nodes $NODE_NAME openvpn=true:NoSchedule- || true
-              kubectl label nodes $NODE_NAME node-role- || true
+              kubectl get node $NODE_NAME -o json | jq -e '.spec.taints // [] | map(select(.key == "openvpn" and .effect == "NoSchedule")) | length > 0' && \
+                kubectl taint nodes $NODE_NAME openvpn=true:NoSchedule-
+              kubectl get node $NODE_NAME -o json | jq -e '.metadata.labels | has("node-role")' && \
+                kubectl label nodes $NODE_NAME node-role-
             fi
             sleep 600
           done
