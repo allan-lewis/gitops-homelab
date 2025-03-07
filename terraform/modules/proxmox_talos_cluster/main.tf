@@ -105,6 +105,25 @@ resource "talos_machine_configuration_apply" "cp_config_apply" {
   node                        = each.value.ipv4_address
 }
 
+data "talos_machine_configuration" "machineconfig_worker" {
+  for_each = var.controlplane_list
+
+  cluster_name     = var.cluster_name
+  cluster_endpoint = join("", ["https://", var.controlplane_list[keys(var.controlplane_list)[0]].ipv4_address, ":6443"]) 
+  machine_type     = "worker"
+  kubernetes_version = "1.31.4"
+  machine_secrets  = talos_machine_secrets.machine_secrets.machine_secrets
+}
+
+resource "talos_machine_configuration_apply" "worker_config_apply" {
+  for_each = var.controlplane_list
+  
+  depends_on                  = [ proxmox_virtual_environment_vm.vm_talos ]
+  client_configuration        = talos_machine_secrets.machine_secrets.client_configuration
+  machine_configuration_input = data.talos_machine_configuration.machineconfig_worker[each.key].machine_configuration
+  node                        = each.value.ipv4_address
+}
+
 resource "talos_machine_bootstrap" "bootstrap" {
   depends_on           = [ talos_machine_configuration_apply.cp_config_apply ]
   client_configuration = talos_machine_secrets.machine_secrets.client_configuration
@@ -112,11 +131,10 @@ resource "talos_machine_bootstrap" "bootstrap" {
 }
 
 data "talos_cluster_health" "health" {
-  depends_on           = [ talos_machine_configuration_apply.cp_config_apply ]
-  # depends_on           = [ talos_machine_configuration_apply.cp_config_apply, talos_machine_configuration_apply.worker_config_apply ]
+  depends_on           = [ talos_machine_configuration_apply.cp_config_apply, talos_machine_configuration_apply.worker_config_apply ]
   client_configuration = data.talos_client_configuration.talosconfig.client_configuration
   control_plane_nodes  = [for vm in var.controlplane_list : vm.ipv4_address]
-  # worker_nodes         = [ var.talos_worker_01_ip_addr ]
+  worker_nodes         = [for vm in var.worker_list : vm.ipv4_address]
   endpoints            = data.talos_client_configuration.talosconfig.endpoints
 }
 
