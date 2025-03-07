@@ -54,7 +54,7 @@ resource "proxmox_virtual_environment_vm" "vm_talos" {
     datastore_id = each.value.datastore_id
     ip_config {
       ipv4 {
-        address = each.value.ipv4_address
+        address = join("", [each.value.ipv4_address, "/24"])
         gateway = each.value.gateway
       }
     }
@@ -78,60 +78,63 @@ resource "proxmox_virtual_environment_download_file" "talos_nocloud_image" {
   overwrite               = false
 }
 
-  # resource "talos_machine_secrets" "machine_secrets" {}
+  resource "talos_machine_secrets" "machine_secrets" {}
 
-  # data "talos_client_configuration" "talosconfig" {
-  #   cluster_name         = "staging"
-  #   client_configuration = talos_machine_secrets.machine_secrets.client_configuration
-  #   endpoints            = ["192.168.86.96"]
-  # }
+  data "talos_client_configuration" "talosconfig" {
+    cluster_name         = var.cluster_name
+    client_configuration = talos_machine_secrets.machine_secrets.client_configuration
+    endpoints            = [var.controlplane_list[keys(var.controlplane_list)[0]].ipv4_address]
+  }
 
-# data "talos_machine_configuration" "machineconfig_cp" {
-#   cluster_name     = "staging"
-#   cluster_endpoint = "https://192.168.86.96:6443"
-#   machine_type     = "controlplane"
-#   kubernetes_version = "1.31.4"
-#   machine_secrets  = talos_machine_secrets.machine_secrets.machine_secrets
-# }
+data "talos_machine_configuration" "machineconfig_cp" {
+  for_each = var.controlplane_list
 
-# resource "talos_machine_configuration_apply" "cp_config_apply" {
-#   depends_on                  = [ proxmox_virtual_environment_vm.vm_talos["talos-control-plane-0"] ]
-#   client_configuration        = talos_machine_secrets.machine_secrets.client_configuration
-#   machine_configuration_input = data.talos_machine_configuration.machineconfig_cp.machine_configuration
-#   count                       = 1
-#   node                        = "192.168.86.96"
-# }
+  cluster_name     = var.cluster_name
+  cluster_endpoint = join("", ["https://", var.controlplane_list[keys(var.controlplane_list)[0]].ipv4_address, ":6443"])  
+  machine_type     = "controlplane"
+  kubernetes_version = "1.31.4"
+  machine_secrets  = talos_machine_secrets.machine_secrets.machine_secrets
+}
 
-# resource "talos_machine_bootstrap" "bootstrap" {
-#   depends_on           = [ talos_machine_configuration_apply.cp_config_apply ]
-#   client_configuration = talos_machine_secrets.machine_secrets.client_configuration
-#   node                 = "192.168.86.96"
-# }
+resource "talos_machine_configuration_apply" "cp_config_apply" {
+  for_each = var.controlplane_list
+  
+  depends_on                  = [ proxmox_virtual_environment_vm.vm_talos ]
+  client_configuration        = talos_machine_secrets.machine_secrets.client_configuration
+  machine_configuration_input = data.talos_machine_configuration.machineconfig_cp[each.key].machine_configuration
+  node                        = each.value.ipv4_address
+}
 
-# data "talos_cluster_health" "health" {
-#   depends_on           = [ talos_machine_configuration_apply.cp_config_apply ]
-#   # depends_on           = [ talos_machine_configuration_apply.cp_config_apply, talos_machine_configuration_apply.worker_config_apply ]
-#   client_configuration = data.talos_client_configuration.talosconfig.client_configuration
-#   control_plane_nodes  = [ "192.168.86.96" ]
-#   # worker_nodes         = [ var.talos_worker_01_ip_addr ]
-#   endpoints            = data.talos_client_configuration.talosconfig.endpoints
-# }
+resource "talos_machine_bootstrap" "bootstrap" {
+  depends_on           = [ talos_machine_configuration_apply.cp_config_apply ]
+  client_configuration = talos_machine_secrets.machine_secrets.client_configuration
+  node                 = var.controlplane_list[keys(var.controlplane_list)[0]].ipv4_address
+}
 
-# resource "talos_cluster_kubeconfig" "kubeconfig" {
-#   depends_on           = [ talos_machine_bootstrap.bootstrap, data.talos_cluster_health.health ]
-#   client_configuration = talos_machine_secrets.machine_secrets.client_configuration
-#   node                 = "192.168.86.96"
-# }
+data "talos_cluster_health" "health" {
+  depends_on           = [ talos_machine_configuration_apply.cp_config_apply ]
+  # depends_on           = [ talos_machine_configuration_apply.cp_config_apply, talos_machine_configuration_apply.worker_config_apply ]
+  client_configuration = data.talos_client_configuration.talosconfig.client_configuration
+  control_plane_nodes  = [for vm in var.controlplane_list : vm.ipv4_address]
+  # worker_nodes         = [ var.talos_worker_01_ip_addr ]
+  endpoints            = data.talos_client_configuration.talosconfig.endpoints
+}
 
-# output "talosconfig" {
-#   value = data.talos_client_configuration.talosconfig.talos_config
-#   sensitive = true
-# }
+resource "talos_cluster_kubeconfig" "kubeconfig" {
+  depends_on           = [ talos_machine_bootstrap.bootstrap, data.talos_cluster_health.health ]
+  client_configuration = talos_machine_secrets.machine_secrets.client_configuration
+  node                 = var.controlplane_list[keys(var.controlplane_list)[0]].ipv4_address
+}
 
-# output "kubeconfig" {
-#   value = resource.talos_cluster_kubeconfig.kubeconfig.kubeconfig_raw
-#   sensitive = true
-# }
+output "talosconfig" {
+  value = data.talos_client_configuration.talosconfig.talos_config
+  sensitive = true
+}
+
+output "kubeconfig" {
+  value = resource.talos_cluster_kubeconfig.kubeconfig.kubeconfig_raw
+  sensitive = true
+}
 
 # Rely on environment variables to populate the Proxmox provider!
 # https://registry.terraform.io/providers/bpg/proxmox/latest/docs#environment-variables-summary

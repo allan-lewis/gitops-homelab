@@ -16,12 +16,12 @@ module "staging_proxmox_talos_cluster" {
   cluster_name = "staging"
 }
 
-# output "talosconfig" {
-#   value = module.staging_proxmox_talos_cluster.talosconfig
-#   sensitive = true
-# }
+output "talosconfig" {
+  value = module.staging_proxmox_talos_cluster.talosconfig
+  sensitive = true
+}
 
-# output "kubeconfig" {
-#   value = module.staging_proxmox_talos_cluster.kubeconfig
-#   sensitive = true
-# }
+output "kubeconfig" {
+  value = module.staging_proxmox_talos_cluster.kubeconfig
+  sensitive = true
+}

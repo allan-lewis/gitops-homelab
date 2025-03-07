@@ -27,7 +27,19 @@ variable "controlplane_list" {
       memory_dedicated  = 2048
       datastore_id      = "local-ssd"
       disk_size         = 32
-      ipv4_address      = "192.168.86.96/24"
+      ipv4_address      = "192.168.86.96"
+      gateway           = "192.168.86.1"
+      tags              = ["terraform", "staging", "talos", "controlplane"]
+    }
+    talos-controlplane-1 = {
+      vm_name           = "beta"
+      description       = "Talos Linux control node managed by Terraform"
+      proxmox_node      = "polaris"
+      cpu_cores         = 2
+      memory_dedicated  = 2048
+      datastore_id      = "local-ssd"
+      disk_size         = 32
+      ipv4_address      = "192.168.86.98"
       gateway           = "192.168.86.1"
       tags              = ["terraform", "staging", "talos", "controlplane"]
     }
@@ -45,7 +57,7 @@ variable "worker_list" {
       memory_dedicated  = 4096
       datastore_id      = "local-ssd"
       disk_size         = 64
-      ipv4_address      = "192.168.86.97/24"
+      ipv4_address      = "192.168.86.97"
       gateway           = "192.168.86.1"
       tags              = ["terraform", "staging", "talos", "worker"]
     }
