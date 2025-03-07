@@ -50,6 +50,7 @@ resource "proxmox_virtual_environment_vm" "vm_ubuntu" {
   }
 
   tags = each.value.tags
+  on_boot     = true
 }
 
 # Rely on environment variables to populate the Proxmox provider!

@@ -1,15 +1,27 @@
-module "staging_ubuntu_vms" {
-  source = "../../modules/vm_ubuntu"
+module "staging_proxmox_ubuntu_vms" {
+  source = "../../modules/proxmox_ubuntu_vms"
   
   vm_list = var.vm_list_ubuntu
 
   public_keys = [var.PROXMOX_VM_PUBLIC_KEY]
 }
 
-module "staging_talos_vms" {
-  source = "../../modules/vm_talos"
+module "staging_proxmox_talos_cluster" {
+  source = "../../modules/proxmox_talos_cluster"
   
-  # vm_list = var.vm_list_ubuntu
+  controlplane_list = var.controlplane_list
+  
+  worker_list = var.worker_list
 
-  # PROXMOX_VM_PUBLIC_KEY = var.PROXMOX_VM_PUBLIC_KEY
+  cluster_name = "staging"
 }
+
+# output "talosconfig" {
+#   value = module.staging_proxmox_talos_cluster.talosconfig
+#   sensitive = true
+# }
+
+# output "kubeconfig" {
+#   value = module.staging_proxmox_talos_cluster.kubeconfig
+#   sensitive = true
+# }
