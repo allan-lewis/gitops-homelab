@@ -12,6 +12,7 @@ resource "proxmox_virtual_environment_vm" "vm_ubuntu" {
 
   name      = each.value.vm_name
   node_name = each.value.proxmox_node
+  description = each.value.description
 
   cpu {
     cores = each.value.cpu_cores
@@ -31,7 +32,7 @@ resource "proxmox_virtual_environment_vm" "vm_ubuntu" {
 
     user_account {
       username = "lab"
-      keys = [var.PROXMOX_VM_PUBLIC_KEY]
+      keys = var.public_keys
     }
   }
 

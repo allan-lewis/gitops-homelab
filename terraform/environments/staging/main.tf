@@ -3,7 +3,7 @@ module "staging_ubuntu_vms" {
   
   vm_list = var.vm_list_ubuntu
 
-  PROXMOX_VM_PUBLIC_KEY = var.PROXMOX_VM_PUBLIC_KEY
+  public_keys = [var.PROXMOX_VM_PUBLIC_KEY]
 }
 
 module "staging_talos_vms" {

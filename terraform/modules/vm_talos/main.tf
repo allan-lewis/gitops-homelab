@@ -11,55 +11,55 @@ terraform {
   }
 }
 
-resource "proxmox_virtual_environment_vm" "talos_cp_01" {
-  name        = "talos-cp-01"
-  description = "Managed by Terraform"
-  tags        = ["terraform"]
-  node_name   = "polaris"
-  on_boot     = true
+# resource "proxmox_virtual_environment_vm" "talos_cp_01" {
+#   name        = "talos-cp-01"
+#   description = "Managed by Terraform"
+#   tags        = ["terraform"]
+#   node_name   = "polaris"
+#   on_boot     = true
 
-  cpu {
-    cores = 2
-    type = "x86-64-v2-AES"
-  }
+#   cpu {
+#     cores = 2
+#     type = "x86-64-v2-AES"
+#   }
 
-  memory {
-    dedicated = 2048
-  }
+#   memory {
+#     dedicated = 2048
+#   }
 
-  agent {
-    enabled = false
-  }
+#   agent {
+#     enabled = false
+#   }
 
-  network_device {
-    bridge = "vmbr0"
-  }
+#   network_device {
+#     bridge = "vmbr0"
+#   }
 
-  disk {
-    datastore_id = "local-lvm"
-    file_id      = proxmox_virtual_environment_download_file.talos_nocloud_image.id
-    file_format  = "raw"
-    interface    = "virtio0"
-    size         = 32
-  }
+#   disk {
+#     datastore_id = "local-lvm"
+#     file_id      = proxmox_virtual_environment_download_file.talos_nocloud_image.id
+#     file_format  = "raw"
+#     interface    = "virtio0"
+#     size         = 32
+#   }
 
-  operating_system {
-    type = "l26" # Linux Kernel 2.6 - 5.X.
-  }
+#   operating_system {
+#     type = "l26" # Linux Kernel 2.6 - 5.X.
+#   }
 
-  initialization {
-    datastore_id = "local-lvm"
-    ip_config {
-      ipv4 {
-        address = "192.168.86.96/24"
-        gateway = "192.168.86.1"
-      }
-      ipv6 {
-        address = "dhcp"
-      }
-    }
-  }
-}
+#   initialization {
+#     datastore_id = "local-lvm"
+#     ip_config {
+#       ipv4 {
+#         address = "192.168.86.96/24"
+#         gateway = "192.168.86.1"
+#       }
+#       ipv6 {
+#         address = "dhcp"
+#       }
+#     }
+#   }
+# }
 
 locals {
   talos = {

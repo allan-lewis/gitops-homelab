@@ -3,6 +3,7 @@ variable "vm_list_ubuntu" {
   default = {
     devops-0 = {
       vm_name           = "procyon"
+      description       = "OpenVPN Gateway managed by Terraform"
       proxmox_node      = "polaris"
       cpu_cores         = 2
       memory_dedicated  = 2048
@@ -10,7 +11,7 @@ variable "vm_list_ubuntu" {
       disk_size         = 64
       ipv4_address      = "192.168.86.125/24"
       gateway           = "192.168.86.1"
-      tags              = ["terraform", "production", "ubuntu", "devops"]
+      tags              = ["terraform", "staging", "ubuntu", "devops"]
     }
   }
 }
