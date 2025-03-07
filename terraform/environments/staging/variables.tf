@@ -3,7 +3,7 @@ variable "vm_list_ubuntu" {
   default = {
     devops-0 = {
       vm_name           = "alpha"
-      description       = "OpenVPN Gateway managed by Terraform"
+      description       = "DevOps host managed by Terraform"
       proxmox_node      = "polaris"
       cpu_cores         = 2
       memory_dedicated  = 2048
