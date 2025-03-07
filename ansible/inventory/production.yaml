@@ -2,18 +2,12 @@ all:
   hosts:
     alcor:
       ansible_host: 192.168.86.123
-    procyon:
-      ansible_host: 192.168.86.125
 
   children:
     homelab_ansible_hosts:
       hosts:
         alcor:
-        procyon:
       children:
-        homelab_devops_hosts:
-          hosts:
-            procyon:
         homelab_openvpn_hosts:
           hosts:
             alcor:

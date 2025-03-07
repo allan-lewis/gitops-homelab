@@ -16,10 +16,10 @@
     mode: '0755'
 
 - name: Use stow to create Ansible config file.
-  command: "stow -d {{ ansible_env.HOME }}/dotfiles/lab-production -t {{ ansible_env.HOME }}/.config/ansible ansible"
+  command: "stow -d {{ ansible_env.HOME }}/dotfiles/ubuntu -t {{ ansible_env.HOME }}/.config/ansible ansible"
 
 - name: Use stow to create a .zshrc config file.
-  command: "stow -d {{ ansible_env.HOME }}/dotfiles/lab-production -t {{ ansible_env.HOME }} zsh"
+  command: "stow -d {{ ansible_env.HOME }}/dotfiles/ubuntu -t {{ ansible_env.HOME }} zsh"
 
 - name: Ensure that the SSH directory exists.
   file:

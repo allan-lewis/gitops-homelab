@@ -106,7 +106,7 @@ resource "talos_machine_configuration_apply" "cp_config_apply" {
 }
 
 data "talos_machine_configuration" "machineconfig_worker" {
-  for_each = var.controlplane_list
+  for_each = var.worker_list
 
   cluster_name     = var.cluster_name
   cluster_endpoint = join("", ["https://", var.controlplane_list[keys(var.controlplane_list)[0]].ipv4_address, ":6443"]) 
@@ -116,7 +116,7 @@ data "talos_machine_configuration" "machineconfig_worker" {
 }
 
 resource "talos_machine_configuration_apply" "worker_config_apply" {
-  for_each = var.controlplane_list
+  for_each = var.worker_list
   
   depends_on                  = [ proxmox_virtual_environment_vm.vm_talos ]
   client_configuration        = talos_machine_secrets.machine_secrets.client_configuration
