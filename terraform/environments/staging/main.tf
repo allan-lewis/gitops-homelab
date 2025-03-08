@@ -13,7 +13,7 @@ module "staging_proxmox_talos_cluster" {
   
   worker_list = var.worker_list
 
-  cluster_name = "staging"
+  cluster_name = "k8s-staging"
 }
 
 output "talosconfig" {
