@@ -1,12 +1,12 @@
 preUpgradeChecker:
   jobEnabled: false
 
-# global:
-#   tolerations:
-#     - key: "openvpn"
-#       operator: "Equal"
-#       value: "true"
-#       effect: "NoSchedule"
+global:
+  tolerations:
+    - key: "openvpn"
+      operator: "Equal"
+      value: "true"
+      effect: "NoSchedule"
 
 # tolerations:
 #   - key: "openvpn"
