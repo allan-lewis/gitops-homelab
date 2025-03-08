@@ -175,9 +175,8 @@ spec:
           persistentVolumeClaim:
             claimName: radarr-config
         - name: media-downloads
-          # emptyDir: {}
           persistentVolumeClaim:
-            claimName: media-downloads
+            claimName: downloads-pvc
         - name: radarr-movies
           persistentVolumeClaim:
             claimName: movies-pvc
