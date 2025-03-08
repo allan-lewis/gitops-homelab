@@ -104,9 +104,8 @@ spec:
           persistentVolumeClaim:
             claimName: transmission-config
         - name: media-downloads
-          emptyDir: {}
-          # persistentVolumeClaim:
-          #   claimName: media-downloads
+          persistentVolumeClaim:
+            claimName: downloads-pvc
         - name: transmission-watch
           emptyDir: {}
       affinity:
@@ -309,3 +308,4 @@ spec:
   resources:
     requests:
       storage: 512Gi
+  storageClassName: ""
