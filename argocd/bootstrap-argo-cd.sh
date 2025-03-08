@@ -14,6 +14,10 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v2
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 kubectl apply -n argocd -f $SCRIPT_DIR/kustomization.yaml
 
+echo "sleeping..."
+
+sleep 10
+
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
 
 kubectl port-forward --address 0.0.0.0 svc/argocd-server -n argocd 8181:443
