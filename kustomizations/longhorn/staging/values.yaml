@@ -7,3 +7,10 @@ global:
       operator: "Equal"
       value: "true"
       effect: "NoSchedule"
+
+csi:
+  tolerations:
+    - key: "openvpn"
+      operator: "Equal"
+      value: "true"
+      effect: "NoSchedule"
