@@ -65,39 +65,20 @@ extraEnvVars: {
   DNSMASQ_USER: "root"
 }
 
-# probes:
-#   # -- probes.liveness -- Configure the healthcheck for the ingress controller
-#   liveness:
-#     # -- Generate a liveness probe
-#     # 'type' defaults to httpGet, can be set to 'command' to use a command type liveness probe.
-#     type: httpGet
-#     # command:
-#     #   - /bin/bash
-#     #   - -c
-#     #   - /bin/true
-#     enabled: true
-#     # -- wait time before trying the liveness probe
-#     initialDelaySeconds: 60
-#     # -- threshold until the probe is considered failing
-#     failureThreshold: 10
-#     # -- timeout in seconds
-#     timeoutSeconds: 5
-#     port: http
-#     scheme: HTTP
-#   readiness:
-#     # -- Generate a readiness probe
-#     # 'type' defaults to httpGet, can be set to 'command' to use a command type readiness probe.
-#     type: httpGet
-#     # command:
-#     #   - /bin/bash
-#     #   - -c
-#     #   - /bin/true
-#     enabled: true
-#     # -- wait time before trying the readiness probe
-#     initialDelaySeconds: 60
-#     # -- threshold until the probe is considered failing
-#     failureThreshold: 10
-#     # -- timeout in seconds
-#     timeoutSeconds: 5
-#     port: http
-#     scheme: HTTP
+probes:
+  liveness:
+    type: httpGet
+    enabled: true
+    initialDelaySeconds: 60
+    failureThreshold: 10
+    timeoutSeconds: 5
+    port: http
+    scheme: HTTP
+  readiness:
+    type: httpGet
+    enabled: true
+    initialDelaySeconds: 60
+    failureThreshold: 10
+    timeoutSeconds: 5
+    port: http
+    scheme: HTTP
