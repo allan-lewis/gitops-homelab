@@ -104,8 +104,9 @@ spec:
           persistentVolumeClaim:
             claimName: transmission-config
         - name: media-downloads
-          persistentVolumeClaim:
-            claimName: media-downloads
+          emptyDir: {}
+          # persistentVolumeClaim:
+          #   claimName: media-downloads
         - name: transmission-watch
           emptyDir: {}
       affinity:
@@ -175,11 +176,13 @@ spec:
           persistentVolumeClaim:
             claimName: radarr-config
         - name: media-downloads
-          persistentVolumeClaim:
-            claimName: media-downloads
+          emptyDir: {}
+          # persistentVolumeClaim:
+          #   claimName: media-downloads
         - name: radarr-movies
-          persistentVolumeClaim:
-            claimName: radarr-movies
+          emptyDir: {}
+          # persistentVolumeClaim:
+          #   claimName: radarr-movies
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -247,11 +250,13 @@ spec:
           persistentVolumeClaim:
             claimName: sonarr-config
         - name: media-downloads
-          persistentVolumeClaim:
-            claimName: media-downloads
+          emptyDir: {}
+          # persistentVolumeClaim:
+          #   claimName: media-downloads
         - name: sonarr-tv
-          persistentVolumeClaim:
-            claimName: sonarr-tv
+          emptyDir: {}
+          # persistentVolumeClaim:
+          #   claimName: sonarr-tv
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
