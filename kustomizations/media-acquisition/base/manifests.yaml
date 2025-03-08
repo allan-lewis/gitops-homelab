@@ -288,7 +288,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: download-pv
+  name: downloads-pv
 spec:
   capacity:
     storage: 512Gi
