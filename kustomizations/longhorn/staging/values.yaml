@@ -1,25 +1,25 @@
 preUpgradeChecker:
   jobEnabled: false
 
-global:
-  tolerations:
-    - key: "openvpn"
-      operator: "Equal"
-      value: "true"
-      effect: "NoSchedule"
+# global:
+#   tolerations:
+#     - key: "openvpn"
+#       operator: "Equal"
+#       value: "true"
+#       effect: "NoSchedule"
 
-tolerations:
-  - key: "openvpn"
-    operator: "Equal"
-    value: "true"
-    effect: "NoSchedule"
+# tolerations:
+#   - key: "openvpn"
+#     operator: "Equal"
+#     value: "true"
+#     effect: "NoSchedule"
 
-csi:
-  tolerations:
-    - key: "openvpn"
-      operator: "Equal"
-      value: "true"
-      effect: "NoSchedule"
+# csi:
+#   tolerations:
+#     - key: "openvpn"
+#       operator: "Equal"
+#       value: "true"
+#       effect: "NoSchedule"
 
 defaultSettings:
   taintToleration: "openvpn=true:NoSchedule"
