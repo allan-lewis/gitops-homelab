@@ -62,3 +62,21 @@ resources:
 extraEnvVars: {
   DNSMASQ_USER: "root"
 }
+
+probes:
+  liveness:
+    type: httpGet
+    enabled: true
+    initialDelaySeconds: 60
+    failureThreshold: 10
+    timeoutSeconds: 5
+    port: http
+    scheme: HTTP
+  readiness:
+    type: httpGet
+    enabled: true
+    initialDelaySeconds: 60
+    failureThreshold: 10
+    timeoutSeconds: 5
+    port: http
+    scheme: HTTP
