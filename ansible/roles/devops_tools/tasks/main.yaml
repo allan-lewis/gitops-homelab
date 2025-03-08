@@ -50,6 +50,29 @@
   register: doppler_version
   changed_when: false
 
+- name: Download AWS CLI installer
+  get_url:
+    url: "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"
+    dest: "/tmp/awscliv2.zip"
+
+- name: Unzip AWS CLI installer
+  unarchive:
+    src: "/tmp/awscliv2.zip"
+    dest: "/tmp"
+    remote_src: yes
+
+- name: Install AWS CLI
+  command: "/tmp/aws/install"
+
+- name: Verify AWS CLI installation
+  command: "aws --version"
+  register: aws_version_output
+  changed_when: false
+
+- name: Display AWS CLI version
+  debug:
+    msg: "AWS CLI installed successfully: {{ aws_version_output.stdout }}"
+
 - name: Display Ansible version
   debug:
     msg: "Ansible: {{ ansible_version }}"

@@ -4,5 +4,6 @@
     pkg:
       - unzip
       - zsh
+      - curl
     state: latest
     update_cache: true
