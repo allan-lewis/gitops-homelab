@@ -31,6 +31,9 @@
 - name: Use stow to create a .zshrc config file.
   command: "stow -d {{ ansible_env.HOME }}/dotfiles/ubuntu -t {{ ansible_env.HOME }} zsh"
 
+- name: Use stow to create a .zshrc config file.
+  command: "stow -d {{ ansible_env.HOME }}/dotfiles/ubuntu -t {{ ansible_env.HOME }}/.config starship"
+
 - name: Ensure that the SSH directory exists.
   file:
     path: "~/.ssh"

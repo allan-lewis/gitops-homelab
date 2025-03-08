@@ -14,8 +14,8 @@
   
   roles:
     - tz
-    - dependencies
     - user
+    - baseline_setup
     - ssh
     - apt
     - reboot

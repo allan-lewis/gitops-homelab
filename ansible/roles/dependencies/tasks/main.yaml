@@ -1,9 +1,0 @@
----
-- name: Install necessary dependencies.
-  ansible.builtin.apt:
-    pkg:
-      - unzip
-      - zsh
-      - curl
-    state: latest
-    update_cache: true
