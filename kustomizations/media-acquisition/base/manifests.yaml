@@ -179,9 +179,8 @@ spec:
           persistentVolumeClaim:
             claimName: media-downloads
         - name: radarr-movies
-          emptyDir: {}
-          # persistentVolumeClaim:
-          #   claimName: radarr-movies
+          persistentVolumeClaim:
+            claimName: movies-pvc
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
