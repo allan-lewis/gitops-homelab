@@ -1,0 +1,31 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: media
+  name: downloads-pv
+spec:
+  capacity:
+    storage: 512Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    path: /mnt/pool1/media-acquisition/downloads
+    server: 192.168.86.104
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: media
+    name: downloads-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: media
+  name: downloads-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 512Gi
+  storageClassName: ""
