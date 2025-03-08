@@ -298,3 +298,14 @@ spec:
     path: /mnt/pool1/media-acquisition/downloads
     server: 192.168.86.104
   persistentVolumeReclaimPolicy: Retain
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: downloads-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 512Gi
