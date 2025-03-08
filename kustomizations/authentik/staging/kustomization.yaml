@@ -9,7 +9,7 @@ helmCharts:
 - name: redis
   repo: oci://registry-1.docker.io/bitnamicharts
   namespace: authentik
-  version: 20.11.1
+  version: 20.11.2
   valuesFile: values-redis.yaml
 - name: postgresql
   repo: oci://registry-1.docker.io/bitnamicharts
