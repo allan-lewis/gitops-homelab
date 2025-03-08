@@ -8,8 +8,21 @@ global:
       value: "true"
       effect: "NoSchedule"
 
+tolerations:
+  - key: "openvpn"
+    operator: "Equal"
+    value: "true"
+    effect: "NoSchedule"
+
 csi:
   tolerations:
+    - key: "openvpn"
+      operator: "Equal"
+      value: "true"
+      effect: "NoSchedule"
+
+defaultSettings:
+  taintToleration:
     - key: "openvpn"
       operator: "Equal"
       value: "true"
