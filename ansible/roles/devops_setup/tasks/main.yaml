@@ -9,6 +9,16 @@
     repo: "https://github.com/allan-lewis/dotfiles.git"
     dest: "{{ ansible_env.HOME }}/dotfiles"
 
+- name: Clone the auto suggestions repo.
+  ansible.builtin.git:
+    repo: "https://github.com/zsh-users/zsh-autosuggestions"
+    dest: "{{ ansible_env.HOME }}/.zsh/zsh-autosuggestions"
+
+- name: Clone the auto suggestions repo.
+  ansible.builtin.git:
+    repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git"
+    dest: "{{ ansible_env.HOME }}/.zsh/zsh-syntax-highlighting"
+
 - name: Create an Ansible config directory
   file:
     path: "{{ ansible_env.HOME }}/.config/ansible"
