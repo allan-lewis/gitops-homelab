@@ -22,8 +22,4 @@ csi:
       effect: "NoSchedule"
 
 defaultSettings:
-  taintToleration:
-    - key: "openvpn"
-      operator: "Equal"
-      value: "true"
-      effect: "NoSchedule"
+  taintToleration: "openvpn=true:NoSchedule"
