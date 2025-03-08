@@ -67,7 +67,7 @@ probes:
   liveness:
     type: httpGet
     enabled: true
-    initialDelaySeconds: 60
+    initialDelaySeconds: 120
     failureThreshold: 10
     timeoutSeconds: 5
     port: http
@@ -75,7 +75,7 @@ probes:
   readiness:
     type: httpGet
     enabled: true
-    initialDelaySeconds: 60
+    initialDelaySeconds: 120
     failureThreshold: 10
     timeoutSeconds: 5
     port: http
