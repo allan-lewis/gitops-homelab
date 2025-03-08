@@ -10,8 +10,6 @@ serviceWeb:
   annotations:
     metallb.universe.tf/allow-shared-ip: pihole-svc
   type: LoadBalancer
-  https:
-    enabled: true
 
 serviceDns:
   loadBalancerIP: 192.168.86.58
