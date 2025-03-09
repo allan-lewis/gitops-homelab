@@ -14,7 +14,7 @@ terraform {
 resource "proxmox_virtual_environment_vm" "vm_talos" {
   for_each = merge(var.controlplane_list, var.worker_list)
 
-  name      = each.value.vm_name
+  name      = each.key
   node_name = each.value.proxmox_node
   description = each.value.description
 

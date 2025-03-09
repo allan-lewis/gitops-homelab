@@ -1,6 +1,5 @@
 variable "controlplane_list" {
   type = map(object({
-    vm_name           = string
     description       = string
     proxmox_node      = string
     cpu_cores         = number
@@ -15,7 +14,6 @@ variable "controlplane_list" {
 
 variable "worker_list" {
   type = map(object({
-    vm_name           = string
     description       = string
     proxmox_node      = string
     cpu_cores         = number

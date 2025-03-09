@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket         = "allans-homelab-terraform-state-bucket"
-    key            = "staging/state.tfstate"   # Path inside the bucket
+    key            = "staging-k8s/state.tfstate"   # Path inside the bucket
     region         = "us-east-1"
     encrypt        = true  # Ensures state is encrypted
   }
