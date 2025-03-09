@@ -2,8 +2,10 @@ all:
   hosts:
     castor:
       ansible_host: 192.168.86.125
+      homelab_ansible_environment: "staging-compute"
     pollux:
       ansible_host: 192.168.86.135
+      homelab_ansible_environment: "production-compute"
 
   children:
     homelab_ansible_hosts:

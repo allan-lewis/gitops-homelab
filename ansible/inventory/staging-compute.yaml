@@ -1,16 +1,12 @@
 all:
   hosts:
-    alpha:
-      ansible_host: 192.168.86.90
+    epsilon:
+      ansible_host: 192.168.86.94
 
   children:
     homelab_ansible_hosts:
       hosts:
-        alpha:
-      children:
-        homelab_devops_hosts:
-          hosts:
-            alpha:
+        epsilon:
 
   vars:
     ansible_python_interpreter: "/usr/bin/python3.12"
