@@ -1,8 +1,7 @@
 variable "vm_list_ubuntu" {
   description = "A list of Ubuntu VMs to create"
   default = {
-    devops-0 = {
-      vm_name           = "epsilon"
+    epsilon = {
       description       = "Ubuntu host managed by Terraform"
       proxmox_node      = "polaris"
       cpu_cores         = 2
