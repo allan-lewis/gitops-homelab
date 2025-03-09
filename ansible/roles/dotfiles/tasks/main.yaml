@@ -1,0 +1,31 @@
+---
+- name: Clone the dotfiles repo.
+  ansible.builtin.git:
+    repo: "https://github.com/allan-lewis/dotfiles.git"
+    dest: "{{ ansible_env.HOME }}/dotfiles"
+
+- name: Clone the auto suggestions repo.
+  ansible.builtin.git:
+    repo: "https://github.com/zsh-users/zsh-autosuggestions"
+    dest: "{{ ansible_env.HOME }}/.zsh/zsh-autosuggestions"
+
+- name: Clone the syntax highlighting repo.
+  ansible.builtin.git:
+    repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git"
+    dest: "{{ ansible_env.HOME }}/.zsh/zsh-syntax-highlighting"
+
+- name: Create the .config directory.
+  file:
+    path: "{{ ansible_env.HOME }}/.config"
+    state: directory
+    mode: '0755'
+
+- name: Stow the .zshrc config file.
+  command: "stow -d {{ ansible_env.HOME }}/dotfiles/ubuntu -t {{ ansible_env.HOME }} zsh"
+  args:
+    creates: "{{ ansible_env.HOME }}/.zshrc"
+
+- name: Stow the Starship config file.
+  command: "stow -d {{ ansible_env.HOME }}/dotfiles/ubuntu -t {{ ansible_env.HOME }}/.config starship"
+  args:
+    creates: "{{ ansible_env.HOME }}/.config/starship.toml"

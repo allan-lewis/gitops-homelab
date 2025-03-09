@@ -1,0 +1,20 @@
+---
+- name: Download Doppler CLI installation script.
+  get_url:
+    url: "https://cli.doppler.com/install.sh"
+    dest: "/tmp/doppler-install.sh"
+    mode: "0755"
+
+- name: Run Doppler CLI installation script.
+  command: "/tmp/doppler-install.sh"
+  args:
+    creates: "/usr/bin/doppler"
+
+- name: Verify Doppler installation.
+  command: "doppler --version"
+  register: doppler_version
+  changed_when: false
+
+- name: Display installed Doppler version.
+  debug:
+    msg: "Doppler: {{ doppler_version.stdout }}"

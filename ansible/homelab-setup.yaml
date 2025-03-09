@@ -1,5 +1,5 @@
 ---
-- name: Setup local host state.
+- name: Get the local host ready to control Ansible.
   hosts: localhost
   become: no
   gather_facts: yes
@@ -7,34 +7,45 @@
   roles:
     - known_hosts
 
-- name: Setup homelab hosts.
+- name: Do basic setup on all hosts (as root).
   hosts: homelab_ansible_hosts
   become: yes
-  gather_facts: yes
-  
+  gather_facts: yes  
+
   roles:
     - tz
-    - user
-    - baseline_setup
+    - user   
     - ssh
     - apt
+    - dependencies
     - reboot
 
-- name: Setup DevOps hosts.
+- name: Do basic setup on all hosts (as local user).
+  hosts: homelab_ansible_hosts
+  become: no
+  gather_facts: yes  
+
+  roles:
+    - dotfiles
+
+- name: Get hosts ready to do DevOps work (as root).
   hosts: homelab_devops_hosts
   become: yes
   gather_facts: yes
 
   roles:
-    - devops_tools
+    - ansible
+    - terraform
+    - doppler
+    - aws
 
-- name: Setup DevOps environment.
+- name: Get hosts ready to do DevOps work (as local user).
   hosts: homelab_devops_hosts
   become: no
-  gather_facts: yes   
+  gather_facts: yes
 
   roles: 
-    - devops_setup
+    - devops
 
 - name: Setup OpenVPN hosts.
   hosts: homelab_openvpn_hosts

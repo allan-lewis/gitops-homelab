@@ -1,0 +1,42 @@
+---
+- name: Clone the GitOps Homelab repo.
+  ansible.builtin.git:
+    repo: "https://github.com/allan-lewis/gitops-homelab.git"
+    dest: "{{ ansible_env.HOME }}/gitops-homelab"
+
+- name: Create local directories.
+  file:
+    path: "{{ item.path }}"
+    state: directory
+    mode: "{{ item.mode }}"
+  with_items:
+    - path:  "{{ ansible_env.HOME }}/.config/ansible"
+      mode: '0755'
+    - path:  "{{ ansible_env.HOME }}/.ssh"
+      mode: '0700'
+
+- name: Stow the Ansible config file.
+  command: "stow -d {{ ansible_env.HOME }}/dotfiles/ubuntu -t {{ ansible_env.HOME }}/.config/ansible ansible"
+  args:
+    creates: "{{ ansible_env.HOME }}/.config/ansible/ansible.cfg"
+
+- name: Fail if SSH_PRIVATE_KEY or SSH_PUBLIC_KEY is not set.
+  fail:
+    msg: "SSH_PRIVATE_KEY and SSH_PUBLIC_KEY must contain Base64-encoded key file values."
+  when: >
+    (lookup('env', 'SSH_PRIVATE_KEY') | length == 0) or
+    (lookup('env', 'SSH_PUBLIC_KEY') | length == 0)
+
+- name: Write private key from base-64-encoded environment variable
+  copy:
+    content: "{{ lookup('env', 'SSH_PRIVATE_KEY') | b64decode }}"
+    dest: "~/.ssh/id_rsa"
+    mode: '0600'
+  when: lookup('env', 'SSH_PRIVATE_KEY') | length > 0
+
+- name: Write public key from base-64-encoded environment variable
+  copy:
+    content: "{{ lookup('env', 'SSH_PUBLIC_KEY') | b64decode }}"
+    dest: "~/.ssh/id_rsa.pub"
+    mode: '0644'
+  when: lookup('env', 'SSH_PUBLIC_KEY') | length > 0

@@ -1,0 +1,16 @@
+---
+- name: Install Ansible and any dependencies.
+  ansible.builtin.apt:
+    pkg:
+      - ansible-core
+    state: latest
+    update_cache: true
+
+- name: Verify Ansible installation
+  command: ansible --version
+  register: ansible_version
+  changed_when: false
+
+- name: Display Ansible version
+  debug:
+    msg: "Ansible: {{ ansible_version }}"

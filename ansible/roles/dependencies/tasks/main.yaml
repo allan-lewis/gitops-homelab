@@ -6,6 +6,7 @@
       - zsh
       - curl
       - stow
+      - net-tools
     state: latest
     update_cache: true
 
@@ -28,4 +29,3 @@
 - name: Display Starship version
   debug:
     msg: "Starship installed successfully: {{ starship_version_output.stdout }}"
-
