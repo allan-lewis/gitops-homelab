@@ -160,6 +160,10 @@ spec:
     spec:
       containers:
       - name: radarr
+        securityContext:
+          runAsUser: 3000       # Match UID of radarruser
+          runAsGroup: 3000      # Match GID of radarrgroup
+          fsGroup: 3000 
         image: "lscr.io/linuxserver/radarr:5.19.3"
         imagePullPolicy: "Always"
         env:
@@ -240,7 +244,7 @@ spec:
             name: sonarr-config
           - mountPath: /downloads
             name: media-downloads
-          - mountPath: /movies
+          - mountPath: /tv
             name: sonarr-tv
       volumes:
         - name: sonarr-config
