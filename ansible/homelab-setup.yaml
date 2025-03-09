@@ -38,6 +38,8 @@
     - terraform
     - doppler
     - aws
+    - kubectl
+    - talosctl
 
 - name: Get hosts ready to do DevOps work (as local user).
   hosts: homelab_devops_hosts

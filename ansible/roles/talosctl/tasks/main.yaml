@@ -1,0 +1,16 @@
+---
+- name: Download talosctl v{{ talos_version }}
+  ansible.builtin.get_url:
+    url: "https://github.com/siderolabs/talos/releases/download/v1.9.1/talosctl-linux-amd64-legacy"
+    dest: "/usr/local/bin/talosctl"
+    mode: '0755'
+
+- name: Verify talosctl installation
+  ansible.builtin.command: talosctl version
+  register: talosctl_version_output
+  changed_when: false
+  ignore_errors: true
+
+- name: Display talosctl version
+  ansible.builtin.debug:
+    msg: "{{ talosctl_version_output.stdout }}"
