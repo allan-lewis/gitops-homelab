@@ -1,7 +1,7 @@
 ---
 - name: Clone the GitOps Homelab repo.
   ansible.builtin.git:
-    repo: "https://github.com/allan-lewis/gitops-homelab.git"
+    repo: "git@github.com:allan-lewis/gitops-homelab.git"
     dest: "{{ ansible_env.HOME }}/gitops-homelab"
 
 - name: Create local directories.
