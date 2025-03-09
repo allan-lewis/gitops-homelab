@@ -10,7 +10,7 @@ terraform {
 resource "proxmox_virtual_environment_vm" "vm_ubuntu" {
   for_each = var.vm_list
 
-  name      = each.value.vm_name
+  name      = each.key
   node_name = each.value.proxmox_node
   description = each.value.description
 

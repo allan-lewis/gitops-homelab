@@ -1,0 +1,18 @@
+all:
+  hosts:
+    castor:
+      ansible_host: 192.168.86.125
+    pollux:
+      ansible_host: 192.168.86.135
+
+  children:
+    homelab_ansible_hosts:
+      children:
+        homelab_devops_hosts:
+          hosts:
+            castor:
+            pollux:
+
+  vars:
+    ansible_python_interpreter: "/usr/bin/python3.12"
+    ansible_user: lab

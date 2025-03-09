@@ -1,6 +1,5 @@
 variable "vm_list" {
   type = map(object({
-    vm_name           = string
     description       = string
     proxmox_node      = string
     cpu_cores         = number
