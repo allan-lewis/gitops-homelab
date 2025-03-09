@@ -6,7 +6,7 @@
     mode: '0755'
 
 - name: Verify talosctl installation
-  ansible.builtin.command: talosctl version
+  ansible.builtin.command: talosctl version --client
   register: talosctl_version_output
   changed_when: false
   ignore_errors: true
