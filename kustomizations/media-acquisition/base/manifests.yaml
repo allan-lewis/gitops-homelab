@@ -160,10 +160,6 @@ spec:
     spec:
       containers:
       - name: radarr
-        # securityContext:
-        #   runAsUser: 911       # Match UID of radarruser
-        #   runAsGroup: 911      # Match GID of radarrgroup
-        #   fsGroup: 911 
         image: "lscr.io/linuxserver/radarr:5.19.3"
         imagePullPolicy: "Always"
         env:
@@ -251,13 +247,11 @@ spec:
           persistentVolumeClaim:
             claimName: sonarr-config
         - name: media-downloads
-          emptyDir: {}
-          # persistentVolumeClaim:
-          #   claimName: media-downloads
+          persistentVolumeClaim:
+            claimName: downloads-pvc
         - name: sonarr-tv
-          emptyDir: {}
-          # persistentVolumeClaim:
-          #   claimName: sonarr-tv
+          persistentVolumeClaim:
+            claimName: tv-pvc
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
