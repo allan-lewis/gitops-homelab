@@ -4,4 +4,4 @@ kind: Kustomization
 
 resources:
   - volumes.yaml
-  # - manifests.yaml
+  - manifests.yaml
