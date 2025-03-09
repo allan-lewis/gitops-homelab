@@ -1,7 +1,7 @@
 ---
 - name: Download talosctl v{{ talos_version }}
   ansible.builtin.get_url:
-    url: "https://github.com/siderolabs/talos/releases/download/v1.9.1/talosctl-linux-amd64-legacy"
+    url: "https://github.com/siderolabs/talos/releases/download/v1.9.1/talosctl-linux-amd64"
     dest: "/usr/local/bin/talosctl"
     mode: '0755'
 
