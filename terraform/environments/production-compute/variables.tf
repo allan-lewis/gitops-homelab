@@ -1,9 +1,8 @@
 variable "vm_list_ubuntu" {
   description = "A list of Ubuntu VMs to create"
   default = {
-    devops-0 = {
-      vm_name           = "alcor"
-      description       = "OpenVPN Gateway host managed by Terraform"
+    alcor = {
+      description       = "OpenVPN gateway host (managed by Terraform)"
       proxmox_node      = "polaris"
       cpu_cores         = 2
       memory_dedicated  = 2048
