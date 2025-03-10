@@ -6,8 +6,6 @@ resources:
 
 patches:
 - path: ip-address-pool.yaml
-
-patches:
 - target:
     kind: DaemonSet
     name: speaker
