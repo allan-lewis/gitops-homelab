@@ -6,15 +6,10 @@ resources:
 - ../base
 
 helmCharts:
-- name: redis
-  repo: oci://registry-1.docker.io/bitnamicharts
-  namespace: authentik
-  version: 20.11.2
-  valuesFile: values-redis.yaml
 - name: postgresql
   repo: oci://registry-1.docker.io/bitnamicharts
   namespace: authentik
-  version: 16.4.16
+  version: 16.5.0
   valuesFile: values-postgresql.yaml
 - name: authentik
   repo: https://charts.goauthentik.io
