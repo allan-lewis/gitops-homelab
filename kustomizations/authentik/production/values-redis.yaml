@@ -1,8 +1,0 @@
-master:
-  service:
-    loadBalancerIP: 192.168.86.194
-    type: LoadBalancer
-    
-auth:
-  enabled: false
-  usePasswordFiles: false

@@ -10,8 +10,6 @@ authentik:
         host: 192.168.86.196
         user: file:///postgres-creds/username
         password: file:///postgres-creds/password
-    redis:
-        host: 192.168.86.194
 
 server:
     volumes:
@@ -34,3 +32,6 @@ worker:
         - name: postgres-creds
           mountPath: /postgres-creds
           readOnly: true
+
+redis:
+    enabled: true
