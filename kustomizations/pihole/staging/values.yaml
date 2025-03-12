@@ -38,8 +38,9 @@ dnsmasq:
     - address=/nonprod.allanshomelab.com/192.168.86.49
     - address=/nonprodhosts.allanshomelab.com/192.168.86.49
     - address=/dockernonprod.allanshomelab.com/192.168.86.90
-
   customCnameEntries: 
+  customSettings: |
+    localnet=192.168.86.0/24
 
 podDnsConfig:
   enabled: true
