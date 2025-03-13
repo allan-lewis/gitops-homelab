@@ -12,10 +12,10 @@ patches:
   patch: |-
     - op: replace
       path: /metadata/name
-      value: authentik
+      value: cert-manager
     - op: add
       path: /spec/source/path
-      value: kustomizations/authentik/staging
+      value: argocd/kustomizations/cert-manager/production
     - op: add
       path: /spec/destination/namespace
-      value: authentik
+      value: cert-manager
