@@ -12,10 +12,10 @@ patches:
   patch: |-
     - op: replace
       path: /metadata/name
-      value: media-acquisition
+      value: metallb
     - op: add
       path: /spec/source/path
-      value: kustomizations/media-acquisition/production
+      value: argocd/kustomizations/metallb/staging
     - op: add
       path: /spec/destination/namespace
-      value: media
+      value: metallb-system

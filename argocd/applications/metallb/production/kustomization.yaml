@@ -12,7 +12,7 @@ patches:
   patch: |-
     - op: add
       path: /spec/source/path
-      value: kustomizations/metallb/production
+      value: argocd/kustomizations/metallb/production
     - op: add
       path: /spec/destination/namespace
       value: metallb-system
