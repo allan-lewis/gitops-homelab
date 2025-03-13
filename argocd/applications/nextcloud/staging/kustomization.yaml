@@ -15,7 +15,7 @@ patches:
       value: nextcloud
     - op: add
       path: /spec/source/path
-      value: kustomizations/nextcloud/staging
+      value: argocd/kustomizations/nextcloud/staging
     - op: add
       path: /spec/destination/namespace
       value: nextcloud
