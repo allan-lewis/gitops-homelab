@@ -15,7 +15,7 @@ patches:
       value: argocd-image-updater
     - op: add
       path: /spec/source/path
-      value: kustomizations/argocd-image-updater/production
+      value: argocd/kustomizations/argocd-image-updater/staging
     - op: add
       path: /spec/destination/namespace
       value: argocd
