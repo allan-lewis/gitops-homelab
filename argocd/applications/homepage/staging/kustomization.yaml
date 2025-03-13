@@ -15,7 +15,7 @@ patches:
       value: homepage
     - op: add
       path: /spec/source/path
-      value: kustomizations/homepage/staging
+      value: argocd/kustomizations/homepage/staging
     - op: add
       path: /spec/destination/namespace
       value: default

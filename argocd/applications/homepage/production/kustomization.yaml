@@ -12,10 +12,10 @@ patches:
   patch: |-
     - op: replace
       path: /metadata/name
-      value: guacamole
+      value: homepage
     - op: add
       path: /spec/source/path
-      value: kustomizations/guacamole/production
+      value: argocd/kustomizations/homepage/production
     - op: add
       path: /spec/destination/namespace
-      value: guacamole
+      value: default

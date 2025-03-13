@@ -15,7 +15,7 @@ patches:
       value: guacamole
     - op: add
       path: /spec/source/path
-      value: kustomizations/guacamole/staging
+      value: argocd/kustomizations/guacamole/production
     - op: add
       path: /spec/destination/namespace
       value: guacamole

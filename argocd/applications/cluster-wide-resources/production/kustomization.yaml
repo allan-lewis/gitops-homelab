@@ -15,7 +15,7 @@ patches:
       value: cluster-wide-resources
     - op: add
       path: /spec/source/path
-      value: kustomizations/cluster-wide-resources/staging
+      value: argocd/kustomizations/cluster-wide-resources/production
     - op: add
       path: /spec/destination/namespace
       value: default

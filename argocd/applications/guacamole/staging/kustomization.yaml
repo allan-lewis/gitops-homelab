@@ -12,10 +12,10 @@ patches:
   patch: |-
     - op: replace
       path: /metadata/name
-      value: cluster-wide-resources
+      value: guacamole
     - op: add
       path: /spec/source/path
-      value: kustomizations/cluster-wide-resources/production
+      value: argocd/kustomizations/guacamole/staging
     - op: add
       path: /spec/destination/namespace
-      value: default
+      value: guacamole

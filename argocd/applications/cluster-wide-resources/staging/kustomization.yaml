@@ -12,10 +12,10 @@ patches:
   patch: |-
     - op: replace
       path: /metadata/name
-      value: homepage
+      value: cluster-wide-resources
     - op: add
       path: /spec/source/path
-      value: kustomizations/homepage/production
+      value: argocd/kustomizations/cluster-wide-resources/staging
     - op: add
       path: /spec/destination/namespace
       value: default
