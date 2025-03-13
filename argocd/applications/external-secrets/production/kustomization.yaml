@@ -15,7 +15,7 @@ patches:
       value: external-secrets
     - op: add
       path: /spec/source/path
-      value: kustomizations/external-secrets/production
+      value: argocd/kustomizations/external-secrets/production
     - op: add
       path: /spec/destination/namespace
       value: external-secrets
