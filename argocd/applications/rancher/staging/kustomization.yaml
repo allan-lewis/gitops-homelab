@@ -12,10 +12,10 @@ patches:
   patch: |-
     - op: replace
       path: /metadata/name
-      value: portainer
+      value: rancher
     - op: add
       path: /spec/source/path
-      value: kustomizations/portainer/staging
+      value: argocd/kustomizations/rancher/staging
     - op: add
       path: /spec/destination/namespace
-      value: portainer
+      value: cattle-system
