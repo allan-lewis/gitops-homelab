@@ -15,7 +15,7 @@ patches:
       value: no-geeks-brewing
     - op: add
       path: /spec/source/path
-      value: kustomizations/no-geeks-brewing/staging
+      value: argocd/kustomizations/no-geeks-brewing/production
     - op: add
       path: /spec/destination/namespace
       value: ngb
@@ -25,4 +25,3 @@ patches:
 # - op: add
 #   path: /metadata/annotations/argocd-image-updater.argoproj.io~1update-strategy
 #   value: digest
-      
