@@ -403,6 +403,17 @@ spec:
           namespace:  traefik
           port: 8000
           scheme: http        
+    - match: Host(`sirius.hosts.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: traefik-endpoint-sirius
+          namespace:  traefik
+          port: 8006
+          scheme: https       
     - match: Host(`polaris.hosts.allanshomelab.com`)
       kind: Rule
       middlewares:
