@@ -5,6 +5,7 @@ provider "registry.terraform.io/bpg/proxmox" {
   version     = "0.73.0"
   constraints = "0.73.0"
   hashes = [
+    "h1:DOsO6qRd8i3BBo4HEBejwjBagbYaQ2TjBhdkgXoPC5k=",
     "h1:jar4Yw6BNNZ9seqwvugNNURRQC25z3uXIxcdeNHmcGY=",
     "zh:16ccf45809d3e2fc033836eec7e37da2ff05888d3b555f84070023a937d2ce7a",
     "zh:3f33d82c7fd0b3a8029408639d01e8bf24b5f93b34ecbae1896470198021fb17",
