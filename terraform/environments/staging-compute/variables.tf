@@ -5,9 +5,9 @@ variable "vm_list_ubuntu" {
       description       = "Ubuntu host (managed by Terraform)"
       proxmox_node      = "polaris"
       cpu_cores         = 2
-      memory_dedicated  = 2048
+      memory_dedicated  = 4096
       datastore_id      = "local-lvm"
-      disk_size         = 32
+      disk_size         = 64
       ipv4_address      = "192.168.86.94/24"
       gateway           = "192.168.86.1"
       tags              = ["terraform", "staging", "ubuntu"]

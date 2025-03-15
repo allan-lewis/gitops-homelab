@@ -13,17 +13,6 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: traefik-endpoint-sirius
-  namespace: traefik
-spec:
-  ports:
-    - protocol: TCP
-      port: 8006
-      targetPort: 8006
----
-kind: Service
-apiVersion: v1
-metadata:
   name: traefik-endpoint-homeassistant
   namespace: traefik
 spec:

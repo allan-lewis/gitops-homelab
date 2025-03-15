@@ -7,7 +7,7 @@ module "staging_proxmox_talos_cluster" {
 
   cluster_name = "k8s-staging"
 
-  node_name = "sirius"
+  node_name = "polaris"
 }
 
 output "talosconfig" {
