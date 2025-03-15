@@ -1,0 +1,39 @@
+---
+- name: Download Node Exporter.
+  get_url:
+    url: https://github.com/prometheus/node_exporter/releases/download/v1.9.0/node_exporter-1.9.0.linux-amd64.tar.gz
+    checksum: "sha256:e7b65ea30eec77180487d518081d3dcb121b975f6d95f1866dfb9156c5b24075"
+    dest: /tmp
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Extract the Node Exporter archive.
+  ansible.builtin.unarchive:
+    src: /tmp/node_exporter-1.9.0.linux-amd64.tar.gz
+    remote_src: true
+    dest: /tmp
+
+- name: Copy the Node Exporter binary onto the path.
+  copy: 
+    remote_src: true 
+    src: /tmp/node_exporter-1.9.0.linux-amd64/node_exporter 
+    dest: /usr/local/bin
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: Create the Node Exporter service.
+  ansible.builtin.template:
+    src: "node_exporter.service.j2"
+    dest: "/etc/systemd/system/node_exporter.service"
+    owner: "root"
+    group: "root"
+    mode: 0644
+
+- name: Start the Node Exporter service.
+  systemd:
+    name: node_exporter.service
+    daemon_reload: yes
+    state: started
+    enabled: yes
