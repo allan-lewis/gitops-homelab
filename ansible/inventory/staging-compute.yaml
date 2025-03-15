@@ -7,7 +7,7 @@ all:
     homelab_ansible_hosts:
       hosts:
         epsilon:
-      choldren:
+      children:
         homelab_node_exporter_hosts:
           hosts:
             epsilon:

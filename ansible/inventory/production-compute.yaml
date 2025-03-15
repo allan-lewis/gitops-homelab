@@ -5,7 +5,7 @@ all:
 
   children:
     homelab_ansible_hosts:
-      choldren:
+      children:
         homelab_node_exporter_hosts:
           hosts:
             alcor:
