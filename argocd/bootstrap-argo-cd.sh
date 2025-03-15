@@ -16,7 +16,7 @@ kubectl apply -n argocd -f $SCRIPT_DIR/kustomization.yaml
 
 echo "sleeping..."
 
-sleep 10
+sleep 60
 
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
 
