@@ -3,11 +3,11 @@ variable "controlplane_list" {
   default = {
     alpha = {
       description       = "Talos Linux control plane node (managed by Terraform)"
-      proxmox_node      = "sirius"
+      proxmox_node      = "polaris"
       cpu_cores         = 4
       memory_dedicated  = 4096
-      datastore_id      = "ssd0"
-      disk_size         = 32
+      datastore_id      = "local-ssd"
+      disk_size         = 64
       ipv4_address      = "192.168.86.90"
       gateway           = "192.168.86.1"
       tags              = ["terraform", "staging", "talos", "controlplane"]
