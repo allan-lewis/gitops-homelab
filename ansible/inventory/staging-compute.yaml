@@ -7,6 +7,10 @@ all:
     homelab_ansible_hosts:
       hosts:
         epsilon:
+      choldren:
+        homelab_node_exporter_hosts:
+          hosts:
+            epsilon:
 
   vars:
     ansible_python_interpreter: "/usr/bin/python3.12"

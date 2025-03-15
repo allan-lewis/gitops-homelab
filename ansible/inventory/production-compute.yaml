@@ -5,6 +5,10 @@ all:
 
   children:
     homelab_ansible_hosts:
+      choldren:
+        homelab_node_exporter_hosts:
+          hosts:
+            alcor:
       children:
         homelab_openvpn_hosts:
           hosts:
