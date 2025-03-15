@@ -1,9 +1,4 @@
 ---
-- name: Clone the GitOps Homelab repo.
-  ansible.builtin.git:
-    repo: "git@github.com:allan-lewis/gitops-homelab.git"
-    dest: "{{ ansible_env.HOME }}/gitops-homelab"
-
 - name: Create local directories.
   file:
     path: "{{ item.path }}"
@@ -40,3 +35,13 @@
     dest: "~/.ssh/id_rsa.pub"
     mode: '0644'
   when: lookup('env', 'SSH_PUBLIC_KEY') | length > 0
+
+- name: Add GitHub to known_hosts using ssh-keyscan.
+  ansible.builtin.shell: ssh-keyscan github.com >> ~/.ssh/known_hosts
+  args:
+    creates: ~/.ssh/known_hosts
+
+- name: Clone the GitOps Homelab repo.
+  ansible.builtin.git:
+    repo: "git@github.com:allan-lewis/gitops-homelab.git"
+    dest: "{{ ansible_env.HOME }}/gitops-homelab"

@@ -27,3 +27,4 @@ variable "worker_list" {
 }
 
 variable "cluster_name" {}
+variable "node_name" {}

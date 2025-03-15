@@ -13,11 +13,11 @@
   gather_facts: yes  
 
   roles:
+    - dependencies 
     - tz
-    - user   
+    - user  
     - ssh
     - apt
-    - dependencies
     - reboot
 
 - name: Do basic setup on all hosts (as local user).

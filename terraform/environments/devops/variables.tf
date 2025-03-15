@@ -3,10 +3,10 @@ variable "vm_list_ubuntu" {
   default = {
     castor = {
       description       = "DevOps host for the staging environment (managed by Terraform)"
-      proxmox_node      = "polaris"
+      proxmox_node      = "sirius"
       cpu_cores         = 2
       memory_dedicated  = 2048
-      datastore_id      = "local-lvm"
+      datastore_id      = "ssd0"
       disk_size         = 64
       ipv4_address      = "192.168.86.125/24"
       gateway           = "192.168.86.1"
@@ -14,10 +14,10 @@ variable "vm_list_ubuntu" {
     }
     pollux = {
       description       = "DevOps host for the production environment (managed by Terraform)"
-      proxmox_node      = "polaris"
+      proxmox_node      = "sirius"
       cpu_cores         = 2
       memory_dedicated  = 2048
-      datastore_id      = "local-lvm"
+      datastore_id      = "ssd0"
       disk_size         = 64
       ipv4_address      = "192.168.86.135/24"
       gateway           = "192.168.86.1"

@@ -70,7 +70,7 @@ locals {
 resource "proxmox_virtual_environment_download_file" "talos_nocloud_image" {
   content_type            = "iso"
   datastore_id            = "local"
-  node_name               = "polaris"
+  node_name               = var.node_name
 
   file_name               = "talos-${local.talos.version}-nocloud-amd64.img"
   url                     = "https://factory.talos.dev/image/613e1592b2da41ae5e265e8789429f22e121aab91cb4deb6bc3c0b6262961245/${local.talos.version}/nocloud-amd64.raw.gz"
