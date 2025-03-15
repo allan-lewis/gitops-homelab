@@ -9,7 +9,6 @@ all:
         homelab_node_exporter_hosts:
           hosts:
             alcor:
-      children:
         homelab_openvpn_hosts:
           hosts:
             alcor:
