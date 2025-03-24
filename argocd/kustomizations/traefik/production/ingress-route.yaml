@@ -128,17 +128,6 @@ spec:
           namespace: wikijs
           port: 80
           scheme: http 
-    - match: Host(`api.nogeeksbrewing.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: no-geeks-brewing-graphql-api
-          namespace: ngb
-          port: 8080
-          scheme: http  
     - match: Host(`nogeeksbrewing.com`)
       kind: Rule
       middlewares:
@@ -146,10 +135,10 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: no-geeks-brewing-nextjs-gui
+        - name: no-geeks-brewing-go
           namespace: ngb
-          port: 3000
-          scheme: http 
+          port: 8080
+          scheme: http  
     - match: Host(`www.nogeeksbrewing.com`)
       kind: Rule
       middlewares:
@@ -157,9 +146,9 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: no-geeks-brewing-nextjs-gui
+        - name: no-geeks-brewing-go
           namespace: ngb
-          port: 3000
+          port: 8080
           scheme: http 
     - match: Host(`tautulli.k8s.allanshomelab.com`)
       kind: Rule
