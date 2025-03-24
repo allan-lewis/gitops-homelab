@@ -11,7 +11,7 @@ spec:
   target:    
     name: no-geeks-brewing-secrets
   data:    
-    - secretKey: NOGEEKSBREWING_BREWFATHER_AUTHTOKEN     
+    - secretKey: NO_GEEKS_BREWING_BREWFATHER_AUTH_TOKEN     
       remoteRef:        
         key: NO_GEEKS_BREWING_BREWFATHER_AUTH_TOKEN
     - secretKey: AUTH_SECRET     
