@@ -84,6 +84,17 @@ spec:
           namespace: kube-prometheus-stack
           port: 80
           scheme: http 
+    - match: Host(`plex.k8s.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: plex
+          namespace: plex
+          port: 32400
+          scheme: http
     - match: Host(`prometheus.k8s.allanshomelab.com`)
       kind: Rule
       middlewares:
