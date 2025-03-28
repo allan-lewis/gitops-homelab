@@ -72,7 +72,7 @@ spec:
     spec:
       containers:
       - name: plex
-        image: linuxserver/plex:latest
+        image: linuxserver/plex:1.41.5
         ports:
         - containerPort: 32400
         env:
