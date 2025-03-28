@@ -54,3 +54,44 @@ spec:
       storage: 256Gi
   volumeName: plex-media-pv
   storageClassName: ""
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: plex
+  namespace: plex
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: plex
+  template:
+    metadata:
+      labels:
+        app: plex
+    spec:
+      containers:
+      - name: plex
+        image: linuxserver/plex:latest
+        ports:
+        - containerPort: 32400
+        env:
+        - name: PUID
+          value: "3000" # Adjust to your host user ID
+        - name: PGID
+          value: "3000" # Adjust to your host group ID
+        - name: TZ
+          value: "America/New_York" # Adjust to your timezone
+        volumeMounts:
+        - name: config-volume
+          mountPath: /config
+        - name: media-volume
+          mountPath: /media-library
+          readOnly: true
+      volumes:
+      - name: config-volume
+        persistentVolumeClaim:
+          claimName: plex-config-pvc
+      - name: media-volume
+        persistentVolumeClaim:
+          claimName: plex-media-pvc
