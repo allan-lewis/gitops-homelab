@@ -6,6 +6,8 @@ all:
     pollux:
       ansible_host: 192.168.86.135
       homelab_ansible_environment: "production-compute"
+    regulus:
+      ansible_host: 192.168.86.116
 
   children:
     homelab_ansible_hosts:
@@ -14,6 +16,9 @@ all:
           hosts:
             castor:
             pollux:
+        homelab_docker_hosts:
+          hosts:
+            regulus:
         homelab_node_exporter_hosts:
           hosts:
             castor:
