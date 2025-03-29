@@ -73,3 +73,12 @@
   roles:
     - docker
     - docker_containers
+
+- name: Setup media server hosts.
+  hosts: homelab_media_server_hosts
+  become: yes
+  gather_facts: yes
+
+  roles:
+    - plex
+    # - immich
