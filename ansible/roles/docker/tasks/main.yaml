@@ -43,6 +43,13 @@
       - docker
     append: yes
 
+- name: Create a root directory for Docker volumes.
+  ansible.builtin.file:
+    path: "/opt/allans-home-lab"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+
 - name: Start the Docker service.
   ansible.builtin.service:
     name: docker

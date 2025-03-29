@@ -8,6 +8,11 @@ all:
       homelab_ansible_environment: "production-compute"
     regulus:
       ansible_host: 192.168.86.116
+      immich_version: "v1.129.0"
+      homelab_mounts:
+        - src: "192.168.86.104:/mnt/pool1/immich"
+          path: "/mnt/immich"
+          options: "rw"
 
   children:
     homelab_ansible_hosts:
