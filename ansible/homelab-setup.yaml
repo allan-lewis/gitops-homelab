@@ -1,33 +1,49 @@
 ---
-# - name: Get the local host ready to control Ansible.
-#   hosts: localhost
-#   become: no
-#   gather_facts: yes
+- name: Get the local host ready to control Ansible.
+  hosts: localhost
+  become: no
+  gather_facts: yes
   
-#   roles:
-#     - known_hosts
+  roles:
+    - known_hosts
 
-# - name: Do basic setup on all hosts (as root).
-#   hosts: homelab_ansible_hosts
-#   become: yes
-#   gather_facts: yes  
+- name: Do basic setup on all hosts (as root).
+  hosts: homelab_ansible_hosts
+  become: yes
+  gather_facts: yes  
 
-#   roles:
-#     - dependencies 
-#     - tz
-#     - user  
-#     - ssh
-#     - apt
-#     - mount
-#     - reboot
+  roles:
+    - dependencies 
+    - tz
+    - user  
+    - ssh
+    - apt
+    - mount
+    - reboot
 
-# - name: Do basic setup on all hosts (as local user).
-#   hosts: homelab_ansible_hosts
-#   become: no
-#   gather_facts: yes  
+- name: Do basic setup on all hosts (as local user).
+  hosts: homelab_ansible_hosts
+  become: no
+  gather_facts: yes  
 
-#   roles:
-#     - dotfiles
+  roles:
+    - role: known_hosts
+      vars:
+        homelab_ssh_keys: ['github.com']
+        homelab_ansible_translate_ip: no
+    - zsh_shell
+
+- name: Configure automated backups.
+  hosts: homelab_backup_hosts
+  become: yes
+  gather_facts: yes  
+
+  roles:
+    - private_key
+    - role: known_hosts
+      vars:
+        homelab_ssh_keys: "{{ hostvars | dict2items | map(attribute='value.homelab_remote_volumes') | select('defined') | flatten | map(attribute='host') | unique | list }}"
+    - backup
 
 # - name: Get hosts ready to do DevOps work (as root).
 #   hosts: homelab_devops_hosts
@@ -75,11 +91,11 @@
 #     - docker
 #     - docker_containers
 
-- name: Setup media server hosts.
-  hosts: homelab_media_server_hosts
-  become: yes
-  gather_facts: yes
+# - name: Setup media server hosts.
+#   hosts: homelab_media_server_hosts
+#   become: yes
+#   gather_facts: yes
 
-  roles:
-    # - plex
-    - immich
+#   roles:
+#     - plex
+#     - immich
