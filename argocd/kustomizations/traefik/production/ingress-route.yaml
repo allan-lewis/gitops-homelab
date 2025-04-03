@@ -7,6 +7,28 @@ spec:
   entryPoints:
     - websecure
   routes:
+    - match: Host(`transmission.k8s.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: jackett
+          namespace: media
+          port: 9117
+          scheme: http 
+    - match: Host(`jackett.k8s.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: jackett
+          namespace: media
+          port: 9117
+          scheme: http 
     - match: Host(`auth.allanandvaia.com`)
       kind: Rule
       middlewares:
