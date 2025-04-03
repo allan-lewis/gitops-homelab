@@ -5,9 +5,9 @@ set -e
 echo "Starting backups @ $(date)"
 
 {% for backup in homelab_remote_volumes | default([]) %}
-echo "Backing up {{ backup.src }} to {{ backup.host }} {{ backup.dest }}"
+echo "Backing up {{ backup.src }} to {{ hostvars[backup.host]['ansible_host'] }} {{ backup.dest }}"
 
-rsync -av {{ backup.options | default('') }} {{  backup.src }} {{ homelab_backup_username }}@{{ backup.host }}:{{ backup.dest }}
+rsync -av {{ backup.options | default('') }} {{  backup.src }} {{ homelab_backup_username }}@{{ hostvars[backup.host]['ansible_host'] }}:{{ backup.dest }}
 
 {% endfor %}
 echo "Backups complete"

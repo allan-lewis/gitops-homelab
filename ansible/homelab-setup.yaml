@@ -45,42 +45,43 @@
         homelab_ssh_keys: "{{ hostvars | dict2items | map(attribute='value.homelab_remote_volumes') | select('defined') | flatten | map(attribute='host') | unique | list }}"
     - backup
 
-# - name: Get hosts ready to do DevOps work (as root).
-#   hosts: homelab_devops_hosts
-#   become: yes
-#   gather_facts: yes
+- name: Get hosts ready to do DevOps work (as root).
+  hosts: homelab_devops_hosts
+  become: yes
+  gather_facts: yes
 
-#   roles:
-#     - ansible
-#     - terraform
-#     - doppler
-#     - aws
-#     - kubectl
-#     - talosctl
+  roles:
+    - ansible
+    - terraform
+    - doppler
+    - aws
+    - kubectl
+    - talosctl
 
-# - name: Get hosts ready to do DevOps work (as local user).
-#   hosts: homelab_devops_hosts
-#   become: no
-#   gather_facts: yes
+- name: Get hosts ready to do DevOps work (as local user).
+  hosts: homelab_devops_hosts
+  become: no
+  gather_facts: yes
 
-#   roles: 
-#     - devops
+  roles: 
+    - private_key
+    - devops
 
-# - name: Setup OpenVPN hosts.
-#   hosts: homelab_openvpn_hosts
-#   become: yes
-#   gather_facts: yes
+- name: Setup OpenVPN hosts.
+  hosts: homelab_openvpn_hosts
+  become: yes
+  gather_facts: yes
 
-#   roles:
-#     - openvpn
+  roles:
+    - openvpn
 
-# - name: Setup Node Exporter hosts.
-#   hosts: homelab_node_exporter_hosts
-#   become: yes
-#   gather_facts: yes
+- name: Setup Node Exporter hosts.
+  hosts: homelab_node_exporter_hosts
+  become: yes
+  gather_facts: yes
 
-#   roles:
-#     - node_exporter
+  roles:
+    - node_exporter
 
 # - name: Setup Docker hosts.
 #   hosts: homelab_docker_hosts
