@@ -2,14 +2,12 @@
 - name: Create user and add to sudo group.
   ansible.builtin.user:
     name: "{{ ansible_user }}"
-    password: "!"
-    password_lock: no
+    password_lock: yes
     shell: /bin/zsh
     groups:
       - sudo
     append: yes
     state: present
-  register: homelab_user_data
 
 - name: Add user to the sudoers list.
   ansible.builtin.lineinfile:

@@ -6,29 +6,9 @@ services:
     restart: "unless-stopped"
     network_mode: "host"
     volumes:
-      - type: volume
-        source: plex_config
-        target: /config
-      - type: volume
-        source: media_library
-        target: /media-library
+      - /opt/allans-home-lab/plex/config:/config
+      - /mnt/media-library:/media-library
     environment: 
       TZ: "America/New_York"
-      PUID: "3000"
-      PGID: "3000"
-      #PUID: "{{ homelab_user_id }}"
-      #PGID: "{{ homelab_group_id }}"
-
-volumes:
-  plex_config:
-    driver: local
-    driver_opts:
-      type: nfs
-      o: addr=192.168.86.104,rw
-      device: ":/mnt/pool1/plex/config"
-  media_library:
-    driver: local
-    driver_opts:
-      type: nfs
-      o: addr=192.168.86.104,ro
-      device: ":/mnt/pool1/media-library"
+      PUID: "{{ homelab_user_id }}"
+      PGID: "{{ homelab_group_id }}"

@@ -1,0 +1,27 @@
+---
+- name: Create SSH directory.
+  file:
+    path: "{{ ansible_env.HOME }}/.ssh"
+    state: directory
+    mode: '0700'
+
+- name: Fail if SSH_PRIVATE_KEY or SSH_PUBLIC_KEY is not set.
+  fail:
+    msg: "SSH_PRIVATE_KEY and SSH_PUBLIC_KEY must contain Base64-encoded key file values."
+  when: >
+    (lookup('env', 'SSH_PRIVATE_KEY') | length == 0) or
+    (lookup('env', 'SSH_PUBLIC_KEY') | length == 0)
+
+- name: Write private key from base-64-encoded environment variable.
+  copy:
+    content: "{{ lookup('env', 'SSH_PRIVATE_KEY') | b64decode }}"
+    dest: "{{ ansible_env.HOME }}/.ssh/id_rsa"
+    mode: '0600'
+  when: lookup('env', 'SSH_PRIVATE_KEY') | length > 0
+
+- name: Write public key from base-64-encoded environment variable.
+  copy:
+    content: "{{ lookup('env', 'SSH_PUBLIC_KEY') | b64decode }}"
+    dest: "{{ ansible_env.HOME }}/.ssh/id_rsa.pub"
+    mode: '0644'
+  when: lookup('env', 'SSH_PUBLIC_KEY') | length > 0

@@ -15,11 +15,12 @@
   args:
     creates: /usr/local/bin/starship
 
-- name: Ensure Starship is added to shell configuration (for Bash)
-  lineinfile:
-    path: ~/.bashrc
-    line: 'eval "$(starship init bash)"'
-    create: yes
+## TODO - This is likely not needed and can be removed
+# - name: Ensure Starship is added to shell configuration (for Bash)
+#   lineinfile:
+#     path: ~/.bashrc
+#     line: 'eval "$(starship init bash)"'
+#     create: yes
 
 - name: Verify Starship installation
   command: "starship --version"
