@@ -14,9 +14,9 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: jackett
+        - name: transmission
           namespace: media
-          port: 9117
+          port: 9091
           scheme: http 
     - match: Host(`jackett.k8s.allanshomelab.com`)
       kind: Rule
