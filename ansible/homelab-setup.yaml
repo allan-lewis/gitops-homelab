@@ -32,6 +32,7 @@
         homelab_ssh_keys: ['github.com']
         homelab_ansible_translate_ip: no
     - public_key
+    - private_key
     - zsh_shell
 
 - name: Configure automated backups.
