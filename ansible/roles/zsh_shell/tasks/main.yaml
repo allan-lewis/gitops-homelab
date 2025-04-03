@@ -1,4 +1,18 @@
 ---
+- name: Download and install Starship
+  shell: curl -sS https://starship.rs/install.sh | sh -s -- -y
+  args:
+    creates: /usr/local/bin/starship
+
+- name: Verify Starship installation
+  command: "starship --version"
+  register: starship_version_output
+  changed_when: false
+
+- name: Display Starship version
+  debug:
+    msg: "Starship installed successfully: {{ starship_version_output.stdout }}"
+
 - name: Clone the dotfiles repo.
   ansible.builtin.git:
     repo: "git@github.com:allan-lewis/dotfiles.git"
