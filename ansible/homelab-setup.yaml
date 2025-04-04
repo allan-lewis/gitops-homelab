@@ -110,5 +110,7 @@
   become: yes
   gather_facts: yes
   
+  collections:
+    - artis3n.tailscale
   roles:
-    - role: artis3n.tailscale
+    - tailscale
