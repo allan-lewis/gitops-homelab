@@ -113,4 +113,4 @@
   tasks:
     - name: Include Tailscale role
       ansible.builtin.include_role:
-        name: artis3n.tailscale.tailscale
+        name: artis3n.tailscale.device
