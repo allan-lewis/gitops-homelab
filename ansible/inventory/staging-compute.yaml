@@ -11,9 +11,6 @@ all:
         homelab_docker_hosts:
           hosts:
             epsilon:
-        homelab_node_exporter_hosts:
-          hosts:
-            epsilon:
 
   vars:
     ansible_python_interpreter: "/usr/bin/python3.12"
