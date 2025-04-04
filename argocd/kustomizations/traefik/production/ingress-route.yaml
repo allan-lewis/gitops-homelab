@@ -29,6 +29,17 @@ spec:
           # See https://kubernetes.io/docs/concepts/services-networking/service/#externalname
           name: ak-outpost-authentik-embedded-outpost
           port: 9000
+    - match: Host(`sonarr.k8s.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: sonarr
+          namespace: media
+          port: 8989
+          scheme: http 
     - match: Host(`transmission.k8s.allanshomelab.com`)
       kind: Rule
       middlewares:
