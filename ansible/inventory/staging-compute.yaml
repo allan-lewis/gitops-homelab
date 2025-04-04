@@ -8,6 +8,9 @@ all:
       hosts:
         epsilon:
       children:
+        homelab_docker_hosts:
+          hosts:
+            epsilon:
         homelab_node_exporter_hosts:
           hosts:
             epsilon:
