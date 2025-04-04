@@ -6,11 +6,11 @@ kind: Kustomization
 resources:
 - ../base/
 
-# patches:
-# - target:
-#     kind: DaemonSet
-#     name: .*
-#   patch: |-
-#     - op: replace
-#       path: /spec/template/spec/containers/0/env/0/value
-#       value: "mintaka"
+patches:
+- target:
+    kind: DaemonSet
+    name: .*
+  patch: |-
+    - op: replace
+      path: /spec/template/spec/containers/0/env/0/value
+      value: "deneb"

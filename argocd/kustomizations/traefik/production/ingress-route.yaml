@@ -7,6 +7,72 @@ spec:
   entryPoints:
     - websecure
   routes:
+    - match: Host(`radarr.k8s.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: authentik
+          namespace: default
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: radarr
+          namespace:  media
+          port: 7878
+          scheme: http        
+    - kind: Rule
+      match: "Host(`radarr.k8s.allanshomelab.com`) && PathPrefix(`/outpost.goauthentik.io/`)"
+      priority: 15
+      services:
+        - kind: Service
+          # Or, to use an external Outpost, create an ExternalName service and reference that here.
+          # See https://kubernetes.io/docs/concepts/services-networking/service/#externalname
+          name: ak-outpost-authentik-embedded-outpost
+          port: 9000
+    - match: Host(`sonarr.k8s.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: authentik
+          namespace: default
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: sonarr
+          namespace:  media
+          port: 8989
+          scheme: http        
+    - kind: Rule
+      match: "Host(`sonarr.k8s.allanshomelab.com`) && PathPrefix(`/outpost.goauthentik.io/`)"
+      priority: 15
+      services:
+        - kind: Service
+          # Or, to use an external Outpost, create an ExternalName service and reference that here.
+          # See https://kubernetes.io/docs/concepts/services-networking/service/#externalname
+          name: ak-outpost-authentik-embedded-outpost
+          port: 9000
+    - match: Host(`transmission.k8s.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: transmission
+          namespace: media
+          port: 9091
+          scheme: http 
+    - match: Host(`jackett.k8s.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: jackett
+          namespace: media
+          port: 9117
+          scheme: http 
     - match: Host(`auth.allanandvaia.com`)
       kind: Rule
       middlewares:
