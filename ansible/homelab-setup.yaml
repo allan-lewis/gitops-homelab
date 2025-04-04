@@ -104,3 +104,11 @@
 #   roles:
 #     - plex
 #     - immich
+
+- name: Install Tailscale.
+  hosts: homelab_tailscale_nodes
+  become: yes
+  gather_facts: yes
+  
+  roles:
+    - role: artis3n.tailscale
