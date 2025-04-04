@@ -18,3 +18,4 @@ all:
   vars:
     ansible_python_interpreter: "/usr/bin/python3.12"
     ansible_user: lab
+    tailscale_authkey: "{{ lookup('env', 'TAILSCALE_AUTH_KEY') }}"
