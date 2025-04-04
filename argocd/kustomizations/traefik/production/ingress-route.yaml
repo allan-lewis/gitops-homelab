@@ -7,6 +7,17 @@ spec:
   entryPoints:
     - websecure
   routes:
+    - match: Host(`radarr.k8s.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: radarr
+          namespace: media
+          port: 7878
+          scheme: http 
     - match: Host(`transmission.k8s.allanshomelab.com`)
       kind: Rule
       middlewares:
