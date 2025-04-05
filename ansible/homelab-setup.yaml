@@ -102,6 +102,9 @@
   gather_facts: yes
 
   roles:
+    - role: known_hosts
+      vars:
+        homelab_ssh_keys: "{{ hostvars | dict2items | map(attribute='value.homelab_remote_volumes') | select('defined') | flatten | map(attribute='host') | unique | list }}"
     - restore
 
 # - name: Setup media server hosts.
