@@ -7,5 +7,6 @@
       - curl
       - stow
       - net-tools
+      - nfs-common
     state: latest
     update_cache: true

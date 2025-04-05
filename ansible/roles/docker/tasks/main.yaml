@@ -10,8 +10,6 @@
       - virtualenv
       - python3-setuptools
       - containerd
-      - net-tools
-      - nfs-common
     state: latest
     update_cache: true
   
