@@ -4,7 +4,7 @@ all:
       ansible_host: 192.168.86.123    
     regulus:
       ansible_host: 192.168.86.116
-      immich_version: "v1.129.0"
+      immich_version: "v1.131.3"
       homelab_backup_healthcheck: "99213ad8-529f-4bd2-a244-c7754a4e6d2f"
       homelab_backup_minute: 35
       homelab_backup_hour: "*"
