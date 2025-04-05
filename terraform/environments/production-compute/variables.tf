@@ -24,7 +24,6 @@ variable "vm_list_ubuntu" {
       tags              = ["terraform", "production", "ubuntu", "media"]
     }
   }
-  }
 }
 
 # Set this from an environment variable called TF_VAR_PROXMOX_VM_PUBLIC_KEY

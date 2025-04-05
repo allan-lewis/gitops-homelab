@@ -12,6 +12,7 @@ variable "vm_list_ubuntu" {
       gateway           = "192.168.86.1"
       tags              = ["terraform", "staging", "ubuntu"]
     }
+  }
 }
 
 # Set this from an environment variable called TF_VAR_PROXMOX_VM_PUBLIC_KEY
