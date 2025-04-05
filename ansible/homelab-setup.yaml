@@ -124,4 +124,11 @@
 
   roles:
     - plex
-    # - immich
+
+- name: Setup Immich.
+  hosts: homelab_immich_hosts
+  become: yes
+  gather_facts: yes
+
+  roles:
+    - immich
