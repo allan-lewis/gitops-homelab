@@ -96,6 +96,14 @@
     - docker
     - docker_containers
 
+- name: Restore remote backup volumes.
+  hosts: homelab_ansible_hosts
+  become: no
+  gather_facts: yes
+
+  roles:
+    - restore
+
 # - name: Setup media server hosts.
 #   hosts: homelab_media_server_hosts
 #   become: yes
