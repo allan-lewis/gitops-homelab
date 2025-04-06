@@ -1,7 +1,9 @@
 all:
   hosts:
     alcor:
-      ansible_host: 192.168.86.123    
+      ansible_host: 192.168.86.123  
+    mizar:
+      ansible_host: 192.168.86.112  
     regulus:
       ansible_host: 192.168.86.116
       immich_version: "v1.131.3"
@@ -35,6 +37,7 @@ all:
             regulus:
         homelab_docker_hosts:
           hosts:
+            mizar:
             regulus:
         homelab_immich_hosts:
           hosts:
