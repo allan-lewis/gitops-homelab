@@ -3,7 +3,12 @@ all:
     alcor:
       ansible_host: 192.168.86.123  
     mizar:
-      ansible_host: 192.168.86.112  
+      ansible_host: 192.168.86.112
+      homelab_remote_volumes:
+        - src: "/opt/allans-home-lab/gatus/"
+          dest: "/mnt/pool1/docker-volumes/gatus/"
+          host: rigel
+          user: allan  
     regulus:
       ansible_host: 192.168.86.116
       immich_version: "v1.131.3"
