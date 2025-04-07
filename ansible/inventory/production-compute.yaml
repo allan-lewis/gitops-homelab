@@ -3,6 +3,9 @@ all:
     alcor:
       ansible_host: 192.168.86.123
       gatus_slug: "(OpenVPN Server)"
+    canopus:
+      ansible_host: 192.168.86.102
+      gatus_slug: "(Local Backup NAS)"
     castor:
       ansible_host: 192.168.86.125
       gatus_slug: "(Staging Dev Ops)"
@@ -23,6 +26,9 @@ all:
     pollux:
       ansible_host: 192.168.86.135
       gatus_slug: "(Production Dev Ops)"
+    procyon:
+      ansible_host: 100.85.197.8
+      gatus_slug: "(Remote Backup NAS)"
     regulus:
       ansible_host: 192.168.86.116
       gatus_slug: "(Media Acquisition)"
@@ -48,7 +54,7 @@ all:
           user: allan
     rigel:
       ansible_host: 192.168.86.104
-      gatus_slug: "(NAS)"
+      gatus_slug: "(Primary NAS)"
 
   children:
     homelab_ansible_hosts:
@@ -82,6 +88,9 @@ all:
         homelab_plex_hosts:
           hosts:
             regulus:
+        homelab_tailscale_hosts:
+          hosts:
+            mizar:
 
   vars:
     ansible_python_interpreter: "/usr/bin/python3.12"
