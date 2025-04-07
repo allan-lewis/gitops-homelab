@@ -11,7 +11,7 @@ alerting:
 
 endpoints:
 {% for host in groups['all']| default([]) %}
-  - name: {{ host  | capitalize }}
+  - name: "{{ host  | capitalize }} {{ hostvars[host].gatus_slug }}"
     group: "Hosts"
     url: "icmp://{{ hostvars[host].ansible_host }}"
     alerts:
