@@ -3,12 +3,33 @@ all:
     alcor:
       ansible_host: 192.168.86.123
       gatus_slug: "(OpenVPN Server)"
+    altair:
+      ansible_host: 192.168.86.146
+      gatus_slug: "(Bare Metal K8s Node)"
+    antares:
+      ansible_host: 192.168.86.149
+      gatus_slug: "(Bare Metal K8s Node)"    
+    arcturus:
+      ansible_host: 192.168.86.124
+      gatus_slug: "(Home Assistant)" 
+    bellatrix:
+      ansible_host: 192.168.86.160
+      gatus_slug: "(Windows 11)" 
     canopus:
       ansible_host: 192.168.86.102
       gatus_slug: "(Local Backup NAS)"
+    capella:
+      ansible_host: 192.168.86.145
+      gatus_slug: "(Bare Metal K8s Node)"
     castor:
       ansible_host: 192.168.86.125
       gatus_slug: "(Staging Dev Ops)"
+    deneb:
+      ansible_host: 192.168.86.147
+      gatus_slug: "(Bare Metal K8s Node)"
+    mimosa:
+      ansible_host: 192.168.86.161
+      gatus_slug: "(Windows 11)" 
     mintaka:
       ansible_host: 192.168.86.130
       gatus_slug: "(Legacy Dev Ops)"
@@ -58,6 +79,9 @@ all:
     rigel:
       ansible_host: 192.168.86.104
       gatus_slug: "(Primary NAS)"
+    vega:
+      ansible_host: 192.168.86.148
+      gatus_slug: "(Bare Metal K8s Node)"
 
   children:
     homelab_ansible_hosts:
