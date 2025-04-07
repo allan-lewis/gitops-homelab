@@ -97,3 +97,4 @@ all:
     ansible_user: lab
     homelab_telegram_bot_token: "{{ lookup('env', 'TELEGRAM_BOT_TOKEN') }}"
     homelab_telegram_id: "{{ lookup('env', 'TELEGRAM_ID') }}"
+    tailscale_authkey: "{{ lookup('env', 'TAILSCALE_AUTH_KEY') }}"

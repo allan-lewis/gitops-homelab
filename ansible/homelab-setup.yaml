@@ -87,6 +87,16 @@
   roles:
     - node_exporter
 
+- name: Install Tailscale.
+  hosts: homelab_tailscale_hosts
+  become: yes
+  gather_facts: yes
+  
+  tasks:
+    - name: Include Tailscale role
+      ansible.builtin.include_role:
+        name: artis3n.tailscale.device
+
 - name: Setup Docker hosts.
   hosts: homelab_docker_hosts
   become: yes
@@ -106,16 +116,6 @@
       vars:
         homelab_ssh_keys: "{{ hostvars | dict2items | map(attribute='value.homelab_remote_volumes') | select('defined') | flatten | map(attribute='host') | unique | list }}"
     - restore
-
-- name: Install Tailscale.
-  hosts: homelab_tailscale_hosts
-  become: yes
-  gather_facts: yes
-  
-  tasks:
-    - name: Include Tailscale role
-      ansible.builtin.include_role:
-        name: artis3n.tailscale.device
 
 - name: Setup Plex.
   hosts: homelab_plex_hosts
