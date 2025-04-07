@@ -55,7 +55,7 @@ all:
       gatus_slug: "(Remote Backup NAS)"
     regulus:
       ansible_host: 192.168.86.116
-      gatus_slug: "(Media Acquisition)"
+      gatus_slug: "(Media Server)"
       immich_version: "v1.131.3"
       homelab_backup_healthcheck: "99213ad8-529f-4bd2-a244-c7754a4e6d2f"
       homelab_backup_minute: 35
