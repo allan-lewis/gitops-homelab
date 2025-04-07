@@ -1,0 +1,4 @@
+---
+homelab_docker_traefik_tmp_dir: /tmp/traefik
+homelab_docker_traefik_volume: "/opt/allans-home-lab/traefik/data"
+homelab_docker_traefik_letsencrypt_volume: "/opt/allans-home-lab/traefik/letsencrypt"

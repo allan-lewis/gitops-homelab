@@ -118,6 +118,9 @@ all:
         homelab_tailscale_hosts:
           hosts:
             mizar:
+        homelab_traefik_hosts:
+          hosts:
+            mizar:
 
   vars:
     ansible_python_interpreter: "/usr/bin/python3.12"
@@ -125,3 +128,23 @@ all:
     homelab_telegram_bot_token: "{{ lookup('env', 'TELEGRAM_BOT_TOKEN') }}"
     homelab_telegram_id: "{{ lookup('env', 'TELEGRAM_ID') }}"
     tailscale_authkey: "{{ lookup('env', 'TAILSCALE_AUTH_KEY') }}"
+    homelab_cloudflare_api_key: "{{ lookup('env', 'TRAEFIK_CF_API_KEY') }}"
+    homelab_docker_traefik_services:
+      - name: "whoami"
+        host: whoami.docker.allanshomelab.com
+        url: "http://{{hostvars['mizar'].ansible_host}}:8180"
+      - name: "traefik-dashboard"
+        host: traefik.docker.allanshomelab.com
+        url: "http://{{ hostvars['mizar'].ansible_host}}:8088"
+      - name: pihole
+        host: dns.docker.allanshomelab.com
+        url: "http://{{ hostvars['mizar'].ansible_host }}:30080"
+      - name: gatus
+        host: gatus.docker.allanshomelab.com
+        url: "http://{{ hostvars['mizar'].ansible_host }}:8080"
+      - name: plex
+        host: plex.docker.allanshomelab.com
+        url: "http://hostvars['regulus']:32400"
+      - name: procyon
+        host: procyon.hosts.allanshomelab.com
+        url: "http://{{ hostvars['procyon'].ansible_host }}"
