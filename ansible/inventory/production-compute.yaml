@@ -4,7 +4,7 @@ all:
       ansible_host: 192.168.86.123  
     mizar:
       ansible_host: 192.168.86.112
-      homelab_backup_healthcheck: "99213ad8-529f-4bd2-a244-c7754a4e6d2f"
+      homelab_backup_healthcheck: "64ffa8c0-3251-4048-87e6-f8ce0205c3ff"
       homelab_backup_minute: 15
       homelab_backup_hour: "*"
       homelab_remote_volumes:
