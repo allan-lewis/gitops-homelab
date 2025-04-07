@@ -4,6 +4,9 @@ all:
       ansible_host: 192.168.86.123  
     mizar:
       ansible_host: 192.168.86.112
+      homelab_backup_healthcheck: "99213ad8-529f-4bd2-a244-c7754a4e6d2f"
+      homelab_backup_minute: 15
+      homelab_backup_hour: "*"
       homelab_remote_volumes:
         - src: "/opt/allans-home-lab/gatus/"
           dest: "/mnt/pool1/docker-volumes/gatus/"
@@ -39,6 +42,7 @@ all:
       children:
         homelab_backup_hosts:
           hosts:
+            mizar:
             regulus:
         homelab_docker_hosts:
           hosts:
