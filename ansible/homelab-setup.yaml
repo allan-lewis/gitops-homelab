@@ -132,3 +132,11 @@
 
   roles:
     - immich
+
+- name: Setup Gatus.
+  hosts: homelab_gatus_hosts
+  become: yes
+  gather_facts: yes
+
+  roles:
+    - gatus

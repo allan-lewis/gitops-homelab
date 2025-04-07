@@ -48,6 +48,9 @@ all:
           hosts:
             mizar:
             regulus:
+        homelab_gatus_hosts:
+          hosts:
+            mizar:
         homelab_immich_hosts:
           hosts:
             regulus:
@@ -70,3 +73,5 @@ all:
   vars:
     ansible_python_interpreter: "/usr/bin/python3.12"
     ansible_user: lab
+    homelab_telegram_bot_token: "{{ lookup('env', 'TELEGRAM_BOT_TOKEN') }}"
+    homelab_telegram_id: "{{ lookup('env', 'TELEGRAM_ID') }}"
