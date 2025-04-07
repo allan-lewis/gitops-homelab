@@ -11,7 +11,7 @@ all:
         homelab_docker_hosts:
           hosts:
             epsilon:
-        homelab_tailscale_nodes:
+        homelab_tailscale_hosts:
           hosts:
             epsilon:
 

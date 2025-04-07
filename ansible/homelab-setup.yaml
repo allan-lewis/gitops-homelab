@@ -108,7 +108,7 @@
     - restore
 
 - name: Install Tailscale.
-  hosts: homelab_tailscale_nodes
+  hosts: homelab_tailscale_hosts
   become: yes
   gather_facts: yes
   
