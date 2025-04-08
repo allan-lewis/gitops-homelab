@@ -218,3 +218,8 @@ all:
         group: "Sites (Hosts)"
         url: "https://rigel.hosts.allanshomelab.com/ui/"
         pattern: "*ix-root*"
+    homelab_docker_gatus_tcp_endpoints:
+      - name: "PostgreSQL"
+        group: "K8s Load Balancer IPs"
+        url: "tcp://postgres.k8s.allanshomelab.com:5432"
+        ip: "192.168.86.196"

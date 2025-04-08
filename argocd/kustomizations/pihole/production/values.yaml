@@ -33,6 +33,7 @@ dnsmasq:
     - address=/k8s.allanshomelab.com/192.168.86.187
     - address=/syncthing.allanshomelab.com/192.168.86.187
     - address=/guacd.k8s.allanshomelab.com/192.168.86.193
+    - address=/postgres.k8s.allanshomelab.com/192.168.86.196
     - address=/control.k8s.allanshomelab.com/192.168.86.140
     - address=/mariadb.k8s.allanshomelab.com/192.168.86.191
     - address=/nonprod.allanshomelab.com/192.168.86.49
