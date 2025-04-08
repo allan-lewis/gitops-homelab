@@ -1,0 +1,27 @@
+---
+- name: Fail if homelab_pihole_admin_password is empty.
+  fail:
+    msg: "PIHOLE_ADMIN_PASSWORD environment variable is required but not set."
+  when: homelab_pihole_admin_password == ''
+
+
+- name: Create Pi-Hole volumes
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: directory
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
+  with_items:
+      - path: "{{ homelab_docker_pihole_data }}"
+      - path: "{{ homelab_docker_pihole_tmp }}"
+
+- name: Write the Docker Compose manifest
+  ansible.builtin.template:
+    src: docker-compose.yaml.j2
+    dest: "{{ homelab_docker_pihole_tmp }}/docker-compose.yml"
+
+- name: Deploy the Docker Compose stack
+  community.docker.docker_compose_v2:
+    project_src: "{{ homelab_docker_pihole_tmp }}"
+    pull: "always"
+    recreate: "always"

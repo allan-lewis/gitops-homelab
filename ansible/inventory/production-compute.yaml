@@ -47,6 +47,10 @@ all:
         - src: "/opt/allans-home-lab/traefik/"
           dest: "/mnt/pool1/docker-volumes/traefik/"
           host: rigel
+          user: allan  
+        - src: "/opt/allans-home-lab/pihole/"
+          dest: "/mnt/pool1/docker-volumes/pihole/"
+          host: rigel
           user: allan 
     polaris:
       ansible_host: 192.168.86.101
@@ -116,6 +120,9 @@ all:
             homelab_openvpn_network: "192.168.86.0/24"
             homelab_openvpn_username: "{{ lookup('env', 'OPEN_VPN_USERNAME') }}"
             homelab_openvpn_password: "{{ lookup('env', 'OPEN_VPN_PASSWORD') }}"
+        homelab_pihole_hosts:
+          hosts:
+            mizar:
         homelab_plex_hosts:
           hosts:
             regulus:
@@ -129,6 +136,7 @@ all:
   vars:
     ansible_python_interpreter: "/usr/bin/python3.12"
     ansible_user: lab
+    homelab_pihole_admin_password: "{{ lookup('env', 'PIHOLE_ADMIN_PASSWORD') }}"
     homelab_telegram_bot_token: "{{ lookup('env', 'TELEGRAM_BOT_TOKEN') }}"
     homelab_telegram_id: "{{ lookup('env', 'TELEGRAM_ID') }}"
     tailscale_authkey: "{{ lookup('env', 'TAILSCALE_AUTH_KEY') }}"
