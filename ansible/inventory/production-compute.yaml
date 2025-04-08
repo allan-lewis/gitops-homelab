@@ -148,7 +148,7 @@ all:
         url: "http://{{ hostvars['mizar'].ansible_host }}:8080"
       - name: plex
         host: plex.docker.allanshomelab.com
-        url: "http://hostvars['regulus']:32400"
+        url: "http://{{ hostvars['regulus'] }}:32400"
       - name: procyon
         host: procyon.hosts.allanshomelab.com
         url: "http://{{ hostvars['procyon'].ansible_host }}"
