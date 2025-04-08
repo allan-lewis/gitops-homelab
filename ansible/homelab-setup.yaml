@@ -1,153 +1,153 @@
 ---
-# - name: Get the local host ready to control Ansible.
-#   hosts: localhost
-#   become: no
-#   gather_facts: yes
+- name: Get the local host ready to control Ansible.
+  hosts: localhost
+  become: no
+  gather_facts: yes
   
-#   roles:
-#     - known_hosts
+  roles:
+    - known_hosts
 
-# - name: Do basic setup on all hosts (as root).
-#   hosts: homelab_ansible_hosts
-#   become: yes
-#   gather_facts: yes  
+- name: Do basic setup on all hosts (as root).
+  hosts: homelab_ansible_hosts
+  become: yes
+  gather_facts: yes  
 
-#   roles:
-#     - dependencies 
-#     - tz
-#     - user  
-#     - ssh
-#     - apt
-#     - mount
-#     - reboot
+  roles:
+    - dependencies 
+    - tz
+    - user  
+    - ssh
+    - apt
+    - mount
+    - reboot
 
-# - name: Do basic setup on all hosts (as local user).
-#   hosts: homelab_ansible_hosts
-#   become: no
-#   gather_facts: yes  
+- name: Do basic setup on all hosts (as local user).
+  hosts: homelab_ansible_hosts
+  become: no
+  gather_facts: yes  
 
-#   roles:
-#     - role: known_hosts
-#       vars:
-#         homelab_ssh_keys: ['github.com']
-#         homelab_ansible_translate_ip: no
-#     - public_key
-#     - private_key
-#     - zsh_shell
+  roles:
+    - role: known_hosts
+      vars:
+        homelab_ssh_keys: ['github.com']
+        homelab_ansible_translate_ip: no
+    - public_key
+    - private_key
+    - zsh_shell
 
-# - name: Configure automated backups.
-#   hosts: homelab_backup_hosts
-#   become: yes
-#   gather_facts: yes  
+- name: Configure automated backups.
+  hosts: homelab_backup_hosts
+  become: yes
+  gather_facts: yes  
 
-#   roles:
-#     - public_key
-#     - private_key
-#     - role: known_hosts
-#       vars:
-#         homelab_ssh_keys: "{{ hostvars | dict2items | map(attribute='value.homelab_remote_volumes') | select('defined') | flatten | map(attribute='host') | unique | list }}"
-#     - backup
+  roles:
+    - public_key
+    - private_key
+    - role: known_hosts
+      vars:
+        homelab_ssh_keys: "{{ hostvars | dict2items | map(attribute='value.homelab_remote_volumes') | select('defined') | flatten | map(attribute='host') | unique | list }}"
+    - backup
 
-# - name: Get hosts ready to do DevOps work (as root).
-#   hosts: homelab_devops_hosts
-#   become: yes
-#   gather_facts: yes
+- name: Get hosts ready to do DevOps work (as root).
+  hosts: homelab_devops_hosts
+  become: yes
+  gather_facts: yes
 
-#   roles:
-#     - ansible
-#     - terraform
-#     - doppler
-#     - aws
-#     - kubectl
-#     - talosctl
+  roles:
+    - ansible
+    - terraform
+    - doppler
+    - aws
+    - kubectl
+    - talosctl
 
-# - name: Get hosts ready to do DevOps work (as local user).
-#   hosts: homelab_devops_hosts
-#   become: no
-#   gather_facts: yes
+- name: Get hosts ready to do DevOps work (as local user).
+  hosts: homelab_devops_hosts
+  become: no
+  gather_facts: yes
 
-#   roles: 
-#     - public_key
-#     - private_key
-#     - devops
+  roles: 
+    - public_key
+    - private_key
+    - devops
 
-# - name: Setup OpenVPN hosts.
-#   hosts: homelab_openvpn_hosts
-#   become: yes
-#   gather_facts: yes
+- name: Setup OpenVPN hosts.
+  hosts: homelab_openvpn_hosts
+  become: yes
+  gather_facts: yes
 
-#   roles:
-#     - openvpn
+  roles:
+    - openvpn
 
-# - name: Setup Node Exporter hosts.
-#   hosts: homelab_node_exporter_hosts
-#   become: yes
-#   gather_facts: yes
+- name: Setup Node Exporter hosts.
+  hosts: homelab_node_exporter_hosts
+  become: yes
+  gather_facts: yes
 
-#   roles:
-#     - node_exporter
+  roles:
+    - node_exporter
 
-# - name: Install Tailscale.
-#   hosts: homelab_tailscale_hosts
-#   become: yes
-#   gather_facts: yes
+- name: Install Tailscale.
+  hosts: homelab_tailscale_hosts
+  become: yes
+  gather_facts: yes
   
-#   tasks:
-#     - name: Include Tailscale role
-#       ansible.builtin.include_role:
-#         name: artis3n.tailscale.device
+  tasks:
+    - name: Include Tailscale role
+      ansible.builtin.include_role:
+        name: artis3n.tailscale.device
 
-# - name: Setup Docker hosts.
-#   hosts: homelab_docker_hosts
-#   become: yes
-#   gather_facts: yes
+- name: Setup Docker hosts.
+  hosts: homelab_docker_hosts
+  become: yes
+  gather_facts: yes
 
-#   roles:
-#     - docker
-#     - docker_containers
+  roles:
+    - docker
+    - docker_containers
 
-# - name: Restore remote backup volumes.
-#   hosts: homelab_ansible_hosts
-#   become: no
-#   gather_facts: yes
+- name: Restore remote backup volumes.
+  hosts: homelab_ansible_hosts
+  become: no
+  gather_facts: yes
 
-#   roles:
-#     - role: known_hosts
-#       vars:
-#         homelab_ssh_keys: "{{ hostvars | dict2items | map(attribute='value.homelab_remote_volumes') | select('defined') | flatten | map(attribute='host') | unique | list }}"
-#     - restore
+  roles:
+    - role: known_hosts
+      vars:
+        homelab_ssh_keys: "{{ hostvars | dict2items | map(attribute='value.homelab_remote_volumes') | select('defined') | flatten | map(attribute='host') | unique | list }}"
+    - restore
 
-# - name: Setup Plex.
-#   hosts: homelab_plex_hosts
-#   become: yes
-#   gather_facts: yes
+- name: Setup Plex.
+  hosts: homelab_plex_hosts
+  become: yes
+  gather_facts: yes
 
-#   roles:
-#     - plex
+  roles:
+    - plex
 
-# - name: Setup Immich.
-#   hosts: homelab_immich_hosts
-#   become: yes
-#   gather_facts: yes
+- name: Setup Immich.
+  hosts: homelab_immich_hosts
+  become: yes
+  gather_facts: yes
 
-#   roles:
-#     - immich
+  roles:
+    - immich
 
-# - name: Setup Gatus.
-#   hosts: homelab_gatus_hosts
-#   become: yes
-#   gather_facts: yes
+- name: Setup Gatus.
+  hosts: homelab_gatus_hosts
+  become: yes
+  gather_facts: yes
 
-#   roles:
-#     - gatus
+  roles:
+    - gatus
 
-# - name: Setup Traefik.
-#   hosts: homelab_traefik_hosts
-#   become: yes
-#   gather_facts: yes
+- name: Setup Traefik.
+  hosts: homelab_traefik_hosts
+  become: yes
+  gather_facts: yes
 
-#   roles:
-#     - traefik
+  roles:
+    - traefik
 
 - name: Setup Pi-Hole.
   hosts: homelab_pihole_hosts
@@ -157,9 +157,3 @@
   roles:
     - systemd_resolvd
     - pihole
-
-  handlers:
-    - name: Restart systemd-resolved
-      ansible.builtin.systemd:
-        name: systemd-resolved
-        state: restarted
