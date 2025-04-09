@@ -236,6 +236,9 @@ spec:
     - secretKey: HOMEPAGE_VAR_PIHOLE_KEY      
       remoteRef:        
         key: HOMEPAGE_VAR_PIHOLE_KEY
+    - secretKey: HOMEPAGE_VAR_PIHOLE_KEY_DOCKER      
+      remoteRef:        
+        key: HOMEPAGE_VAR_PIHOLE_KEY_DOCKER
     - secretKey: HOMEPAGE_VAR_PLEX_KEY      
       remoteRef:        
         key: HOMEPAGE_VAR_PLEX_KEY
