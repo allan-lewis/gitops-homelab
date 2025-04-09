@@ -224,6 +224,7 @@ data:
             widget:
               type: pihole
               url: https://dns.k8s.allanshomelab.com
+              version: 6
               key: {{HOMEPAGE_VAR_PIHOLE_KEY}}
         - Pi-hole (Docker):
             icon: pi-hole.png
@@ -234,6 +235,7 @@ data:
             widget:
               type: pihole
               url: https://dns.docker.allanshomelab.com
+              version: 6
               key: {{HOMEPAGE_VAR_PIHOLE_KEY}}
         - Traefik (k8s):
             icon: traefik.png
