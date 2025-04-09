@@ -226,6 +226,30 @@ all:
         group: "Sites (Hosts)"
         url: "https://rigel.hosts.allanshomelab.com/ui/"
         pattern: "*ix-root*"
+      - name: Radarr
+        group: "Sites (K8s)"
+        url: "https://radarr.k8s.allanshomelab.com"
+        pattern: "*authentik*"
+      - name: Rancher
+        group: "Sites (K8s)"
+        url: "https://rancher.k8s.allanshomelab.com"
+        pattern: "*rancher*"
+      - name: Sonarr
+        group: "Sites (K8s)"
+        url: "https://sonarr.k8s.allanshomelab.com"
+        pattern: "*authentik*"
+      - name: "Tautulli"
+        group: "Sites (K8s)"
+        url: "https://tautulli.k8s.allanshomelab.com"
+        pattern: "*Tautulli*"
+      - name: "Traefik"
+        group: "Sites (K8s)"
+        url: "https://traefik.k8s.allanshomelab.com/dashboard/#/"
+        pattern: "*Traefik*"
+      - name: Transmission
+        group: "Sites (K8s)"
+        url: "https://transmission.k8s.allanshomelab.com"
+        pattern: "*Transmission*"
     homelab_docker_gatus_tcp_endpoints:
       - name: "Control Plane"
         group: "K8s Load Balancer IPs"
