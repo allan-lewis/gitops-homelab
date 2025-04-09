@@ -6,7 +6,29 @@ metadata:
 spec:
   entryPoints:
     - websecure
-  routes:
+  routes: 
+    - match: Host(`radarr-homepage.k8s.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: radarr
+          namespace: media
+          port: 7878
+          scheme: http   
+    - match: Host(`sonarr-homepage.k8s.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: sonarr
+          namespace: media
+          port: 8989
+          scheme: http  
     - match: Host(`radarr.k8s.allanshomelab.com`)
       kind: Rule
       middlewares:
