@@ -236,7 +236,7 @@ data:
               type: pihole
               url: https://dns.docker.allanshomelab.com
               version: 6
-              key: {{HOMEPAGE_VAR_PIHOLE_KEY}}
+              key: {{HOMEPAGE_VAR_PIHOLE_KEY_DOCKER}}
         - Traefik (k8s):
             icon: traefik.png
             href: https://traefik.k8s.allanshomelab.com
