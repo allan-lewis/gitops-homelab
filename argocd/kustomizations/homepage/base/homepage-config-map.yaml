@@ -258,7 +258,7 @@ data:
             icon: immich.png
             href: https://photos.allanandvaia.com
             description: Photo and video management
-            server: mizar
+            server: regulus
             container: immich_server
             widget:
               type: immich
@@ -278,7 +278,7 @@ data:
             icon: plex.png
             href: https://plex.docker.allanshomelab.com
             description: Media server
-            server: mizar
+            server: regulus
             container: plex
             widget:
               type: plex
@@ -372,5 +372,5 @@ data:
       host: 192.168.86.112
       port: 2375
     regulus:
-      host: 192.168.86.111
+      host: 192.168.86.116
       port: 2375
