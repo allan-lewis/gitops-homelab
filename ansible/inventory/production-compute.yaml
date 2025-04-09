@@ -226,6 +226,33 @@ all:
         group: "Sites (Hosts)"
         url: "https://rigel.hosts.allanshomelab.com/ui/"
         pattern: "*ix-root*"
+      - name: "Alertmanager"
+        group: "Sites (K8s)"
+        url: "https://alerts.k8s.allanshomelab.com"
+        pattern: "*Alertmanager*"
+      - name: Jackett
+        group: "Sites (K8s)"
+        url: "https://jackett.k8s.allanshomelab.com/health"
+        pattern: "*OK*"
+      - name: Homepage
+        group: "Sites (K8s)"
+        url: "https://homepage.k8s.allanshomelab.com"
+        pattern: "*Homepage*"
+      - name: Longhorn
+        group: "Sites (K8s)"
+        url: "https://longhorn.k8s.allanshomelab.com"
+      - name: "Pi-hole"
+        group: "Sites (K8s)"
+        url: "https://dns.k8s.allanshomelab.com/admin"
+        pattern: "*Pi-hole*"
+      - name: Portainer
+        group: "Sites (K8s)"
+        url: "https://portainer.k8s.allanshomelab.com"
+        pattern: "*Portainer*"
+      - name: Prometheus
+        group: "Sites (K8s)"
+        url: "https://prometheus.k8s.allanshomelab.com"
+        pattern: "*Prometheus*"
       - name: Radarr
         group: "Sites (K8s)"
         url: "https://radarr.k8s.allanshomelab.com"
