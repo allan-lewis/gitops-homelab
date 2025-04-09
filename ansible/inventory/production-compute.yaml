@@ -30,9 +30,6 @@ all:
     mimosa:
       ansible_host: 192.168.86.161
       gatus_slug: "(Windows 11)" 
-    mintaka:
-      ansible_host: 192.168.86.130
-      gatus_slug: "(Legacy Dev Ops)"
     mizar:
       ansible_host: 192.168.86.112
       gatus_slug: "(Bare Metal Monitoring/Networking)"
@@ -176,10 +173,6 @@ all:
       - name: "Mizar"
         group: "Healthchecks"
         url: "https://healthchecks.io/b/2/e36ad4aa-1554-44c5-a356-522c56cd9650.json"
-        pattern: "*up*"
-      - name: "Mintaka"
-        group: "Healthchecks"
-        url: "https://healthchecks.io/b/2/6e7b08e9-c059-48f6-b788-aa61c884abd5.json"
         pattern: "*up*"
       - name: "Rigel Media Sync"
         group: "Healthchecks"
