@@ -294,7 +294,7 @@ data:
             app: radarr
             widget:
               type: radarr
-              url: http://192.168.86.111:31300
+              url: https://radarr-homepage.k8s.allanshomelab.com
               key: {{HOMEPAGE_VAR_RADARR_KEY}}
         - Sonarr:
             icon: sonarr.png
@@ -304,7 +304,7 @@ data:
             app: sonarr
             widget:
               type: sonarr
-              url: http://192.168.86.111:31200
+              url: https://sonarr-homepage.k8s.allanshomelab.com
               key: {{HOMEPAGE_VAR_SONARR_KEY}}
         - Tautulli:
             icon: tautulli.png
