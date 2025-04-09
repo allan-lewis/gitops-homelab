@@ -132,7 +132,7 @@ data:
             widget:
               type: truenas
               url: https://rigel.hosts.allanshomelab.com
-              username: root
+              username: "{{HOMEPAGE_VAR_TRUENAS_USERNAME}}"
               password: "{{HOMEPAGE_VAR_TRUENAS_PASSWORD}}"
     - Dev Ops:
         - Alertmanager:
