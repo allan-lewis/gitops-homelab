@@ -49,6 +49,9 @@ all:
           dest: "/mnt/pool1/docker-volumes/pihole/"
           host: rigel
           user: allan 
+    peacock:
+      ansible_host: 192.168.86.162
+      gatus_slug: "(Daily Driver)"
     polaris:
       ansible_host: 192.168.86.101
       gatus_slug: "(Hypervisor)"
@@ -158,18 +161,6 @@ all:
         host: procyon.hosts.allanshomelab.com
         url: "http://{{ hostvars['procyon'].ansible_host }}"
     homelab_docker_gatus_https_endpoints:
-      - name: "Rigel"
-        group: "Sites (Syncthing)"
-        url: "https://rigel.syncthing.allanshomelab.com"
-        pattern: "*Syncthing*"
-      - name: "Bellatrix"
-        group: "Sites (Syncthing)"
-        url: "https://bellatrix.syncthing.allanshomelab.com"
-        pattern: "*Syncthing*"
-      - name: "Mimosa"
-        group: "Sites (Syncthing)"
-        url: "https://mimosa.syncthing.allanshomelab.com"
-        pattern: "*Syncthing*"
       - name: "Mizar"
         group: "Healthchecks"
         url: "https://healthchecks.io/b/2/e36ad4aa-1554-44c5-a356-522c56cd9650.json"
