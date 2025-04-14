@@ -35,6 +35,17 @@ subsets:
 kind: Endpoints
 apiVersion: v1
 metadata:
+  name: traefik-endpoint-sirius
+  namespace: traefik
+subsets:
+  - addresses:
+      - ip: 192.168.86.105
+    ports:
+      - port: 8006
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
   name: traefik-endpoint-rigel
   namespace: traefik
 subsets:
