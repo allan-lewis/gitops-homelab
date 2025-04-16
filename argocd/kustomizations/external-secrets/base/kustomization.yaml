@@ -10,4 +10,4 @@ helmCharts:
   repo: https://charts.external-secrets.io
   releaseName: external-secrets
   namespace: external-secrets
-  version: 0.15.1
+  version: 0.16.1
