@@ -61,6 +61,11 @@ grafana:
 
 alertmanager:
   alertmanagerSpec:
+    extraSecretMounts:
+      - name: telegram-secret
+        mountPath: /etc/secrets/telegram
+        secretName: telegram-bot-token-secret
+        readOnly: true
     persistentVolumeClaimRetentionPolicy:
       whenDeleted: Retain
       whenScaled: Retain

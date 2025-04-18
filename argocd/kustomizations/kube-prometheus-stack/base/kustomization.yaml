@@ -3,6 +3,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
+  - external-secret.yaml
   - homelab-metrics.yaml
   - prometheus-rules.yaml
   - https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.81.0/example/prometheus-operator-crd/monitoring.coreos.com_alertmanagerconfigs.yaml
