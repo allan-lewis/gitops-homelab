@@ -7,6 +7,17 @@ spec:
   entryPoints:
     - websecure
   routes:
+    - match: Host(`prometheus.k8s.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: kube-prometheus-stack-prometheus
+          namespace: kube-prometheus-stack
+          port: 9090
+          scheme: http
     - match: Host(`radarr.nonprod.allanshomelab.com`)
       kind: Rule
       middlewares:
