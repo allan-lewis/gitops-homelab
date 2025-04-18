@@ -82,3 +82,24 @@ alertmanager:
           resources:
             requests:
               storage: 5Gi
+    config:
+      global:
+        resolve_timeout: 5m
+      route:
+        group_by: ['alertname']
+        group_wait: 30s
+        group_interval: 5m
+        repeat_interval: 12h
+        receiver: telegram
+
+      receivers:
+        - name: telegram
+          telegram_configs:
+            - chat_id_file: "/etc/secrets/telegram/chat_id"         # 👈 chat_id from secret
+              bot_token_file: "/etc/secrets/telegram/bot_token"     # 👈 token from secret
+              parse_mode: "Markdown"
+              message: |
+                *Alert:* {{ .CommonAnnotations.summary }}
+                {{ range .Alerts }}
+                  • *{{ .Labels.alertname }}*: {{ .Annotations.description }}
+                {{ end }}
