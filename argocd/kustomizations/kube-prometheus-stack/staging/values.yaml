@@ -60,12 +60,10 @@ grafana:
     existingClaim: grafana
 
 alertmanager:
-  alertmanagerSpec:
-    extraSecretMounts:
-      - name: telegram-secret
-        mountPath: /etc/secrets/telegram
-        secretName: telegram-bot-token-secret
-        readOnly: true
+    volumes:
+      - name: telegram-bot-token
+        secret:
+          secretName: telegram-bot-token-secret
     persistentVolumeClaimRetentionPolicy:
       whenDeleted: Retain
       whenScaled: Retain
