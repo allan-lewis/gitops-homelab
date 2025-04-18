@@ -64,6 +64,8 @@ alertmanager:
     alertmanagerConfigSelector:
       matchLabels:
         alertmanagerConfig: alertmanager-telegram
+    alertmanagerConfigMatcherStrategy:
+      type: None
     containers:
       - name: alertmanager
         volumeMounts:
