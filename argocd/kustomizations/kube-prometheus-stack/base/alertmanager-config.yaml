@@ -1,0 +1,25 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: telegram-alertmanager-config
+  namespace: kube-prometheus-stack
+  labels:
+    alertmanager: config
+spec:
+  route:
+    groupBy: ["alertname"]
+    receiver: "telegram"
+    groupWait: 30s
+    groupInterval: 5m
+    repeatInterval: 12h
+  receivers:
+    - name: telegram
+      telegramConfigs:
+        - botTokenFile: /etc/secrets/telegram/bot_token
+          chatIdFile: /etc/secrets/telegram/chat_id
+          parseMode: "Markdown"
+          message: |
+            *Alert:* {{ .CommonAnnotations.summary }}
+            {{ range .Alerts }}
+              • *{{ .Labels.alertname }}*: {{ .Annotations.description }}
+            {{ end }}
