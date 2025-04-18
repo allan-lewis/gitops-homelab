@@ -12,6 +12,11 @@ spec:
       labels:
         app: homelab-metrics
     spec:
+      tolerations:
+        # Allow the DaemonSet to run on master/control plane nodes
+        - key: "node-role.kubernetes.io/master"
+          operator: "Exists"
+          effect: "NoSchedule"
       containers:
       - name: homelab-metrics
         image: allanelewis/homelab-metrics:latest
