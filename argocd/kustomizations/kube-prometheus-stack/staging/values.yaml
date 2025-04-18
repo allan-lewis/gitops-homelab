@@ -60,8 +60,14 @@ grafana:
     existingClaim: grafana
 
 alertmanager:
+    containers:
+      - name: alertmanager
+        volumeMounts:
+          - name: telegram-secret
+            mountPath: /etc/secrets/telegram
+            readOnly: true
     volumes:
-      - name: telegram-bot-token
+      - name: telegram-secret
         secret:
           secretName: telegram-bot-token-secret
     persistentVolumeClaimRetentionPolicy:
