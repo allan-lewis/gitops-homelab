@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
@@ -33,3 +34,18 @@ spec:
           limits:
             cpu: 100m
             memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: homelab-metrics
+  namespace: kube-prometheus-stack
+  labels:
+    app: homelab-metrics
+spec:
+  selector:
+    app: homelab-metrics
+  ports:
+  - name: metrics
+    port: 9102
+    targetPort: metrics
