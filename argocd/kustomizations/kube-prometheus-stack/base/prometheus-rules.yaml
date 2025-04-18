@@ -1,3 +1,4 @@
+---
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
@@ -23,3 +24,29 @@ spec:
           Expected exactly one node to report a different public IP address.
           This alert fires when all nodes agree or when multiple nodes disagree,
           and persists in that state for at least 10 minutes.
+---
+apiVersion: monitoring.coreos.com/v1
+kind: AlertmanagerConfig
+metadata:
+  name: telegram-alertmanager-config
+  labels:
+    alertmanager: config  # This label matches the selector in values.yaml
+spec:
+  receivers:
+    - name: telegram
+      telegram_configs:
+        - chat_id_file: "/etc/secrets/telegram/chat_id"
+          bot_token_file: "/etc/secrets/telegram/bot_token"
+          parse_mode: "Markdown"
+          message: |
+            *Alert:* {{ .CommonAnnotations.summary }}
+            {{ range .Alerts }}
+              • *{{ .Labels.alertname }}*: {{ .Annotations.description }}
+            {{ end }}
+
+  route:
+    receiver: telegram
+    group_by: ['alertname']
+    group_wait: 30s
+    group_interval: 5m
+    repeat_interval: 12h
