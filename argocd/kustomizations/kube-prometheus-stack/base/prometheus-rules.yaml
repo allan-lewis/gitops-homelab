@@ -1,0 +1,23 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: homelab-ip-anomaly
+  namespace: kube-prometheus-stack
+spec:
+  groups:
+  - name: homelab.rules
+    rules:
+    - alert: HomelabPublicIPPatternInvalid
+      expr: |
+        count(count_values("ip", homelab_public_ip_numeric)) != 2
+        or
+        min(count_values("ip", homelab_public_ip_numeric)) != 1
+      for: 10m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Unexpected public IP distribution across homelab nodes"
+        description: |
+          Expected exactly one node to report a different public IP address.
+          This alert fires when all nodes agree or when multiple nodes disagree,
+          and persists in that state for at least 10 minutes.
