@@ -14,7 +14,7 @@ spec:
     spec:
       tolerations:
         # Allow the DaemonSet to run on master/control plane nodes
-        - key: "node-role.kubernetes.io/master"
+        - key: "node-role.kubernetes.io/control-plane"
           operator: "Exists"
           effect: "NoSchedule"
       containers:
