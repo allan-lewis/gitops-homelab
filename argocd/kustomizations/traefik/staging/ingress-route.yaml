@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`prometheus.k8s.allanshomelab.com`)
+    - match: Host(`prometheus.nonprod.allanshomelab.com`)
       kind: Rule
       middlewares:
         - name: traefik-custom-headers
