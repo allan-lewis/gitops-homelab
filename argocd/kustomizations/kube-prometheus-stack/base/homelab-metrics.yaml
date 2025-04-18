@@ -58,7 +58,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: homelab-metrics
+      app: kube-prometheus-stack
   endpoints:
   - port: metrics
     interval: 30s
