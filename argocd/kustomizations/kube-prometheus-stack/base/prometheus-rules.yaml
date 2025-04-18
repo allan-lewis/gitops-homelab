@@ -16,7 +16,7 @@ spec:
         min(count_values("ip", homelab_public_ip_numeric)) != 1
       for: 10m
       labels:
-        severity: warning
+        severity: critical
       annotations:
         summary: "Unexpected public IP distribution across homelab nodes"
         description: |
