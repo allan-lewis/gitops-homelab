@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: homelab-metrics
+  namespace: kube-prometheus-stack
+spec:
+  selector:
+    matchLabels:
+      app: homelab-metrics
+  template:
+    metadata:
+      labels:
+        app: homelab-metrics
+    spec:
+      containers:
+      - name: homelab-metrics
+        image: allanelewis/homelab-metrics:latest
+        ports:
+        - containerPort: 9102
+          name: metrics
+        resources:
+          requests:
+            cpu: 25m
+            memory: 64Mi
+          limits:
+            cpu: 100m
+            memory: 128Mi
