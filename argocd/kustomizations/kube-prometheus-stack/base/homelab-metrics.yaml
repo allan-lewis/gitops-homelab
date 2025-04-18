@@ -17,6 +17,9 @@ spec:
         - key: "node-role.kubernetes.io/control-plane"
           operator: "Exists"
           effect: "NoSchedule"
+        - key: "openvpn"
+          operator: "Exists"
+          effect: "NoSchedule"
       containers:
       - name: homelab-metrics
         image: allanelewis/homelab-metrics:latest
