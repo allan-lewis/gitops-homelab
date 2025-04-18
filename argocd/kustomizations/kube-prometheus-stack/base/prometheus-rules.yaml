@@ -3,6 +3,8 @@ kind: PrometheusRule
 metadata:
   name: homelab-ip-anomaly
   namespace: kube-prometheus-stack
+  labels:
+    release: prometheus 
 spec:
   groups:
   - name: homelab.rules
