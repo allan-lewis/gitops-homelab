@@ -15,5 +15,5 @@ spec:
     - name: telegram
       telegramConfigs:
         - botToken: "{{ .Secrets.telegram-bot-token-secret.TELEGRAM_TOKEN }}"
-          chatID: "1234567890"
+          chatID: 1234567890
           sendResolved: true
