@@ -12,7 +12,8 @@ spec:
     groupInterval: 5m
     repeatInterval: 1h
   receivers:
-    - name: telegram-test
-      webhookConfigs:
-        - url: "https://api.telegram.org/bot{{ .Env.TELEGRAM_TOKEN }}/sendMessage"
+    - name: telegram
+      telegramConfigs:
+        - botToken: "{{ .Secrets.telegram-bot-token-secret.TELEGRAM_TOKEN }}"
+          chatID: "1234567890"
           sendResolved: true
