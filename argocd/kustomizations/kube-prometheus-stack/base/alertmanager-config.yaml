@@ -17,5 +17,7 @@ spec:
         - botToken:
             name: telegram-bot-token-secret
             key: TELEGRAM_TOKEN
-          chatID: 1234567890
+          chatID: 
+            name: telegram-bot-token-secret
+            key: CHAT_ID
           sendResolved: true
