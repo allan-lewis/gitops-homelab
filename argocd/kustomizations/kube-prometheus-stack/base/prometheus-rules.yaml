@@ -25,7 +25,7 @@ spec:
               This alert fires when all nodes agree or when multiple nodes disagree,
               and persists in that state for at least 10 minutes.
 
-        - alert: PublicIPMetricStale
+        - alert: HomelabPublicIPMetricStale
           expr: time() - homelab_public_ip_last_success_unix > 1200
           for: 5m
           labels:
