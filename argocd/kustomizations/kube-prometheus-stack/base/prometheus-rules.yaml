@@ -1,42 +1,30 @@
----
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: homelab-ip-anomaly
+  name: homelab-public-ip-rules
   namespace: kube-prometheus-stack
   labels:
-    release: kube-prometheus-stack 
-spec:
-  groups:
-  - name: homelab.rules
-    rules:
-    - alert: HomelabPublicIPPatternInvalid
-      expr: |
-        count(count_values("ip", homelab_public_ip_numeric)) != 2
-        or
-        min(count_values("ip", homelab_public_ip_numeric)) != 1
-      for: 5m
-      labels:
-        severity: critical
-        rulegroup: homelabRules
-      annotations:
-        summary: "Unexpected public IP distribution across homelab nodes"
-        description: |
-          Expected exactly one node to report a different public IP address.
-          This alert fires when all nodes agree or when multiple nodes disagree,
-          and persists in that state for at least 10 minutes.
----
-apiVersion: monitoring.coreos.com/v1
-kind: PrometheusRule
-metadata:
-  name: public-ip-last-update-alert
-  namespace: kube-prometheus-stack
-  labels:
-    release: kube-prometheus-stack 
+    release: kube-prometheus-stack
 spec:
   groups:
     - name: homelab.rules
       rules:
+        - alert: HomelabPublicIPPatternInvalid
+          expr: |
+            count(count_values("ip", homelab_public_ip_numeric)) != 2
+            or
+            min(count_values("ip", homelab_public_ip_numeric)) != 1
+          for: 5m
+          labels:
+            severity: critical
+            rulegroup: homelabRules
+          annotations:
+            summary: "Unexpected public IP distribution across homelab nodes"
+            description: |
+              Expected exactly one node to report a different public IP address.
+              This alert fires when all nodes agree or when multiple nodes disagree,
+              and persists in that state for at least 10 minutes.
+
         - alert: PublicIPMetricStale
           expr: time() - homelab_public_ip_last_success_unix > 1200
           for: 5m
@@ -45,4 +33,5 @@ spec:
             rulegroup: homelabRules
           annotations:
             summary: "Public IP update metric is stale"
-            description: "The public IP update metric has not refreshed in over 20 minutes."
+            description: |
+              The public IP update metric has not refreshed in over 20 minutes.
