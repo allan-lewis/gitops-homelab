@@ -2,14 +2,16 @@ apiVersion: monitoring.coreos.com/v1alpha1
 kind: AlertmanagerConfig
 metadata:
   name: test-alertmanager-config
-  namespace: kube-prometheus-stack # Replace with your actual namespace
+  namespace: kube-prometheus-stack
   labels:
-    alertmanagerConfig: alertmanager-telegram  # This must match your Helm selector
+    alertmanagerConfig: alertmanager-telegram
 spec:
   route:
-    receiver: test-receiver
+    receiver: webhook-test
     groupWait: 30s
     groupInterval: 5m
     repeatInterval: 1h
   receivers:
-    - name: test-receiver
+    - name: webhook-test
+      webhookConfigs:
+        - url: "http://example.com"
