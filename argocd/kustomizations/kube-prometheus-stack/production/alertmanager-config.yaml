@@ -18,6 +18,9 @@ spec:
           - name: severity
             value: critical
             matchType: "="
+          - name: rulegroup
+            value: homelabRules
+            matchType: "="
   receivers:
     - name: telegram
       telegramConfigs:

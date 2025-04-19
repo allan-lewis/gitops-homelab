@@ -18,6 +18,7 @@ spec:
       for: 10m
       labels:
         severity: critical
+        rulegroup: homelabRules
       annotations:
         summary: "Unexpected public IP distribution across homelab nodes"
         description: |
