@@ -15,7 +15,7 @@ spec:
         count(count_values("ip", homelab_public_ip_numeric)) != 2
         or
         min(count_values("ip", homelab_public_ip_numeric)) != 1
-      for: 10m
+      for: 5m
       labels:
         severity: critical
         rulegroup: homelabRules
@@ -25,3 +25,22 @@ spec:
           Expected exactly one node to report a different public IP address.
           This alert fires when all nodes agree or when multiple nodes disagree,
           and persists in that state for at least 10 minutes.
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: public-ip-last-update-alert
+  namespace: kube-prometheus-stack
+spec:
+  groups:
+    - name: homelab.rules
+      rules:
+        - alert: PublicIPMetricStale
+          expr: time() - homelab_public_ip_last_success_unix < 1200
+          for: 5m
+          labels:
+            severity: critical
+            rulegroup: homelabRules
+          annotations:
+            summary: "Public IP update metric is stale"
+            description: "The public IP update metric has not refreshed in over 20 minutes."
