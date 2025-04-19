@@ -17,5 +17,5 @@ spec:
         - botToken:
             name: telegram-bot-token-secret
             key: TELEGRAM_TOKEN
-          chatID: {{ .Values.telegramChatID | quote }}
+          chatID: {{ .Values.telegramChatID }}
           sendResolved: true
