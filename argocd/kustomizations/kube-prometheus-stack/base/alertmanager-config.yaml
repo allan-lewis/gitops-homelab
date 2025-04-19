@@ -7,11 +7,12 @@ metadata:
     alertmanagerConfig: alertmanager-telegram
 spec:
   route:
-    receiver: webhook-test
+    receiver: telegram-test
     groupWait: 30s
     groupInterval: 5m
     repeatInterval: 1h
   receivers:
-    - name: webhook-test
+    - name: telegram-test
       webhookConfigs:
-        - url: "http://example.com"
+        - url: "https://api.telegram.org/bot123456:TEST-TOKEN/sendMessage"
+          sendResolved: true
