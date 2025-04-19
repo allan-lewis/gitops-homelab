@@ -16,3 +16,4 @@ resources:
   - external-secret.yaml
   - homelab-metrics.yaml
   - prometheus-rules.yaml
+  - alertmanager-config.yaml
