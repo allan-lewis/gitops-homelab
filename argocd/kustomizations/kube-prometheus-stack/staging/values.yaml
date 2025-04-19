@@ -61,25 +61,6 @@ grafana:
 
 alertmanager:
   alertmanagerSpec:
-    alertmanagerConfigSelector:
-      matchLabels:
-        alertmanagerConfig: alertmanager-telegram
-    containers:
-      - name: alertmanager
-        # volumeMounts:
-        #   - name: telegram-secret
-        #     mountPath: /etc/secrets/telegram
-        #     readOnly: true
-        env:
-          - name: TELEGRAM_TOKEN
-            valueFrom:
-              secretKeyRef:
-                name: telegram-bot-token-secret
-                key: TELEGRAM_TOKEN
-    # volumes:
-    #   - name: telegram-secret
-    #     secret:
-    #       secretName: telegram-bot-token-secret
     persistentVolumeClaimRetentionPolicy:
       whenDeleted: Retain
       whenScaled: Retain

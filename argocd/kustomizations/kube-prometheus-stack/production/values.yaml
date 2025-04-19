@@ -77,6 +77,9 @@ grafana:
 
 alertmanager:
   alertmanagerSpec:
+    alertmanagerConfigSelector:
+      matchLabels:
+        alertmanagerConfig: alertmanager-telegram
     persistentVolumeClaimRetentionPolicy:
       whenDeleted: Retain
       whenScaled: Retain

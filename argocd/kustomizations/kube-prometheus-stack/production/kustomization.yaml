@@ -4,6 +4,8 @@ kind: Kustomization
 
 resources:
 - ../base/
+# - external-secret.yaml
+# - alertmanager-config.yaml
 
 helmCharts:
 - name: kube-prometheus-stack
