@@ -31,6 +31,8 @@ kind: PrometheusRule
 metadata:
   name: public-ip-last-update-alert
   namespace: kube-prometheus-stack
+  labels:
+    release: kube-prometheus-stack 
 spec:
   groups:
     - name: homelab.rules
