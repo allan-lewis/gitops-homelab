@@ -14,13 +14,5 @@ spec:
   receivers:
     - name: telegram-test
       webhookConfigs:
-        - url: https://api.telegram.org/bot123456:TEST-TOKEN/sendMessage
+        - url: "https://api.telegram.org/bot123456:TEST-TOKEN/sendMessage"
           sendResolved: true
-          httpConfig:
-            headers:
-              Content-Type: application/json
-          body: |
-            {
-              "chat_id": "123456789",
-              "text": "{{ range .Alerts }}🔥 Alert: {{ .Labels.alertname }} - {{ .Annotations.summary }}{{ end }}"
-            }
