@@ -38,7 +38,7 @@ spec:
     - name: homelab.rules
       rules:
         - alert: PublicIPMetricStale
-          expr: time() - homelab_public_ip_last_success_unix < 1200
+          expr: time() - homelab_public_ip_last_success_unix > 1200
           for: 5m
           labels:
             severity: critical
