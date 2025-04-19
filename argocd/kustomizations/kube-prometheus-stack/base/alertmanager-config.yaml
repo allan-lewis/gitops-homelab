@@ -14,5 +14,5 @@ spec:
   receivers:
     - name: telegram-test
       webhookConfigs:
-        - url: "https://api.telegram.org/bot123456:TEST-TOKEN/sendMessage"
+        - url: "https://api.telegram.org/bot{{ .Env.TELEGRAM_TOKEN }}/sendMessage"
           sendResolved: true
