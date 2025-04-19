@@ -1,5 +1,3 @@
-telegramChatID: 1122334455
-
 kubeScheduler:
   enabled: false
 
