@@ -1,12 +1,6 @@
-apiVersion: monitoring.coreos.com/v1alpha1
-kind: AlertmanagerConfig
-metadata:
-  name: test-alertmanager-config
-  namespace: kube-prometheus-stack
-  labels:
-    alertmanagerConfig: alertmanager-telegram
 spec:
   route:
+    receiver: black-hole  # <-- safe once we define it ourselves
     groupBy: ['alertname']
     groupWait: 30s
     groupInterval: 5m
@@ -28,3 +22,4 @@ spec:
             key: TELEGRAM_TOKEN
           chatID: 6249140198
           sendResolved: true
+    - name: black-hole  # <-- you must explicitly define this
