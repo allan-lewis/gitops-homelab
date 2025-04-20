@@ -9,11 +9,11 @@ helmCharts:
 - name: postgresql
   repo: oci://registry-1.docker.io/bitnamicharts
   namespace: authentik
-  version: 16.6.0
+  version: 16.6.3
   valuesFile: values-postgresql.yaml
 - name: authentik
   repo: https://charts.goauthentik.io
   releaseName: authentik
   namespace: authentik
-  version: 2025.2.3
+  version: 2025.2.4
   valuesFile: values-authentik.yaml
