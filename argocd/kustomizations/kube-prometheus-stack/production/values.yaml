@@ -44,7 +44,7 @@ prometheus:
   prometheusSpec:
     walCompression: true
     retention: 21d
-    retentionSize: "120Gi"
+    retentionSize: "120GiB"
     persistentVolumeClaimRetentionPolicy:
       whenDeleted: Retain
       whenScaled: Retain
