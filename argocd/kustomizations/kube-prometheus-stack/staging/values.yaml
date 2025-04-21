@@ -43,7 +43,7 @@ crds:
 prometheus:    
   prometheusSpec:
     walCompression: true
-    retention: 2d
+    retention: 21d
     retentionSize: "10GiB"
     persistentVolumeClaimRetentionPolicy:
       whenDeleted: Retain
