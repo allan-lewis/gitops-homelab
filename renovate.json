@@ -5,6 +5,9 @@
     ":dependencyDashboard"
   ],
   "kubernetes": {
-    "fileMatch": ["\\.yaml$", "\\.yaml.j2$"]
+    "fileMatch": ["\\.yaml$"]
+  },
+  "docker": {
+    "fileMatch": ["docker-compose\\.ya?ml\\.j2$"]
   }
 }
