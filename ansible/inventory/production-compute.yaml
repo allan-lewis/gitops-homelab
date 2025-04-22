@@ -87,6 +87,9 @@ all:
     rigel:
       ansible_host: 192.168.86.104
       gatus_slug: "(Primary NAS)"
+    sirius:
+      ansible_host: 192.168.86.105
+      gatus_slug: "(Hypervisor)"
     vega:
       ansible_host: 192.168.86.148
       gatus_slug: "(Bare Metal K8s Node)"
