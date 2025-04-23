@@ -110,6 +110,8 @@ all:
         homelab_immich_hosts:
           hosts:
             regulus:
+          vars:
+            homelab_immich_version: "v1.129.0"
         homelab_node_exporter_hosts:
           hosts:
             alcor:
