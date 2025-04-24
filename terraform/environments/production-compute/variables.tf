@@ -10,7 +10,7 @@ variable "vm_list_ubuntu" {
       disk_size         = 64
       ipv4_address      = "192.168.86.123/24"
       gateway           = "192.168.86.1"
-      tags              = ["terraform", "production", "ubuntu", "devops"]
+      tags              = ["terraform", "production", "ubuntu", "openvpn"]
     }
     regulus = {
       description       = "Media host (managed by Terraform)"
