@@ -24,7 +24,7 @@ defaultRules:
     kubernetesApps: true
     kubernetesResources: false
     kubernetesStorage: true
-    kubernetesSystem: true
+    kubernetesSystem: false
     kubeSchedulerAlerting: false
     kubeSchedulerRecording: false
     kubeStateMetrics: true
