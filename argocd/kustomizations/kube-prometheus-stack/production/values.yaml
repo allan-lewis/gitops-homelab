@@ -22,7 +22,7 @@ defaultRules:
     kubePrometheusGeneral: true
     kubePrometheusNodeRecording: true
     kubernetesApps: true
-    kubernetesResources: true
+    kubernetesResources: false
     kubernetesStorage: true
     kubernetesSystem: true
     kubeSchedulerAlerting: false
