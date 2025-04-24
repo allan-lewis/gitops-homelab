@@ -3,10 +3,10 @@ variable "vm_list_ubuntu" {
   default = {
     alcor = {
       description       = "OpenVPN gateway host (managed by Terraform)"
-      proxmox_node      = "polaris"
+      proxmox_node      = "sirius"
       cpu_cores         = 2
       memory_dedicated  = 2048
-      datastore_id      = "local-ssd"
+      datastore_id      = "local-lvm"
       disk_size         = 64
       ipv4_address      = "192.168.86.123/24"
       gateway           = "192.168.86.1"
@@ -14,7 +14,7 @@ variable "vm_list_ubuntu" {
     }
     regulus = {
       description       = "Media host (managed by Terraform)"
-      proxmox_node      = "polaris"
+      proxmox_node      = "sirius"
       cpu_cores         = 4
       memory_dedicated  = 8192
       datastore_id      = "local-lvm"
