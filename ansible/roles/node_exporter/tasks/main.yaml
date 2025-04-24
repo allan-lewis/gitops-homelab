@@ -31,6 +31,14 @@
     group: "root"
     mode: 0644
 
+- name: Ensure textfile collector directory exists
+  file:
+    path: /var/lib/node_exporter/textfile_collector
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'
+
 - name: Start the Node Exporter service.
   systemd:
     name: node_exporter.service
