@@ -4,11 +4,11 @@
     path: "{{ homelab_docker_immich_tmp }}"
     state: directory
 
-# https://github.com/immich-app/immich/releases/download/{{ immich_version }}/docker-compose.yml
-- name: Write the Docker Compose manifest.
-  ansible.builtin.template:
-    src: templates/docker-compose.yaml.j2
+- name: Copy the Docker Compose manifest to the temporary directory.
+  copy:
+    src: docker-compose.yml
     dest: "{{ homelab_docker_immich_tmp }}/docker-compose.yml"
+    mode: '0644'
 
 - name: Write the .env file.
   ansible.builtin.template:
