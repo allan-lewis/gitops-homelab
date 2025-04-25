@@ -12,7 +12,7 @@ helmCharts:
   repo: https://traefik.github.io/charts
   releaseName: traefik
   namespace: traefik
-  version: 35.0.1
+  version: 35.1.0
   valuesFile: values.yaml
 
 patches:
