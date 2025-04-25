@@ -5,10 +5,10 @@
   gather_facts: false
 
   vars:
-    immich_version: "v1.129.0"
-    immich_compose_url: "https://raw.githubusercontent.com/immich-app/immich/{{ immich_version }}/docker/docker-compose.yml"
+    immich_compose_url: "https://raw.githubusercontent.com/immich-app/immich/{{ homelab_immich_version }}/docker/docker-compose.yml"
     raw_path: "/tmp/immich-compose-raw.yml"
     final_path: "{{ playbook_dir }}/roles/immich/files/docker-compose.yml"
+    homelab_immich_version: "v1.132.1"
 
   tasks:
     - name: Ensure roles/immich/files directory exists
@@ -27,7 +27,7 @@
       ansible.builtin.replace:
         path: "{{ raw_path }}"
         regexp: "\\$\\{IMMICH_VERSION:-release\\}"
-        replace: "{{ immich_version }}"
+        replace: "{{ homelab_immich_version }}"
 
     - name: Move updated Compose file into role
       ansible.builtin.copy:
