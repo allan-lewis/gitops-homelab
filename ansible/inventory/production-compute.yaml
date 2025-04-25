@@ -12,9 +12,6 @@ all:
     arcturus:
       ansible_host: 192.168.86.124
       gatus_slug: "(Home Assistant)" 
-    bellatrix:
-      ansible_host: 192.168.86.160
-      gatus_slug: "(Windows 11)" 
     canopus:
       ansible_host: 192.168.86.102
       gatus_slug: "(Local Backup NAS)"
@@ -28,8 +25,8 @@ all:
       ansible_host: 192.168.86.147
       gatus_slug: "(Bare Metal K8s Node)"
     mimosa:
-      ansible_host: 192.168.86.161
-      gatus_slug: "(Windows 11)" 
+      ansible_host: 192.168.86.163
+      gatus_slug: "(Gaming Rig)" 
     mizar:
       ansible_host: 192.168.86.112
       gatus_slug: "(Bare Metal Monitoring/Networking)"
