@@ -60,7 +60,6 @@ all:
       gatus_slug: "(Remote Backup NAS)"
     procyon2:
       ansible_host: 100.85.197.89
-      gatus_slug: "(Remote Backup NAS)"
       gatus_slug: "(Primary NAS)"
     regulus:
       ansible_host: 192.168.86.116
