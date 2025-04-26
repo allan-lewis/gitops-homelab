@@ -40,6 +40,17 @@ variable "worker_list" {
       gateway           = "192.168.86.1"
       tags              = ["terraform", "production", "talos", "worker"]
     }
+    mintaka = {
+      description       = "Talos Linux worker node (managed by Terraform)"
+      proxmox_node      = "sirius"
+      cpu_cores         = 4
+      memory_dedicated  = 4096
+      datastore_id      = "local-ssd0"
+      disk_size         = 64
+      ipv4_address      = "192.168.86.153"
+      gateway           = "192.168.86.123"
+      tags              = ["terraform", "production", "talos", "worker"]
+    }
   }
 }
 
