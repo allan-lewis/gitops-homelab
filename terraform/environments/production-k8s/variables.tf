@@ -6,7 +6,7 @@ variable "controlplane_list" {
       proxmox_node      = "sirius"
       cpu_cores         = 4
       memory_dedicated  = 4096
-      datastore_id      = "local-ssd0"
+      datastore_id      = "ssd0"
       disk_size         = 128
       ipv4_address      = "192.168.86.150"
       gateway           = "192.168.86.1"
@@ -23,7 +23,7 @@ variable "worker_list" {
       proxmox_node      = "sirius"
       cpu_cores         = 4
       memory_dedicated  = 8192
-      datastore_id      = "local-ssd0"
+      datastore_id      = "ssd0"
       disk_size         = 512
       ipv4_address      = "192.168.86.151"
       gateway           = "192.168.86.1"
@@ -34,7 +34,7 @@ variable "worker_list" {
       proxmox_node      = "sirius"
       cpu_cores         = 4
       memory_dedicated  = 8192
-      datastore_id      = "local-ssd0"
+      datastore_id      = "ssd0"
       disk_size         = 512
       ipv4_address      = "192.168.86.152"
       gateway           = "192.168.86.1"
@@ -45,7 +45,7 @@ variable "worker_list" {
       proxmox_node      = "sirius"
       cpu_cores         = 4
       memory_dedicated  = 4096
-      datastore_id      = "local-ssd0"
+      datastore_id      = "ssd0"
       disk_size         = 128
       ipv4_address      = "192.168.86.153"
       gateway           = "192.168.86.123"
