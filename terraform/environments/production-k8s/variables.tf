@@ -1,7 +1,7 @@
 variable "controlplane_list" {
   description = "A list of Talos Control Plane VMs to create"
   default = {
-    betelgeuse = {
+    bellatrix = {
       description       = "Talos Linux control plane node (managed by Terraform)"
       proxmox_node      = "sirius"
       cpu_cores         = 4
