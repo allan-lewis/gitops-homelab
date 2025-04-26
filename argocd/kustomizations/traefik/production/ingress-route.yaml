@@ -501,7 +501,18 @@ spec:
         - name: traefik-endpoint-rigel
           namespace:  traefik
           port: 80
-          scheme: http               
+          scheme: http     
+    - match: Host(`procyon2.hosts.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: traefik-endpoint-procyon2
+          namespace:  traefik
+          port: 80
+          scheme: http             
     - match: Host(`bellatrix.syncthing.allanshomelab.com`)
       kind: Rule
       middlewares:

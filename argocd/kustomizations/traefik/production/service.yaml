@@ -57,6 +57,17 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
+  name: traefik-endpoint-procyon2
+  namespace: traefik
+spec:
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+kind: Service
+apiVersion: v1
+metadata:
   name: traefik-endpoint-immich
   namespace: traefik
 spec:

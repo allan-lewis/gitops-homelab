@@ -57,6 +57,17 @@ subsets:
 kind: Endpoints
 apiVersion: v1
 metadata:
+  name: traefik-endpoint-procyon2
+  namespace: traefik
+subsets:
+  - addresses:
+      - ip: 192.168.86.106
+    ports:
+      - port: 80
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
   name: traefik-endpoint-syncthing-bellatrix
   namespace: traefik
 subsets:
