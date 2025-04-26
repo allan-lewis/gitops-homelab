@@ -7,7 +7,7 @@ variable "controlplane_list" {
       cpu_cores         = 4
       memory_dedicated  = 4096
       datastore_id      = "local-ssd0"
-      disk_size         = 64
+      disk_size         = 128
       ipv4_address      = "192.168.86.150"
       gateway           = "192.168.86.1"
       tags              = ["terraform", "production", "talos", "controlplane"]
@@ -46,7 +46,7 @@ variable "worker_list" {
       cpu_cores         = 4
       memory_dedicated  = 4096
       datastore_id      = "local-ssd0"
-      disk_size         = 64
+      disk_size         = 128
       ipv4_address      = "192.168.86.153"
       gateway           = "192.168.86.123"
       tags              = ["terraform", "production", "talos", "worker"]
