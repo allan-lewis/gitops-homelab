@@ -54,6 +54,7 @@
   gather_facts: yes
 
   roles:
+    - kustomize
     - ansible
     - terraform
     - doppler

@@ -1,0 +1,14 @@
+---
+- name: Download kustomize install script
+  get_url:
+    url: https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh
+    dest: /tmp/install_kustomize.sh
+    mode: '0755'
+
+- name: Run kustomize install script
+  shell: |
+    cd /tmp
+    ./install_kustomize.sh
+    mv kustomize /usr/local/bin/kustomize
+  args:
+    creates: /usr/local/bin/kustomize
