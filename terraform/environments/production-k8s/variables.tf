@@ -6,7 +6,7 @@ variable "controlplane_list" {
       proxmox_node      = "sirius"
       cpu_cores         = 4
       memory_dedicated  = 4096
-      datastore_id      = "local-lvm"
+      datastore_id      = "local-ssd0"
       disk_size         = 64
       ipv4_address      = "192.168.86.150"
       gateway           = "192.168.86.1"
@@ -23,9 +23,20 @@ variable "worker_list" {
       proxmox_node      = "sirius"
       cpu_cores         = 4
       memory_dedicated  = 8192
-      datastore_id      = "local-lvm"
-      disk_size         = 256
+      datastore_id      = "local-ssd0"
+      disk_size         = 512
       ipv4_address      = "192.168.86.151"
+      gateway           = "192.168.86.1"
+      tags              = ["terraform", "production", "talos", "worker"]
+    }
+    alnitak = {
+      description       = "Talos Linux worker node (managed by Terraform)"
+      proxmox_node      = "sirius"
+      cpu_cores         = 4
+      memory_dedicated  = 8192
+      datastore_id      = "local-ssd0"
+      disk_size         = 512
+      ipv4_address      = "192.168.86.152"
       gateway           = "192.168.86.1"
       tags              = ["terraform", "production", "talos", "worker"]
     }

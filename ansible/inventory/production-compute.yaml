@@ -58,6 +58,10 @@ all:
     procyon:
       ansible_host: 100.85.197.89
       gatus_slug: "(Remote Backup NAS)"
+    procyon2:
+      ansible_host: 100.85.197.89
+      gatus_slug: "(Remote Backup NAS)"
+      gatus_slug: "(Primary NAS)"
     regulus:
       ansible_host: 192.168.86.116
       gatus_slug: "(Media Server)"
@@ -207,6 +211,11 @@ all:
       - name: "Procyon"
         group: "Sites (Hosts)"
         url: "http://procyon.hosts.allanshomelab.com/ui/"
+        pattern: "*ix-root*"
+        check_cert: false
+      - name: "Procyon2"
+        group: "Sites (Hosts)"
+        url: "http://procyon2.hosts.allanshomelab.com/ui/"
         pattern: "*ix-root*"
         check_cert: false
       - name: "Rigel"
