@@ -9,7 +9,7 @@ kubectl create namespace argocd --dry-run=client -o yaml | kubectl apply -f -
 
 kubectl create secret generic doppler-token --from-literal dopplerToken=$DOPPLER_TOKEN --dry-run=client -o yaml | kubectl apply -f -
 
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v2.14.2/manifests/install.yaml
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v2.14.11/manifests/install.yaml
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 kubectl apply -n argocd -f $SCRIPT_DIR/kustomization.yaml
