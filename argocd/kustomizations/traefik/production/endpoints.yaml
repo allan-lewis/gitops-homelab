@@ -68,39 +68,6 @@ subsets:
 kind: Endpoints
 apiVersion: v1
 metadata:
-  name: traefik-endpoint-syncthing-bellatrix
-  namespace: traefik
-subsets:
-  - addresses:
-      - ip: 192.168.86.160
-    ports:
-      - port: 8384
----
-kind: Endpoints
-apiVersion: v1
-metadata:
-  name: traefik-endpoint-syncthing-mimosa
-  namespace: traefik
-subsets:
-  - addresses:
-      - ip: 192.168.86.161
-    ports:
-      - port: 8384
----
-kind: Endpoints
-apiVersion: v1
-metadata:
-  name: traefik-endpoint-syncthing-rigel
-  namespace: traefik
-subsets:
-  - addresses:
-      - ip: 192.168.86.104
-    ports:
-      - port: 20910
----
-kind: Endpoints
-apiVersion: v1
-metadata:
   name: traefik-endpoint-immich
   namespace: traefik
 subsets:
