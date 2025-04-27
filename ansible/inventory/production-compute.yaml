@@ -3,6 +3,12 @@ all:
     alcor:
       ansible_host: 192.168.86.123
       gatus_slug: "(OpenVPN Server)"
+    alnilam:
+      ansible_host: 192.168.86.151
+      gatus_slug: "(K8s Worker)"
+    alnitak:
+      ansible_host: 192.168.86.152
+      gatus_slug: "(K8s Worker)"
     altair:
       ansible_host: 192.168.86.146
       gatus_slug: "(Bare Metal K8s Node)"
@@ -11,7 +17,10 @@ all:
       gatus_slug: "(Bare Metal K8s Node)"    
     arcturus:
       ansible_host: 192.168.86.124
-      gatus_slug: "(Home Assistant)" 
+      gatus_slug: "(Home Assistant)"  
+    bellatrix:
+      ansible_host: 192.168.86.150
+      gatus_slug: "(K8s Control Plane)" 
     canopus:
       ansible_host: 192.168.86.102
       gatus_slug: "(Local Backup NAS)"
@@ -27,6 +36,9 @@ all:
     mimosa:
       ansible_host: 192.168.86.163
       gatus_slug: "(Gaming Rig)" 
+    mintaka:
+      ansible_host: 192.168.86.153
+      gatus_slug: "(K8s Worker)"
     mizar:
       ansible_host: 192.168.86.112
       gatus_slug: "(Bare Metal Monitoring/Networking)"
