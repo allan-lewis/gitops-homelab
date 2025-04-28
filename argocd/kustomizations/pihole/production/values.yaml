@@ -25,7 +25,6 @@ serviceDhcp:
 
 dnsmasq:
   customDnsEntries:
-    - address=/longhorn2.k8s.allanshomelab.com/192.168.86.238
     - address=/docker.allanshomelab.com/192.168.86.112
     - address=/procyon.hosts.allanshomelab.com/192.168.86.112
     - address=/hosts.allanshomelab.com/192.168.86.187
