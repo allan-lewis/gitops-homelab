@@ -4,3 +4,4 @@ kind: Kustomization
 
 resources:
   - external-secret.yaml
+  - recurring-job.yaml
