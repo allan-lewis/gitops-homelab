@@ -9,6 +9,13 @@ metadata:
 kind: Namespace
 apiVersion: v1
 metadata:
+  name: cattle-system
+  labels:
+    name: cattle-system
+---
+kind: Namespace
+apiVersion: v1
+metadata:
   name: external-secrets
   labels:
     name: external-secrets
