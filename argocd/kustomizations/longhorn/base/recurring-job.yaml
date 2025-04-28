@@ -10,4 +10,4 @@ spec:
   retain: 3           # Keep 3 backups (rolling window)
   concurrency: 1      # Run 1 backup at a time
   groups:
-    - default         # (Optional) assign it to the 'default' group
+    - autobackup         # (Optional) assign it to the 'default' group
