@@ -6,7 +6,7 @@ metadata:
 spec:
   name: daily-backup
   task: backup
-  cron: "0 15 * * *"   # Run at 10:00 AM (Z) every day
+  cron: "0 10 * * *"   # Run at 10:00 AM (Z) every day
   retain: 3           # Keep 3 backups (rolling window)
   concurrency: 1      # Run 1 backup at a time
   groups:
