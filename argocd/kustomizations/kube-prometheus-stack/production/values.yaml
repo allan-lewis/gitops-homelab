@@ -5,7 +5,7 @@ kubeControllerManager:
   enabled: false
 
 kubeProxy:
-  enables: false
+  enabled: false
 
 defaultRules:
   create: true
