@@ -23,21 +23,15 @@ spec:
     - secretKey: NO_GEEKS_BREWING_BREWFATHER_AUTH_TOKEN     
       remoteRef:        
         key: NO_GEEKS_BREWING_BREWFATHER_AUTH_TOKEN
-    - secretKey: AUTH_SECRET     
+    - secretKey: NO_GEEKS_BREWING_POST_LOGOUT_REDIRECT_URI     
       remoteRef:        
-        key: NO_GEEKS_BREWING_AUTH_SECRET
-    - secretKey: AUTH_AUTHENTIK_SECRET     
+        key: NO_GEEKS_BREWING_POST_LOGOUT_REDIRECT_URI
+    - secretKey: NO_GEEKS_BREWING_AUTHENTIK_LOGOUT_URI     
       remoteRef:        
-        key: NO_GEEKS_BREWING_AUTH_AUTHENTIK_SECRET
-    - secretKey: AUTH_AUTHENTIK_ID     
+        key: NO_GEEKS_BREWING_AUTHENTIK_LOGOUT_URI
+    - secretKey: NO_GEEKS_BREWING_REDIRECT_URI     
       remoteRef:        
-        key: NO_GEEKS_BREWING_AUTH_AUTHENTIK_ID
-    - secretKey: GRAPHQL_URL
-      remoteRef:        
-        key: NO_GEEKS_BREWING_GRAPHQL_URL
-    - secretKey: AUTH_URL
-      remoteRef:        
-        key: NO_GEEKS_BREWING_AUTH_URL
+        key: NO_GEEKS_BREWING_REDIRECT_URI
 ---
 kind: Deployment
 apiVersion: apps/v1
