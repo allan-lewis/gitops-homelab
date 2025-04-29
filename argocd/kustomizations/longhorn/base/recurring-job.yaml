@@ -1,13 +1,36 @@
+---
 apiVersion: longhorn.io/v1beta2
 kind: RecurringJob
 metadata:
-  name: daily-backup
+  name: r-stack-radarr
   namespace: longhorn-system
 spec:
-  name: daily-backup
+  name: r-stack-radarr
   task: backup
-  cron: "0 20 * * *"   # Run at 10:00 AM (Z) every day
+  cron: "30 0 * * *"   # Run at 10:00 AM (Z) every day
   retain: 3           # Keep 3 backups (rolling window)
   concurrency: 1      # Run 1 backup at a time
-  groups:
-    - dailybackup         # (Optional) assign it to the 'default' group
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: volume-group-assigner
+  namespace: longhorn-system
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      containers:
+      - name: patch-volumes
+        image: bitnami/kubectl:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          set -ex
+          echo "Assigning r-stack-radarr volume to recurring job r-stack-radarr..."
+          kubectl patch volume.longhorn.io r-stack-radarr -n longhorn-system --type=merge -p '{"spec": {"recurringJobSelector": {"job": "r-stack-radarr"}}}'
+      restartPolicy: Never
+  backoffLimit: 2
