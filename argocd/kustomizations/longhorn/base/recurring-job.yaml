@@ -46,4 +46,75 @@ spec:
   cron: "45 9 * * *"  # Run at 9:45 AM (Z) every day
   retain: 3           # Keep 3 backups (rolling window)
   concurrency: 1      # Run 1 backup at a time
-  
+---
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: pihole
+  namespace: longhorn-system
+spec:
+  name: pihole
+  task: backup
+  cron: "0 10 * * *"  # Run at 10:00 AM (Z) every day
+  retain: 3           # Keep 3 backups (rolling window)
+  concurrency: 1      # Run 1 backup at a time
+---
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: portainer
+  namespace: longhorn-system
+spec:
+  name: portainer
+  task: backup
+  cron: "10 10 * * *"  # Run at 10:10 AM (Z) every day
+  retain: 3           # Keep 3 backups (rolling window)
+  concurrency: 1      # Run 1 backup at a time
+---
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: wikijs
+  namespace: longhorn-system
+spec:
+  name: wikijs
+  task: backup
+  cron: "20 10 * * *"  # Run at 10:20 AM (Z) every day
+  retain: 3           # Keep 3 backups (rolling window)
+  concurrency: 1      # Run 1 backup at a time
+---
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: vaultwarden
+  namespace: longhorn-system
+spec:
+  name: vaultwarden
+  task: backup
+  cron: "30 10 * * *"  # Run at 10:30 AM (Z) every day
+  retain: 3           # Keep 3 backups (rolling window)
+  concurrency: 1      # Run 1 backup at a time
+---
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: kps-grafana
+  namespace: longhorn-system
+spec:
+  name: kps-grafana
+  task: backup
+  cron: "40 10 * * *"  # Run at 10:40 AM (Z) every day
+  retain: 3           # Keep 3 backups (rolling window)
+  concurrency: 1      # Run 1 backup at a time
+---
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: kps-alertmanager
+  namespace: longhorn-system
+spec:
+  name: kps-alertmanager
+  task: backup
+  cron: "50 10 * * *"  # Run at 10:50 AM (Z) every day
+  retain: 3           # Keep 3 backups (rolling window)
+  concurrency: 1      # Run 1 backup at a time
