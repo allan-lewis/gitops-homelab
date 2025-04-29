@@ -11,6 +11,12 @@ spec:
   target:    
     name: no-geeks-brewing-secrets
   data:    
+    - secretKey: NO_GEEKS_BREWING_AUTHENTIK_CLIENT_ID     
+      remoteRef:        
+        key: NO_GEEKS_BREWING_AUTHENTIK_CLIENT_ID
+    - secretKey: NO_GEEKS_BREWING_AUTHENTIK_ISSUER_URL     
+      remoteRef:        
+        key: NO_GEEKS_BREWING_AUTH_AUTHENTIK_ISSUER
     - secretKey: NO_GEEKS_BREWING_BREWFATHER_AUTH_TOKEN     
       remoteRef:        
         key: NO_GEEKS_BREWING_BREWFATHER_AUTH_TOKEN
@@ -20,9 +26,6 @@ spec:
     - secretKey: AUTH_AUTHENTIK_SECRET     
       remoteRef:        
         key: NO_GEEKS_BREWING_AUTH_AUTHENTIK_SECRET
-    - secretKey: NO_GEEKS_BREWING_AUTHENTIK_ISSUER_URL     
-      remoteRef:        
-        key: NO_GEEKS_BREWING_AUTH_AUTHENTIK_ISSUER
     - secretKey: AUTH_AUTHENTIK_ID     
       remoteRef:        
         key: NO_GEEKS_BREWING_AUTH_AUTHENTIK_ID
