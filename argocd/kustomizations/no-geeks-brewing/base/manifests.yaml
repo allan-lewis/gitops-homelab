@@ -20,7 +20,7 @@ spec:
     - secretKey: AUTH_AUTHENTIK_SECRET     
       remoteRef:        
         key: NO_GEEKS_BREWING_AUTH_AUTHENTIK_SECRET
-    - secretKey: AUTH_AUTHENTIK_ISSUER     
+    - secretKey: NO_GEEKS_BREWING_AUTHENTIK_ISSUER_URL     
       remoteRef:        
         key: NO_GEEKS_BREWING_AUTH_AUTHENTIK_ISSUER
     - secretKey: AUTH_AUTHENTIK_ID     
