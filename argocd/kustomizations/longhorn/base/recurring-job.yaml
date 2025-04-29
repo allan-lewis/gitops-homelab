@@ -37,7 +37,7 @@ metadata:
 spec:
   name: r-stack-radarr
   task: backup
-  cron: "45 0 * * *"   # Run at 10:00 AM (Z) every day
+  cron: "44 0 * * *"   # Run at 10:00 AM (Z) every day
   retain: 3           # Keep 3 backups (rolling window)
   concurrency: 1      # Run 1 backup at a time
 ---
