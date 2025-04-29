@@ -62,6 +62,6 @@ spec:
         - |
           set -ex
           echo "Assigning r-stack-radarr volume to recurring job r-stack-radarr..."
-          kubectl patch volume.longhorn.io r-stack-radarr -n longhorn-system --type=merge -p '{"spec": {"recurringJobSelector": {"job": "r-stack-radarr"}}}'
+          kubectl patch volume.longhorn.io r-stack-radarr -n longhorn-system --type=merge -p '{"spec": {"recurringJobSelector": {"r-stack-radarr": {"isGroup": false}}}}'
       restartPolicy: Never
   backoffLimit: 2
