@@ -1,4 +1,34 @@
 ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: longhorn-volume-patcher
+  namespace: longhorn-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: longhorn-volume-patcher
+  namespace: longhorn-system
+rules:
+- apiGroups: ["longhorn.io"]
+  resources: ["volumes"]
+  verbs: ["get", "patch", "update"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: longhorn-volume-patcher
+  namespace: longhorn-system
+subjects:
+- kind: ServiceAccount
+  name: longhorn-volume-patcher
+  namespace: longhorn-system
+roleRef:
+  kind: Role
+  name: longhorn-volume-patcher
+  apiGroup: rbac.authorization.k8s.io
+---
 apiVersion: longhorn.io/v1beta2
 kind: RecurringJob
 metadata:
@@ -22,6 +52,7 @@ metadata:
 spec:
   template:
     spec:
+      serviceAccountName: longhorn-volume-patcher
       containers:
       - name: patch-volumes
         image: bitnami/kubectl:latest
