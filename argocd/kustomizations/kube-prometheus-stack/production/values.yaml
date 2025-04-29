@@ -18,7 +18,7 @@ defaultRules:
     kubeApiserverSlos: true
     kubeControllerManager: false
     kubelet: false
-    kubeProxy: true
+    kubeProxy: false
     kubePrometheusGeneral: true
     kubePrometheusNodeRecording: true
     kubernetesApps: true
