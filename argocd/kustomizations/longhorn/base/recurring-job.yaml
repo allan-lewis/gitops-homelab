@@ -2,11 +2,48 @@
 apiVersion: longhorn.io/v1beta2
 kind: RecurringJob
 metadata:
+  name: r-stack-jackett
+  namespace: longhorn-system
+spec:
+  name: r-stack-jackett
+  task: backup
+  cron: "0 9 * * *"   # Run at 9:00 AM (Z) every day
+  retain: 3           # Keep 3 backups (rolling window)
+  concurrency: 1      # Run 1 backup at a time
+---
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
   name: r-stack-radarr
   namespace: longhorn-system
 spec:
   name: r-stack-radarr
   task: backup
-  cron: "45 0 * * *"   # Run at 10:00 AM (Z) every day
+  cron: "15 9 * * *"  # Run at 9:15 AM (Z) every day
   retain: 3           # Keep 3 backups (rolling window)
   concurrency: 1      # Run 1 backup at a time
+---
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: r-stack-sonarr
+  namespace: longhorn-system
+spec:
+  name: r-stack-sonarr
+  task: backup
+  cron: "30 9 * * *"  # Run at 9:30 AM (Z) every day
+  retain: 3           # Keep 3 backups (rolling window)
+  concurrency: 1      # Run 1 backup at a time
+---
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: r-stack-transmission
+  namespace: longhorn-system
+spec:
+  name: r-stack-transmission
+  task: backup
+  cron: "45 9 * * *"  # Run at 9:45 AM (Z) every day
+  retain: 3           # Keep 3 backups (rolling window)
+  concurrency: 1      # Run 1 backup at a time
+  
