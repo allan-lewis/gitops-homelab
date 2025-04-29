@@ -1,34 +1,4 @@
 ---
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: longhorn-volume-patcher
-  namespace: longhorn-system
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  name: longhorn-volume-patcher
-  namespace: longhorn-system
-rules:
-- apiGroups: ["longhorn.io"]
-  resources: ["volumes"]
-  verbs: ["get", "patch", "update"]
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: longhorn-volume-patcher
-  namespace: longhorn-system
-subjects:
-- kind: ServiceAccount
-  name: longhorn-volume-patcher
-  namespace: longhorn-system
-roleRef:
-  kind: Role
-  name: longhorn-volume-patcher
-  apiGroup: rbac.authorization.k8s.io
----
 apiVersion: longhorn.io/v1beta2
 kind: RecurringJob
 metadata:
@@ -37,31 +7,6 @@ metadata:
 spec:
   name: r-stack-radarr
   task: backup
-  cron: "44 0 * * *"   # Run at 10:00 AM (Z) every day
+  cron: "45 0 * * *"   # Run at 10:00 AM (Z) every day
   retain: 3           # Keep 3 backups (rolling window)
   concurrency: 1      # Run 1 backup at a time
----
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: volume-group-assigner
-  namespace: longhorn-system
-  annotations:
-    argocd.argoproj.io/hook: PostSync
-    argocd.argoproj.io/hook-delete-policy: HookSucceeded
-spec:
-  template:
-    spec:
-      serviceAccountName: longhorn-volume-patcher
-      containers:
-      - name: patch-volumes
-        image: bitnami/kubectl:latest
-        command:
-        - /bin/bash
-        - -c
-        - |
-          set -ex
-          echo "Assigning r-stack-radarr volume to recurring job r-stack-radarr..."
-          kubectl patch volume.longhorn.io r-stack-radarr -n longhorn-system --type=merge -p '{"spec": {"recurringJobSelector": {"r-stack-radarr": {"isGroup": false}}}}'
-      restartPolicy: Never
-  backoffLimit: 2
