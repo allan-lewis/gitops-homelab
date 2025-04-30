@@ -271,7 +271,7 @@ spec:
           namespace: cattle-system
           port: 80
           scheme: http 
-    - match: Host(`vault.allanshomelab.com`)
+    - match: Host(`vault.legacy.allanshomelab.com`)
       kind: Rule
       middlewares:
         - name: traefik-custom-headers
