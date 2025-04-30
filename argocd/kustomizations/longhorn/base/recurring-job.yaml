@@ -118,3 +118,51 @@ spec:
   cron: "50 10 * * *"  # Run at 10:50 AM (Z) every day
   retain: 3           # Keep 3 backups (rolling window)
   concurrency: 1      # Run 1 backup at a time
+---
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: authentik-postgres
+  namespace: longhorn-system
+spec:
+  name: authentik-postgres
+  task: backup
+  cron: "0 11 * * *"  # Run at 11:00 AM (Z) every day
+  retain: 3           # Keep 3 backups (rolling window)
+  concurrency: 1      # Run 1 backup at a time
+---
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: guacamole-mariadb
+  namespace: longhorn-system
+spec:
+  name: guacamole-mariadb
+  task: backup
+  cron: "10 11 * * *"  # Run at 11:10 AM (Z) every day
+  retain: 3           # Keep 3 backups (rolling window)
+  concurrency: 1      # Run 1 backup at a time
+---
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: nextcloud
+  namespace: longhorn-system
+spec:
+  name: nextcloud
+  task: backup
+  cron: "20 11 * * *" # Run at 11:20 AM (Z) every day
+  retain: 3           # Keep 3 backups (rolling window)
+  concurrency: 1      # Run 1 backup at a time
+---
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: tautulli
+  namespace: longhorn-system
+spec:
+  name: tautulli
+  task: backup
+  cron: "40 11 * * *" # Run at 11:40 AM (Z) every day
+  retain: 3           # Keep 3 backups (rolling window)
+  concurrency: 1      # Run 1 backup at a time
