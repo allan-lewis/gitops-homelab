@@ -333,6 +333,9 @@ all:
       - name: Longhorn
         group: "Sites (K8s)"
         url: "https://longhorn.k8s.allanshomelab.com"
+      - name: Longhorn (Old K8s Cluster)
+        group: "Sites (Legacy)"
+        url: "https://longhorn.legacy.allanshomelab.com"
       - name: "Pi-hole"
         group: "Sites (K8s)"
         url: "https://dns.k8s.allanshomelab.com/admin"
@@ -340,6 +343,10 @@ all:
       - name: Portainer
         group: "Sites (K8s)"
         url: "https://portainer.k8s.allanshomelab.com"
+        pattern: "*Portainer*"
+      - name: Portainer (Old K8s Cluster)
+        group: "Sites (Legacy)"
+        url: "https://portainer.legacy.allanshomelab.com"
         pattern: "*Portainer*"
       - name: Prometheus
         group: "Sites (K8s)"
@@ -364,6 +371,10 @@ all:
       - name: "Traefik"
         group: "Sites (K8s)"
         url: "https://traefik.k8s.allanshomelab.com/dashboard/#/"
+        pattern: "*Traefik*"
+      - name: "Traefik (Old K8s Cluster)"
+        group: "Sites (Legacy)"
+        url: "https://traefik.legacy.allanshomelab.com/dashboard/#/"
         pattern: "*Traefik*"
       - name: Transmission
         group: "Sites (K8s)"
