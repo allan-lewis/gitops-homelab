@@ -6,3 +6,10 @@ resources:
 
 patches:
 - path: ip-address-pool.yaml
+- target:
+    kind: DaemonSet
+    name: speaker
+  patch: |-
+    - op: add
+      path: /spec/template/spec/containers/0/args/0
+      value: --ignore-exclude-lb=true
