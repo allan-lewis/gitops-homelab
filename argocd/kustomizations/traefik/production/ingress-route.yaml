@@ -216,7 +216,7 @@ spec:
           namespace: guacamole
           port: 35100
           scheme: http 
-    - match: Host(`wiki.allanandvaia.com`)
+    - match: Host(`wiki.legacy.allanandvaia.com`)
       kind: Rule
       middlewares:
         - name: traefik-custom-headers
