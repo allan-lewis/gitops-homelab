@@ -30,9 +30,6 @@ all:
     castor:
       ansible_host: 192.168.86.125
       gatus_slug: "(Staging Dev Ops)"
-    deneb:
-      ansible_host: 192.168.86.147
-      gatus_slug: "(Bare Metal K8s Node)"
     mimosa:
       ansible_host: 192.168.86.163
       gatus_slug: "(Gaming Rig)" 
