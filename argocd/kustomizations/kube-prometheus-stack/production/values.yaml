@@ -43,8 +43,8 @@ crds:
 prometheus:    
   prometheusSpec:
     walCompression: true
-    retention: 21d
-    retentionSize: "120GiB"
+    retention: 7d
+    retentionSize: "30GiB"
     persistentVolumeClaimRetentionPolicy:
       whenDeleted: Retain
       whenScaled: Retain
@@ -54,7 +54,7 @@ prometheus:
           storageClassName: longhorn
           resources:
             requests:
-              storage: 128Gi
+              storage: 32Gi
     additionalScrapeConfigs:
       - job_name: 'gatus'
         scheme: http
