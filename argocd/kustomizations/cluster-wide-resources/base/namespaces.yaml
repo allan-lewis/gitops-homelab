@@ -16,6 +16,13 @@ metadata:
 kind: Namespace
 apiVersion: v1
 metadata:
+  name: cloudflare
+  labels:
+    name: cloudflare
+---
+kind: Namespace
+apiVersion: v1
+metadata:
   name: external-secrets
   labels:
     name: external-secrets
