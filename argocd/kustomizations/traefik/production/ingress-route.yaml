@@ -18,7 +18,7 @@ spec:
           namespace: default
           port: 3000
           scheme: http 
-    - match: Host(`longhorn.k8s.allanshomelab.com`)
+    - match: Host(`longhorn.legacy.allanshomelab.com`)
       kind: Rule
       middlewares:
         - name: traefik-custom-headers
@@ -315,7 +315,7 @@ spec:
           namespace: portainer
           port: 9000
           scheme: http 
-    - match: Host(`gitops.allanshomelab.com`)
+    - match: Host(`argocd.legacy.allanshomelab.com`)
       kind: Rule
       middlewares:
         - name: traefik-custom-headers
