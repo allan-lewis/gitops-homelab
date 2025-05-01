@@ -98,9 +98,6 @@ all:
     sirius:
       ansible_host: 192.168.86.105
       gatus_slug: "(Hypervisor)"
-    vega:
-      ansible_host: 192.168.86.148
-      gatus_slug: "(Bare Metal K8s Node)"
 
   children:
     homelab_ansible_hosts:
