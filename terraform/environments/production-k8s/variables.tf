@@ -44,7 +44,7 @@ variable "worker_list" {
       description       = "Talos Linux worker node (managed by Terraform)"
       proxmox_node      = "sirius"
       cpu_cores         = 4
-      memory_dedicated  = 4096
+      memory_dedicated  = 8192
       datastore_id      = "ssd0"
       disk_size         = 128
       ipv4_address      = "192.168.86.153"
