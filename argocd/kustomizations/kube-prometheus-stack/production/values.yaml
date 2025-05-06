@@ -81,6 +81,14 @@ prometheus:
             regex: '192.168.86.123:9100'
             target_label: instance
             replacement: 'alcor'
+          - source_labels: ['__address__']
+            regex: '192.168.86.112:9100'
+            target_label: instance
+            replacement: 'mizar'
+          - source_labels: ['__address__']
+            regex: '192.168.86.116:9100'
+            target_label: instance
+            replacement: 'regulus'
 
 grafana:
   persistence:
