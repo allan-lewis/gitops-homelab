@@ -15,5 +15,5 @@ helmCharts:
   version: 70.10.0
   valuesFile: values.yaml
 
-# patchesStrategicMerge:
-#   - relabel-configs.yaml
+patchesStrategicMerge:
+  - relabel-configs.yaml

@@ -5,7 +5,7 @@ metadata:
   namespace: kube-prometheus-stack
 spec:
   endpoints:
-    - port: metrics
+    - port: http-metrics  # must match your actual port name
       relabelings:
         - sourceLabels: [__address__]
           regex: '192.168.86.153:9100'
