@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: kube-prometheus-stack-prometheus-node-exporter
-  namespace: monitoring  # Update if your namespace is different
+  namespace: kube-prometheus-stack
 spec:
   endpoints:
     - port: metrics
