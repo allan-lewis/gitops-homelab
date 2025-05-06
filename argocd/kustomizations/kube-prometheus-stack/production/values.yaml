@@ -76,6 +76,11 @@ prometheus:
             - 192.168.86.135:9100
             - 192.168.86.105:9100
             - 192.168.86.101:9100
+    relabel_configs:
+      - source_labels: ['__address__']
+        regex: '192.168.86.123:9100'
+        target_label: instance
+        replacement: 'alcor'
 
 grafana:
   persistence:
