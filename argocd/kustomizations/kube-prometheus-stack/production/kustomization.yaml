@@ -14,3 +14,6 @@ helmCharts:
   namespace: kube-prometheus-stack
   version: 70.10.0
   valuesFile: values.yaml
+
+patchesStrategicMerge:
+  - relabel-configs.yaml
