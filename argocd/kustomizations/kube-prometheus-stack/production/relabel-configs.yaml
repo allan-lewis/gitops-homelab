@@ -8,6 +8,18 @@ spec:
     - port: http-metrics  # must match your actual port name
       relabelings:
         - sourceLabels: [__address__]
+          regex: '192.168.86.150:9100'
+          targetLabel: instance
+          replacement: 'bellatrix'
+        - sourceLabels: [__address__]
+          regex: '192.168.86.151:9100'
+          targetLabel: instance
+          replacement: 'alnilam'
+        - sourceLabels: [__address__]
+          regex: '192.168.86.152:9100'
+          targetLabel: instance
+          replacement: 'alnitak'
+        - sourceLabels: [__address__]
           regex: '192.168.86.153:9100'
           targetLabel: instance
           replacement: 'mintaka'
