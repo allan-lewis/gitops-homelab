@@ -11,10 +11,7 @@ all:
       gatus_slug: "(K8s Worker)"
     altair:
       ansible_host: 192.168.86.146
-      gatus_slug: "(Bare Metal K8s Node)"
-    antares:
-      ansible_host: 192.168.86.149
-      gatus_slug: "(Bare Metal K8s Node)"    
+      gatus_slug: "(Bare Metal K8s Node)"  
     arcturus:
       ansible_host: 192.168.86.124
       gatus_slug: "(Home Assistant)"  
