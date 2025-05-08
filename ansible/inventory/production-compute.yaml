@@ -327,9 +327,6 @@ all:
       - name: Longhorn
         group: "Sites (K8s)"
         url: "https://longhorn.k8s.allanshomelab.com"
-      - name: Longhorn (Old K8s Cluster)
-        group: "Sites (Legacy)"
-        url: "https://longhorn.legacy.allanshomelab.com"
       - name: "Pi-hole"
         group: "Sites (K8s)"
         url: "https://dns.k8s.allanshomelab.com/admin"
