@@ -5,5 +5,5 @@ metadata:
   name: certificate-production
   namespace: default
 spec:
-  commonName: '*.local.allanshomelab.com'
-  dnsNames: ['*.local.allanshomelab.com', '*.hosts.allanshomelab.com', '*.k8s.allanshomelab.com', '*.legacy.allanshomelab.com', '*.docker.allanshomelab.com']
+  commonName: '*.legacy.allanshomelab.com'
+  dnsNames: ['*.legacy.allanshomelab.com']
