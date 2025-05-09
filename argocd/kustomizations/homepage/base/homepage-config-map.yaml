@@ -134,6 +134,16 @@ data:
               url: https://rigel.hosts.allanshomelab.com
               username: "{{HOMEPAGE_VAR_TRUENAS_USERNAME}}"
               password: "{{HOMEPAGE_VAR_TRUENAS_PASSWORD}}"
+        - Sirius:
+            icon: proxmox.png
+            href: https://sirius.hosts.allanshomelab.com
+            description: Hypervisor
+            widget:
+              type: proxmox
+              url: https://sirius.hosts.allanshomelab.com
+              username: {{HOMEPAGE_VAR_SIRIUS_USERNAME}}
+              password: {{HOMEPAGE_VAR_SIRIUS_PASSWORD}}
+              fields: ['vms', 'resources.cpu', 'resources.mem']
     - Dev Ops:
         - Alertmanager:
             icon: alertmanager.png

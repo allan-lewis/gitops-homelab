@@ -209,6 +209,12 @@ spec:
     - secretKey: HOMEPAGE_VAR_POLARIS_PASSWORD      
       remoteRef:        
         key: HOMEPAGE_VAR_POLARIS_PASSWORD
+    - secretKey: HOMEPAGE_VAR_SIRIUS_USERNAME      
+      remoteRef:        
+        key: HOMEPAGE_VAR_SIRIUS_USERNAME
+    - secretKey: HOMEPAGE_VAR_SIRIUS_PASSWORD      
+      remoteRef:        
+        key: HOMEPAGE_VAR_SIRIUS_PASSWORD
     - secretKey: HOMEPAGE_VAR_TRUENAS_PASSWORD      
       remoteRef:        
         key: HOMEPAGE_VAR_TRUENAS_PASSWORD
