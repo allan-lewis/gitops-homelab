@@ -94,9 +94,12 @@
   gather_facts: yes
   
   tasks:
-    - name: Include Tailscale role
-      ansible.builtin.include_role:
-        name: artis3n.tailscale.device
+    - name: Bring up Tailscale
+      artis3n.tailscale.tailscale_up:
+        authkey: "{{ tailscale_authkey }}"
+    # - name: Include Tailscale role
+    #   ansible.builtin.include_role:
+    #     name: artis3n.tailscale.device
 
 - name: Setup Docker hosts.
   hosts: homelab_docker_hosts
