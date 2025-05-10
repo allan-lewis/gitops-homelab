@@ -18,42 +18,8 @@
 - name: Install the Tailscale Ansible role.
   shell: "ansible-galaxy role install artis3n.tailscale"
 
-- name: Comment out invalid "end_role" task in artis3n.tailscale role
-  become: false
-  lineinfile:
-    path: "{{ ansible_user_dir }}/.ansible/roles/artis3n.tailscale/tasks/main.yml"
-    regexp: '^\s*- name: "Warning: Role migrated into Collection"'
-    line: '# - name: "Warning: Role migrated into Collection"'
-    state: present
-    backrefs: yes
-
-- name: Comment out the broken "end_role" warning block - step 1
+- name: Disable the "Role migrated into Collection" task by falsifying its when clause
   ansible.builtin.replace:
     path: "{{ ansible_user_dir }}/.ansible/roles/artis3n.tailscale/tasks/main.yml"
-    regexp: '^(\s*)- name: "Warning: Role migrated into Collection"$'
-    replace: '\1# - name: "Warning: Role migrated into Collection"'
-
-- name: Comment out the broken "end_role" warning block - step 2
-  ansible.builtin.replace:
-    path: "{{ ansible_user_dir }}/.ansible/roles/artis3n.tailscale/tasks/main.yml"
-    regexp: '^(\s*)ansible\.builtin\.meta: end_role$'
-    replace: '\1#   ansible.builtin.meta: end_role'
-
-- name: Comment out the broken "end_role" warning block - step 3
-  ansible.builtin.replace:
-    path: "{{ ansible_user_dir }}/.ansible/roles/artis3n.tailscale/tasks/main.yml"
-    regexp: '^(\s*)delegate_to: localhost$'
-    replace: '\1#   delegate_to: localhost'
-
-- name: Comment out the broken "end_role" warning block - step 4
-  ansible.builtin.replace:
-    path: "{{ ansible_user_dir }}/.ansible/roles/artis3n.tailscale/tasks/main.yml"
-    regexp: '^(\s*)run_once: true$'
-    replace: '\1#   run_once: true'
-
-- name: Comment out the broken "end_role" warning block - step 5
-  ansible.builtin.replace:
-    path: "{{ ansible_user_dir }}/.ansible/roles/artis3n.tailscale/tasks/main.yml"
-    regexp: '^(\s*)when: .*$'
-    replace: '\1#   when: <commented out>'
-
+    regexp: '^(\s*)when: \(".*migrated into a collection.*print_warn\(\)\)"$'
+    replace: '\1when: false'
