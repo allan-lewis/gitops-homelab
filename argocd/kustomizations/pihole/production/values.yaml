@@ -35,9 +35,7 @@ dnsmasq:
     - address=/pihole.k8s.allanshomelab.com/192.168.86.199
     - address=/control.k8s.allanshomelab.com/192.168.86.140
     - address=/mariadb.k8s.allanshomelab.com/192.168.86.191
-    - address=/nonprod.allanshomelab.com/192.168.86.49
-    - address=/nonprodhosts.allanshomelab.com/192.168.86.49
-    - address=/dockernonprod.allanshomelab.com/192.168.86.90
+    - address=/staging.allanshomelab.com/192.168.86.49
     - address=/legacy.allanshomelab.com/192.168.86.238
 
   customCnameEntries: 
