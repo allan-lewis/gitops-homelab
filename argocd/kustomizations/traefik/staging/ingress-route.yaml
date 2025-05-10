@@ -7,28 +7,28 @@ spec:
   entryPoints:
     - websecure
   routes: 
-    # - match: Host(`alerts.nonprod.allanshomelab.com`)
-    #   kind: Rule
-    #   middlewares:
-    #     - name: traefik-custom-headers
-    #       namespace: default
-    #   priority: 10
-    #   services:
-    #     - name: kube-prometheus-stack-alertmanager
-    #       namespace: kube-prometheus-stack
-    #       port: 9093
-    #       scheme: http
-    # - match: Host(`prometheus.nonprod.allanshomelab.com`)
-    #   kind: Rule
-    #   middlewares:
-    #     - name: traefik-custom-headers
-    #       namespace: default
-    #   priority: 10
-    #   services:
-    #     - name: kube-prometheus-stack-prometheus
-    #       namespace: kube-prometheus-stack
-    #       port: 9090
-    #       scheme: http
+    - match: Host(`alerts.staging.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: kube-prometheus-stack-alertmanager
+          namespace: kube-prometheus-stack
+          port: 9093
+          scheme: http
+    - match: Host(`prometheus.staging.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: kube-prometheus-stack-prometheus
+          namespace: kube-prometheus-stack
+          port: 9090
+          scheme: http
     # - match: Host(`radarr.nonprod.allanshomelab.com`)
     #   kind: Rule
     #   middlewares:
@@ -106,17 +106,17 @@ spec:
     #       namespace: pihole
     #       port: 80
     #       scheme: http 
-    # - match: Host(`grafana.nonprod.allanshomelab.com`)
-    #   kind: Rule
-    #   middlewares:
-    #     - name: traefik-custom-headers
-    #       namespace: default
-    #   priority: 10
-    #   services:
-    #     - name: kube-prometheus-stack-grafana
-    #       namespace: kube-prometheus-stack
-    #       port: 80
-    #       scheme: http 
+    - match: Host(`grafana.staging.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: kube-prometheus-stack-grafana
+          namespace: kube-prometheus-stack
+          port: 80
+          scheme: http 
     # - match: Host(`homepage.nonprod.allanshomelab.com`)
     #   kind: Rule
     #   middlewares:
