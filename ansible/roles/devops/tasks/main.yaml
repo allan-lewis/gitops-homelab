@@ -17,3 +17,21 @@
 
 - name: Install the Tailscale Ansible role.
   shell: "ansible-galaxy role install artis3n.tailscale"
+
+- name: Comment out invalid "end_role" task in artis3n.tailscale role
+  become: false
+  lineinfile:
+    path: "{{ ansible_user_dir }}/.ansible/roles/artis3n.tailscale/tasks/main.yml"
+    regexp: '^\s*- name: "Warning: Role migrated into Collection"'
+    line: '# - name: "Warning: Role migrated into Collection"'
+    state: present
+    backrefs: yes
+
+- name: Comment out invalid end_role action in artis3n.tailscale role
+  become: false
+  lineinfile:
+    path: "{{ ansible_user_dir }}/.ansible/roles/artis3n.tailscale/tasks/main.yml"
+    regexp: '^\s*end_role:'
+    line: '#   end_role:'
+    state: present
+    backrefs: yes
