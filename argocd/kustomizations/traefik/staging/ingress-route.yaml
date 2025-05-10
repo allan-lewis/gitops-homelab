@@ -29,83 +29,17 @@ spec:
           namespace: kube-prometheus-stack
           port: 9090
           scheme: http
-    # - match: Host(`radarr.nonprod.allanshomelab.com`)
-    #   kind: Rule
-    #   middlewares:
-    #     - name: traefik-custom-headers
-    #       namespace: default
-    #   priority: 10
-    #   services:
-    #     - name: radarr
-    #       namespace: media
-    #       port: 7878
-    #       scheme: http 
-    # - match: Host(`sonarr.nonprod.allanshomelab.com`)
-    #   kind: Rule
-    #   middlewares:
-    #     - name: traefik-custom-headers
-    #       namespace: default
-    #   priority: 10
-    #   services:
-    #     - name: sonarr
-    #       namespace: media
-    #       port: 8989
-    #       scheme: http 
-    # - match: Host(`transmission.nonprod.allanshomelab.com`)
-    #   kind: Rule
-    #   middlewares:
-    #     - name: traefik-custom-headers
-    #       namespace: default
-    #   priority: 10
-    #   services:
-    #     - name: transmission
-    #       namespace: media
-    #       port: 9091
-    #       scheme: http 
-    # - match: Host(`jackett.nonprod.allanshomelab.com`)
-    #   kind: Rule
-    #   middlewares:
-    #     - name: traefik-custom-headers
-    #       namespace: default
-    #   priority: 10
-    #   services:
-    #     - name: jackett
-    #       namespace: media
-    #       port: 9117
-    #       scheme: http 
-    # - match: Host(`auth.nonprod.allanshomelab.com`)
-    #   kind: Rule
-    #   middlewares:
-    #     - name: traefik-custom-headers
-    #       namespace: default
-    #   priority: 10
-    #   services:
-    #     - name: authentik-server
-    #       namespace: authentik
-    #       port: 80
-    #       scheme: http 
-    # - match: Host(`cloud.nonprod.allanshomelab.com`)
-    #   kind: Rule
-    #   middlewares:
-    #     - name: traefik-custom-headers
-    #       namespace: default
-    #   priority: 10
-    #   services:
-    #     - name: nextcloud
-    #       namespace: nextcloud
-    #       port: 8080
-    #       scheme: http 
-    # - match: Host(`dns.nonprod.allanshomelab.com`)
-    #   kind: Rule
-    #   middlewares:
-    #     - name: traefik-custom-headers
-    #       namespace: default
-    #   priority: 10
-    #   services:
-    #     - name: pihole-web
-    #       namespace: pihole
-    #       port: 80
-    #       scheme: http 
+    - match: Host(`auth.staging.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: authentik-server
+          namespace: authentik
+          port: 80
+          scheme: http 
     - match: Host(`grafana.staging.allanshomelab.com`)
       kind: Rule
       middlewares:
@@ -117,17 +51,6 @@ spec:
           namespace: kube-prometheus-stack
           port: 80
           scheme: http 
-    # - match: Host(`homepage.nonprod.allanshomelab.com`)
-    #   kind: Rule
-    #   middlewares:
-    #     - name: traefik-custom-headers
-    #       namespace: default
-    #   priority: 10
-    #   services:
-    #     - name: homepage
-    #       namespace: default
-    #       port: 3000
-    #       scheme: http 
     - match: Host(`argocd.staging.allanshomelab.com`)
       kind: Rule
       middlewares:
@@ -139,28 +62,6 @@ spec:
           namespace: argocd
           port: 443
           scheme: https     
-    # - match: Host(`tautulli.nonprod.allanshomelab.com`)
-    #   kind: Rule
-    #   middlewares:
-    #     - name: traefik-custom-headers
-    #       namespace: default
-    #   priority: 10
-    #   services:
-    #     - name: tautulli
-    #       namespace: tautulli
-    #       port: 8181
-    #       scheme: http     
-    # - match: Host(`ngb.nonprod.allanshomelab.com`)
-    #   kind: Rule
-    #   middlewares:
-    #     - name: traefik-custom-headers
-    #       namespace: default
-    #   priority: 10
-    #   services:
-    #     - name: no-geeks-brewing-go
-    #       namespace: ngb
-    #       port: 8080
-    #       scheme: http  
     - match: Host(`longhorn.staging.allanshomelab.com`)
       kind: Rule
       middlewares:
@@ -172,28 +73,6 @@ spec:
           namespace: longhorn-system
           port: 80
           scheme: http   
-    # - match: Host(`wiki.nonprod.allanshomelab.com`)
-    #   kind: Rule
-    #   middlewares:
-    #     - name: traefik-custom-headers
-    #       namespace: default
-    #   priority: 10
-    #   services:
-    #     - name: wikijs
-    #       namespace: wikijs
-    #       port: 80
-    #       scheme: http 
-    # - match: Host(`vaultwarden.nonprod.allanshomelab.com`)
-    #   kind: Rule
-    #   middlewares:
-    #     - name: traefik-custom-headers
-    #       namespace: default
-    #   priority: 10
-    #   services:
-    #     - name: vaultwarden
-    #       namespace: vaultwarden
-    #       port: 35550
-    #       scheme: http 
     # - match: Host(`nginx.nonprod.allanshomelab.com`)
     #   kind: Rule
     #   middlewares:
@@ -216,36 +95,3 @@ spec:
     #       # See https://kubernetes.io/docs/concepts/services-networking/service/#externalname
     #       name: ak-outpost-authentik-embedded-outpost
     #       port: 9000
-    # - match: Host(`tools.nonprod.allanshomelab.com`)
-    #   kind: Rule
-    #   middlewares:
-    #     - name: traefik-custom-headers
-    #       namespace: default
-    #   priority: 10
-    #   services:
-    #     - name: it-tools
-    #       namespace: it-tools
-    #       port: 80
-    #       scheme: http  
-    # - match: Host(`portainer.nonprod.allanshomelab.com`)
-    #   kind: Rule
-    #   middlewares:
-    #     - name: traefik-custom-headers
-    #       namespace: default
-    #   priority: 10
-    #   services:
-    #     - name: portainer
-    #       namespace: portainer
-    #       port: 9000
-    #       scheme: http  
-    # - match: Host(`rancher.nonprod.allanshomelab.com`)
-    #   kind: Rule
-    #   middlewares:
-    #     - name: traefik-custom-headers
-    #       namespace: default
-    #   priority: 10
-    #   services:
-    #     - name: rancher
-    #       namespace: cattle-system
-    #       port: 80
-    #       scheme: http  
