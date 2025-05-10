@@ -27,15 +27,33 @@
     state: present
     backrefs: yes
 
-- name: Comment out the deprecated "end_role" block in artis3n.tailscale
-  become: false
-  blockinfile:
+- name: Comment out the broken "end_role" warning block - step 1
+  ansible.builtin.replace:
     path: "{{ ansible_user_dir }}/.ansible/roles/artis3n.tailscale/tasks/main.yml"
-    marker: "# {mark} ANSIBLE PATCH: comment out deprecated end_role block"
-    block: |
-      # - name: "Warning: Role migrated into Collection"
-      #   ansible.builtin.meta: end_role
-      #   delegate_to: localhost
-      #   run_once: true
-      #   when: "('This standalone role has been migrated into a collection.\n\nPlease review the collection and plan a drop-in migration.\nThis role will eventually be archived. A notice period will be communicated.\n\nhttps://github.com/artis3n/ansible-collection-tailscale' | print_warn())"
+    regexp: '^(\s*)- name: "Warning: Role migrated into Collection"$'
+    replace: '\1# - name: "Warning: Role migrated into Collection"'
+
+- name: Comment out the broken "end_role" warning block - step 2
+  ansible.builtin.replace:
+    path: "{{ ansible_user_dir }}/.ansible/roles/artis3n.tailscale/tasks/main.yml"
+    regexp: '^(\s*)ansible\.builtin\.meta: end_role$'
+    replace: '\1#   ansible.builtin.meta: end_role'
+
+- name: Comment out the broken "end_role" warning block - step 3
+  ansible.builtin.replace:
+    path: "{{ ansible_user_dir }}/.ansible/roles/artis3n.tailscale/tasks/main.yml"
+    regexp: '^(\s*)delegate_to: localhost$'
+    replace: '\1#   delegate_to: localhost'
+
+- name: Comment out the broken "end_role" warning block - step 4
+  ansible.builtin.replace:
+    path: "{{ ansible_user_dir }}/.ansible/roles/artis3n.tailscale/tasks/main.yml"
+    regexp: '^(\s*)run_once: true$'
+    replace: '\1#   run_once: true'
+
+- name: Comment out the broken "end_role" warning block - step 5
+  ansible.builtin.replace:
+    path: "{{ ansible_user_dir }}/.ansible/roles/artis3n.tailscale/tasks/main.yml"
+    regexp: '^(\s*)when: .*$'
+    replace: '\1#   when: <commented out>'
 
