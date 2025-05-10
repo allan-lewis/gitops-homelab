@@ -134,6 +134,8 @@ all:
         homelab_tailscale_hosts:
           hosts:
             mizar:
+          vars:
+            lsb_release_package: lsb-release
         homelab_traefik_hosts:
           hosts:
             mizar:
