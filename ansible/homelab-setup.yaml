@@ -96,9 +96,8 @@
   # tasks:
   #   - name: Bring up Tailscale
 
-  tasks:
-    - name: Bring up Tailscale
-      artis3n.tailscale.tailscale_up:
+  roles:
+    - artis3n.tailscale
 
 - name: Setup Docker hosts.
   hosts: homelab_docker_hosts
