@@ -94,8 +94,6 @@
   gather_facts: yes
   
   tasks:
-    - name: Install the Tailscale Ansible role.
-      shell: "ansible-galaxy collection install artis3n.tailscale"
     - name: Include Tailscale role
       ansible.builtin.include_role:
         name: artis3n.tailscale.device

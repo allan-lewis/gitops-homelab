@@ -14,3 +14,6 @@
   ansible.builtin.git:
     repo: "git@github.com:allan-lewis/gitops-homelab.git"
     dest: "{{ ansible_env.HOME }}/gitops-homelab"
+
+- name: Install the Tailscale Ansible role.
+  shell: "ansible-galaxy collection install artis3n.tailscale"
