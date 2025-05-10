@@ -93,8 +93,10 @@
   become: yes
   gather_facts: yes
   
-  # tasks:
-  #   - name: Bring up Tailscale
+  tasks:
+    - name: Force lsb_release_package to correct value for Ubuntu
+      set_fact:
+        lsb_release_package: lsb-release
 
   roles:
     - artis3n.tailscale
