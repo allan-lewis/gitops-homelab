@@ -18,8 +18,15 @@
 - name: Install the Tailscale Ansible role.
   shell: "ansible-galaxy role install artis3n.tailscale"
 
-- name: Disable the "Role migrated into Collection" task by falsifying its when clause
+- name: Disable the "migrated into a collection" task by overriding its when clause
   ansible.builtin.replace:
     path: "{{ ansible_user_dir }}/.ansible/roles/artis3n.tailscale/tasks/main.yml"
-    regexp: '^(\s*)when: \(".*migrated into a collection.*print_warn\(\)\)"$'
+    regexp: '^(\s*)when:.*migrated into a collection.*$'
     replace: '\1when: false'
+
+- name: Check that the task has been patched.
+  shell: grep 'when:' {{ ansible_user_dir }}/.ansible/roles/artis3n.tailscale/tasks/main.yml } | grep migrated || echo "already disabled"
+  register: patch_status
+
+- debug:
+    var: patch_status.stdout
