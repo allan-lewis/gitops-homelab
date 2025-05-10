@@ -6,7 +6,7 @@ metadata:
 spec:
   routes:
     - kind: Rule
-      match: Host(`traefik.nonprod.allanshomelab.com`)
+      match: Host(`traefik.staging.allanshomelab.com`)
       services:
         - name: api@internal
           kind: TraefikService
