@@ -58,6 +58,8 @@ prometheus:
 
 grafana:
   grafana.ini:
+    server:
+      root_url: https://grafana.staging.allanshomelab.com
     auth.generic_oauth:
       enabled: true
       name: Authentik
