@@ -278,6 +278,10 @@ all:
         group: "Sites (Allan's Home Lab)"
         url: "https://gitops.allanshomelab.com"
         pattern: "*Argo CD*"
+      - name: Argo CD
+        group: "Sites (Legacy)"
+        url: "https://argocd.legacy.allanshomelab.com"
+        pattern: "*Argo CD*"
       - name: Guacamole
         group: "Sites (Allan's Home Lab)"
         url: "https://guacamole.allanshomelab.com/guacamole/"
