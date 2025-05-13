@@ -15,6 +15,45 @@
     repo: "git@github.com:allan-lewis/gitops-homelab.git"
     dest: "{{ ansible_env.HOME }}/gitops-homelab"
 
+- name: Ensure required config directories exist.
+  file:
+    path: "{{ ansible_env.HOME }}/{{ item }}"
+    state: directory
+    mode: '0700'
+  loop:
+    - "{{ ansible_env.HOME }}/.kube"
+    - "{{ ansible_env.HOME }}/.talos"
+
+- name: Set Terraform output values
+  set_fact:
+    items:
+      - output: kubeconfig
+        path: "{{ ansible_env.HOME }}/.kube/config"
+      - output: talosconfig
+        path: "{{ ansible_env.HOME }}/.talos/talosconfig"
+
+- name: Extract Terraform output.
+  shell: doppler run -- terraform output -raw {{ item.output }}
+  args:
+    chdir: "{{ homelab_k8s_terraform_dir }}"
+  register: terraform_output_result
+  loop:
+    - { output: "kubeconfig", path: "{{ ansible_env.HOME }}/.kube/config" }
+    - { output: "talosconfig", path: "{{ ansible_env.HOME }}/.talos/talosconfig" }
+  loop_control:
+    label: "{{ item.output }}"
+  when: homelab_k8s_terraform_dir is defined
+
+- name: Write Terraform output to files.
+  copy:
+    content: "{{ item.stdout }}"
+    dest: "{{ item.item.path }}"
+    mode: '0600'
+  loop: "{{ terraform_output_result.results | default([]) }}"
+  loop_control:
+    label: "{{ item.item.output }}"
+  when: homelab_k8s_terraform_dir is defined
+
 - name: Install the Tailscale Ansible role.
   shell: "ansible-galaxy role install artis3n.tailscale"
 
