@@ -1,0 +1,10 @@
+---
+- name: Get the local host ready to run Ansible playbooks.
+  hosts: localhost
+  become: no
+  gather_facts: yes
+
+  roles:
+    - known_hosts
+    - tailscale
+    - terraform_output

@@ -1,0 +1,21 @@
+---
+- name: Check if Tailscale role is already installed.
+  stat:
+    path: "{{ ansible_user_dir }}/.ansible/roles/artis3n.tailscale"
+  register: tailscale_role
+
+- name: Install the Tailscale Ansible role.
+  shell: "ansible-galaxy role install artis3n.tailscale"
+  when: not tailscale_role.stat.exists
+
+- name: Disable the "migrated into a collection" task by overriding its when clause.
+  ansible.builtin.replace:
+    path: "{{ ansible_user_dir }}/.ansible/roles/artis3n.tailscale/tasks/main.yml"
+    regexp: '^(\s*)when:.*migrated into a collection.*$'
+    replace: '\1when: false'
+
+- name: Replace invalid end_role meta action with a safe noop.
+  ansible.builtin.replace:
+    path: "{{ ansible_user_dir }}/.ansible/roles/artis3n.tailscale/tasks/main.yml"
+    regexp: '^(\s*)ansible\.builtin\.meta: end_role$'
+    replace: '\1debug:\n\1  msg: "noop"'

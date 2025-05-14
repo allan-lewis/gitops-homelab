@@ -71,6 +71,7 @@
     - public_key
     - private_key
     - devops
+    - tailscale
 
 - name: Setup OpenVPN hosts.
   hosts: homelab_openvpn_hosts
