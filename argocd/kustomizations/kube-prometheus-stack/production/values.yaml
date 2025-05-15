@@ -79,43 +79,53 @@ prometheus:
             - 192.168.86.106:9100
             - 192.168.86.101:9100
         relabel_configs:
-          - source_labels: ['__address__']
+          - action: replace
+            source_labels: ['__address__']
             regex: '192.168.86.123:9100'
             target_label: instance
             replacement: 'alcor'
-          - source_labels: ['__address__']
+          - action: replace
+            source_labels: ['__address__']
             regex: '192.168.86.112:9100'
             target_label: instance
             replacement: 'mizar'
-          - source_labels: ['__address__']
+          - action: replace
+            source_labels: ['__address__']
             regex: '192.168.86.116:9100'
             target_label: instance
             replacement: 'regulus'
-          - source_labels: ['__address__']
+          - action: replace
+            source_labels: ['__address__']
             regex: '192.168.86.124:9100'
             target_label: instance
             replacement: 'arcturus'
-          - source_labels: ['__address__']
+          - action: replace
+            source_labels: ['__address__']
             regex: '192.168.86.125:9100'
             target_label: instance
             replacement: 'castor'
-          - source_labels: ['__address__']
+          - action: replace
+            source_labels: ['__address__']
             regex: '192.168.86.135:9100'
             target_label: instance
             replacement: 'pollux'
-          - source_labels: ['__address__']
+          - action: replace
+            source_labels: ['__address__']
             regex: '192.168.86.101:9100'
             target_label: instance
             replacement: 'polaris'
-          - source_labels: ['__address__']
+          - action: replace
+            source_labels: ['__address__']
             regex: '192.168.86.105:9100'
             target_label: instance
             replacement: 'sirius'
-          - source_labels: ['__address__']
+          - action: replace
+            source_labels: ['__address__']
             regex: '192.168.86.104:9100'
             target_label: instance
             replacement: 'rigel'
-          - source_labels: ['__address__']
+          - action: replace
+            source_labels: ['__address__']
             regex: '192.168.86.106:9100'
             target_label: instance
             replacement: 'procyon'
