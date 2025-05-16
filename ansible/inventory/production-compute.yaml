@@ -161,8 +161,8 @@ all:
       - name: plex
         host: plex.docker.allanshomelab.com
         url: "http://{{ hostvars['regulus'].ansible_host }}:32400"
-      - name: procyon
-        host: procyon.hosts.allanshomelab.com
+      - name: vega
+        host: vega.hosts.allanshomelab.com
         url: "http://{{ hostvars['procyon'].ansible_host }}"
     homelab_docker_gatus_https_endpoints:
       - name: "Mizar"
