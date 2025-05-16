@@ -104,7 +104,7 @@ data:
         - Procyon:
             icon: truenas.png
             href: https://procyon.hosts.allanshomelab.com
-            description: NAS (offsite backup)
+            description: NAS
             namespace:
             app:
             server:
@@ -134,7 +134,7 @@ data:
         - Vega:
             icon: truenas.png
             href: https://vega.hosts.allanshomelab.com
-            description: NAS
+            description: NAS (offsite backup)
             namespace:
             app:
             server:
