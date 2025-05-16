@@ -513,25 +513,25 @@ spec:
           namespace:  traefik
           port: 8006
           scheme: https     
-    - match: Host(`rigel.hosts.allanshomelab.com`)
+    - match: Host(`vega.hosts.allanshomelab.com`)
       kind: Rule
       middlewares:
         - name: traefik-custom-headers
           namespace: default
       priority: 10
       services:
-        - name: traefik-endpoint-rigel
+        - name: traefik-endpoint-vega
           namespace:  traefik
           port: 80
           scheme: http     
-    - match: Host(`procyon2.hosts.allanshomelab.com`)
+    - match: Host(`procyon.hosts.allanshomelab.com`)
       kind: Rule
       middlewares:
         - name: traefik-custom-headers
           namespace: default
       priority: 10
       services:
-        - name: traefik-endpoint-procyon2
+        - name: traefik-endpoint-procyon
           namespace:  traefik
           port: 80
           scheme: http                             

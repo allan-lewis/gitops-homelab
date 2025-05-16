@@ -46,7 +46,7 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: traefik-endpoint-rigel
+  name: traefik-endpoint-vega
   namespace: traefik
 spec:
   ports:
@@ -57,7 +57,7 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: traefik-endpoint-procyon2
+  name: traefik-endpoint-procyon
   namespace: traefik
 spec:
   ports:

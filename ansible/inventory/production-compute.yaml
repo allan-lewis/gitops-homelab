@@ -214,14 +214,9 @@ all:
         url: "http://procyon.hosts.allanshomelab.com/ui/"
         pattern: "*ix-root*"
         check_cert: false
-      - name: "Procyon2"
+      - name: "Vega"
         group: "Sites (Hosts)"
-        url: "http://procyon2.hosts.allanshomelab.com/ui/"
-        pattern: "*ix-root*"
-        check_cert: false
-      - name: "Rigel"
-        group: "Sites (Hosts)"
-        url: "https://rigel.hosts.allanshomelab.com/ui/"
+        url: "https://vega.hosts.allanshomelab.com/ui/"
         pattern: "*ix-root*"
       - name: "Authentik"
         group: "Sites (Allan's Home Lab)"

@@ -121,19 +121,6 @@ data:
             namespace: cattle-system
             app: rancher
             podSelector: app = rancher
-        - Rigel:
-            icon: truenas.png
-            href: https://rigel.hosts.allanshomelab.com
-            description: NAS
-            namespace:
-            app:
-            server:
-            container:
-            widget:
-              type: truenas
-              url: https://rigel.hosts.allanshomelab.com
-              username: "{{HOMEPAGE_VAR_TRUENAS_USERNAME}}"
-              password: "{{HOMEPAGE_VAR_TRUENAS_PASSWORD}}"
         - Sirius:
             icon: proxmox.png
             href: https://sirius.hosts.allanshomelab.com
@@ -144,6 +131,19 @@ data:
               username: {{HOMEPAGE_VAR_SIRIUS_USERNAME}}
               password: {{HOMEPAGE_VAR_SIRIUS_PASSWORD}}
               fields: ['vms', 'resources.cpu', 'resources.mem']
+        - Vega:
+            icon: truenas.png
+            href: https://vega.hosts.allanshomelab.com
+            description: NAS
+            namespace:
+            app:
+            server:
+            container:
+            widget:
+              type: truenas
+              url: https://vega.hosts.allanshomelab.com
+              username: "{{HOMEPAGE_VAR_TRUENAS_USERNAME}}"
+              password: "{{HOMEPAGE_VAR_TRUENAS_PASSWORD}}"
     - Dev Ops:
         - Alertmanager:
             icon: alertmanager.png

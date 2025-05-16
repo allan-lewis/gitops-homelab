@@ -46,7 +46,18 @@ subsets:
 kind: Endpoints
 apiVersion: v1
 metadata:
-  name: traefik-endpoint-procyon2
+  name: traefik-endpoint-vega
+  namespace: traefik
+subsets:
+  - addresses:
+      - ip: 100.85.197.89
+    ports:
+      - port: 80
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: traefik-endpoint-procyon
   namespace: traefik
 subsets:
   - addresses:
