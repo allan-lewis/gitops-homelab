@@ -74,7 +74,6 @@ prometheus:
             - 192.168.86.124:9100
             - 192.168.86.125:9100
             - 192.168.86.135:9100
-            - 192.168.86.104:9100
             - 192.168.86.105:9100
             - 192.168.86.106:9100
             - 192.168.86.101:9100
@@ -119,11 +118,6 @@ prometheus:
             regex: '192.168.86.105:9100'
             target_label: instance
             replacement: 'sirius'
-          - action: replace
-            source_labels: ['__address__']
-            regex: '192.168.86.104:9100'
-            target_label: instance
-            replacement: 'rigel'
           - action: replace
             source_labels: ['__address__']
             regex: '192.168.86.106:9100'

@@ -11,7 +11,7 @@ spec:
     - ReadWriteMany
   nfs:
     path: /mnt/pool1/media-acquisition/downloads
-    server: 192.168.86.104
+    server: 192.168.86.106
   persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: media
@@ -42,7 +42,7 @@ spec:
     - ReadWriteMany
   nfs:
     path: /mnt/pool1/media-acquisition/movies
-    server: 192.168.86.104
+    server: 192.168.86.106
   persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: media
@@ -73,7 +73,7 @@ spec:
     - ReadWriteMany
   nfs:
     path: /mnt/pool1/media-acquisition/tv
-    server: 192.168.86.104
+    server: 192.168.86.106
   persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: media
