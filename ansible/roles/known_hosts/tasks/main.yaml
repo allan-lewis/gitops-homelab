@@ -1,61 +1,67 @@
 ---
-- name: Establish the list of SSH host keys that needs to be retrieved.
+- name: Determine list of SSH host targets
   set_fact:
     homelab_target_hosts: "{{ homelab_ssh_keys | default(groups['homelab_ansible_hosts'], true) }}"
 
-- name: Display the list of SSH host keys to be retrieved.
-  debug:
-    var: homelab_target_hosts
-
-- name: Set host mapping
+- name: Map hostnames to IPs if needed
   set_fact:
     homelab_host_map: >-
       {{
         dict(
           homelab_target_hosts | zip(
-            homelab_target_hosts | map('extract', hostvars, 'ansible_host') 
+            homelab_target_hosts | map('extract', hostvars, 'ansible_host')
             if homelab_ansible_translate_ip | default(true) | bool
             else homelab_target_hosts
           )
         )
       }}
 
-- name: Display the list of SSH host keys to be retrieved.
-  debug:
-    var: homelab_host_map
-
-- name: Check if known_hosts file exists.
-  ansible.builtin.stat:
-    path: "~/.ssh/known_hosts"
-  register: known_hosts_stat
-
-- name: Ensure known_hosts file exists (only if missing).
+- name: Ensure known_hosts file exists
   ansible.builtin.file:
     path: "~/.ssh/known_hosts"
     state: touch
     mode: '0600'
-  when: not known_hosts_stat.stat.exists
 
-- name: Check if host key already exists in known_hosts.
-  command: "ssh-keygen -F {{ item.value }}"
-  register: existing_keys
-  changed_when: false
-  failed_when: false
-  loop: "{{ homelab_host_map | dict2items }}"
-
-- name: Fetch new SSH key using ssh-keyscan.
-  command: "ssh-keyscan -t rsa {{ item.value }}"
-  register: new_keys
-  changed_when: false
-  failed_when: false
-  loop: "{{ homelab_host_map | dict2items }}"
-
-- name: Ensure each host key is added to known_hosts.
-  ansible.builtin.known_hosts:
-    name: "{{ item.value }}"
-    state: present
-    key: "{{ new_keys.results[index].stdout }}"
+- name: Fetch SSH keys with ssh-keyscan
+  ansible.builtin.command:
+    cmd: "ssh-keyscan -T 5 -t rsa {{ item.value }}"
   loop: "{{ homelab_host_map | dict2items }}"
   loop_control:
-    index_var: index
-  when: "'found' not in existing_keys.results[index].stdout"
+    label: "{{ item.key }}"
+  register: scanned_keys
+  changed_when: false
+  failed_when: false
+
+- name: Build list of valid scanned host entries (strip comments)
+  set_fact:
+    known_hosts_entries: "{{ known_hosts_entries | default([]) + [ {
+      'host': item.item.key,
+      'addr': item.item.value,
+      'key': (
+        item.stdout_lines
+        | select('match', '^[^#]')
+        | list
+        | join('\n')
+      )
+    } ] }}"
+  loop: "{{ scanned_keys.results }}"
+  when: item.rc == 0
+
+- name: Remove any existing known_hosts entry for each host
+  ansible.builtin.known_hosts:
+    name: "{{ item.addr }}"
+    state: absent
+    path: "~/.ssh/known_hosts"
+  loop: "{{ known_hosts_entries }}"
+  loop_control:
+    label: "{{ item.host }}"
+
+- name: Add updated host entries to known_hosts
+  ansible.builtin.known_hosts:
+    name: "{{ item.addr }}"
+    key: "{{ item.key }}"
+    state: present
+    path: "~/.ssh/known_hosts"
+  loop: "{{ known_hosts_entries }}"
+  loop_control:
+    label: "{{ item.host }}"
