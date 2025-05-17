@@ -27,6 +27,9 @@ all:
     castor:
       ansible_host: 192.168.86.125
       gatus_slug: "(Staging Dev Ops)"
+    deneb:
+      ansible_host: 192.168.86.166
+      gatus_slug: "(Daily Driver)"
     mimosa:
       ansible_host: 192.168.86.163
       gatus_slug: "(Gaming Rig)" 
