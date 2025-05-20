@@ -9,6 +9,9 @@ all:
     alnitak:
       ansible_host: 192.168.86.152
       gatus_slug: "(K8s Worker)"
+    antares:
+      ansible_host: 192.168.86.167
+      gatus_slug: "(Retro Gaming)"
     arcturus:
       ansible_host: 192.168.86.124
       gatus_slug: "(Home Assistant)"  
