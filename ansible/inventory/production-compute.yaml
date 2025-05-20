@@ -9,9 +9,6 @@ all:
     alnitak:
       ansible_host: 192.168.86.152
       gatus_slug: "(K8s Worker)"
-    altair:
-      ansible_host: 192.168.86.146
-      gatus_slug: "(Bare Metal K8s Node)"  
     arcturus:
       ansible_host: 192.168.86.124
       gatus_slug: "(Home Assistant)"  
@@ -270,10 +267,6 @@ all:
         group: "Sites (Allan's Home Lab)"
         url: "https://gitops.allanshomelab.com"
         pattern: "*Argo CD*"
-      - name: Argo CD
-        group: "Sites (Legacy)"
-        url: "https://argocd.legacy.allanshomelab.com"
-        pattern: "*Argo CD*"
       - name: Guacamole
         group: "Sites (Allan's Home Lab)"
         url: "https://guacamole.allanshomelab.com/guacamole/"
@@ -356,10 +349,6 @@ all:
       - name: "Traefik"
         group: "Sites (K8s)"
         url: "https://traefik.k8s.allanshomelab.com/dashboard/#/"
-        pattern: "*Traefik*"
-      - name: "Traefik (Old K8s Cluster)"
-        group: "Sites (Legacy)"
-        url: "https://traefik.legacy.allanshomelab.com/dashboard/#/"
         pattern: "*Traefik*"
       - name: Transmission
         group: "Sites (K8s)"
