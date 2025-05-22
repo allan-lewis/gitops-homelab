@@ -39,6 +39,7 @@ all:
       homelab_backup_healthcheck: "64ffa8c0-3251-4048-87e6-f8ce0205c3ff"
       homelab_backup_minute: 15
       homelab_backup_hour: "*"
+      homelab_metrics_forward_url: "http://{{hostvars['procyon'].ansible_host}}:9100"
       homelab_remote_volumes:
         - src: "/opt/allans-home-lab/gatus/"
           dest: "/mnt/pool1/docker-volumes/gatus/"
@@ -104,6 +105,9 @@ all:
           hosts:
             mizar:
             regulus:
+          children:
+            homelab_metrics_hosts:
+              mizar:
         homelab_gatus_hosts:
           hosts:
             mizar:

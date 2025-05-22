@@ -154,6 +154,14 @@
   roles:
     - traefik
 
+- name: Setup Homelab Metrics.
+  hosts: homelab_metrics_hosts
+  become: yes
+  gather_facts: yes
+
+  roles:
+    - homelab_metrics
+
 - name: Setup Pi-Hole.
   hosts: homelab_pihole_hosts
   become: yes
