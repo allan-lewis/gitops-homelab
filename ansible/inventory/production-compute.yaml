@@ -107,7 +107,8 @@ all:
             regulus:
           children:
             homelab_metrics_hosts:
-              mizar:
+              hosts:
+                mizar:
         homelab_gatus_hosts:
           hosts:
             mizar:
