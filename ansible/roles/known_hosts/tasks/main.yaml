@@ -52,7 +52,7 @@
     name: "{{ item.addr }}"
     state: absent
     path: "~/.ssh/known_hosts"
-  loop: "{{ known_hosts_entries }}"
+  loop: "{{ known_hosts_entries | default([]) }}"
   loop_control:
     label: "{{ item.host }}"
 
@@ -62,6 +62,6 @@
     key: "{{ item.key }}"
     state: present
     path: "~/.ssh/known_hosts"
-  loop: "{{ known_hosts_entries }}"
+  loop: "{{ known_hosts_entries | default([]) }}"
   loop_control:
     label: "{{ item.host }}"
