@@ -7,4 +7,3 @@
   roles:
     - known_hosts
     - tailscale
-    - terraform_output
