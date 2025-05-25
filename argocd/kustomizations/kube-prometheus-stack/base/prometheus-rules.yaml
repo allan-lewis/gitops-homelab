@@ -24,7 +24,6 @@ spec:
               Expected exactly one node to report a different public IP address.
               This alert fires when all nodes agree or when multiple nodes disagree,
               and persists in that state for at least 10 minutes.
-
         - alert: HomelabPublicIPMetricStale
           expr: time() - homelab_public_ip_last_success_unix > 1200
           for: 5m
@@ -35,3 +34,13 @@ spec:
             summary: "Public IP update metric is stale"
             description: |
               The public IP update metric has not refreshed in over 20 minutes.
+        - alert: HomelabGatusFailures
+          expr: count(rate(gatus_results_total{success="false"}[5m]) > 0)
+          for: 1m
+          labels:
+            severity: critical
+            rulegroup: homelabRules
+          annotations:
+            summary: "There are Gatus check failures"
+            description: |
+              Gatus has had failed checks for more than 5 minutes.
