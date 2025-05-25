@@ -54,3 +54,17 @@ spec:
             summary: "High CPU usage detected on {{ $labels.instance }}"
             description: |
               Host {{ $labels.instance }} has had CPU usage over 50% for more than 5 minutes. Current usage: {{ $value | printf "%.2f" }}%
+        - alert: HomelabHighTemperature
+          expr: |
+            max by(instance) (
+              node_hwmon_temp_celsius{chip=~"platform_coretemp_0|pci0000:00_0000:00:18_3"}
+            ) > 50
+          for: 5m
+          labels:
+            severity: critical
+            rulegroup: homelabRules
+          annotations:
+            summary: "High temperature detected on {{ $labels.instance }}"
+            description: |
+              Host {{ $labels.instance }} has had a sensor reporting temperature over 50°C for more than 5 minutes.
+              Current temperature: {{ $value | printf "%.1f" }}°C
