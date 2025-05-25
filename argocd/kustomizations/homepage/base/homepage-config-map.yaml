@@ -142,7 +142,7 @@ data:
             widget:
               type: truenas
               url: https://vega.hosts.allanshomelab.com
-              username: admin
+              username: truenas_admin
               password: "{{HOMEPAGE_VAR_TRUENAS_PASSWORD}}"
     - Dev Ops:
         - Alertmanager:
