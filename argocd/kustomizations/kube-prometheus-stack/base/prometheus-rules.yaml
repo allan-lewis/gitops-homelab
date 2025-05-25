@@ -44,3 +44,13 @@ spec:
             summary: "There are Gatus check failures"
             description: |
               Gatus has had failed checks for more than 5 minutes.
+        - alert: HomelabHighCPUUsage
+          expr: 100 - (avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 50
+          for: 5m
+          labels:
+            severity: critical
+            rulegroup: homelabRules
+          annotations:
+            summary: "High CPU usage detected on {{ $labels.instance }}"
+            description: |
+              Host {{ $labels.instance }} has had CPU usage over 50% for more than 5 minutes. Current usage: {{ $value | printf "%.2f" }}%
