@@ -73,7 +73,7 @@ spec:
             100 - (
               (node_memory_MemAvailable_bytes{job="node-exporter"} * 100)
               / node_memory_MemTotal_bytes{job="node-exporter"}
-            ) > 60
+            ) > 90
           for: 5m
           labels:
             severity: critical
@@ -81,5 +81,5 @@ spec:
           annotations:
             summary: "High memory usage detected on {{ $labels.instance }}"
             description: |
-              Host {{ $labels.instance }} has had memory usage above 60% for more than 5 minutes.
+              Host {{ $labels.instance }} has had memory usage above 90% for more than 5 minutes.
               Current usage: {{ $value | printf "%.1f" }}%
