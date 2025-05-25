@@ -68,3 +68,18 @@ spec:
             description: |
               Host {{ $labels.instance }} has had a sensor reporting temperature over 80°C for more than 5 minutes.
               Current temperature: {{ $value | printf "%.1f" }}°C
+        - alert: HomelabHighMemoryUsage
+          expr: |
+            100 - (
+              (node_memory_MemAvailable_bytes{job="node-exporter"} * 100)
+              / node_memory_MemTotal_bytes{job="node-exporter"}
+            ) > 60
+          for: 5m
+          labels:
+            severity: critical
+            rulegroup: homelabRules
+          annotations:
+            summary: "High memory usage detected on {{ $labels.instance }}"
+            description: |
+              Host {{ $labels.instance }} has had memory usage above 60% for more than 5 minutes.
+              Current usage: {{ $value | printf "%.1f" }}%
