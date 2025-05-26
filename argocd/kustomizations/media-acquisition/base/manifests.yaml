@@ -29,10 +29,20 @@ spec:
         volumeMounts:
           - mountPath: /config
             name: lidarr-config
+          - mountPath: /downloads
+            name: media-downloads
+          - mountPath: /music
+            name: lidarr-music
       volumes:
         - name: lidarr-config
           persistentVolumeClaim:
             claimName: lidarr-config
+        - name: media-downloads
+          persistentVolumeClaim:
+            claimName: downloads-pvc
+        - name: lidarr-music
+          persistentVolumeClaim:
+            claimName: music-pvc
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:

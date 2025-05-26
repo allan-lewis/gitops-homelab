@@ -341,6 +341,9 @@ all:
       - name: Radarr
         group: "Sites (K8s)"
         url: "https://radarr.k8s.allanshomelab.com"
+      - name: Lidarr
+        group: "Sites (K8s)"
+        url: "https://lidarr.k8s.allanshomelab.com"
         pattern: "*authentik*"
       - name: Rancher
         group: "Sites (K8s)"
