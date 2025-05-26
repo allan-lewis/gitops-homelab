@@ -95,7 +95,7 @@ spec:
     spec:
       containers:
       - name: jackett
-        image: "lscr.io/linuxserver/jackett:0.22.1368"
+        image: "lscr.io/linuxserver/jackett:0.22.1951"
         imagePullPolicy: "Always"
         env:
         volumeMounts:
