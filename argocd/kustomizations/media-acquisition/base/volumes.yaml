@@ -91,3 +91,34 @@ spec:
     requests:
       storage: 256Gi
   storageClassName: ""
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: media
+  name: music-pv
+spec:
+  capacity:
+    storage: 256Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    path: /mnt/pool1/media-acquisition/music
+    server: 192.168.86.106
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: media
+    name: music-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: media
+  name: music-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 256Gi
+  storageClassName: ""
