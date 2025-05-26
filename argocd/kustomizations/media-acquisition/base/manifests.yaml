@@ -48,6 +48,19 @@ spec:
         value: "true"
         effect: "NoSchedule"
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lidarr
+  namespace: media
+spec:
+  selector:
+    app: lidarr
+  ports:
+  - name: http
+    targetPort: 8686
+    port: 8686
+---
 kind: Deployment
 apiVersion: apps/v1
 metadata:
