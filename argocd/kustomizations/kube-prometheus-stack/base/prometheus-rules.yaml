@@ -18,6 +18,7 @@ spec:
           labels:
             severity: critical
             rulegroup: homelabRules
+            namespace: kube-prometheus-stack
           annotations:
             summary: "Unexpected public IP distribution across homelab nodes"
             description: |
@@ -30,6 +31,7 @@ spec:
           labels:
             severity: critical
             rulegroup: homelabRules
+            namespace: kube-prometheus-stack
           annotations:
             summary: "Public IP update metric is stale"
             description: |
@@ -40,6 +42,7 @@ spec:
           labels:
             severity: critical
             rulegroup: homelabRules
+            namespace: kube-prometheus-stack
           annotations:
             summary: "There are Gatus check failures"
             description: |
@@ -50,6 +53,7 @@ spec:
           labels:
             severity: critical
             rulegroup: homelabRules
+            namespace: kube-prometheus-stack
           annotations:
             summary: "High CPU usage detected on {{ $labels.instance }}"
             description: |
@@ -63,6 +67,7 @@ spec:
           labels:
             severity: critical
             rulegroup: homelabRules
+            namespace: kube-prometheus-stack
           annotations:
             summary: "High temperature detected on {{ $labels.instance }}"
             description: |
@@ -78,6 +83,7 @@ spec:
           labels:
             severity: critical
             rulegroup: homelabRules
+            namespace: kube-prometheus-stack
           annotations:
             summary: "High memory usage detected on {{ $labels.instance }}"
             description: |
