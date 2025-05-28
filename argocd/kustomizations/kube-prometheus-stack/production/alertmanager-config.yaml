@@ -8,7 +8,7 @@ metadata:
 spec:
   route:
     receiver: black-hole  # Default receiver for unmatched alerts
-    groupBy: ['alertname']
+    groupBy: ['severity', 'rulegroup']
     groupWait: 30s
     groupInterval: 5m
     repeatInterval: 1h
