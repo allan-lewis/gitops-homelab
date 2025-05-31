@@ -47,7 +47,7 @@ prometheus:
   prometheusSpec:
     walCompression: true
     retention: 21d
-    retentionSize: "96GiB"
+    retentionSize: "90GiB"
     persistentVolumeClaimRetentionPolicy:
       whenDeleted: Retain
       whenScaled: Retain
@@ -57,7 +57,7 @@ prometheus:
           storageClassName: longhorn
           resources:
             requests:
-              storage: 128Gi
+              storage: 96Gi
     additionalScrapeConfigs:
       - job_name: 'gatus'
         scheme: http
