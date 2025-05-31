@@ -78,27 +78,9 @@ resource "proxmox_virtual_environment_download_file" "talos_nocloud_image" {
   overwrite               = false
 }
 
-resource "null_resource" "wait_for_talos" {
-  for_each = merge(var.controlplane_list, var.worker_list)
-
+resource "null_resource" "pause_for_talos_ready" {
   provisioner "local-exec" {
-    command = <<EOT
-      echo "Waiting for Talos API on ${each.value.ipv4_address}..."
-      for i in $(seq 1 30); do
-        if nc -z -w 2 ${each.value.ipv4_address} 50000; then
-          echo "Talos API is up on ${each.value.ipv4_address}"
-          exit 0
-        fi
-        echo "Still waiting for ${each.value.ipv4_address}..."
-        sleep 5
-      done
-      echo "ERROR: Talos API did not respond on ${each.value.ipv4_address}"
-      exit 1
-    EOT
-  }
-
-  triggers = {
-    vm_id = proxmox_virtual_environment_vm.vm_talos[each.key].id
+    command = "echo 'Waiting 300 seconds for Talos nodes to boot and be ready...' && sleep 300"
   }
 
   depends_on = [proxmox_virtual_environment_vm.vm_talos]
@@ -125,7 +107,7 @@ data "talos_machine_configuration" "machineconfig_cp" {
 resource "talos_machine_configuration_apply" "cp_config_apply" {
   for_each = var.controlplane_list
 
-  depends_on                  = [null_resource.wait_for_talos]
+  depends_on                  = [null_resource.pause_for_talos_ready]
   client_configuration        = talos_machine_secrets.machine_secrets.client_configuration
   machine_configuration_input = data.talos_machine_configuration.machineconfig_cp[each.key].machine_configuration
   node                        = each.value.ipv4_address
@@ -144,67 +126,41 @@ data "talos_machine_configuration" "machineconfig_worker" {
 resource "talos_machine_configuration_apply" "worker_config_apply" {
   for_each = var.worker_list
 
-  depends_on                  = [null_resource.wait_for_talos]
+  depends_on                  = [null_resource.pause_for_talos_ready]
   client_configuration        = talos_machine_secrets.machine_secrets.client_configuration
   machine_configuration_input = data.talos_machine_configuration.machineconfig_worker[each.key].machine_configuration
   node                        = each.value.ipv4_address
 }
 
-resource "null_resource" "wait_for_talos_healthy" {
-  for_each = merge(var.controlplane_list, var.worker_list)
+# resource "talos_machine_bootstrap" "bootstrap" {
+#   depends_on           = [talos_machine_configuration_apply.cp_config_apply, talos_machine_configuration_apply.worker_config_apply]
+#   client_configuration = talos_machine_secrets.machine_secrets.client_configuration
+#   node                 = var.controlplane_list[keys(var.controlplane_list)[0]].ipv4_address
+# }
 
-  provisioner "local-exec" {
-    command = <<EOT
-      echo "Waiting for Talos node to become healthy: ${each.value.ipv4_address}"
-      for i in $(seq 1 30); do
-        talosctl --nodes ${each.value.ipv4_address} --talosconfig=${path.module}/generated-talosconfig health | grep -q healthy && exit 0
-        echo "Still waiting on ${each.value.ipv4_address} to be healthy..."
-        sleep 5
-      done
-      echo "ERROR: Talos node ${each.value.ipv4_address} did not become healthy"
-      exit 1
-    EOT
-  }
+# resource "talos_cluster_kubeconfig" "kubeconfig" {
+#   depends_on           = [talos_machine_bootstrap.bootstrap]
+#   client_configuration = talos_machine_secrets.machine_secrets.client_configuration
+#   node                 = var.controlplane_list[keys(var.controlplane_list)[0]].ipv4_address
+# }
 
-  depends_on = [
-    talos_machine_configuration_apply.cp_config_apply,
-    talos_machine_configuration_apply.worker_config_apply
-  ]
+# output "talosconfig" {
+#   value     = data.talos_client_configuration.talosconfig.talos_config
+#   sensitive = true
+# }
 
-  triggers = {
-    node = each.value.ipv4_address
-  }
-}
+# output "kubeconfig" {
+#   value     = resource.talos_cluster_kubeconfig.kubeconfig.kubeconfig_raw
+#   sensitive = true
+# }
 
-resource "talos_machine_bootstrap" "bootstrap" {
-  depends_on           = [null_resource.wait_for_talos_healthy]
-  client_configuration = talos_machine_secrets.machine_secrets.client_configuration
-  node                 = var.controlplane_list[keys(var.controlplane_list)[0]].ipv4_address
-}
-
-resource "talos_cluster_kubeconfig" "kubeconfig" {
-  depends_on           = [talos_machine_bootstrap.bootstrap, null_resource.wait_for_talos_healthy]
-  client_configuration = talos_machine_secrets.machine_secrets.client_configuration
-  node                 = var.controlplane_list[keys(var.controlplane_list)[0]].ipv4_address
-}
-
-output "talosconfig" {
-  value     = data.talos_client_configuration.talosconfig.talos_config
-  sensitive = true
-}
-
-output "kubeconfig" {
-  value     = resource.talos_cluster_kubeconfig.kubeconfig.kubeconfig_raw
-  sensitive = true
-}
-
-data "talos_cluster_health" "health" {
-  depends_on           = [talos_machine_configuration_apply.cp_config_apply, talos_machine_configuration_apply.worker_config_apply]
-  client_configuration = data.talos_client_configuration.talosconfig.client_configuration
-  control_plane_nodes  = [for vm in var.controlplane_list : vm.ipv4_address]
-  worker_nodes         = [for vm in var.worker_list : vm.ipv4_address]
-  endpoints            = data.talos_client_configuration.talosconfig.endpoints
-}
+# data "talos_cluster_health" "health" {
+#   depends_on           = [talos_machine_configuration_apply.cp_config_apply, talos_machine_configuration_apply.worker_config_apply]
+#   client_configuration = data.talos_client_configuration.talosconfig.client_configuration
+#   control_plane_nodes  = [for vm in var.controlplane_list : vm.ipv4_address]
+#   worker_nodes         = [for vm in var.worker_list : vm.ipv4_address]
+#   endpoints            = data.talos_client_configuration.talosconfig.endpoints
+# }
 
 # Rely on environment variables to populate the Proxmox provider!
 # https://registry.terraform.io/providers/bpg/proxmox/latest/docs#environment-variables-summary
