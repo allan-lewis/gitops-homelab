@@ -80,7 +80,7 @@ resource "proxmox_virtual_environment_download_file" "talos_nocloud_image" {
 
 resource "null_resource" "pause_for_talos_ready" {
   provisioner "local-exec" {
-    command = "echo 'Waiting 300 seconds for Talos nodes to boot and be ready...' && sleep 300"
+    command = "echo 'Waiting 120 seconds for Talos nodes to boot and be ready...' && sleep 120"
   }
 
   depends_on = [proxmox_virtual_environment_vm.vm_talos]
