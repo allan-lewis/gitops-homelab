@@ -132,35 +132,35 @@ resource "talos_machine_configuration_apply" "worker_config_apply" {
   node                        = each.value.ipv4_address
 }
 
-# resource "talos_machine_bootstrap" "bootstrap" {
-#   depends_on           = [talos_machine_configuration_apply.cp_config_apply, talos_machine_configuration_apply.worker_config_apply]
-#   client_configuration = talos_machine_secrets.machine_secrets.client_configuration
-#   node                 = var.controlplane_list[keys(var.controlplane_list)[0]].ipv4_address
-# }
+resource "talos_machine_bootstrap" "bootstrap" {
+  depends_on           = [talos_machine_configuration_apply.cp_config_apply, talos_machine_configuration_apply.worker_config_apply]
+  client_configuration = talos_machine_secrets.machine_secrets.client_configuration
+  node                 = var.controlplane_list[keys(var.controlplane_list)[0]].ipv4_address
+}
 
-# resource "talos_cluster_kubeconfig" "kubeconfig" {
-#   depends_on           = [talos_machine_bootstrap.bootstrap]
-#   client_configuration = talos_machine_secrets.machine_secrets.client_configuration
-#   node                 = var.controlplane_list[keys(var.controlplane_list)[0]].ipv4_address
-# }
+resource "talos_cluster_kubeconfig" "kubeconfig" {
+  depends_on           = [talos_machine_bootstrap.bootstrap]
+  client_configuration = talos_machine_secrets.machine_secrets.client_configuration
+  node                 = var.controlplane_list[keys(var.controlplane_list)[0]].ipv4_address
+}
 
-# output "talosconfig" {
-#   value     = data.talos_client_configuration.talosconfig.talos_config
-#   sensitive = true
-# }
+output "talosconfig" {
+  value     = data.talos_client_configuration.talosconfig.talos_config
+  sensitive = true
+}
 
-# output "kubeconfig" {
-#   value     = resource.talos_cluster_kubeconfig.kubeconfig.kubeconfig_raw
-#   sensitive = true
-# }
+output "kubeconfig" {
+  value     = resource.talos_cluster_kubeconfig.kubeconfig.kubeconfig_raw
+  sensitive = true
+}
 
-# data "talos_cluster_health" "health" {
-#   depends_on           = [talos_machine_configuration_apply.cp_config_apply, talos_machine_configuration_apply.worker_config_apply]
-#   client_configuration = data.talos_client_configuration.talosconfig.client_configuration
-#   control_plane_nodes  = [for vm in var.controlplane_list : vm.ipv4_address]
-#   worker_nodes         = [for vm in var.worker_list : vm.ipv4_address]
-#   endpoints            = data.talos_client_configuration.talosconfig.endpoints
-# }
+data "talos_cluster_health" "health" {
+  depends_on           = [talos_machine_configuration_apply.cp_config_apply, talos_machine_configuration_apply.worker_config_apply]
+  client_configuration = data.talos_client_configuration.talosconfig.client_configuration
+  control_plane_nodes  = [for vm in var.controlplane_list : vm.ipv4_address]
+  worker_nodes         = [for vm in var.worker_list : vm.ipv4_address]
+  endpoints            = data.talos_client_configuration.talosconfig.endpoints
+}
 
 # Rely on environment variables to populate the Proxmox provider!
 # https://registry.terraform.io/providers/bpg/proxmox/latest/docs#environment-variables-summary
