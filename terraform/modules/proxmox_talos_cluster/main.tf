@@ -14,16 +14,16 @@ terraform {
 resource "proxmox_virtual_environment_vm" "vm_talos" {
   for_each = merge(var.controlplane_list, var.worker_list)
 
-  name      = each.key
-  node_name = each.value.proxmox_node
+  name        = each.key
+  node_name   = each.value.proxmox_node
   description = each.value.description
 
-  tags        = each.value.tags
-  on_boot     = true
+  tags    = each.value.tags
+  on_boot = true
 
   cpu {
     cores = each.value.cpu_cores
-    type = "x86-64-v2-AES"
+    type  = "x86-64-v2-AES"
   }
 
   memory {
@@ -78,28 +78,54 @@ resource "proxmox_virtual_environment_download_file" "talos_nocloud_image" {
   overwrite               = false
 }
 
-  resource "talos_machine_secrets" "machine_secrets" {}
+resource "null_resource" "wait_for_talos" {
+  for_each = merge(var.controlplane_list, var.worker_list)
 
-  data "talos_client_configuration" "talosconfig" {
-    cluster_name         = var.cluster_name
-    client_configuration = talos_machine_secrets.machine_secrets.client_configuration
-    endpoints            = [var.controlplane_list[keys(var.controlplane_list)[0]].ipv4_address]
+  provisioner "local-exec" {
+    command = <<EOT
+      echo "Waiting for Talos API on ${each.value.ipv4_address}..."
+      for i in $(seq 1 30); do
+        if nc -z -w 2 ${each.value.ipv4_address} 50000; then
+          echo "Talos API is up on ${each.value.ipv4_address}"
+          exit 0
+        fi
+        echo "Still waiting for ${each.value.ipv4_address}..."
+        sleep 5
+      done
+      echo "ERROR: Talos API did not respond on ${each.value.ipv4_address}"
+      exit 1
+    EOT
   }
+
+  triggers = {
+    vm_id = proxmox_virtual_environment_vm.vm_talos[each.key].id
+  }
+
+  depends_on = [proxmox_virtual_environment_vm.vm_talos]
+}
+
+resource "talos_machine_secrets" "machine_secrets" {}
+
+data "talos_client_configuration" "talosconfig" {
+  cluster_name         = var.cluster_name
+  client_configuration = talos_machine_secrets.machine_secrets.client_configuration
+  endpoints            = [var.controlplane_list[keys(var.controlplane_list)[0]].ipv4_address]
+}
 
 data "talos_machine_configuration" "machineconfig_cp" {
   for_each = var.controlplane_list
 
-  cluster_name     = var.cluster_name
-  cluster_endpoint = join("", ["https://", var.controlplane_list[keys(var.controlplane_list)[0]].ipv4_address, ":6443"])  
-  machine_type     = "controlplane"
-  kubernetes_version = "1.31.4"
-  machine_secrets  = talos_machine_secrets.machine_secrets.machine_secrets
+  cluster_name        = var.cluster_name
+  cluster_endpoint    = join("", ["https://", var.controlplane_list[keys(var.controlplane_list)[0]].ipv4_address, ":6443"])
+  machine_type        = "controlplane"
+  kubernetes_version  = "1.31.4"
+  machine_secrets     = talos_machine_secrets.machine_secrets.machine_secrets
 }
 
 resource "talos_machine_configuration_apply" "cp_config_apply" {
   for_each = var.controlplane_list
-  
-  depends_on                  = [ proxmox_virtual_environment_vm.vm_talos ]
+
+  depends_on                  = [null_resource.wait_for_talos]
   client_configuration        = talos_machine_secrets.machine_secrets.client_configuration
   machine_configuration_input = data.talos_machine_configuration.machineconfig_cp[each.key].machine_configuration
   node                        = each.value.ipv4_address
@@ -108,50 +134,50 @@ resource "talos_machine_configuration_apply" "cp_config_apply" {
 data "talos_machine_configuration" "machineconfig_worker" {
   for_each = var.worker_list
 
-  cluster_name     = var.cluster_name
-  cluster_endpoint = join("", ["https://", var.controlplane_list[keys(var.controlplane_list)[0]].ipv4_address, ":6443"]) 
-  machine_type     = "worker"
-  kubernetes_version = "1.31.4"
-  machine_secrets  = talos_machine_secrets.machine_secrets.machine_secrets
+  cluster_name        = var.cluster_name
+  cluster_endpoint    = join("", ["https://", var.controlplane_list[keys(var.controlplane_list)[0]].ipv4_address, ":6443"])
+  machine_type        = "worker"
+  kubernetes_version  = "1.31.4"
+  machine_secrets     = talos_machine_secrets.machine_secrets.machine_secrets
 }
 
 resource "talos_machine_configuration_apply" "worker_config_apply" {
   for_each = var.worker_list
-  
-  depends_on                  = [ proxmox_virtual_environment_vm.vm_talos ]
+
+  depends_on                  = [null_resource.wait_for_talos]
   client_configuration        = talos_machine_secrets.machine_secrets.client_configuration
   machine_configuration_input = data.talos_machine_configuration.machineconfig_worker[each.key].machine_configuration
   node                        = each.value.ipv4_address
 }
 
 resource "talos_machine_bootstrap" "bootstrap" {
-  depends_on           = [ talos_machine_configuration_apply.cp_config_apply ]
+  depends_on           = [data.talos_cluster_health.health]
   client_configuration = talos_machine_secrets.machine_secrets.client_configuration
   node                 = var.controlplane_list[keys(var.controlplane_list)[0]].ipv4_address
 }
 
+data "talos_cluster_health" "health" {
+  depends_on           = [talos_machine_configuration_apply.cp_config_apply, talos_machine_configuration_apply.worker_config_apply]
+  client_configuration = data.talos_client_configuration.talosconfig.client_configuration
+  control_plane_nodes  = [for vm in var.controlplane_list : vm.ipv4_address]
+  worker_nodes         = [for vm in var.worker_list : vm.ipv4_address]
+  endpoints            = data.talos_client_configuration.talosconfig.endpoints
+}
+
 resource "talos_cluster_kubeconfig" "kubeconfig" {
-  depends_on           = [ talos_machine_bootstrap.bootstrap, data.talos_cluster_health.health ]
+  depends_on           = [talos_machine_bootstrap.bootstrap, data.talos_cluster_health.health]
   client_configuration = talos_machine_secrets.machine_secrets.client_configuration
   node                 = var.controlplane_list[keys(var.controlplane_list)[0]].ipv4_address
 }
 
 output "talosconfig" {
-  value = data.talos_client_configuration.talosconfig.talos_config
+  value     = data.talos_client_configuration.talosconfig.talos_config
   sensitive = true
 }
 
 output "kubeconfig" {
-  value = resource.talos_cluster_kubeconfig.kubeconfig.kubeconfig_raw
+  value     = resource.talos_cluster_kubeconfig.kubeconfig.kubeconfig_raw
   sensitive = true
-}
-
-data "talos_cluster_health" "health" {
-  depends_on           = [ talos_machine_configuration_apply.cp_config_apply, talos_machine_configuration_apply.worker_config_apply ]
-  client_configuration = data.talos_client_configuration.talosconfig.client_configuration
-  control_plane_nodes  = [for vm in var.controlplane_list : vm.ipv4_address]
-  worker_nodes         = [for vm in var.worker_list : vm.ipv4_address]
-  endpoints            = data.talos_client_configuration.talosconfig.endpoints
 }
 
 # Rely on environment variables to populate the Proxmox provider!
