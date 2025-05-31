@@ -48,7 +48,7 @@ variable "worker_list" {
       datastore_id      = "local-ssd"
       disk_size         = 64
       ipv4_address      = "192.168.86.93"
-      gateway           = "192.168.86.1"
+      gateway           = "192.168.86.123"
       tags              = ["terraform", "staging", "talos", "worker"]
     }
   }
