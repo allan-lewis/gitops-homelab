@@ -1,7 +1,7 @@
 ---
 - name: Ensure required config directories exist.
   file:
-    path: "{{ ansible_env.HOME }}/{{ item }}"
+    path: "{{ item }}"
     state: directory
     mode: '0700'
   loop:
