@@ -130,14 +130,6 @@ resource "talos_machine_bootstrap" "bootstrap" {
   node                 = var.controlplane_list[keys(var.controlplane_list)[0]].ipv4_address
 }
 
-data "talos_cluster_health" "health" {
-  depends_on           = [ talos_machine_configuration_apply.cp_config_apply, talos_machine_configuration_apply.worker_config_apply ]
-  client_configuration = data.talos_client_configuration.talosconfig.client_configuration
-  control_plane_nodes  = [for vm in var.controlplane_list : vm.ipv4_address]
-  worker_nodes         = [for vm in var.worker_list : vm.ipv4_address]
-  endpoints            = data.talos_client_configuration.talosconfig.endpoints
-}
-
 resource "talos_cluster_kubeconfig" "kubeconfig" {
   depends_on           = [ talos_machine_bootstrap.bootstrap, data.talos_cluster_health.health ]
   client_configuration = talos_machine_secrets.machine_secrets.client_configuration
@@ -152,6 +144,14 @@ output "talosconfig" {
 output "kubeconfig" {
   value = resource.talos_cluster_kubeconfig.kubeconfig.kubeconfig_raw
   sensitive = true
+}
+
+data "talos_cluster_health" "health" {
+  depends_on           = [ talos_machine_configuration_apply.cp_config_apply, talos_machine_configuration_apply.worker_config_apply ]
+  client_configuration = data.talos_client_configuration.talosconfig.client_configuration
+  control_plane_nodes  = [for vm in var.controlplane_list : vm.ipv4_address]
+  worker_nodes         = [for vm in var.worker_list : vm.ipv4_address]
+  endpoints            = data.talos_client_configuration.talosconfig.endpoints
 }
 
 # Rely on environment variables to populate the Proxmox provider!
