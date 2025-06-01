@@ -97,3 +97,25 @@ subsets:
       - ip: 192.168.86.111
     ports:
       - port: 31200
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: traefik-endpoint-kvm1
+  namespace: traefik
+subsets:
+  - addresses:
+      - ip: 192.168.86.240
+    ports:
+      - port: 80
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: traefik-endpoint-kvm2
+  namespace: traefik
+subsets:
+  - addresses:
+      - ip: 192.168.86.245
+    ports:
+      - port: 80

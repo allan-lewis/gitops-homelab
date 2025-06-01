@@ -600,4 +600,26 @@ spec:
           # Or, to use an external Outpost, create an ExternalName service and reference that here.
           # See https://kubernetes.io/docs/concepts/services-networking/service/#externalname
           name: ak-outpost-authentik-embedded-outpost
-          port: 9000
+          port: 9000       
+    - match: Host(`one.kvm.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: traefik-endpoint-kvm1
+          namespace:  traefik
+          port: 80
+          scheme: http        
+    - match: Host(`two.kvm.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: traefik-endpoint-kvm2
+          namespace:  traefik
+          port: 80
+          scheme: http 

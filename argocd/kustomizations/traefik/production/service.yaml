@@ -97,3 +97,25 @@ spec:
     - protocol: TCP
       port: 31200
       targetPort: 31200
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: traefik-endpoint-kvm1
+  namespace: traefik
+spec:
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: traefik-endpoint-kvm2
+  namespace: traefik
+spec:
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
