@@ -365,6 +365,14 @@ all:
         group: "Sites (K8s)"
         url: "https://transmission.k8s.allanshomelab.com"
         pattern: "*Transmission*"
+      - name: KVM (Polaris)
+        group: "Sites (KVM)"
+        url: "https://one.kvm.allanshomelab.com"
+        pattern: "*JetKVM*"
+      - name: KVM (Sirius)
+        group: "Sites (KVM)"
+        url: "https://two.kvm.allanshomelab.com"
+        pattern: "*JetKVM*"
     homelab_docker_gatus_tcp_endpoints:
       - name: "Guacd"
         group: "K8s Load Balancer IPs"
