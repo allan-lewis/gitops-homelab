@@ -7,17 +7,6 @@ spec:
   entryPoints:
     - websecure
   routes: 
-    - match: Host(`lidarr.k8s.allanshomelab.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: lidarr
-          namespace: media
-          port: 8686
-          scheme: http 
     - match: Host(`homepage.k8s.allanshomelab.com`)
       kind: Rule
       middlewares:
@@ -623,3 +612,25 @@ spec:
           namespace:  traefik
           port: 80
           scheme: http 
+    - match: Host(`lidarr.k8s.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: authentik
+          namespace: default
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: lidarr
+          namespace:  media
+          port: 8686
+          scheme: http        
+    - kind: Rule
+      match: "Host(`lidarr.k8s.allanshomelab.com`) && PathPrefix(`/outpost.goauthentik.io/`)"
+      priority: 15
+      services:
+        - kind: Service
+          # Or, to use an external Outpost, create an ExternalName service and reference that here.
+          # See https://kubernetes.io/docs/concepts/services-networking/service/#externalname
+          name: ak-outpost-authentik-embedded-outpost
+          port: 9000
