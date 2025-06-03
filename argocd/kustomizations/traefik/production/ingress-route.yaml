@@ -51,6 +51,17 @@ spec:
           namespace: media
           port: 7878
           scheme: http   
+    - match: Host(`lidarr-homepage.k8s.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: lidarr
+          namespace: media
+          port: 8686
+          scheme: http 
     - match: Host(`sonarr-homepage.k8s.allanshomelab.com`)
       kind: Rule
       middlewares:
