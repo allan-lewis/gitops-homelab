@@ -29,6 +29,17 @@ spec:
           namespace: longhorn-system
           port: 80
           scheme: http 
+    - match: Host(`lidarr-homepage.k8s.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: lidarr
+          namespace: media
+          port: 8686
+          scheme: http 
     - match: Host(`radarr-homepage.k8s.allanshomelab.com`)
       kind: Rule
       middlewares:
