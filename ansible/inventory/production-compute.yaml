@@ -21,6 +21,9 @@ all:
     canopus:
       ansible_host: 192.168.86.102
       gatus_slug: "(Local Backup NAS)"
+    capella:
+      ansible_host: 100.95.108.6
+      gatus_slug: "(Remote Backup NAS)"
     castor:
       ansible_host: 192.168.86.125
       gatus_slug: "(Staging Dev Ops)"
@@ -169,6 +172,9 @@ all:
       - name: vega
         host: vega.hosts.allanshomelab.com
         url: "http://{{ hostvars['vega'].ansible_host }}"
+      - name: capella
+        host: capella.hosts.allanshomelab.com
+        url: "http://{{ hostvars['capella'].ansible_host }}"
     homelab_docker_gatus_https_endpoints:
       - name: "Mizar"
         group: "Healthchecks"
@@ -222,6 +228,10 @@ all:
       - name: "Vega"
         group: "Sites (Hosts)"
         url: "https://vega.hosts.allanshomelab.com/ui/"
+        pattern: "*ix-root*"
+      - name: "Capella"
+        group: "Sites (Hosts)"
+        url: "https://capella.hosts.allanshomelab.com/ui/"
         pattern: "*ix-root*"
       - name: "Authentik"
         group: "Sites (Allan's Home Lab)"
