@@ -57,6 +57,17 @@ subsets:
 kind: Endpoints
 apiVersion: v1
 metadata:
+  name: traefik-endpoint-capella
+  namespace: traefik
+subsets:
+  - addresses:
+      - ip: 100.95.108.6
+    ports:
+      - port: 80
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
   name: traefik-endpoint-procyon
   namespace: traefik
 subsets:

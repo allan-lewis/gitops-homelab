@@ -27,6 +27,7 @@ dnsmasq:
   customDnsEntries:
     - address=/docker.allanshomelab.com/192.168.86.112
     - address=/vega.hosts.allanshomelab.com/192.168.86.112
+    - address=/capella.hosts.allanshomelab.com/192.168.86.112
     - address=/hosts.allanshomelab.com/192.168.86.187
     - address=/k8s.allanshomelab.com/192.168.86.187
     - address=/kvm.allanshomelab.com/192.168.86.187
