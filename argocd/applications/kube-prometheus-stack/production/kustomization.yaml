@@ -3,24 +3,30 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-- ../../base
+  - ../../base
 
 patches:
-- target:
-    kind: Application
-    name: .*
-  patch: |-
-    - op: replace
-      path: /metadata/name
-      value: kube-prometheus-stack
-    - op: add
-      path: /spec/source/path
-      value: argocd/kustomizations/kube-prometheus-stack/production
-    - op: add
-      path: /spec/destination/namespace
-      value: kube-prometheus-stack
-    - op: add
-      path: /spec/syncPolicy/syncOptions
-      value:
-        - ServerSideApply=true
-    
+  - target:
+      kind: Application
+      name: .*
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: kube-prometheus-stack
+      - op: add
+        path: /spec/source/path
+        value: argocd/kustomizations/kube-prometheus-stack/production
+      - op: add
+        path: /spec/destination/namespace
+        value: kube-prometheus-stack
+      - op: add
+        path: /spec/syncPolicy/syncOptions
+        value:
+          - ServerSideApply=true
+      - op: add
+        path: /spec/ignoreDifferences
+        value:
+          - group: monitoring.coreos.com
+            kind: ServiceMonitor
+            jsonPointers:
+              - /spec/endpoints/0/relabelings
