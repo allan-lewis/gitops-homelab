@@ -42,7 +42,7 @@ all:
       homelab_backup_healthcheck: "64ffa8c0-3251-4048-87e6-f8ce0205c3ff"
       homelab_backup_minute: 15
       homelab_backup_hour: "*"
-      homelab_metrics_forward_url: "http://{{hostvars['vega'].ansible_host}}:9100"
+      homelab_metrics_forward_url: "http://{{hostvars['capella'].ansible_host}}:9100"
       homelab_remote_volumes:
         - src: "/opt/allans-home-lab/gatus/"
           dest: "/mnt/pool1/docker-volumes/gatus/"
@@ -93,9 +93,6 @@ all:
     sirius:
       ansible_host: 192.168.86.105
       gatus_slug: "(Hypervisor)"
-    vega:
-      ansible_host: 100.72.79.7
-      gatus_slug: "(Remote Backup NAS)"
 
   children:
     homelab_ansible_hosts:
@@ -169,9 +166,6 @@ all:
       - name: plex
         host: plex.docker.allanshomelab.com
         url: "http://{{ hostvars['regulus'].ansible_host }}:32400"
-      - name: vega
-        host: vega.hosts.allanshomelab.com
-        url: "http://{{ hostvars['vega'].ansible_host }}"
       - name: capella
         host: capella.hosts.allanshomelab.com
         url: "http://{{ hostvars['capella'].ansible_host }}"
@@ -225,10 +219,6 @@ all:
         url: "http://procyon.hosts.allanshomelab.com/ui/"
         pattern: "*ix-root*"
         check_cert: false
-      - name: "Vega"
-        group: "Sites (Hosts)"
-        url: "https://vega.hosts.allanshomelab.com/ui/"
-        pattern: "*ix-root*"
       - name: "Capella"
         group: "Sites (Hosts)"
         url: "https://capella.hosts.allanshomelab.com/ui/"

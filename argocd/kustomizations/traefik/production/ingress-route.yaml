@@ -523,18 +523,7 @@ spec:
         - name: traefik-endpoint-sirius
           namespace:  traefik
           port: 8006
-          scheme: https     
-    - match: Host(`vega.hosts.allanshomelab.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: traefik-endpoint-vega
-          namespace:  traefik
-          port: 80
-          scheme: http        
+          scheme: https           
     - match: Host(`capella.hosts.allanshomelab.com`)
       kind: Rule
       middlewares:

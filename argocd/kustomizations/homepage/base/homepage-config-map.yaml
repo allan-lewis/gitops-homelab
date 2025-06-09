@@ -144,19 +144,6 @@ data:
               username: {{HOMEPAGE_VAR_SIRIUS_USERNAME}}
               password: {{HOMEPAGE_VAR_SIRIUS_PASSWORD}}
               fields: ['vms', 'resources.cpu', 'resources.mem']
-        - Vega:
-            icon: truenas.png
-            href: https://vega.hosts.allanshomelab.com
-            description: NAS (offsite backup)
-            namespace:
-            app:
-            server:
-            container:
-            widget:
-              type: truenas
-              url: https://vega.hosts.allanshomelab.com
-              username: truenas_admin
-              password: "{{HOMEPAGE_VAR_TRUENAS_PASSWORD}}"
     - Dev Ops:
         - Alertmanager:
             icon: alertmanager.png
