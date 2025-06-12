@@ -14,6 +14,14 @@ all:
         homelab_tailscale_hosts:
           hosts:
             epsilon:
+    homelab_talos_controlplane_nodes:
+      hosts:
+        alpha:
+    homelab_talos_worker_nodes:
+      hosts:
+        beta:
+        gamma:
+        delta:
 
   vars:
     ansible_python_interpreter: "/usr/bin/python3.12"

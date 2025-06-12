@@ -1,0 +1,3 @@
+---
+talosconfig_path: "~/.talos/talosconfig"
+drain_pause_seconds: 120
