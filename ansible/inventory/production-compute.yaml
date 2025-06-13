@@ -141,6 +141,14 @@ all:
         homelab_traefik_hosts:
           hosts:
             mizar:
+    homelab_talos_controlplane_nodes:
+      hosts:
+        bellatrix:
+    homelab_talos_worker_nodes:
+      hosts:
+        alnilam:
+        alnitak:
+        mintaka:
 
   vars:
     ansible_python_interpreter: "/usr/bin/python3.12"
