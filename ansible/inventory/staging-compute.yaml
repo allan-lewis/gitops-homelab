@@ -1,7 +1,15 @@
 all:
   hosts:
+    alpha:
+      ansible_host: 192.168.86.90
+    beta:
+      ansible_host: 192.168.86.91
+    delta:
+      ansible_host: 192.168.86.93
     epsilon:
       ansible_host: 192.168.86.94
+    gamma:
+      ansible_host: 192.168.86.92
 
   children:
     homelab_ansible_hosts:
