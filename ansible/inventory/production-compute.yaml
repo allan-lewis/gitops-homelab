@@ -153,6 +153,7 @@ all:
   vars:
     ansible_python_interpreter: "/usr/bin/python3.12"
     ansible_user: lab
+    homelab_k8s_terraform_dir: "/home/lab/gitops-homelab/terraform/environments/production-k8s"
     homelab_pihole_admin_password: "{{ lookup('env', 'PIHOLE_ADMIN_PASSWORD') }}"
     homelab_telegram_bot_token: "{{ lookup('env', 'TELEGRAM_BOT_TOKEN') }}"
     homelab_telegram_id: "{{ lookup('env', 'TELEGRAM_ID') }}"

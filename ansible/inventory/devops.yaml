@@ -3,11 +3,9 @@ all:
     castor:
       ansible_host: 192.168.86.125
       homelab_ansible_environment: "staging-compute"
-      homelab_k8s_terraform_dir: "/home/lab/gitops-homelab/terraform/environments/staging-k8s"
     pollux:
       ansible_host: 192.168.86.135
       homelab_ansible_environment: "production-compute"
-      homelab_k8s_terraform_dir: "/home/lab/gitops-homelab/terraform/environments/production-k8s"
 
   children:
     homelab_ansible_hosts:
