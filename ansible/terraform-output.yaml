@@ -1,6 +1,6 @@
 ---
 - name: Export Terraform outputs to disk.
-  hosts: homelab_devops_hosts
+  hosts: localhost
   become: no
   gather_facts: yes
 
