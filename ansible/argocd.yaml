@@ -57,3 +57,20 @@
         chart_ref: "{{ argocd_chart_name }}"
         namespace: "{{ argocd_namespace }}"
         create_namespace: false
+
+    - name: Apply ArgoCD ConfigMap customizations.
+      kubernetes.core.k8s:
+        state: present
+        definition:
+          apiVersion: v1
+          kind: ConfigMap
+          metadata:
+            name: argocd-cm
+            namespace: argocd
+            labels:
+              app.kubernetes.io/name: argocd-cm
+              app.kubernetes.io/part-of: argocd
+          data:
+            kustomize.buildOptions: --enable-helm
+            admin.enabled: "true"
+            accounts.admin: apiKey
