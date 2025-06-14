@@ -61,6 +61,7 @@
     - aws
     - kubectl
     - talosctl
+    - helm
 
 - name: Get hosts ready to do DevOps work (as local user).
   hosts: homelab_devops_hosts

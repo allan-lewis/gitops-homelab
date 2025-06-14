@@ -1,0 +1,28 @@
+---
+- name: Download Helm install script.
+  get_url:
+    url: "https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3"
+    dest: /tmp/get_helm.sh
+    mode: '0755'
+
+- name: Run Helm install script.
+  command: /tmp/get_helm.sh
+  environment:
+    DESIRED_VERSION: "v3.14.4"
+  args:
+    creates: /usr/local/bin/helm
+
+- name: Check for the Helm diff plugin.
+  ansible.builtin.command: helm plugin list
+  register: helm_plugins
+  become: true
+  become_user: lab
+  changed_when: false
+
+- name: Install the Helm diff plugin.
+  ansible.builtin.command: helm plugin install https://github.com/databus23/helm-diff
+  when: "'diff' not in helm_plugins.stdout"  
+  become: true
+  become_user: lab
+  args:
+    creates: "/home/lab/.local/share/helm/plugins/helm-diff"

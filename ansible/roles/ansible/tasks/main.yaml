@@ -14,3 +14,10 @@
 - name: Display Ansible version
   debug:
     msg: "Ansible: {{ ansible_version }}"
+
+- name: Install necessary Python dependencies.
+  ansible.builtin.package:
+    name: 
+      - python3-kubernetes
+      - python3-openshift
+    state: present
