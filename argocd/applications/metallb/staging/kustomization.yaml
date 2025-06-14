@@ -23,6 +23,6 @@ patches:
       path: /spec/ignoreDifferences
       value:
         - group: metallb.io
-          kind: BGPPeer
+          kind: CustomResourceDefinition
           jsonPointers:
             - /status
