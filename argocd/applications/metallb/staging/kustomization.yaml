@@ -15,7 +15,5 @@ patches:
     - op: add
       path: /spec/ignoreDifferences
       value:
-        - group: metallb.io
-          kind: BGPPeer
-          jsonPointers:
-            - /status
+        - group: monitoring.coreos.com
+          kind: CustomResourceDefinition
