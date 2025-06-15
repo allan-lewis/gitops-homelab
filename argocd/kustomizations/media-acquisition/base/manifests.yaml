@@ -27,6 +27,19 @@ spec:
           persistentVolumeClaim:
             claimName: autobrr-config
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: autobrr
+  namespace: media
+spec:
+  selector:
+    app: autobrr
+  ports:
+  - name: http
+    targetPort: 7474
+    port: 7474
+---
 kind: Deployment
 apiVersion: apps/v1
 metadata:
