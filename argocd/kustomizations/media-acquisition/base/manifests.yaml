@@ -1,4 +1,32 @@
 ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: autobrr
+  namespace: media
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: autobrr
+  template:
+    metadata:
+      labels:
+        app: autobrr
+    spec:
+      containers:
+        - name: autobrr
+          image: ghcr.io/autobrr/autobrr:1.63.1
+          ports:
+            - containerPort: 7474
+          volumeMounts:
+            - name: config
+              mountPath: /config
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: autobrr-config
+---
 kind: Deployment
 apiVersion: apps/v1
 metadata:
