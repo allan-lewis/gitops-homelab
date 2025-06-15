@@ -40,6 +40,17 @@ spec:
           namespace: media
           port: 8686
           scheme: http 
+    - match: Host(`autobrr.k8s.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: autobrr
+          namespace: media
+          port: 7474
+          scheme: http 
     - match: Host(`radarr-homepage.k8s.allanshomelab.com`)
       kind: Rule
       middlewares:
