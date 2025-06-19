@@ -6,3 +6,10 @@ module "staging_proxmox_ubuntu_vms" {
   public_keys = [var.PROXMOX_VM_PUBLIC_KEY]
 }
 
+module "staging_proxmox_haos_vms" {
+  source = "../../modules/proxmox_home_assistant"
+  
+  vm_list = var.vm_list_haos
+
+  public_keys = [var.PROXMOX_VM_PUBLIC_KEY]
+}
