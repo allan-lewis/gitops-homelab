@@ -28,7 +28,7 @@ resource "proxmox_virtual_environment_vm" "vm_haos" {
     file_id      = "local-lvm:vm-199-disk-0"
     interface    = "scsi0"
     iothread     = true
-    discard      = true
+    discard      = "on"  # Fix: must be a string, not a boolean
   }
 
   network_device {
