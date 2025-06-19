@@ -23,20 +23,6 @@ resource "proxmox_virtual_environment_vm" "vm_haos" {
     dedicated = each.value.memory_dedicated
   }
 
-  initialization {
-    ip_config {
-      ipv4 {
-        address = each.value.ipv4_address
-        gateway = each.value.gateway
-      }
-    }
-
-    user_account {
-      username = "lab"
-      keys = var.public_keys
-    }
-  }
-
   disk {
     datastore_id = each.value.datastore_id
     file_id      = "local:iso/haos_ova-15.2.qcow2"
