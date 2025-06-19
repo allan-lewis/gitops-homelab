@@ -7,17 +7,6 @@ terraform {
   }
 }
 
-# Register the HAOS QCOW2 file as a disk image in Proxmox storage
-resource "proxmox_virtual_environment_file" "haos_disk" {
-  content_type = "disk-image"
-  datastore_id = "local-lvm"
-  node_name    = "polaris"
-
-  source_file {
-    path = "/var/lib/vz/template/iso/haos_ova-15.2.qcow2"
-  }
-}
-
 resource "proxmox_virtual_environment_vm" "vm_haos" {
   for_each = var.vm_list
 
