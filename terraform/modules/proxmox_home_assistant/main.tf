@@ -36,7 +36,7 @@ resource "proxmox_virtual_environment_vm" "vm_haos" {
 
   disk {
     datastore_id = "local-lvm"
-    file_id      = proxmox_virtual_environment_file.haos_disk.id
+    file_id      = "local-lvm:vm-199-disk-0"
     interface    = "scsi0"
     iothread     = true
     discard      = true
