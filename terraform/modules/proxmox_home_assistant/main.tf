@@ -23,14 +23,6 @@ resource "proxmox_virtual_environment_vm" "vm_haos" {
     dedicated = each.value.memory_dedicated
   }
 
-  disk {
-    datastore_id = "local-lvm"
-    file_id      = "local-lvm:vm-199-disk-0"
-    interface    = "scsi0"
-    iothread     = true
-    discard      = "on"  # Fix: must be a string, not a boolean
-  }
-
   network_device {
     bridge = "vmbr0"
   }
