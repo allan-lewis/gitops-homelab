@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    proxmox = {
+      source = "bpg/proxmox"
+      version = "0.78.0"
+    }
+  }
+}
+
 resource "proxmox_virtual_environment_vm" "vm_haos" {
   for_each = var.vm_list
 
