@@ -19,6 +19,10 @@ resource "proxmox_virtual_environment_vm" "vm_haos" {
     type = "x86-64-v2-AES"
   }
 
+  firmware {
+  type = "efi"
+}
+
   memory {
     dedicated = each.value.memory_dedicated
   }
