@@ -1,0 +1,6 @@
+ wget https://github.com/home-assistant/operating-system/releases/download/15.2/haos_ova-15.2.qcow2.xz
+ xz -d haos_ova-15.2.qcow2.xz
+ qm importdisk 107 haos_ova-15.2.qcow2 local-lvm
+ qm set 107 --scsihw virtio-scsi-pci --scsi0 local-lvm:vm-107-disk-0
+ qm set 107 --boot order=scsi0 --bootdisk scsi0
+ qm resize 107 scsi0 128G
