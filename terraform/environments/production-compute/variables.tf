@@ -26,5 +26,20 @@ variable "vm_list_ubuntu" {
   }
 }
 
+variable "vm_list_haos" {
+  description = "A list of Ubuntu VMs to create"
+  default = {
+    zeta = {
+      description       = "Home Assistant VM (managed by Terraform)"
+      proxmox_node      = "polaris"
+      cpu_cores         = 4
+      memory_dedicated  = 4096
+      datastore_id      = "local-lvm"
+      disk_size         = 64
+      tags              = ["terraform", "staging", "haos"]
+    }
+  }
+}
+
 # Set this from an environment variable called TF_VAR_PROXMOX_VM_PUBLIC_KEY
 variable "PROXMOX_VM_PUBLIC_KEY" {}
