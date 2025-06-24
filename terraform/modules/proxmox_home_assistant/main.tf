@@ -20,8 +20,8 @@ resource "proxmox_virtual_environment_vm" "vm_haos" {
   }
 
   firmware {
-  type = "efi"
-}
+    type = "efi"
+  }
 
   memory {
     dedicated = each.value.memory_dedicated
