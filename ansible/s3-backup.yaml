@@ -13,10 +13,13 @@
       - gitops-homelab-terraform
     download_dir: /tmp/s3_backups
     rsync_target: "allan@192.168.86.106:/mnt/pool1/gitops-homelab/s3-backups/"
-    timestamp: "{{ lookup('pipe', 'date +%Y%m%d_%H%M%S') }}"
     cleanup_temp: false
 
   tasks:
+    - name: Generate consistent timestamp
+      set_fact:
+        timestamp: "{{ lookup('pipe', 'date +%Y%m%d_%H%M%S') }}"
+
     - name: Sync each S3 bucket to local temp directory.
       shell: |
         mkdir -p "{{ download_dir }}/{{ item }}"
