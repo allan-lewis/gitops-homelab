@@ -14,19 +14,9 @@
     download_dir: /tmp/s3_backups
     rsync_target: "allan@192.168.86.106:/mnt/pool1/gitops-homelab/s3-backups/"
     timestamp: "{{ lookup('pipe', 'date +%Y%m%d_%H%M%S') }}"
+    cleanup_temp: false
 
   tasks:
-    - name: Remove existing download directory if present.
-      file:
-        path: "{{ download_dir }}"
-        state: absent
-
-    - name: Recreate empty download directory.
-      file:
-        path: "{{ download_dir }}"
-        state: directory
-        mode: '0755'
-
     - name: Sync each S3 bucket to local temp directory.
       shell: |
         mkdir -p "{{ download_dir }}/{{ item }}"
@@ -48,3 +38,9 @@
       loop: "{{ s3_buckets }}"
       register: rsync_results
       failed_when: rsync_results.rc != 0
+
+    - name: Optionally clean up temporary files
+      file:
+        path: "{{ download_dir }}"
+        state: absent
+      when: cleanup_temp
