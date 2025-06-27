@@ -1,0 +1,32 @@
+---
+- name: Generate consistent timestamp
+  set_fact:
+    timestamp: "{{ lookup('pipe', 'date +%Y%m%d_%H%M%S') }}"
+
+- name: Sync each S3 bucket to local temp directory.
+  shell: |
+    mkdir -p "{{ download_dir }}/{{ item }}"
+    aws s3 sync s3://{{ item }} "{{ download_dir }}/{{ item }}"
+  loop: "{{ s3_buckets }}"
+  register: sync_results
+  failed_when: sync_results.rc != 0
+
+- name: Gzip each bucket folder with timestamp.
+  shell: |
+    tar -czf "{{ download_dir }}/{{ item }}_{{ timestamp }}.tar.gz" -C "{{ download_dir }}" "{{ item }}"
+  loop: "{{ s3_buckets }}"
+  register: tar_results
+  failed_when: tar_results.rc != 0
+
+- name: Rsync gzipped backups to remote host.
+  shell: |
+    rsync -avz "{{ download_dir }}/{{ item }}_{{ timestamp }}.tar.gz" "{{ rsync_target }}/"
+  loop: "{{ s3_buckets }}"
+  register: rsync_results
+  failed_when: rsync_results.rc != 0
+
+- name: Optionally clean up temporary files
+  file:
+    path: "{{ download_dir }}"
+    state: absent
+  when: cleanup_temp
