@@ -7,13 +7,6 @@
     homelab_ansible_translate_ip: false
     homelab_ssh_keys: 
       - "192.168.86.106"
-    s3_buckets:
-      - allans-home-lab-longhorn
-      - allans-homelab-terraform-state-bucket
-      - gitops-homelab-longhorn
-      - gitops-homelab-longhorn-attic
-      - gitops-homelab-longhorn-staging
-      - gitops-homelab-terraform
     download_dir: /tmp/s3_backups
     rsync_target: "allan@192.168.86.106:/mnt/pool1/gitops-homelab/s3-backups/"
     cleanup_temp: false

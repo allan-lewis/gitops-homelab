@@ -159,6 +159,13 @@ all:
     homelab_telegram_id: "{{ lookup('env', 'TELEGRAM_ID') }}"
     tailscale_authkey: "{{ lookup('env', 'TAILSCALE_AUTH_KEY') }}"
     homelab_cloudflare_api_key: "{{ lookup('env', 'TRAEFIK_CF_API_KEY') }}"
+    homelab_s3_buckets:
+      - allans-home-lab-longhorn
+      - allans-homelab-terraform-state-bucket
+      - gitops-homelab-longhorn
+      - gitops-homelab-longhorn-attic
+      - gitops-homelab-longhorn-staging
+      - gitops-homelab-terraform
     homelab_docker_traefik_services:
       - name: "whoami"
         host: whoami.docker.allanshomelab.com

@@ -35,4 +35,6 @@ all:
     ansible_python_interpreter: "/usr/bin/python3.12"
     ansible_user: lab
     homelab_k8s_terraform_dir: "/home/lab/gitops-homelab/terraform/environments/staging-k8s"
+    homelab_s3_buckets:
+      - gitops-homelab-terraform
     tailscale_authkey: "{{ lookup('env', 'TAILSCALE_AUTH_KEY') }}"
