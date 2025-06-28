@@ -16,7 +16,7 @@ configs:
           config:
             issuer: ${ARGOCD_AUTHENTIK_ISSUER}
             clientID: ${ARGOCD_AUTHENTIK_CLIENT_ID}
-            clientSecret: ${ARGOCD_AUTHENTIK_CLIENT_ID}
+            clientSecret: ${ARGOCD_AUTHENTIK_CLIENT_SECRET}
             redirectURI: ${ARGOCD_AUTHENTIK_REDIRECT_URI}
             scopes:
               - openid
