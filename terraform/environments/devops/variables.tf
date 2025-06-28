@@ -18,7 +18,7 @@ variable "vm_list_ubuntu" {
       cpu_cores         = 2
       memory_dedicated  = 2048
       datastore_id      = "local-lvm"
-      disk_size         = 64
+      disk_size         = 256
       ipv4_address      = "192.168.86.135/24"
       gateway           = "192.168.86.1"
       tags              = ["terraform", "devops", "ubuntu"]

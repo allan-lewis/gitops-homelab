@@ -2,7 +2,7 @@
 
 set -eu
 
-doppler run --command "envsubst < values.yaml > /tmp/argocd-values.yaml"
+doppler run --command "envsubst < argocd-helm-values-template.yaml > /tmp/argocd-values.yaml"
 
 helm repo add argo https://argoproj.github.io/argo-helm
 helm repo update
