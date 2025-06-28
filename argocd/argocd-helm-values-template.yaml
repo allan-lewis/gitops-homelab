@@ -7,8 +7,9 @@ server:
     - --dex-server=https://argocd-dex-server:5556
 configs:
   params:
-    enable.helm: "true"
-    kustomize.buildOptions: "--enable-helm"
+    kustomize.buildOptions: --enable-helm
+    admin.enabled: "true"
+    accounts.admin: apiKey
   cm:
     url: ${ARGOCD_AUTHENTIK_URL}
     dex.config: |
