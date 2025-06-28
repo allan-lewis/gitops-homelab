@@ -60,8 +60,8 @@ spec:
       services:
         - name: argocd-server
           namespace: argocd
-          port: 80
-          scheme: http    
+          port: 443
+          scheme: https     
     - match: Host(`longhorn.staging.allanshomelab.com`)
       kind: Rule
       middlewares:
