@@ -1,0 +1,33 @@
+server:
+  insecure: true
+  service:
+    ports:
+      https: null
+  extraArgs:
+    - --dex-server=https://argocd-dex-server:5556
+configs:
+  cm:
+    url: ${ARGOCD_AUTHENTIK_URL}
+    dex.config: |
+      connectors:
+        - type: oidc
+          id: authentik
+          name: Authentik
+          config:
+            issuer: ${ARGOCD_AUTHENTIK_ISSUER}
+            clientID: ${ARGOCD_AUTHENTIK_CLIENT_ID}
+            clientSecret: ${ARGOCD_AUTHENTIK_CLIENT_ID}
+            redirectURI: ${ARGOCD_AUTHENTIK_REDIRECT_URI}
+            scopes:
+              - openid
+              - profile
+              - email
+              - groups
+            insecureSkipEmailVerified: true
+            insecureEnableGroups: true
+
+
+  rbac:
+    policy.default: role:readonly
+    policy.csv: |
+      p, user:allan.e.lewis@gmail.com, role:admin, *, *, allow
