@@ -6,10 +6,6 @@ server:
   extraArgs:
     - --dex-server=https://argocd-dex-server:5556
 configs:
-  params:
-    kustomize.buildOptions: --enable-helm
-    admin.enabled: "true"
-    accounts.admin: apiKey
   cm:
     url: ${ARGOCD_AUTHENTIK_URL}
     dex.config: |
