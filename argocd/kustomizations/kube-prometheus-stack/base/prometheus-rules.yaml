@@ -41,7 +41,7 @@ spec:
             count by (name) (
               rate(gatus_results_total{success="false"}[5m])
             ) > 0
-          for: 1m
+          for: 5m
           labels:
             severity: critical
             rulegroup: homelabRules
