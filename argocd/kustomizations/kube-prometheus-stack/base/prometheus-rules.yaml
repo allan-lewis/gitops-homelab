@@ -46,7 +46,7 @@ spec:
           annotations:
             summary: "There are Gatus check failures"
             description: |
-              Gatus has had failed checks for more than 5 minutes.
+              The Gatus endpoint "{{ $labels.name }}" has been failing for more than 5 minutes.
         - alert: HomelabHighCPUUsage
           expr: 100 - (avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
           for: 5m
