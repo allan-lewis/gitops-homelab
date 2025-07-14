@@ -38,9 +38,7 @@ spec:
               The public IP update metric has not refreshed in over 20 minutes.
         - alert: HomelabGatusFailures
           expr: |
-            count by (name) (
-              rate(gatus_results_total{success="false"}[5m])
-            ) > 0
+            increase(gatus_results_total{success="false"}[5m]) > 0
           for: 5m
           labels:
             severity: critical
