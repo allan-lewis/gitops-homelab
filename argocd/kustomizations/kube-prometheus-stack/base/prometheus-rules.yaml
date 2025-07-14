@@ -37,14 +37,17 @@ spec:
             description: |
               The public IP update metric has not refreshed in over 20 minutes.
         - alert: HomelabGatusFailures
-          expr: count(rate(gatus_results_total{success="false"}[5m]) > 0)
+          expr: |
+            count by (name) (
+              rate(gatus_results_total{success="false"}[5m])
+            ) > 0
           for: 1m
           labels:
             severity: critical
             rulegroup: homelabRules
             namespace: kube-prometheus-stack
           annotations:
-            summary: "There are Gatus check failures"
+            summary: "Gatus check failure: {{ $labels.name }}"
             description: |
               The Gatus endpoint "{{ $labels.name }}" has been failing for more than 5 minutes.
         - alert: HomelabHighCPUUsage
