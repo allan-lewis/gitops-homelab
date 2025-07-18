@@ -69,3 +69,11 @@
     test_command: uptime
   when: (openvpn_configs is changed) or (openvpn_scripts is changed) or (openvpn_service is changed)
   
+- name: Add a cron job to restart rc-local at midnight.
+  cron:
+    name: "Restart rc-local daily at midnight"
+    minute: "0"
+    hour: "0"
+    user: root
+    job: "systemctl restart rc-local"
+    state: present
