@@ -215,6 +215,7 @@ data:
               type: authentik
               url: https://auth.allanshomelab.com
               key: {{HOMEPAGE_VAR_AUTHENTIK_KEY}}
+              version: 2
         - Cloudflared:
             icon: cloudflare.png
             href: {{HOMEPAGE_VAR_CLOUDFLARE_URL}}
