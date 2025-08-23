@@ -337,7 +337,7 @@ spec:
           namespace: portainer
           port: 9000
           scheme: http 
-    - match: Host(`memos.k8s.allanshomelab.com`)
+    - match: Host(`memos.allanandvaia.com`)
       kind: Rule
       middlewares:
         - name: traefik-custom-headers
