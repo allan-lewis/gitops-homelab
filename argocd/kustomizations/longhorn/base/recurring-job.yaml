@@ -178,3 +178,15 @@ spec:
   cron: "0 12 * * *"  # Run at 12:00 PM (Z) every day
   retain: 3           # Keep 3 backups (rolling window)
   concurrency: 1      # Run 1 backup at a time
+---
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: memos
+  namespace: longhorn-system
+spec:
+  name: memos
+  task: backup
+  cron: "20 12 * * *"  # Run at 12:20 PM (Z) every day
+  retain: 3            # Keep 3 backups (rolling window)
+  concurrency: 1       # Run 1 backup at a time
