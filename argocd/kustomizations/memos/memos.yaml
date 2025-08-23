@@ -1,0 +1,34 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: memos
+  namespace: memos
+  labels:
+    app: memos
+spec:
+  replicas: 1
+  progressDeadlineSeconds: 600
+  revisionHistoryLimit: 2
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: memos
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: memos
+        app: memos
+    spec:
+      containers:
+      - name: memos
+        image: neosmemo/memos:0.25.0
+        imagePullPolicy: "Always"
+        volumeMounts:
+          - mountPath: /var/opt/memos
+            name: memos-data
+      volumes:
+        - name: memos-data
+          persistentVolumeClaim:
+            claimName: memos-pvc
