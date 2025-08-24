@@ -347,6 +347,12 @@ data:
               type: transmission
               url: https://transmission.k8s.allanshomelab.com
     - Productivity:
+        - Memos:
+            icon: memos.png
+            href: https://memos.allanandvaia.com
+            description: Note-taking
+            namespace: memos
+            app: memos
         - Nextcloud:
             icon: nextcloud.png
             href: https://cloud.allanandvaia.com
