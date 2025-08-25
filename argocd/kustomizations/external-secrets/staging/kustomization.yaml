@@ -6,9 +6,10 @@ resources:
 - ../base
 - https://raw.githubusercontent.com/external-secrets/external-secrets/v0.19.2/deploy/crds/bundle.yaml
 
-# helmCharts:
-# - name: external-secrets
-#   repo: https://charts.external-secrets.io
-#   releaseName: external-secrets
-#   namespace: external-secrets
-#   version: 0.18.2
+helmCharts:
+- name: external-secrets
+  repo: https://charts.external-secrets.io
+  releaseName: external-secrets
+  namespace: external-secrets
+  version: 0.19.2
+  valuesFile: values.yaml
