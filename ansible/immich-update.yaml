@@ -8,7 +8,7 @@
     immich_compose_url: "https://raw.githubusercontent.com/immich-app/immich/{{ homelab_immich_version }}/docker/docker-compose.yml"
     raw_path: "/tmp/immich-compose-raw.yml"
     final_path: "{{ playbook_dir }}/roles/immich/files/docker-compose.yml"
-    homelab_immich_version: "v1.139.2"
+    homelab_immich_version: "v1.139.4"
 
   tasks:
     - name: Ensure roles/immich/files directory exists
