@@ -19,3 +19,7 @@ patches:
     - op: add
       path: /spec/destination/namespace
       value: external-secrets
+    - op: add
+      path: /spec/syncPolicy/syncOptions
+      value:
+        - ServerSideApply=true
