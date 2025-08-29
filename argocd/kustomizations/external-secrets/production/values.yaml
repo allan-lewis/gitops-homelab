@@ -1,0 +1,2 @@
+# Do not install/upgrade CRDs via the Helm chart.
+installCRDs: false
