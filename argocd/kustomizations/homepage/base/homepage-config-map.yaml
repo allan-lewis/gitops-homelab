@@ -353,18 +353,6 @@ data:
             description: Note-taking
             namespace: memos
             app: memos
-        - Nextcloud:
-            icon: nextcloud.png
-            href: https://cloud.allanandvaia.com
-            description: Online collaboration platform
-            namespace: nextcloud
-            app: nextcloud 
-            widget:
-              type: nextcloud
-              url: https://cloud.allanandvaia.com
-              username: {{HOMEPAGE_VAR_NEXTCLOUD_USERNAME}}
-              password: {{HOMEPAGE_VAR_NEXTCLOUD_PASSWORD}}
-              fields: ['freespace', 'activeusers']
         - Vaultwarden:
             icon: bitwarden.png
             href: https://vault.allanshomelab.com
