@@ -359,12 +359,6 @@ data:
             description: Secrets management
             namespace: vaultwarden
             app: vaultwarden
-        - WikiJS:
-            icon: wikijs.png
-            href: https://wiki.allanshomelab.com
-            description: Wiki
-            namespace: wikijs
-            app: wiki
     - Home Automation:
         - Homeassistant:
             icon: home-assistant.png

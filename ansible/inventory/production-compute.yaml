@@ -279,10 +279,6 @@ all:
         group: "Sites (Allan & Vaia)"
         url: "https://vault.allanandvaia.com"
         pattern: "*Vaultwarden*"
-      - name: "Wiki.js"
-        group: "Sites (Allan & Vaia)"
-        url: "https://wiki.allanandvaia.com"
-        pattern: "*Login*"
       - name: Grafana
         group: "Sites (Allan's Home Lab)"
         url: "https://grafana.allanshomelab.com"
