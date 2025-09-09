@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: tautulli
-        image: linuxserver/tautulli:2.15.3
+        image: linuxserver/tautulli:2.16.0
         imagePullPolicy: "Always"
         env:
           - name: TZ
