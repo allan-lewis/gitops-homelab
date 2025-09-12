@@ -10,5 +10,5 @@ helmCharts:
   repo: https://charts.js.wiki
   releaseName: wikijs
   namespace: wikijs
-  version: 2.2.23
+  version: 2.2.24
   valuesFile: values.yaml
