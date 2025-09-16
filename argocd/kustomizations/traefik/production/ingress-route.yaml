@@ -330,7 +330,7 @@ spec:
       kind: Rule
       middlewares:
         - name: traefik-custom-headers
-          namespace: default
+          namespace: memos
       priority: 10
       services:
         - name: memos
