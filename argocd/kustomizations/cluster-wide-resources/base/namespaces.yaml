@@ -70,7 +70,6 @@ metadata:
   name: memos
   labels:
     name: memos
-    name: memos
     pod-security.kubernetes.io/enforce: privileged
 ---
 kind: Namespace
