@@ -1,9 +1,7 @@
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  name: traefik-read-backends
-  namespace: memos
+kind: ClusterRole
+metadata: { name: traefik-read-backends }
 rules:
 - apiGroups: [""]
   resources: ["services","endpoints"]
@@ -11,17 +9,19 @@ rules:
 - apiGroups: ["discovery.k8s.io"]
   resources: ["endpointslices"]
   verbs: ["get","list","watch"]
+- apiGroups: ["traefik.io"]
+  resources: ["ingressroutes","middlewares","ingressroutetcps","ingressrouteudps","traefikservices","tlsoptions","tlsstores"]
+  verbs: ["get","list","watch"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: traefik-read-backends
-  namespace: memos
+kind: ClusterRoleBinding
+metadata: { name: traefik-read-backends }
 roleRef:
   apiGroup: rbac.authorization.k8s.io
-  kind: Role
+  kind: ClusterRole
   name: traefik-read-backends
 subjects:
 - kind: ServiceAccount
-  name: traefik
-  namespace: traefik
+  name: traefik        # your SA name
+  namespace: traefik   # your SA namespace
+  
