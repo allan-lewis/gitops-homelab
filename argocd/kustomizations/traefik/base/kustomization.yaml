@@ -10,3 +10,4 @@ resources:
 - middleware.yaml
 - ingress-route-dashboard.yaml
 - ingress-route.yaml
+- rbac.yaml
