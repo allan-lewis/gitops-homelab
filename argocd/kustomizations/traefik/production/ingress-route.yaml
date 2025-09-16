@@ -315,17 +315,17 @@ spec:
           namespace: portainer
           port: 9000
           scheme: http 
-    - match: Host(`memos.allanandvaia.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: memos
-          namespace: memos
-          port: 5230
-          scheme: http 
+    # - match: Host(`memos.allanandvaia.com`)
+    #   kind: Rule
+    #   middlewares:
+    #     - name: traefik-custom-headers
+    #       namespace: default
+    #   priority: 10
+    #   services:
+    #     - name: memos
+    #       namespace: memos
+    #       port: 5230
+    #       scheme: http 
     - match: Host(`memos.k8s.allanshomelab.com`)
       kind: Rule
       middlewares:
