@@ -287,6 +287,16 @@ data:
             widget:
               type: jackett
               url: https://jackett.k8s.allanshomelab.com
+        - Jellyfin:
+            icon: jellyfin.png
+            href: https://jellyfin.docker.allanshomelab.com
+            description: Media server
+            server: regulus
+            container: jellyfin
+            widget:
+              type: jellyfin
+              url: https://jellyfin.docker.allanshomelab.com
+              key: {{HOMEPAGE_VAR_JELLYFIN_KEY}}
         - Lidarr:
             icon: lidarr.png
             href: https://lidarr.k8s.allanshomelab.com
