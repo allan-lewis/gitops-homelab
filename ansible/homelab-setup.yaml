@@ -131,6 +131,14 @@
   roles:
     - plex
 
+- name: Setup Jellyfin.
+  hosts: homelab_jellyfin_hosts
+  become: yes
+  gather_facts: yes
+
+  roles:
+    - jellyfin
+
 - name: Setup Immich.
   hosts: homelab_immich_hosts
   become: yes

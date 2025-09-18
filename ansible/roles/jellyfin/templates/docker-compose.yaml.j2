@@ -1,0 +1,23 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:2025090105
+    container_name: jellyfin
+    user: {{ homelab_user_id }}:{{ homelab_group_id }}
+    network_mode: 'host'
+    volumes:
+      - {{ homelab_docker_jellyfin_config }}:/config
+      - {{ homelab_docker_jellyfin_cache }}:/cache
+      #- type: bind
+      #  source: /path/to/media
+      #  target: /media
+      #- type: bind
+      #  source: /path/to/media2
+      #  target: /media2
+      #  read_only: true
+    restart: 'unless-stopped'
+    # Optional - alternative address used for autodiscovery
+    environment:
+      - JELLYFIN_PublishedServerUrl=https://jellyfin.plex.allanshomelab.com
+    # Optional - may be necessary for docker healthcheck to pass if running in host network mode
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'

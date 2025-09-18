@@ -1,0 +1,38 @@
+---
+- name: Get entries from the passwd database.
+  ansible.builtin.getent:
+    database: passwd
+  when: ahl_getent_passwd is undefined
+
+- name: Set uid and gid facts.
+  ansible.builtin.set_fact:
+    homelab_user_id: "{{ ansible_facts.getent_passwd[ansible_ssh_user].1 | int }}"
+    homelab_group_id: "{{ ansible_facts.getent_passwd[ansible_ssh_user].2 | int }}"
+  register: ahl_getent_passwd
+  when: ahl_getent_passwd is undefined
+
+- name: Ensure that the destination directory exists.
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
+  with_items:
+    - "{{ homelab_docker_jellyfin_config }}"
+    - "{{ homelab_docker_jellyfin_cache }}"
+
+- name: Create a temporary directoryfor the Docker Compose manifest.
+  ansible.builtin.file:
+    path: "{{ homelab_docker_jellyfin_tmp }}"
+    state: directory
+
+- name: Write the Docker Compose manifest.
+  ansible.builtin.template:
+    src: docker-compose.yaml.j2
+    dest: "{{ homelab_docker_jellyfin_tmp }}/docker-compose.yml"
+
+- name: Deploy the Docker Compose stack.
+  community.docker.docker_compose_v2:
+    project_src: "{{ homelab_docker_jellyfin_tmp }}"
+    pull: "always"
+    recreate: "always"
