@@ -29,7 +29,7 @@ spec:
         args:
         - --token
         - $(CLOUDFLARE_TUNNEL_TOKEN)
-        image: cloudflare/cloudflared:2025.8.1
+        image: cloudflare/cloudflared:2025.9.0
         envFrom:
         - secretRef:
             name: cloudflare-secret
