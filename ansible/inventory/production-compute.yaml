@@ -120,6 +120,9 @@ all:
         homelab_immich_hosts:
           hosts:
             regulus:
+        homelab_jellyfin_hosts:
+          hosts:
+            regulus:
         homelab_node_exporter_hosts:
           hosts:
             alcor:
