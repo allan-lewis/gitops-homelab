@@ -7,13 +7,10 @@ services:
     volumes:
       - {{ homelab_docker_jellyfin_config }}:/config
       - {{ homelab_docker_jellyfin_cache }}:/cache
-      #- type: bind
-      #  source: /path/to/media
-      #  target: /media
-      #- type: bind
-      #  source: /path/to/media2
-      #  target: /media2
-      #  read_only: true
+      - type: bind
+        source: /mnt/media-library
+        target: /media-library
+        read_only: true        
     restart: 'unless-stopped'
     # Optional - alternative address used for autodiscovery
     environment:
