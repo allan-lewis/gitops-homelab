@@ -187,6 +187,9 @@ all:
       - name: gatus
         host: gatus.docker.allanshomelab.com
         url: "http://{{ hostvars['mizar'].ansible_host }}:8080"
+      - name: jellyfin
+        host: jellyfin.docker.allanshomelab.com
+        url: "http://{{ hostvars['regulus'].ansible_host }}:8096"
       - name: plex
         host: plex.docker.allanshomelab.com
         url: "http://{{ hostvars['regulus'].ansible_host }}:32400"
