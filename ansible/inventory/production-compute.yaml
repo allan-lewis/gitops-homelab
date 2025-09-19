@@ -95,6 +95,10 @@ all:
           dest: "/mnt/pool1/docker-volumes/plex/"
           host: procyon
           user: allan
+        - src: "/opt/allans-home-lab/jellyfin/"
+          dest: "/mnt/pool1/docker-volumes/jellyfin/"
+          host: procyon
+          user: allan
     sirius:
       ansible_host: 192.168.86.105
       gatus_slug: "(Hypervisor)"
