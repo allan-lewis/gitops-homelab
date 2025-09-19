@@ -401,10 +401,6 @@ all:
         url: "https://two.kvm.allanshomelab.com"
         pattern: "*JetKVM*"
     homelab_docker_gatus_tcp_endpoints:
-      - name: "Guacd"
-        group: "K8s Load Balancer IPs"
-        url: "tcp://guacd.k8s.allanshomelab.com:35101"
-        ip: "192.168.86.193"
       - name: "MariaDB"
         group: "K8s Load Balancer IPs"
         url: "tcp://mariadb.k8s.allanshomelab.com:3306"
