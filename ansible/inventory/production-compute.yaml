@@ -306,10 +306,6 @@ all:
         group: "Sites (Allan's Home Lab)"
         url: "https://gitops.allanshomelab.com"
         pattern: "*Argo CD*"
-      - name: Guacamole
-        group: "Sites (Allan's Home Lab)"
-        url: "https://guacamole.allanshomelab.com/guacamole/"
-        pattern: "*guacamole*"
       - name: "Vaultwarden (Allan's Home Lab)"
         group: "Sites (Allan's Home Lab)"
         url: "https://vault.allanshomelab.com"
