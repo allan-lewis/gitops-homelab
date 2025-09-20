@@ -86,12 +86,6 @@ data:
               url: https://capella.hosts.allanshomelab.com
               username: truenas_admin
               password: "{{HOMEPAGE_VAR_TRUENAS_PASSWORD}}"
-        - Guacamole:
-            icon: guacamole.png
-            href: https://guacamole.allanshomelab.com/guacamole
-            description: Remote connection gateway
-            namespace: guacamole
-            app: guacamole
         - Longhorn:
             icon: longhorn.png
             href: https://longhorn.k8s.allanshomelab.com
