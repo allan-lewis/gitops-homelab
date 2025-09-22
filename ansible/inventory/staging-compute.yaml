@@ -18,15 +18,19 @@ all:
     roland:
       ansible_host: 192.168.86.201
       gatus_slug: "(K8s Control Plane)" 
+      gatus_enabled: false
     eddie:
       ansible_host: 192.168.86.202
       gatus_slug: "(K8s Worker)"
+      gatus_enabled: false
     jake:
       ansible_host: 192.168.86.203
       gatus_slug: "(K8s Worker)"
+      gatus_enabled: false
     susannah:
       ansible_host: 192.168.86.204
       gatus_slug: "(K8s Worker*)"
+      gatus_enabled: false
 
   children:
     homelab_ansible_hosts:
