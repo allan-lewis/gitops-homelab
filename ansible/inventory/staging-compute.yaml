@@ -26,7 +26,7 @@ all:
       gatus_slug: "(K8s Worker)"
     susannah:
       ansible_host: 192.168.86.204
-      gatus_slug: "(K8s Worker)"
+      gatus_slug: "(K8s Worker*)"
 
   children:
     homelab_ansible_hosts:
