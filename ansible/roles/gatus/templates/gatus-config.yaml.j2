@@ -15,6 +15,7 @@ endpoints:
 {% for host in groups['all']| default([]) %}
   - name: "{{ host  | capitalize }} {{ hostvars[host].gatus_slug }}"
     group: "Hosts"
+    enabled: {{ hostvars[host].gatus_enabled | default(true) }}
     url: "icmp://{{ hostvars[host].ansible_host }}"
 #    alerts:
 #      - type: telegram
