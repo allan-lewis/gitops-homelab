@@ -27,6 +27,10 @@ all:
         homelab_docker_hosts:
           hosts:
             epsilon:
+          children:
+            homelab_gatus_hosts:
+              hosts:
+                epsilon:
         homelab_tailscale_hosts:
           hosts:
             epsilon:
