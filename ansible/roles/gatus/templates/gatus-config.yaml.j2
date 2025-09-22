@@ -4,10 +4,12 @@ storage:
 
 metrics: true
 
+{% if homelab_telegram_bot_token is defined %}
 alerting:
   telegram:
     token: "{{ homelab_telegram_bot_token }}"
     id: "{{ homelab_telegram_id }}"
+{% endif %}
 
 endpoints:
 {% for host in groups['all']| default([]) %}
