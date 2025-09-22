@@ -1,13 +1,13 @@
 ---
-- name: Fail if homelab_telegram_bot_token is empty.
-  fail:
-    msg: "TELEGRAM_BOT_TOKEN environment variable is required but not set."
-  when: homelab_telegram_bot_token == ''
+# - name: Fail if homelab_telegram_bot_token is empty.
+#   fail:
+#     msg: "TELEGRAM_BOT_TOKEN environment variable is required but not set."
+#   when: homelab_telegram_bot_token == ''
 
-- name: Fail if homelab_telegram_id is empty.
-  fail:
-    msg: "TELEGRAM_ID environment variable is required but not set."
-  when: homelab_telegram_id == ''
+# - name: Fail if homelab_telegram_id is empty.
+#   fail:
+#     msg: "TELEGRAM_ID environment variable is required but not set."
+#   when: homelab_telegram_id == ''
 
 - name: Create directories for Gatus.
   ansible.builtin.file:
