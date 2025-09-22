@@ -12,12 +12,16 @@ all:
       ansible_host: 192.168.86.92
     roland:
       ansible_host: 192.168.86.201
+      gatus_slug: "(K8s Control Plane)" 
     eddie:
       ansible_host: 192.168.86.202
+      gatus_slug: "(K8s Worker)"
     jake:
       ansible_host: 192.168.86.203
+      gatus_slug: "(K8s Worker)"
     susannah:
       ansible_host: 192.168.86.204
+      gatus_slug: "(K8s Worker)"
 
   children:
     homelab_ansible_hosts:
