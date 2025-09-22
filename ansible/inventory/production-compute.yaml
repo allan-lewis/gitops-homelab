@@ -1,10 +1,5 @@
 all:
   hosts:
-    ## NEW HOSTS
-    # gilead:
-    #   ansible_host: 192.168.86.200
-    #   gatus_slug: "(Hypervisor)"
-    ## OLD HOSTS
     alcor:
       ansible_host: 192.168.86.123
       gatus_slug: "(OpenVPN Server)"

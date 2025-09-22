@@ -10,6 +10,14 @@ all:
       ansible_host: 192.168.86.94
     gamma:
       ansible_host: 192.168.86.92
+    roland:
+      ansible_host: 192.168.86.201
+    eddie:
+      ansible_host: 192.168.86.202
+    jake:
+      ansible_host: 192.168.86.203
+    susannah:
+      ansible_host: 192.168.86.204
 
   children:
     homelab_ansible_hosts:
