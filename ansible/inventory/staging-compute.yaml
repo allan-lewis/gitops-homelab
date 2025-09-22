@@ -2,14 +2,19 @@ all:
   hosts:
     alpha:
       ansible_host: 192.168.86.90
+      gatus_slug: "(K8s Control Plane)" 
     beta:
       ansible_host: 192.168.86.91
+      gatus_slug: "(K8s Worker)"
     delta:
       ansible_host: 192.168.86.93
+      gatus_slug: "(K8s Worker)"
     epsilon:
       ansible_host: 192.168.86.94
+      gatus_slug: "(Docker)"
     gamma:
       ansible_host: 192.168.86.92
+      gatus_slug: "(K8s Worker)"
     roland:
       ansible_host: 192.168.86.201
       gatus_slug: "(K8s Control Plane)" 
