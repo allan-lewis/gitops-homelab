@@ -1,7 +1,12 @@
 all:
   hosts:
     ## NEW HOSTS
-    ## K8s
+    ## VIRTUAL MACHINES
+    pennywise:
+      ansible_host: 192.168.86.220
+      gatus_slug: "(Primary NAS)"
+      gatus_enabled: false
+    ## KUBERNETES
     roland:
       ansible_host: 192.168.86.230
       gatus_slug: "(K8s Control Plane)" 

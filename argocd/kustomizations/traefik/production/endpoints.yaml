@@ -105,7 +105,7 @@ metadata:
   namespace: traefik
 subsets:
   - addresses:
-      - ip: 192.168.86.240
+      - ip: 192.168.86.247
     ports:
       - port: 80
 ---
@@ -116,6 +116,6 @@ metadata:
   namespace: traefik
 subsets:
   - addresses:
-      - ip: 192.168.86.245
+      - ip: 192.168.86.248
     ports:
       - port: 80
