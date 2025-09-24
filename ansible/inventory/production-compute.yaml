@@ -1,22 +1,27 @@
 all:
   hosts:
     ## NEW HOSTS
+    ## K8s
     roland:
-      ansible_host: 192.168.86.201
+      ansible_host: 192.168.86.230
       gatus_slug: "(K8s Control Plane)" 
       gatus_enabled: false
     eddie:
-      ansible_host: 192.168.86.202
+      ansible_host: 192.168.86.234
       gatus_slug: "(K8s Worker)"
       gatus_enabled: false
     jake:
-      ansible_host: 192.168.86.203
+      ansible_host: 192.168.86.235
       gatus_slug: "(K8s Worker)"
       gatus_enabled: false
     susannah:
-      ansible_host: 192.168.86.204
+      ansible_host: 192.168.86.236
       gatus_slug: "(K8s Worker*)"
       gatus_enabled: false
+    ## OFF PREMISES
+    flagg:
+      ansible_host: 100.95.108.6
+      gatus_slug: "(Remote Backup NAS)"
     ## OLD HOSTS
     alcor:
       ansible_host: 192.168.86.123
