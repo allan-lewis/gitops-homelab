@@ -7,5 +7,5 @@ helmCharts:
   repo: https://releases.rancher.com/server-charts/stable
   releaseName: rancher
   namespace: cattle-system
-  version: 2.12.1
+  version: 2.12.2
   valuesFile: values.yaml
