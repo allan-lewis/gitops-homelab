@@ -13,6 +13,17 @@ subsets:
 kind: Endpoints
 apiVersion: v1
 metadata:
+  name: traefik-endpoint-derry
+  namespace: traefik
+subsets:
+  - addresses:
+      - ip: 192.168.86.210
+    ports:
+      - port: 8000
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
   name: traefik-endpoint-canopus
   namespace: traefik
 subsets:

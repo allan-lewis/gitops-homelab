@@ -480,6 +480,17 @@ spec:
           namespace:  traefik
           port: 8123
           scheme: http        
+    - match: Host(`derry.hosts.allanshomelab.com`)
+      kind: Rule
+      middlewares:
+        - name: traefik-custom-headers
+          namespace: default
+      priority: 10
+      services:
+        - name: traefik-endpoint-derry
+          namespace:  traefik
+          port: 8000
+          scheme: http      
     - match: Host(`canopus.hosts.allanshomelab.com`)
       kind: Rule
       middlewares:

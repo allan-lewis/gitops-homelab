@@ -35,6 +35,17 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
+  name: traefik-endpoint-derry
+  namespace: traefik
+spec:
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+---
+kind: Service
+apiVersion: v1
+metadata:
   name: traefik-endpoint-canopus
   namespace: traefik
 spec:

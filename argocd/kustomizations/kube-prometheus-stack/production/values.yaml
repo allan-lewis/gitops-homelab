@@ -118,6 +118,11 @@ prometheus:
             replacement: 'polaris'
           - action: replace
             source_labels: ['__address__']
+            regex: '192.168.86.210:9100'
+            target_label: instance
+            replacement: 'derry'
+          - action: replace
+            source_labels: ['__address__']
             regex: '192.168.86.102:9100'
             target_label: instance
             replacement: 'canopus'

@@ -86,6 +86,10 @@ data:
               url: https://capella.hosts.allanshomelab.com
               username: truenas_admin
               password: "{{HOMEPAGE_VAR_TRUENAS_PASSWORD}}"
+        - Derry:
+            icon: https://styles.redditmedia.com/t5_23wawa/styles/communityIcon_4dwn4v5j0f641.png?width=256&v=enabled&s=27560fbcc6159fe0c23f4a3e5366223954d32509
+            href: https://derry.hosts.allanshomelab.com
+            description: NAS (local backup)
         - Longhorn:
             icon: longhorn.png
             href: https://longhorn.k8s.allanshomelab.com
