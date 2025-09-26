@@ -2,6 +2,9 @@ all:
   hosts:
     ## NEW HOSTS
     ## BARE METAL
+    derry:
+      ansible_host: 192.168.86.205
+      gatus_slug: "(Local Backup NAS)"
     maturin:
       ansible_host: 192.168.86.200
       gatus_slug: "(Hypervisor)"
