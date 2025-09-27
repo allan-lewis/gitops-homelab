@@ -182,12 +182,12 @@ all:
             mizar:
     homelab_talos_controlplane_nodes:
       hosts:
-        bellatrix:
+        roland:
     homelab_talos_worker_nodes:
       hosts:
-        alnilam:
-        alnitak:
-        mintaka:
+        eddie:
+        jake:
+        susannah:
 
   vars:
     ansible_python_interpreter: "/usr/bin/python3.12"
