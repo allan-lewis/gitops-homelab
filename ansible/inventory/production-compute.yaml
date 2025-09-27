@@ -21,19 +21,15 @@ all:
     roland:
       ansible_host: 192.168.86.230
       gatus_slug: "(K8s Control Plane)" 
-      gatus_enabled: false
     eddie:
       ansible_host: 192.168.86.234
       gatus_slug: "(K8s Worker)"
-      gatus_enabled: false
     jake:
       ansible_host: 192.168.86.235
       gatus_slug: "(K8s Worker)"
-      gatus_enabled: false
     susannah:
       ansible_host: 192.168.86.236
       gatus_slug: "(K8s Worker*)"
-      gatus_enabled: false
     ## OFF PREMISES
     gilead:
       ansible_host: 100.95.108.6
