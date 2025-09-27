@@ -227,6 +227,10 @@ all:
       - name: capella
         host: capella.hosts.allanshomelab.com
         url: "http://{{ hostvars['capella'].ansible_host }}"
+      - name: sirius
+        host: sirius.docker.allanshomelab.com
+        url: "http://{{ hostvars['sirius'].ansible_host }}"
+        scheme: https
     homelab_docker_gatus_https_endpoints:
       - name: "Mizar"
         group: "Healthchecks"
