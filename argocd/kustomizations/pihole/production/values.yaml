@@ -28,6 +28,8 @@ dnsmasq:
     - address=/derry.local.allanshomelab.com/192.168.86.210
     - address=/homeassistant.local.allanshomelab.com/192.168.86.124
     - address=/procyon.local.allanshomelab.com/192.168.86.106
+    - address=/polaris.local.allanshomelab.com/192.168.86.101
+    - address=/sirius.local.allanshomelab.com/192.168.86.105
     - address=/docker.allanshomelab.com/192.168.86.112
     - address=/capella.hosts.allanshomelab.com/192.168.86.112
     - address=/hosts.allanshomelab.com/192.168.86.187

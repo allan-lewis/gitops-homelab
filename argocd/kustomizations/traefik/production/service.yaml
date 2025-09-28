@@ -26,6 +26,24 @@ spec:
   type: ExternalName
   externalName: procyon.local.allanshomelab.com
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: traefik-service-polaris-local
+  namespace: traefik
+spec:
+  type: ExternalName
+  externalName: polaris.local.allanshomelab.com
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: traefik-service-sirius-local
+  namespace: traefik
+spec:
+  type: ExternalName
+  externalName: sirius.local.allanshomelab.com
+---
 kind: Service
 apiVersion: v1
 metadata:

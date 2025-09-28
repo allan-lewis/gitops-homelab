@@ -498,7 +498,7 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: traefik-endpoint-polaris
+        - name: traefik-service-polaris-local
           namespace:  traefik
           port: 8006
           scheme: https              
@@ -509,7 +509,7 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: traefik-endpoint-sirius
+        - name: traefik-service-sirius-local
           namespace:  traefik
           port: 8006
           scheme: https           
