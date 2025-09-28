@@ -542,7 +542,7 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: traefik-endpoint-immich
+        - name: traefik-service-immich-local
           namespace:  traefik
           port: 2283
           scheme: http        

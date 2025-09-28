@@ -38,6 +38,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: traefik-service-immich-local
+  namespace: traefik
+spec:
+  type: ExternalName
+  externalName: immich.local.allanshomelab.com
+---
+apiVersion: v1
+kind: Service
+metadata:
   name: traefik-service-sirius-local
   namespace: traefik
 spec:

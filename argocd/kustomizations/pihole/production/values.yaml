@@ -30,6 +30,7 @@ dnsmasq:
     - address=/procyon.local.allanshomelab.com/192.168.86.106
     - address=/polaris.local.allanshomelab.com/192.168.86.101
     - address=/sirius.local.allanshomelab.com/192.168.86.105
+    - address=/immich.local.allanshomelab.com/192.168.86.116
     - address=/docker.allanshomelab.com/192.168.86.112
     - address=/capella.hosts.allanshomelab.com/192.168.86.112
     - address=/hosts.allanshomelab.com/192.168.86.187
