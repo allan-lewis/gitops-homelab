@@ -476,10 +476,10 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: traefik-endpoint-homeassistant
+        - name: traefik-service-homeassistant-local
           namespace:  traefik
           port: 8123
-          scheme: http        
+          scheme: http  
     - match: Host(`derry.hosts.allanshomelab.com`)
       kind: Rule
       middlewares:
@@ -487,10 +487,10 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: traefik-endpoint-derry
+        - name: traefik-service-derry-local
           namespace:  traefik
           port: 8000
-          scheme: http               
+          scheme: http              
     - match: Host(`polaris.hosts.allanshomelab.com`)
       kind: Rule
       middlewares:
@@ -498,7 +498,7 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: traefik-endpoint-polaris
+        - name: traefik-service-polaris-local
           namespace:  traefik
           port: 8006
           scheme: https              
@@ -509,7 +509,7 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: traefik-endpoint-sirius
+        - name: traefik-service-sirius-local
           namespace:  traefik
           port: 8006
           scheme: https           
@@ -526,23 +526,23 @@ spec:
           scheme: http 
     - match: Host(`procyon.hosts.allanshomelab.com`)
       kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
+      # middlewares:
+      #   - name: traefik-custom-headers
+      #     namespace: default
       priority: 10
       services:
-        - name: traefik-endpoint-procyon
+        - name: traefik-service-procyon-local
           namespace:  traefik
           port: 80
           scheme: http                             
     - match: Host(`photos.allanandvaia.com`)
       kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
+      # middlewares:
+      #   - name: traefik-custom-headers
+      #     namespace: default
       priority: 10
       services:
-        - name: traefik-endpoint-immich
+        - name: traefik-service-immich-local
           namespace:  traefik
           port: 2283
           scheme: http        
@@ -597,7 +597,7 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: traefik-endpoint-kvm1
+        - name: traefik-service-kvm1-local
           namespace:  traefik
           port: 80
           scheme: http        
@@ -608,7 +608,7 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: traefik-endpoint-kvm2
+        - name: traefik-service-kvm2-local
           namespace:  traefik
           port: 80
           scheme: http 

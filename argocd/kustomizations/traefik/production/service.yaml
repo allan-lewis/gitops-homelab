@@ -1,121 +1,72 @@
 ---
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
-  name: traefik-endpoint-polaris
+  name: traefik-service-homeassistant-local
   namespace: traefik
 spec:
-  ports:
-    - protocol: TCP
-      port: 8006
-      targetPort: 8006
+  type: ExternalName
+  externalName: homeassistant.local.allanshomelab.com
 ---
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
-  name: traefik-endpoint-sirius
+  name: traefik-service-derry-local
   namespace: traefik
 spec:
-  ports:
-    - protocol: TCP
-      port: 8006
-      targetPort: 8006
+  type: ExternalName
+  externalName: derry.local.allanshomelab.com
 ---
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
-  name: traefik-endpoint-homeassistant
+  name: traefik-service-procyon-local
   namespace: traefik
 spec:
-  ports:
-    - protocol: TCP
-      port: 8123
-      targetPort: 8123
+  type: ExternalName
+  externalName: procyon.local.allanshomelab.com
 ---
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
-  name: traefik-endpoint-derry
+  name: traefik-service-polaris-local
   namespace: traefik
 spec:
-  ports:
-    - protocol: TCP
-      port: 8000
-      targetPort: 8000
+  type: ExternalName
+  externalName: polaris.local.allanshomelab.com
 ---
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
-  name: traefik-endpoint-capella
+  name: traefik-service-immich-local
   namespace: traefik
 spec:
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
+  type: ExternalName
+  externalName: immich.local.allanshomelab.com
 ---
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
-  name: traefik-endpoint-procyon
+  name: traefik-service-sirius-local
   namespace: traefik
 spec:
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
+  type: ExternalName
+  externalName: sirius.local.allanshomelab.com
 ---
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
-  name: traefik-endpoint-immich
+  name: traefik-service-kvm1-local
   namespace: traefik
 spec:
-  ports:
-    - protocol: TCP
-      port: 2283
-      targetPort: 2283
+  type: ExternalName
+  externalName: kvm1.local.allanshomelab.com
 ---
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
-  name: traefik-endpoint-radarr
+  name: traefik-service-kvm2-local
   namespace: traefik
 spec:
-  ports:
-    - protocol: TCP
-      port: 31300
-      targetPort: 31300
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: traefik-endpoint-sonarr
-  namespace: traefik
-spec:
-  ports:
-    - protocol: TCP
-      port: 31200
-      targetPort: 31200
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: traefik-endpoint-kvm1
-  namespace: traefik
-spec:
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: traefik-endpoint-kvm2
-  namespace: traefik
-spec:
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
+  type: ExternalName
+  externalName: kvm2.local.allanshomelab.com
