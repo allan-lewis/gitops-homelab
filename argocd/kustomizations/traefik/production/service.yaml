@@ -33,6 +33,14 @@ spec:
       targetPort: 8123
 ---
 kind: Service
+metadata:
+  name: homeassistant-traefik
+  namespace: traefik
+spec:
+  type: ExternalName
+  externalName: home.allanandvaia.com
+---
+kind: Service
 apiVersion: v1
 metadata:
   name: traefik-endpoint-derry
