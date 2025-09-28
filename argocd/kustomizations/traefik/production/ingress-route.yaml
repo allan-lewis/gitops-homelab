@@ -487,10 +487,10 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: traefik-endpoint-derry
+        - name: traefik-service-derry-local
           namespace:  traefik
           port: 8000
-          scheme: http               
+          scheme: http              
     - match: Host(`polaris.hosts.allanshomelab.com`)
       kind: Rule
       middlewares:

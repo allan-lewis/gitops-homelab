@@ -1,24 +1,21 @@
-# ---
-# apiVersion: traefik.io/v1alpha1
-# kind: TraefikService
-# metadata:
-#   name: ha-service
-#   namespace: traefik
-# spec:
-#   weighted:
-#     services:
-#       - name: homeassistant-direct
-#         kind: Service
-# ---
-# apiVersion: traefik.io/v1alpha1
-# kind: Service
-# metadata:
-#   name: homeassistant-direct
-#   namespace: traefik
-# spec:
-#   loadBalancer:
-#     servers:
-#       - url: http://192.168.86.124:8123
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: traefik-service-homeassistant-local
+  namespace: traefik
+spec:
+  type: ExternalName
+  externalName: homeassistant.local.allanshomelab.com
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: traefik-service-derry-local
+  namespace: traefik
+spec:
+  type: ExternalName
+  externalName: derry.local.allanshomelab.com
 ---
 kind: Service
 apiVersion: v1
@@ -41,15 +38,6 @@ spec:
     - protocol: TCP
       port: 8006
       targetPort: 8006
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: traefik-service-homeassistant-local
-  namespace: traefik
-spec:
-  type: ExternalName
-  externalName: homeassistant.local.allanshomelab.com
 # ---
 # kind: Service
 # apiVersion: v1
@@ -70,17 +58,6 @@ spec:
 # spec:
 #   type: ExternalName
 #   externalName: 192.168.86.124
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: traefik-endpoint-derry
-  namespace: traefik
-spec:
-  ports:
-    - protocol: TCP
-      port: 8000
-      targetPort: 8000
 ---
 kind: Service
 apiVersion: v1
