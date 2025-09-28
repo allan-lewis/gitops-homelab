@@ -17,6 +17,15 @@ spec:
   type: ExternalName
   externalName: derry.local.allanshomelab.com
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: traefik-service-procyon-local
+  namespace: traefik
+spec:
+  type: ExternalName
+  externalName: procyon.local.allanshomelab.com
+---
 kind: Service
 apiVersion: v1
 metadata:
@@ -69,17 +78,17 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: traefik-endpoint-procyon
-  namespace: traefik
-spec:
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
+# ---
+# kind: Service
+# apiVersion: v1
+# metadata:
+#   name: traefik-endpoint-procyon
+#   namespace: traefik
+# spec:
+#   ports:
+#     - protocol: TCP
+#       port: 80
+#       targetPort: 80
 ---
 kind: Service
 apiVersion: v1

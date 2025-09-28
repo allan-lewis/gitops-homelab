@@ -531,7 +531,7 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: traefik-endpoint-procyon
+        - name: traefik-service-procyon-local
           namespace:  traefik
           port: 80
           scheme: http                             
