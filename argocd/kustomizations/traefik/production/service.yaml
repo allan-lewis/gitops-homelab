@@ -1,5 +1,5 @@
 ---
-apiVersion: traefik.io/v1alpha1
+apiVersion: v1
 kind: TraefikService
 metadata:
   name: ha-service
@@ -10,7 +10,7 @@ spec:
       - name: homeassistant-direct
         kind: Service
 ---
-apiVersion: traefik.io/v1alpha1
+apiVersion: v1
 kind: Service
 metadata:
   name: homeassistant-direct
