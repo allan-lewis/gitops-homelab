@@ -42,16 +42,25 @@ spec:
       port: 8006
       targetPort: 8006
 ---
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
-  name: traefik-service-homeassistant
+  name: traefik-service-homeassistant-local
   namespace: traefik
 spec:
-  ports:
-    - protocol: TCP
-      port: 8123
-      targetPort: 8123
+  type: ExternalName
+  externalName: homeassistant.local.allanshomelab.com
+# ---
+# kind: Service
+# apiVersion: v1
+# metadata:
+#   name: traefik-service-homeassistant
+#   namespace: traefik
+# spec:
+#   ports:
+#     - protocol: TCP
+#       port: 8123
+#       targetPort: 8123
 # ---
 # kind: Service
 # apiVersion: v1

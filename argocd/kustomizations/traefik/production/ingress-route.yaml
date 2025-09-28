@@ -476,7 +476,7 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: traefik-service-homeassistant
+        - name: traefik-service-homeassistant-local
           namespace:  traefik
           port: 8123
           scheme: http  
