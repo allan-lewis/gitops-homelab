@@ -31,6 +31,8 @@ dnsmasq:
     - address=/polaris.local.allanshomelab.com/192.168.86.101
     - address=/sirius.local.allanshomelab.com/192.168.86.105
     - address=/immich.local.allanshomelab.com/192.168.86.116
+    - address=/kvm1.local.allanshomelab.com/192.168.86.247
+    - address=/kvm2.local.allanshomelab.com/192.168.86.248
     - address=/docker.allanshomelab.com/192.168.86.112
     - address=/capella.hosts.allanshomelab.com/192.168.86.112
     - address=/hosts.allanshomelab.com/192.168.86.187

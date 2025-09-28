@@ -597,7 +597,7 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: traefik-endpoint-kvm1
+        - name: traefik-service-kvm1-local
           namespace:  traefik
           port: 80
           scheme: http        
@@ -608,7 +608,7 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: traefik-endpoint-kvm2
+        - name: traefik-service-kvm2-local
           namespace:  traefik
           port: 80
           scheme: http 
