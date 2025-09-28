@@ -476,10 +476,8 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: homeassistant-traefik
-          namespace: traefik
-          port: 8123
-          scheme: http      
+        - kind: TraefikService
+          name: ha-service    
     - match: Host(`derry.hosts.allanshomelab.com`)
       kind: Rule
       middlewares:
