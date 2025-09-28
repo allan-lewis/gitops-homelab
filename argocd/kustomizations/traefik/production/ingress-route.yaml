@@ -537,9 +537,9 @@ spec:
           scheme: http                             
     - match: Host(`photos.allanandvaia.com`)
       kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
+      # middlewares:
+      #   - name: traefik-custom-headers
+      #     namespace: default
       priority: 10
       services:
         - name: traefik-service-immich-local
