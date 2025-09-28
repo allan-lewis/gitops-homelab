@@ -33,6 +33,7 @@ spec:
       targetPort: 8123
 ---
 kind: Service
+apiVersion: v1
 metadata:
   name: homeassistant-traefik
   namespace: traefik
