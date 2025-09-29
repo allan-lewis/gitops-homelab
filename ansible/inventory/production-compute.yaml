@@ -5,9 +5,9 @@ all:
     derry:
       ansible_host: 192.168.86.210
       gatus_slug: "(Local Backup NAS)"
-    flagg:
-      ansible_host: 192.168.86.205
-      gatus_slug: "(Bare Metal Monitoring/Networking)"
+    # flagg:
+    #   ansible_host: 192.168.86.205
+    #   gatus_slug: "(Bare Metal Monitoring/Networking)"
     maturin:
       ansible_host: 192.168.86.200
       gatus_slug: "(Hypervisor)"
