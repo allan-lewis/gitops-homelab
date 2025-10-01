@@ -219,6 +219,10 @@ all:
         host: sirius.docker.allanshomelab.com
         url: "https://{{ hostvars['sirius'].ansible_host }}:8006"
         scheme: https
+      - name: polaris
+        host: polaris.docker.allanshomelab.com
+        url: "https://{{ hostvars['polaris'].ansible_host }}:8006"
+        scheme: https
     homelab_docker_gatus_https_endpoints:
       - name: "Mizar"
         group: "Healthchecks"
