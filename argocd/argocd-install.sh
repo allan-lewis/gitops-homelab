@@ -14,8 +14,7 @@ doppler run --command "envsubst < argocd-helm-values-template.yaml > /tmp/argocd
 helm repo add argo https://argoproj.github.io/argo-helm
 helm repo update
 
-helm install argocd argo/argo-cd -n argocd --create-namespace --version 7.9.1 -f /tmp/argocd-values.yaml
-# helm install argocd argo/argo-cd -n argocd --create-namespace --version 8.5.6 -f /tmp/argocd-values.yaml
+helm install argocd argo/argo-cd -n argocd --create-namespace --version 8.5.6 -f /tmp/argocd-values.yaml
 
 kubectl apply -f $CONFIG_MAP
 
