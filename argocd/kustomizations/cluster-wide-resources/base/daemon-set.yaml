@@ -15,7 +15,7 @@ spec:
       serviceAccountName: openvpn-configurer
       containers:
       - name: taint-label-container
-        image: bitnami/kubectl:latest
+        image: bitnami/kubectl:1.31.1
         command: ["/bin/sh", "-c"]
         args:
         - |
