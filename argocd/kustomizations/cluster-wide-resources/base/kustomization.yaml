@@ -4,4 +4,4 @@ kind: Kustomization
 
 resources:
   - namespaces.yaml
-  - daemon-set.yaml
+  # - daemon-set.yaml
