@@ -31,7 +31,7 @@ variable "vm_list_ubuntu" {
       datastore_id      = "local-lvm"
       disk_size         = 128
       ipv4_address      = "192.168.86.216/24"
-      gateway           = "192.168.86.1"
+      gateway           = "192.168.86.123"
       tags              = ["terraform", "production", "ubuntu", "media"]
     }
   }
