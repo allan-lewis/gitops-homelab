@@ -23,6 +23,17 @@ variable "vm_list_ubuntu" {
       gateway           = "192.168.86.1"
       tags              = ["terraform", "production", "ubuntu", "media"]
     }
+    mordred = {
+      description       = "Media acquisition (managed by Terraform)"
+      proxmox_node      = "sirius"
+      cpu_cores         = 4
+      memory_dedicated  = 8192
+      datastore_id      = "local-lvm"
+      disk_size         = 128
+      ipv4_address      = "192.168.86.216/24"
+      gateway           = "192.168.86.1"
+      tags              = ["terraform", "production", "ubuntu", "media"]
+    }
   }
 }
 
