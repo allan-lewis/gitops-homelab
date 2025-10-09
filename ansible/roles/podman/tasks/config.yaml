@@ -1,0 +1,93 @@
+---
+- name: Create /etc/containers
+  tags: [step2_config]
+  ansible.builtin.file:
+    path: /etc/containers
+    state: directory
+    mode: "0755"
+
+- name: Write registries.conf
+  tags: [step2_config]
+  ansible.builtin.copy:
+    dest: /etc/containers/registries.conf
+    mode: "0644"
+    content: |
+      unqualified-search-registries = [{{ default_registries | map('to_json') | join(', ') }}]
+
+      [[registry]]
+      prefix = "docker.io"
+      location = "registry-1.docker.io"
+
+- name: Write policy.json
+  tags: [step2_config]
+  ansible.builtin.copy:
+    dest: /etc/containers/policy.json
+    mode: "0644"
+    content: |
+      {
+        "default": [{ "type": "insecureAcceptAnything" }],
+        "transports": {
+          "docker": {
+            "": [{ "type": "insecureAcceptAnything" }]
+          }
+        }
+      }
+
+- name: Write storage.conf
+  tags: [step2_config]
+  ansible.builtin.copy:
+    dest: /etc/containers/storage.conf
+    mode: "0644"
+    content: |
+      [storage]
+      driver = "overlay"
+      runroot = "/run/containers/storage"
+      graphroot = "/var/lib/containers/storage"
+
+      [storage.options]
+      mount_program = "/usr/bin/fuse-overlayfs"
+
+      [storage.options.overlay]
+      mountopt = "nodev,metacopy=on"
+
+- name: Write containers.conf (netavark + journald)
+  tags: [step2_config]
+  ansible.builtin.copy:
+    dest: /etc/containers/containers.conf
+    mode: "0644"
+    content: |
+      [network]
+      network_backend = "netavark"
+
+      [engine]
+      events_logger = "journald"
+
+- name: Ensure overlay module loads at boot
+  tags: [step2_config]
+  ansible.builtin.lineinfile:
+    path: /etc/modules-load.d/podman.conf
+    line: "overlay"
+    create: true
+    mode: "0644"
+
+- name: Load overlay now (best effort)
+  tags: [step2_config]
+  ansible.builtin.modprobe:
+    name: overlay
+    state: present
+  ignore_errors: true
+
+- name: Enable IP forwarding
+  tags: [step2_config]
+  ansible.builtin.copy:
+    dest: /etc/sysctl.d/99-podman.conf
+    mode: "0644"
+    content: |
+      net.ipv4.ip_forward = 1
+      net.ipv6.conf.all.forwarding = 1
+  notify: Reload sysctl
+
+- name: Apply sysctl immediately (idempotent)
+  tags: [step2_config]
+  ansible.builtin.command: sysctl --system
+  changed_when: false

@@ -8,29 +8,13 @@ all:
       gatus_slug: "(K8s Worker)"
     delta:
       ansible_host: 192.168.86.93
-      gatus_slug: "(K8s Worker)"
+      gatus_slug: "(Podman)"
     epsilon:
       ansible_host: 192.168.86.94
       gatus_slug: "(Docker)"
     gamma:
       ansible_host: 192.168.86.92
       gatus_slug: "(K8s Worker)"
-    roland:
-      ansible_host: 192.168.86.201
-      gatus_slug: "(K8s Control Plane)" 
-      gatus_enabled: false
-    eddie:
-      ansible_host: 192.168.86.202
-      gatus_slug: "(K8s Worker)"
-      gatus_enabled: false
-    jake:
-      ansible_host: 192.168.86.203
-      gatus_slug: "(K8s Worker)"
-      gatus_enabled: false
-    susannah:
-      ansible_host: 192.168.86.204
-      gatus_slug: "(K8s Worker*)"
-      gatus_enabled: false
 
   children:
     homelab_ansible_hosts:
@@ -44,6 +28,9 @@ all:
             homelab_gatus_hosts:
               hosts:
                 epsilon:
+        homelab_podman_hosts:
+          hosts:
+            delta:
         homelab_tailscale_hosts:
           hosts:
             epsilon:
@@ -54,7 +41,6 @@ all:
       hosts:
         beta:
         gamma:
-        delta:
 
   vars:
     ansible_python_interpreter: "/usr/bin/python3.12"

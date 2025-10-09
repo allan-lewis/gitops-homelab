@@ -6,6 +6,9 @@ all:
     pollux:
       ansible_host: 192.168.86.135
       homelab_ansible_environment: "production-compute"
+    delta:
+      ansible_host: 192.168.86.93
+      gatus_slug: "(Podman)"
 
   children:
     homelab_ansible_hosts:
@@ -18,6 +21,9 @@ all:
           hosts:
             castor:
             pollux:
+        homelab_podman_hosts:
+          hosts:
+            delta:
 
   vars:
     ansible_python_interpreter: "/usr/bin/python3.12"

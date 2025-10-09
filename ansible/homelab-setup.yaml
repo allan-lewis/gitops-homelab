@@ -1,181 +1,199 @@
 ---
-- name: Get the local host ready to control Ansible.
-  hosts: localhost
-  become: no
-  gather_facts: yes
+# - name: Get the local host ready to control Ansible.
+#   hosts: localhost
+#   become: no
+#   gather_facts: yes
   
-  roles:
-    - known_hosts
+#   roles:
+#     - known_hosts
 
-- name: Do basic setup on all hosts (as root).
-  hosts: homelab_ansible_hosts
-  become: yes
-  gather_facts: yes  
+# - name: Do basic setup on all hosts (as root).
+#   hosts: homelab_ansible_hosts
+#   become: yes
+#   gather_facts: yes  
 
-  roles:
-    - dependencies 
-    - tz
-    - user  
-    - ssh
-    - apt
-    - mount
-    - reboot
+#   roles:
+#     - dependencies 
+#     - tz
+#     - user  
+#     - ssh
+#     - apt
+#     - mount
+#     - reboot
 
-- name: Do basic setup on all hosts (as local user).
-  hosts: homelab_ansible_hosts
-  become: no
-  gather_facts: yes  
+# - name: Do basic setup on all hosts (as local user).
+#   hosts: homelab_ansible_hosts
+#   become: no
+#   gather_facts: yes  
 
-  roles:
-    - role: known_hosts
-      vars:
-        homelab_ssh_keys: ['github.com']
-        homelab_ansible_translate_ip: no
-    - public_key
-    - private_key
-    - zsh_shell
+#   roles:
+#     - role: known_hosts
+#       vars:
+#         homelab_ssh_keys: ['github.com']
+#         homelab_ansible_translate_ip: no
+#     - public_key
+#     - private_key
+#     - zsh_shell
 
-- name: Configure automated backups.
-  hosts: homelab_backup_hosts
-  become: yes
-  gather_facts: yes  
+# - name: Configure automated backups.
+#   hosts: homelab_backup_hosts
+#   become: yes
+#   gather_facts: yes  
 
-  roles:
-    - public_key
-    - private_key
-    - role: known_hosts
-      vars:
-        homelab_ssh_keys: "{{ hostvars | dict2items | map(attribute='value.homelab_remote_volumes') | select('defined') | flatten | map(attribute='host') | unique | list }}"
-    - backup
+#   roles:
+#     - public_key
+#     - private_key
+#     - role: known_hosts
+#       vars:
+#         homelab_ssh_keys: "{{ hostvars | dict2items | map(attribute='value.homelab_remote_volumes') | select('defined') | flatten | map(attribute='host') | unique | list }}"
+#     - backup
 
-- name: Get hosts ready to do DevOps work (as root).
-  hosts: homelab_devops_hosts
-  become: yes
-  gather_facts: yes
+# - name: Get hosts ready to do DevOps work (as root).
+#   hosts: homelab_devops_hosts
+#   become: yes
+#   gather_facts: yes
 
-  roles:
-    - kustomize
-    - ansible
-    - terraform
-    - doppler
-    - aws
-    - kubectl
-    - talosctl
-    - helm
+#   roles:
+#     - kustomize
+#     - ansible
+#     - terraform
+#     - doppler
+#     - aws
+#     - kubectl
+#     - talosctl
+#     - helm
 
-- name: Get hosts ready to do DevOps work (as local user).
-  hosts: homelab_devops_hosts
-  become: no
-  gather_facts: yes
+# - name: Get hosts ready to do DevOps work (as local user).
+#   hosts: homelab_devops_hosts
+#   become: no
+#   gather_facts: yes
 
-  roles: 
-    - public_key
-    - private_key
-    - devops
-    - tailscale
+#   roles: 
+#     - public_key
+#     - private_key
+#     - devops
+#     - tailscale
 
-- name: Setup OpenVPN hosts.
-  hosts: homelab_openvpn_hosts
-  become: yes
-  gather_facts: yes
+# - name: Setup OpenVPN hosts.
+#   hosts: homelab_openvpn_hosts
+#   become: yes
+#   gather_facts: yes
 
-  roles:
-    - openvpn
+#   roles:
+#     - openvpn
 
-- name: Setup Node Exporter hosts.
-  hosts: homelab_node_exporter_hosts
-  become: yes
-  gather_facts: yes
+# - name: Setup Node Exporter hosts.
+#   hosts: homelab_node_exporter_hosts
+#   become: yes
+#   gather_facts: yes
 
-  roles:
-    - node_exporter
+#   roles:
+#     - node_exporter
 
-- name: Install Tailscale.
-  hosts: homelab_tailscale_hosts
-  become: yes
-  gather_facts: yes
+# - name: Install Tailscale.
+#   hosts: homelab_tailscale_hosts
+#   become: yes
+#   gather_facts: yes
   
-  tasks:
-    - name: Force lsb_release_package to correct value for Ubuntu
-      set_fact:
-        lsb_release_package: lsb-release
+#   tasks:
+#     - name: Force lsb_release_package to correct value for Ubuntu
+#       set_fact:
+#         lsb_release_package: lsb-release
 
-  roles:
-    - artis3n.tailscale
+#   roles:
+#     - artis3n.tailscale
 
-- name: Setup Docker hosts.
-  hosts: homelab_docker_hosts
+# - name: Setup Docker hosts.
+#   hosts: homelab_docker_hosts
+#   become: yes
+#   gather_facts: yes
+
+#   roles:
+#     - docker
+#     - docker_containers
+
+# - name: Restore remote backup volumes.
+#   hosts: homelab_ansible_hosts
+#   become: no
+#   gather_facts: yes
+
+#   roles:
+#     - role: known_hosts
+#       vars:
+#         homelab_ssh_keys: "{{ hostvars | dict2items | map(attribute='value.homelab_remote_volumes') | select('defined') | flatten | map(attribute='host') | unique | list }}"
+#     - restore
+
+# - name: Setup Plex.
+#   hosts: homelab_plex_hosts
+#   become: yes
+#   gather_facts: yes
+
+#   roles:
+#     - plex
+
+# - name: Setup Jellyfin.
+#   hosts: homelab_jellyfin_hosts
+#   become: yes
+#   gather_facts: yes
+
+#   roles:
+#     - jellyfin
+
+# - name: Setup Immich.
+#   hosts: homelab_immich_hosts
+#   become: yes
+#   gather_facts: yes
+
+#   roles:
+#     - immich
+
+# - name: Setup Gatus.
+#   hosts: homelab_gatus_hosts
+#   become: yes
+#   gather_facts: yes
+
+#   roles:
+#     - gatus
+
+# - name: Setup Traefik.
+#   hosts: homelab_traefik_hosts
+#   become: yes
+#   gather_facts: yes
+
+#   roles:
+#     - traefik
+
+# - name: Setup Homelab Metrics.
+#   hosts: homelab_metrics_hosts
+#   become: yes
+#   gather_facts: yes
+
+#   roles:
+#     - homelab_metrics
+
+# - name: Setup Pi-Hole.
+#   hosts: homelab_pihole_hosts
+#   become: yes
+#   gather_facts: yes
+
+#   roles:
+#     - systemd_resolvd
+#     - pihole
+
+- name: Setup Podman hosts.
+  hosts: homelab_podman_hosts
   become: yes
   gather_facts: yes
 
   roles:
-    - docker
-    - docker_containers
-
-- name: Restore remote backup volumes.
-  hosts: homelab_ansible_hosts
-  become: no
-  gather_facts: yes
-
-  roles:
-    - role: known_hosts
+    - role: podman
       vars:
-        homelab_ssh_keys: "{{ hostvars | dict2items | map(attribute='value.homelab_remote_volumes') | select('defined') | flatten | map(attribute='host') | unique | list }}"
-    - restore
-
-- name: Setup Plex.
-  hosts: homelab_plex_hosts
-  become: yes
-  gather_facts: yes
-
-  roles:
-    - plex
-
-- name: Setup Jellyfin.
-  hosts: homelab_jellyfin_hosts
-  become: yes
-  gather_facts: yes
-
-  roles:
-    - jellyfin
-
-- name: Setup Immich.
-  hosts: homelab_immich_hosts
-  become: yes
-  gather_facts: yes
-
-  roles:
-    - immich
-
-- name: Setup Gatus.
-  hosts: homelab_gatus_hosts
-  become: yes
-  gather_facts: yes
-
-  roles:
-    - gatus
-
-- name: Setup Traefik.
-  hosts: homelab_traefik_hosts
-  become: yes
-  gather_facts: yes
-
-  roles:
-    - traefik
-
-- name: Setup Homelab Metrics.
-  hosts: homelab_metrics_hosts
-  become: yes
-  gather_facts: yes
-
-  roles:
-    - homelab_metrics
-
-- name: Setup Pi-Hole.
-  hosts: homelab_pihole_hosts
-  become: yes
-  gather_facts: yes
-
-  roles:
-    - systemd_resolvd
-    - pihole
+        podman_users: ["lab"]
+        enable_podman_socket_root: false
+        enable_podman_socket_user: true
+        install_docker_compat: false
+        install_podman_compose: false
+        default_registries:
+          - "quay.io"
+          - "docker.io"
+          - "ghcr.io"
