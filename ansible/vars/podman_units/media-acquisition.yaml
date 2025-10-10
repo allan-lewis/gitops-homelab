@@ -5,6 +5,8 @@ paths:
   - "/home/lab/apps/media-acquisition/radarr/config"
   - "/home/lab/apps/media-acquisition/transmission/config"
   - "/home/lab/apps/media-acquisition/transmission/watch"
+  - "/home/lab/apps/media-acquisition/sonarr/config"
+  - "/mnt/media-acquisition/tv"
   - "/mnt/media-acquisition/downloads"
   - "/mnt/media-acquisition/movies"
 
@@ -84,6 +86,34 @@ units:
         -v /home/lab/apps/media-acquisition/transmission/watch:/watch \
         lscr.io/linuxserver/transmission:latest
       ExecStop=/usr/bin/podman stop -t 10 transmission
+      TimeoutStopSec=30
+
+      [Install]
+      WantedBy=default.target
+
+units:
+  - name: sonarr
+    type: service
+    content: |
+      [Unit]
+      Description=Sonarr (Podman, native)
+      After=network-online.target
+      Wants=network-online.target
+
+      [Service]
+      Restart=always
+      ExecStartPre=-/usr/bin/podman rm -f sonarr
+      ExecStart=/usr/bin/podman run --name sonarr --replace \
+        --userns=keep-id \
+        -e PUID={{ pod_units_puid | default('1000') }} \
+        -e PGID={{ pod_units_pgid | default('1000') }} \
+        -e TZ={{ pod_units_tz | default('America/New_York') }} \
+        -p 8989:8989 \
+        -v /home/lab/apps/media-acquisition/sonarr/config:/config \
+        -v /mnt/media-acquisition/downloads:/downloads \
+        -v /mnt/media-acquisition/tv:/tv \
+        lscr.io/linuxserver/sonarr:latest
+      ExecStop=/usr/bin/podman stop -t 10 sonarr
       TimeoutStopSec=30
 
       [Install]
