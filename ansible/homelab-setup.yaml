@@ -156,14 +156,14 @@
 #   roles:
 #     - immich
 
-# - name: Setup Gatus.
-#   hosts: homelab_gatus_hosts
-#   become: yes
-#   gather_facts: yes
-#   tags: [gatus]
+- name: Setup Gatus.
+  hosts: homelab_gatus_hosts
+  become: yes
+  gather_facts: yes
+  tags: [docker_gatus]
 
-#   roles:
-#     - gatus
+  roles:
+    - gatus
 
 # - name: Setup Traefik.
 #   hosts: homelab_traefik_hosts
