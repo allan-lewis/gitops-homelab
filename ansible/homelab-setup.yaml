@@ -231,3 +231,20 @@
       vars:
         pod_units_files:
           - vars/podman_units/gatus.yaml
+
+- name: Setup media acquisition stack on Podman.
+  hosts: homelab_podman_media_acquisition_hosts
+  become: yes
+  gather_facts: yes
+  tags: [podman_media_acquisition]
+
+  roles:
+    - role: podman_prepare
+      vars:
+        podprep_dirs:      
+          - /home/lab/apps/media-acquisition/jackett/config
+          - /home/lab/apps/media-acquisition/jackett/downloads
+    - role: podman_units
+      vars:
+        pod_units_files:
+          - vars/podman_units/media-acquisition.yaml

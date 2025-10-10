@@ -1,0 +1,27 @@
+---
+paths:
+  - "/home/lab/apps/media-acquisition/jackett/config"
+  - "/home/lab/apps/media-acquisition/jackett/downloads"
+
+units:
+  - name: jackett
+    type: service
+    content: |
+      [Unit]
+      Description=Jackett (Podman, native)
+      After=network-online.target
+      Wants=network-online.target
+
+      [Service]
+      Restart=always
+      ExecStartPre=-/usr/bin/podman rm -f jackett
+      ExecStart=/usr/bin/podman run --name jackett --replace \
+        -p 9117:9117 \
+        -v /home/lab/apps/media-acquisition/jackett/config:/config \
+        -v /home/lab/apps/media-acquisition/jackett/downloads:/downloads \
+        ghcr.io/linuxserver/jackett:latest
+      ExecStop=/usr/bin/podman stop -t 10 jackett
+      TimeoutStopSec=30
+
+      [Install]
+      WantedBy=default.target

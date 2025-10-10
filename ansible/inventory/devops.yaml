@@ -30,6 +30,9 @@ all:
             homelab_podman_gatus_hosts:
               hosts:
                 delta:
+            homelab_podman_media_acquisition_hosts:
+              hosts:
+                delta:
 
   vars:
     ansible_python_interpreter: "/usr/bin/python3.12"
