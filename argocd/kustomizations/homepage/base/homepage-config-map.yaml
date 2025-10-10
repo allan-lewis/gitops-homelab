@@ -349,13 +349,13 @@ data:
               key: {{HOMEPAGE_VAR_TAUTULLI_KEY}}
         - Transmission:
             icon: transmission.png
-            href: https://transmission.k8s.allanshomelab.com
+            href: https://transmission.media.allanshomelab.com
             description: Torrent download client
             namespace: media
             app: transmission
             widget:
               type: transmission
-              url: https://transmission.k8s.allanshomelab.com
+              url: https://transmission.media.allanshomelab.com
     - Productivity:
         - Memos:
             icon: memos.png
