@@ -2,6 +2,9 @@
 paths:
   - "/home/lab/apps/media-acquisition/jackett/config"
   - "/home/lab/apps/media-acquisition/jackett/downloads"
+  - "/home/lab/apps/media-acquisition/radarr/config"
+  - "/home/lab/apps/media-acquisition/radarr/downloads"
+  - "/home/lab/apps/media-acquisition/radarr/movies"
 
 units:
   - name: jackett
@@ -21,6 +24,29 @@ units:
         -v /home/lab/apps/media-acquisition/jackett/downloads:/downloads \
         ghcr.io/linuxserver/jackett:latest
       ExecStop=/usr/bin/podman stop -t 10 jackett
+      TimeoutStopSec=30
+
+      [Install]
+      WantedBy=default.target
+
+  - name: radarr
+    type: service
+    content: |
+      [Unit]
+      Description=Radarr (Podman, native)
+      After=network-online.target
+      Wants=network-online.target
+
+      [Service]
+      Restart=always
+      ExecStartPre=-/usr/bin/podman rm -f radarr
+      ExecStart=/usr/bin/podman run --name radarr --replace \
+        -p 7878:7878 \
+        -v /home/lab/apps/media-acquisition/radarr/config:/config \
+        -v /home/lab/apps/media-acquisition/radarr/downloads:/downloads \
+        -v /home/lab/apps/media-acquisition/radarr/movies:/movies \
+        lscr.io/linuxserver/radarr:5.27.5
+      ExecStop=/usr/bin/podman stop -t 10 radarr
       TimeoutStopSec=30
 
       [Install]
