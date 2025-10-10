@@ -17,9 +17,9 @@ all:
       gatus_slug: "(Hypervisor)"
       gatus_enabled: false
     ## VIRTUAL MACHINES
-    # mordred:
-    #   ansible_host: 192.168.86.216
-    #   gatus_slug: "(Media Acquisition)"
+    mordred:
+      ansible_host: 192.168.86.216
+      gatus_slug: "(Media Acquisition)"
     ## KUBERNETES
     roland:
       ansible_host: 192.168.86.230
