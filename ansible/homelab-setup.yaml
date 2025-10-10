@@ -1,39 +1,42 @@
 ---
-# - name: Get the local host ready to control Ansible.
-#   hosts: localhost
-#   become: no
-#   gather_facts: yes
+- name: Get the local host ready to control Ansible.
+  hosts: localhost
+  become: no
+  gather_facts: yes
+  tags: [known_hosts]
   
-#   roles:
-#     - known_hosts
+  roles:
+    - known_hosts
 
-# - name: Do basic setup on all hosts (as root).
-#   hosts: homelab_ansible_hosts
-#   become: yes
-#   gather_facts: yes  
+- name: Do basic setup on all hosts (as root).
+  hosts: homelab_ansible_hosts
+  become: yes
+  gather_facts: yes
+  tags: [baseline_setup]
 
-#   roles:
-#     - dependencies 
-#     - tz
-#     - user  
-#     - ssh
-#     - apt
-#     - mount
-#     - reboot
+  roles:
+    - dependencies 
+    - tz
+    - user  
+    - ssh
+    - apt
+    - mount
+    - reboot
 
-# - name: Do basic setup on all hosts (as local user).
-#   hosts: homelab_ansible_hosts
-#   become: no
-#   gather_facts: yes  
+- name: Do basic setup on all hosts (as local user).
+  hosts: homelab_ansible_hosts
+  become: no
+  gather_facts: yes  
+  tags: [baseline_setup]
 
-#   roles:
-#     - role: known_hosts
-#       vars:
-#         homelab_ssh_keys: ['github.com']
-#         homelab_ansible_translate_ip: no
-#     - public_key
-#     - private_key
-#     - zsh_shell
+  roles:
+    - role: known_hosts
+      vars:
+        homelab_ssh_keys: ['github.com']
+        homelab_ansible_translate_ip: no
+    - public_key
+    - private_key
+    - zsh_shell
 
 # - name: Configure automated backups.
 #   hosts: homelab_backup_hosts
@@ -218,6 +221,7 @@
   tags: [podman_gatus]
 
   roles:
+    - role: host_icmp_sysctl
     - role: podman_prepare
       vars:
         podprep_dirs:          
@@ -232,19 +236,19 @@
         pod_units_files:
           - vars/podman_units/gatus.yaml
 
-- name: Setup media acquisition stack on Podman.
-  hosts: homelab_podman_media_acquisition_hosts
-  become: yes
-  gather_facts: yes
-  tags: [podman_media_acquisition]
+# - name: Setup media acquisition stack on Podman.
+#   hosts: homelab_podman_media_acquisition_hosts
+#   become: yes
+#   gather_facts: yes
+#   tags: [podman_media_acquisition]
 
-  roles:
-    - role: podman_prepare
-      vars:
-        podprep_dirs:      
-          - /home/lab/apps/media-acquisition/jackett/config
-          - /home/lab/apps/media-acquisition/jackett/downloads
-    - role: podman_units
-      vars:
-        pod_units_files:
-          - vars/podman_units/media-acquisition.yaml
+#   roles:
+#     - role: podman_prepare
+#       vars:
+#         podprep_dirs:      
+#           - /home/lab/apps/media-acquisition/jackett/config
+#           - /home/lab/apps/media-acquisition/jackett/downloads
+#     - role: podman_units
+#       vars:
+#         pod_units_files:
+#           - vars/podman_units/media-acquisition.yaml

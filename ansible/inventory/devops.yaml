@@ -11,9 +11,14 @@ all:
     delta:
       ansible_host: 192.168.86.93
       gatus_slug: "(Podman)"
+    epsilon:
+      ansible_host: 192.168.86.94
+      gatus_slug: "(Docker)"
 
   children:
     homelab_ansible_hosts:
+      hosts:
+        epsilon:
       children:
         homelab_devops_hosts:
           hosts:

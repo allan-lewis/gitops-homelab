@@ -1,39 +1,54 @@
 ---
+# 0) Reset working vars so multiple role invocations don't aggregate
+- name: Reset working vars for this role invocation
+  ansible.builtin.set_fact:
+    pod_units_src_files: []
+    pod_units: []
+    pod_units_changed_services: []
+
 # 1) Discover files
 - name: Discover unit files from directory (optional)
   vars: { _dir: "{{ pod_units_dir | trim }}" }
-  set_fact:
-    pod_units_files: >-
+  ansible.builtin.set_fact:
+    pod_units_src_files: >-
       {{ (pod_units_files | default([])) +
          (lookup('ansible.builtin.fileglob', _dir ~ '/*.yml', wantlist=True) | default([])) }}
   when: _dir != ""
 
+- name: Use provided files when no directory discovery is used
+  ansible.builtin.set_fact:
+    pod_units_src_files: "{{ pod_units_files | default([]) }}"
+  when: (pod_units_dir | default('') | trim) == ""
+
 - name: Fail if no unit files provided
-  assert:
-    that: pod_units_files | length > 0
+  ansible.builtin.assert:
+    that: pod_units_src_files | length > 0
     fail_msg: "No unit files provided. Set pod_units_files or pod_units_dir."
 
 # 2) Load each file (expects a top-level 'units:' list)
 - name: Load unit file
-  include_vars:
+  ansible.builtin.include_vars:
     file: "{{ item }}"
     name: __app
-  loop: "{{ pod_units_files }}"
+  loop: "{{ pod_units_src_files }}"
   register: __loaded
 
-- name: Merge units
-  set_fact:
-    pod_units: "{{ (pod_units | default([])) + (__item.ansible_facts.__app.units | default([])) }}"
-  loop: "{{ __loaded.results }}"
-  loop_control: { loop_var: __item }
+- name: Merge units (fresh)
+  ansible.builtin.set_fact:
+    pod_units: >-
+      {{ __loaded.results
+         | map(attribute='ansible_facts.__app.units')
+         | select('defined')
+         | list
+         | sum(start=[]) }}
 
 - name: Show merged units (summary)
-  debug:
+  ansible.builtin.debug:
     msg: "{{ pod_units | map(attribute='name') | list | join(', ') }}"
 
 # 3) Ensure user systemd dir
 - name: Ensure user systemd dir exists
-  file:
+  ansible.builtin.file:
     path: "/home/{{ pod_units_user }}/.config/systemd/user"
     state: directory
     owner: "{{ pod_units_user }}"
@@ -42,7 +57,7 @@
 
 # 4) Write units (native systemd)
 - name: Deploy user units
-  copy:
+  ansible.builtin.copy:
     content: "{{ item.content }}"
     dest: "/home/{{ pod_units_user }}/.config/systemd/user/{{ item.name }}.{{ item.type | default('service') }}"
     owner: "{{ pod_units_user }}"
@@ -54,7 +69,7 @@
 # 5) Prepare user-bus env
 - name: Get UID for {{ pod_units_user }} on remote
   become: true
-  command: "id -u {{ pod_units_user }}"
+  ansible.builtin.command: "id -u {{ pod_units_user }}"
   register: pod_uid
   changed_when: false
 
@@ -66,7 +81,7 @@
   environment:
     XDG_RUNTIME_DIR: "/run/user/{{ pod_uid.stdout }}"
     DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/{{ pod_uid.stdout }}/bus"
-  systemd:
+  ansible.builtin.systemd:
     daemon_reload: true
     scope: user
 
@@ -77,7 +92,7 @@
   environment:
     XDG_RUNTIME_DIR: "/run/user/{{ pod_uid.stdout }}"
     DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/{{ pod_uid.stdout }}/bus"
-  systemd:
+  ansible.builtin.systemd:
     name: "{{ item.name }}.service"
     scope: user
     enabled: true
@@ -86,7 +101,7 @@
 
 # 8) Restart only services whose files changed (Compose-like delta behavior)
 - name: Build list of changed services
-  set_fact:
+  ansible.builtin.set_fact:
     pod_units_changed_services: >-
       {{ pod_units_deploy.results
          | selectattr('changed','equalto',true)
@@ -102,7 +117,7 @@
   environment:
     XDG_RUNTIME_DIR: "/run/user/{{ pod_uid.stdout }}"
     DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/{{ pod_uid.stdout }}/bus"
-  systemd:
+  ansible.builtin.systemd:
     name: "{{ item }}.service"
     scope: user
     state: restarted
