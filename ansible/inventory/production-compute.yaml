@@ -418,7 +418,7 @@ all:
         url: "https://traefik.k8s.allanshomelab.com/dashboard/#/"
         pattern: "*Traefik*"
       - name: Transmission
-        group: "Sites (K8s)"
+        group: "Sites (Media)"
         url: "https://transmission.media.allanshomelab.com"
         pattern: "*Transmission*"
       - name: KVM (Polaris)
