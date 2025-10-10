@@ -1,0 +1,33 @@
+---
+- name: "Ensure directories exist"
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ podprep_owner }}"
+    group: "{{ podprep_group }}"
+    mode: "0755"
+  loop: "{{ podprep_dirs }}"
+  tags: [podman_prepare, prepare_dirs]
+
+# Pre-create parent directories for template destinations
+- name: "Ensure parent dirs for templates exist"
+  when: podprep_templates | length > 0
+  ansible.builtin.file:
+    path: "{{ item.dest | dirname }}"
+    state: directory
+    owner: "{{ item.owner | default(podprep_owner) }}"
+    group: "{{ item.group | default(podprep_group) }}"
+    mode: "0755"
+  loop: "{{ podprep_templates }}"
+  tags: [podman_prepare, prepare_templates]
+
+- name: "Render templates"
+  when: podprep_templates | length > 0
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner | default(podprep_owner) }}"
+    group: "{{ item.group | default(podprep_group) }}"
+    mode: "{{ item.mode | default('0644') }}"
+  loop: "{{ podprep_templates }}"
+  tags: [podman_prepare, prepare_templates]

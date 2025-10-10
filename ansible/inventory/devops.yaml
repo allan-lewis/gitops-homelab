@@ -3,9 +3,11 @@ all:
     castor:
       ansible_host: 192.168.86.125
       homelab_ansible_environment: "staging-compute"
+      gatus_slug: "(Staging DevOps)"
     pollux:
       ansible_host: 192.168.86.135
       homelab_ansible_environment: "production-compute"
+      gatus_slug: "(Production DevOps)"
     delta:
       ansible_host: 192.168.86.93
       gatus_slug: "(Podman)"
@@ -24,6 +26,10 @@ all:
         homelab_podman_hosts:
           hosts:
             delta:
+          children:
+            homelab_podman_gatus_hosts:
+              hosts:
+                delta:
 
   vars:
     ansible_python_interpreter: "/usr/bin/python3.12"

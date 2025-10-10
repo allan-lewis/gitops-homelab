@@ -74,37 +74,37 @@
 #     - devops
 #     - tailscale
 
-- name: Setup OpenVPN hosts.
-  hosts: homelab_openvpn_hosts
-  become: yes
-  gather_facts: yes
-  tags: [openvpn]
+# - name: Setup OpenVPN hosts.
+#   hosts: homelab_openvpn_hosts
+#   become: yes
+#   gather_facts: yes
+#   tags: [openvpn]
 
-  roles:
-    - openvpn
+#   roles:
+#     - openvpn
 
-- name: Setup Node Exporter hosts.
-  hosts: homelab_node_exporter_hosts
-  become: yes
-  gather_facts: yes
-  tags: [node_exporter]
+# - name: Setup Node Exporter hosts.
+#   hosts: homelab_node_exporter_hosts
+#   become: yes
+#   gather_facts: yes
+#   tags: [node_exporter]
 
-  roles:
-    - node_exporter
+#   roles:
+#     - node_exporter
 
-- name: Install Tailscale.
-  hosts: homelab_tailscale_hosts
-  become: yes
-  gather_facts: yes
-  tags: [tailscale]
+# - name: Install Tailscale.
+#   hosts: homelab_tailscale_hosts
+#   become: yes
+#   gather_facts: yes
+#   tags: [tailscale]
   
-  tasks:
-    - name: Force lsb_release_package to correct value for Ubuntu
-      set_fact:
-        lsb_release_package: lsb-release
+#   tasks:
+#     - name: Force lsb_release_package to correct value for Ubuntu
+#       set_fact:
+#         lsb_release_package: lsb-release
 
-  roles:
-    - artis3n.tailscale
+#   roles:
+#     - artis3n.tailscale
 
 # - name: Setup Docker hosts.
 #   hosts: homelab_docker_hosts
@@ -126,71 +126,71 @@
 #         homelab_ssh_keys: "{{ hostvars | dict2items | map(attribute='value.homelab_remote_volumes') | select('defined') | flatten | map(attribute='host') | unique | list }}"
 #     - restore
 
-- name: Setup Plex.
-  hosts: homelab_plex_hosts
-  become: yes
-  gather_facts: yes
-  tags: [plex]
+# - name: Setup Plex.
+#   hosts: homelab_plex_hosts
+#   become: yes
+#   gather_facts: yes
+#   tags: [plex]
 
-  roles:
-    - plex
+#   roles:
+#     - plex
 
-- name: Setup Jellyfin.
-  hosts: homelab_jellyfin_hosts
-  become: yes
-  gather_facts: yes
-  tags: [jellyfin]
+# - name: Setup Jellyfin.
+#   hosts: homelab_jellyfin_hosts
+#   become: yes
+#   gather_facts: yes
+#   tags: [jellyfin]
 
-  roles:
-    - jellyfin
+#   roles:
+#     - jellyfin
 
-- name: Setup Immich.
-  hosts: homelab_immich_hosts
-  become: yes
-  gather_facts: yes
-  tags: [immich]
+# - name: Setup Immich.
+#   hosts: homelab_immich_hosts
+#   become: yes
+#   gather_facts: yes
+#   tags: [immich]
 
-  roles:
-    - immich
+#   roles:
+#     - immich
 
-- name: Setup Gatus.
-  hosts: homelab_gatus_hosts
-  become: yes
-  gather_facts: yes
-  tags: [gatus]
+# - name: Setup Gatus.
+#   hosts: homelab_gatus_hosts
+#   become: yes
+#   gather_facts: yes
+#   tags: [gatus]
 
-  roles:
-    - gatus
+#   roles:
+#     - gatus
 
-- name: Setup Traefik.
-  hosts: homelab_traefik_hosts
-  become: yes
-  gather_facts: yes
-  tags: [traefik]
+# - name: Setup Traefik.
+#   hosts: homelab_traefik_hosts
+#   become: yes
+#   gather_facts: yes
+#   tags: [traefik]
 
-  roles:
-    - traefik
+#   roles:
+#     - traefik
 
-- name: Setup Homelab Metrics.
-  hosts: homelab_metrics_hosts
-  become: yes
-  gather_facts: yes
-  tags: [metrics]
+# - name: Setup Homelab Metrics.
+#   hosts: homelab_metrics_hosts
+#   become: yes
+#   gather_facts: yes
+#   tags: [metrics]
 
-  roles:
-    - homelab_metrics
+#   roles:
+#     - homelab_metrics
 
-- name: Setup Pi-Hole.
-  hosts: homelab_pihole_hosts
-  become: yes
-  gather_facts: yes
-  tags: [pihole]
+# - name: Setup Pi-Hole.
+#   hosts: homelab_pihole_hosts
+#   become: yes
+#   gather_facts: yes
+#   tags: [pihole]
 
-  roles:
-    - systemd_resolvd
-    - pihole
+#   roles:
+#     - systemd_resolvd
+#     - pihole
 
-- name: Setup Podman hosts.
+- name: Setup Podman.
   hosts: homelab_podman_hosts
   become: yes
   gather_facts: yes
@@ -199,7 +199,7 @@
   roles:
     - role: podman
 
-- name: Setup Podman units common to all hosts.
+- name: Setup units common to all Podman hosts.
   hosts: homelab_podman_hosts
   become: yes
   gather_facts: yes
@@ -210,3 +210,24 @@
       vars:
         pod_units_files:
           - vars/podman_units/monitoring.yaml
+
+- name: Setup Gatus on Podman.
+  hosts: homelab_podman_gatus_hosts
+  become: yes
+  gather_facts: yes
+  tags: [podman_gatus]
+
+  roles:
+    - role: podman_prepare
+      vars:
+        podprep_dirs:          
+          - /home/lab/apps/gatus/config
+          - /home/lab/apps/gatus/data
+        podprep_templates:
+          - src: templates/gatus/config.yaml.j2
+            dest: /home/lab/apps/gatus/config/config.yaml
+            mode: "0644"
+    - role: podman_units
+      vars:
+        pod_units_files:
+          - vars/podman_units/gatus.yaml

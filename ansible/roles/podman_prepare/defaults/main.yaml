@@ -1,0 +1,16 @@
+---
+# Who should own created files/dirs (defaults to the SSH user)
+podprep_owner: "{{ ansible_user }}"
+podprep_group: "{{ podprep_owner }}"
+
+# 1) List of directories to ensure exist
+# Example:
+# podprep_dirs:
+#   - /home/lab/apps/gatus/config
+#   - /home/lab/apps/gatus/data
+podprep_dirs: []
+
+# 2) List of templates to render
+# Each item: {src: "templates/foo.j2", dest: "/path/file.yaml", mode: "0644"}
+# owner/group default to podprep_owner/podprep_group if not set.
+podprep_templates: []
