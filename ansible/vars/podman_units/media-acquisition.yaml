@@ -105,8 +105,8 @@ units:
       ExecStartPre=-/usr/bin/podman rm -f sonarr
       ExecStart=/usr/bin/podman run --name sonarr --replace \
         --userns=keep-id \
-        -e PUID={{ pod_units_puid | default('1000') }} \
-        -e PGID={{ pod_units_pgid | default('1000') }} \
+        -e PUID={{ homelab_user_id }} \
+        -e PGID={{ homelab_user_id }} \
         -e TZ={{ pod_units_tz | default('America/New_York') }} \
         -p 8989:8989 \
         -v /home/lab/apps/media-acquisition/sonarr/config:/config \
