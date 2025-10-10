@@ -74,34 +74,37 @@
 #     - devops
 #     - tailscale
 
-# - name: Setup OpenVPN hosts.
-#   hosts: homelab_openvpn_hosts
-#   become: yes
-#   gather_facts: yes
+- name: Setup OpenVPN hosts.
+  hosts: homelab_openvpn_hosts
+  become: yes
+  gather_facts: yes
+  tags: [openvpn]
 
-#   roles:
-#     - openvpn
+  roles:
+    - openvpn
 
-# - name: Setup Node Exporter hosts.
-#   hosts: homelab_node_exporter_hosts
-#   become: yes
-#   gather_facts: yes
+- name: Setup Node Exporter hosts.
+  hosts: homelab_node_exporter_hosts
+  become: yes
+  gather_facts: yes
+  tags: [node_exporter]
 
-#   roles:
-#     - node_exporter
+  roles:
+    - node_exporter
 
-# - name: Install Tailscale.
-#   hosts: homelab_tailscale_hosts
-#   become: yes
-#   gather_facts: yes
+- name: Install Tailscale.
+  hosts: homelab_tailscale_hosts
+  become: yes
+  gather_facts: yes
+  tags: [tailscale]
   
-#   tasks:
-#     - name: Force lsb_release_package to correct value for Ubuntu
-#       set_fact:
-#         lsb_release_package: lsb-release
+  tasks:
+    - name: Force lsb_release_package to correct value for Ubuntu
+      set_fact:
+        lsb_release_package: lsb-release
 
-#   roles:
-#     - artis3n.tailscale
+  roles:
+    - artis3n.tailscale
 
 # - name: Setup Docker hosts.
 #   hosts: homelab_docker_hosts
@@ -123,77 +126,87 @@
 #         homelab_ssh_keys: "{{ hostvars | dict2items | map(attribute='value.homelab_remote_volumes') | select('defined') | flatten | map(attribute='host') | unique | list }}"
 #     - restore
 
-# - name: Setup Plex.
-#   hosts: homelab_plex_hosts
-#   become: yes
-#   gather_facts: yes
+- name: Setup Plex.
+  hosts: homelab_plex_hosts
+  become: yes
+  gather_facts: yes
+  tags: [plex]
 
-#   roles:
-#     - plex
+  roles:
+    - plex
 
-# - name: Setup Jellyfin.
-#   hosts: homelab_jellyfin_hosts
-#   become: yes
-#   gather_facts: yes
+- name: Setup Jellyfin.
+  hosts: homelab_jellyfin_hosts
+  become: yes
+  gather_facts: yes
+  tags: [jellyfin]
 
-#   roles:
-#     - jellyfin
+  roles:
+    - jellyfin
 
-# - name: Setup Immich.
-#   hosts: homelab_immich_hosts
-#   become: yes
-#   gather_facts: yes
+- name: Setup Immich.
+  hosts: homelab_immich_hosts
+  become: yes
+  gather_facts: yes
+  tags: [immich]
 
-#   roles:
-#     - immich
+  roles:
+    - immich
 
-# - name: Setup Gatus.
-#   hosts: homelab_gatus_hosts
-#   become: yes
-#   gather_facts: yes
+- name: Setup Gatus.
+  hosts: homelab_gatus_hosts
+  become: yes
+  gather_facts: yes
+  tags: [gatus]
 
-#   roles:
-#     - gatus
+  roles:
+    - gatus
 
-# - name: Setup Traefik.
-#   hosts: homelab_traefik_hosts
-#   become: yes
-#   gather_facts: yes
+- name: Setup Traefik.
+  hosts: homelab_traefik_hosts
+  become: yes
+  gather_facts: yes
+  tags: [traefik]
 
-#   roles:
-#     - traefik
+  roles:
+    - traefik
 
-# - name: Setup Homelab Metrics.
-#   hosts: homelab_metrics_hosts
-#   become: yes
-#   gather_facts: yes
+- name: Setup Homelab Metrics.
+  hosts: homelab_metrics_hosts
+  become: yes
+  gather_facts: yes
+  tags: [metrics]
 
-#   roles:
-#     - homelab_metrics
+  roles:
+    - homelab_metrics
 
-# - name: Setup Pi-Hole.
-#   hosts: homelab_pihole_hosts
-#   become: yes
-#   gather_facts: yes
+- name: Setup Pi-Hole.
+  hosts: homelab_pihole_hosts
+  become: yes
+  gather_facts: yes
+  tags: [pihole]
 
-#   roles:
-#     - systemd_resolvd
-#     - pihole
+  roles:
+    - systemd_resolvd
+    - pihole
 
 - name: Setup Podman hosts.
   hosts: homelab_podman_hosts
   become: yes
   gather_facts: yes
+  tags: [podman]
 
   roles:
     - role: podman
+
+- name: Setup Podman units common to all hosts.
+  hosts: homelab_podman_hosts
+  become: yes
+  gather_facts: yes
+  tags: [podman_units]
+
+  roles:
+    - role: podman_units
       vars:
-        podman_users: ["lab"]
-        enable_podman_socket_root: false
-        enable_podman_socket_user: true
-        install_docker_compat: false
-        install_podman_compose: false
-        default_registries:
-          - "quay.io"
-          - "docker.io"
-          - "ghcr.io"
+        pod_units_files:
+          - vars/podman_units/monitoring.yaml
