@@ -3,8 +3,10 @@ paths:
   - "/home/lab/apps/media-acquisition/jackett/config"
   - "/home/lab/apps/media-acquisition/jackett/downloads"
   - "/home/lab/apps/media-acquisition/radarr/config"
-  - "/home/lab/apps/media-acquisition/radarr/downloads"
-  - "/home/lab/apps/media-acquisition/radarr/movies"
+  - "/home/lab/apps/media-acquisition/transmission/config"
+  - "/home/lab/apps/media-acquisition/transmission/watch"
+  - "/mnt/media-acquisition/downloads"
+  - "/mnt/media-acquisition/movies"
 
 units:
   - name: jackett
@@ -19,6 +21,10 @@ units:
       Restart=always
       ExecStartPre=-/usr/bin/podman rm -f jackett
       ExecStart=/usr/bin/podman run --name jackett --replace \
+        --userns=keep-id \
+        -e PUID={{ homelab_user_id }} \
+        -e PGID={{ homelab_group_id }} \
+        -e TZ={{ pod_units_tz | default('America/New_York') }} \
         -p 9117:9117 \
         -v /home/lab/apps/media-acquisition/jackett/config:/config \
         -v /home/lab/apps/media-acquisition/jackett/downloads:/downloads \
@@ -41,12 +47,43 @@ units:
       Restart=always
       ExecStartPre=-/usr/bin/podman rm -f radarr
       ExecStart=/usr/bin/podman run --name radarr --replace \
+        --userns=keep-id \
+        -e PUID={{ homelab_user_id }} \
+        -e PGID={{ homelab_group_id }} \
+        -e TZ={{ pod_units_tz | default('America/New_York') }} \
         -p 7878:7878 \
         -v /home/lab/apps/media-acquisition/radarr/config:/config \
-        -v /home/lab/apps/media-acquisition/radarr/downloads:/downloads \
-        -v /home/lab/apps/media-acquisition/radarr/movies:/movies \
-        lscr.io/linuxserver/radarr:5.27.5
+        -v /mnt/media-acquisition/downloads:/downloads \
+        -v /mnt/media-acquisition/movies:/movies \
+        lscr.io/linuxserver/radarr:latest
       ExecStop=/usr/bin/podman stop -t 10 radarr
+      TimeoutStopSec=30
+
+      [Install]
+      WantedBy=default.target
+
+  - name: transmission
+    type: service
+    content: |
+      [Unit]
+      Description=Transmission (Podman, native)
+      After=network-online.target
+      Wants=network-online.target
+
+      [Service]
+      Restart=always
+      ExecStartPre=-/usr/bin/podman rm -f transmission
+      ExecStart=/usr/bin/podman run --name transmission --replace \
+        --userns=keep-id \
+        -e PUID={{ homelab_user_id }} \
+        -e PGID={{ homelab_group_id }} \
+        -e TZ={{ pod_units_tz | default('America/New_York') }} \
+        -p 9091:9091 \
+        -v /home/lab/apps/media-acquisition/transmission/config:/config \
+        -v /mnt/media-acquisition/downloads:/downloads \
+        -v /home/lab/apps/media-acquisition/transmission/watch:/watch \
+        lscr.io/linuxserver/transmission:latest
+      ExecStop=/usr/bin/podman stop -t 10 transmission
       TimeoutStopSec=30
 
       [Install]
