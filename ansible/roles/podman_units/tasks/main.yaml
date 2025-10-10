@@ -27,7 +27,7 @@
   loop: "{{ __loaded.results }}"
   loop_control: { loop_var: __item }
 
-- name: Show merged Quadlet units (summary)
+- name: Show merged units (summary)
   debug:
     msg: "{{ pod_units | map(attribute='name') | list | join(', ') }}"
 
