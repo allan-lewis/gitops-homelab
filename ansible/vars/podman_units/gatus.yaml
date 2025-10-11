@@ -17,7 +17,7 @@ units:
         -p 8080:8080 \
         -v {{ pod_units_apps_root | default('/home/' ~ pod_units_user ~ '/apps') }}/gatus/data:/data \
         -v {{ pod_units_apps_root | default('/home/' ~ pod_units_user ~ '/apps') }}/gatus/config:/config \
-        twinproduction/gatus:v5.25.2
+        twinproduction/gatus:latest
       ExecStop=/usr/bin/podman stop -t 10 gatus
       TimeoutStopSec=30
 
