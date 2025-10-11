@@ -430,7 +430,7 @@ all:
         pattern: "*Traefik*"
       - name: Transmission
         group: "Sites (Media)"
-        url: "https://transmission.media.allanshomelab.com"
+        url: "https://transmission.media.allanshomelab.com/transmission/web/"
         pattern: "*Transmission*"
       - name: KVM (Polaris)
         group: "Sites (KVM)"
