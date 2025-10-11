@@ -38,62 +38,66 @@
     - private_key
     - zsh_shell
 
-# - name: Configure automated backups.
-#   hosts: homelab_backup_hosts
-#   become: yes
-#   gather_facts: yes  
+- name: Synchronize local state with remote servers.
+  hosts: homelab_ansible_hosts:&homelab_remote_volumes
+  become: yes
+  gather_facts: yes  
+  tags: [baseline_setup]
 
-#   roles:
-#     - public_key
-#     - private_key
-#     - role: known_hosts
-#       vars:
-#         homelab_ssh_keys: "{{ hostvars | dict2items | map(attribute='value.homelab_remote_volumes') | select('defined') | flatten | map(attribute='host') | unique | list }}"
-#     - backup
+  roles:
+    - public_key
+    - private_key
+    - role: known_hosts
+      vars:
+        homelab_ssh_keys: "{{ hostvars | dict2items | map(attribute='value.homelab_remote_volumes') | select('defined') | flatten | map(attribute='host') | unique | list }}"
+    - restore
+    - backup
 
-# - name: Get hosts ready to do DevOps work (as root).
-#   hosts: homelab_devops_hosts
-#   become: yes
-#   gather_facts: yes
+- name: Get hosts ready to do DevOps work (as root).
+  hosts: homelab_devops_hosts
+  become: yes
+  gather_facts: yes
+  tags: [devops]
 
-#   roles:
-#     - kustomize
-#     - ansible
-#     - terraform
-#     - doppler
-#     - aws
-#     - kubectl
-#     - talosctl
-#     - helm
+  roles:
+    - kustomize
+    - ansible
+    - terraform
+    - doppler
+    - aws
+    - kubectl
+    - talosctl
+    - helm
 
-# - name: Get hosts ready to do DevOps work (as local user).
-#   hosts: homelab_devops_hosts
-#   become: no
-#   gather_facts: yes
+- name: Get hosts ready to do DevOps work (as local user).
+  hosts: homelab_devops_hosts
+  become: no
+  gather_facts: yes
+  tags: [devops]
 
-#   roles: 
-#     - public_key
-#     - private_key
-#     - devops
-#     - tailscale
+  roles: 
+    - public_key
+    - private_key
+    - devops
+    - tailscale
 
-# - name: Setup OpenVPN hosts.
-#   hosts: homelab_openvpn_hosts
-#   become: yes
-#   gather_facts: yes
-#   tags: [openvpn]
+- name: Setup OpenVPN hosts.
+  hosts: homelab_openvpn_hosts
+  become: yes
+  gather_facts: yes
+  tags: [openvpn]
 
-#   roles:
-#     - openvpn
+  roles:
+    - openvpn
 
-# - name: Setup Node Exporter hosts.
-#   hosts: homelab_node_exporter_hosts
-#   become: yes
-#   gather_facts: yes
-#   tags: [node_exporter]
+- name: Setup Node Exporter hosts.
+  hosts: homelab_node_exporter_hosts
+  become: yes
+  gather_facts: yes
+  tags: [node_exporter]
 
-#   roles:
-#     - node_exporter
+  roles:
+    - node_exporter
 
 # - name: Install Tailscale.
 #   hosts: homelab_tailscale_hosts
@@ -117,17 +121,6 @@
 #   roles:
 #     - docker
 #     - docker_containers
-
-# - name: Restore remote backup volumes.
-#   hosts: homelab_ansible_hosts
-#   become: no
-#   gather_facts: yes
-
-#   roles:
-#     - role: known_hosts
-#       vars:
-#         homelab_ssh_keys: "{{ hostvars | dict2items | map(attribute='value.homelab_remote_volumes') | select('defined') | flatten | map(attribute='host') | unique | list }}"
-#     - restore
 
 # - name: Setup Plex.
 #   hosts: homelab_plex_hosts
@@ -173,15 +166,6 @@
 
   roles:
     - traefik
-
-# - name: Setup Homelab Metrics.
-#   hosts: homelab_metrics_hosts
-#   become: yes
-#   gather_facts: yes
-#   tags: [metrics]
-
-#   roles:
-#     - homelab_metrics
 
 # - name: Setup Pi-Hole.
 #   hosts: homelab_pihole_hosts
