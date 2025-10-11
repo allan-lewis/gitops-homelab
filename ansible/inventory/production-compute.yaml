@@ -123,6 +123,8 @@ all:
 
   children:
     homelab_ansible_hosts:
+      hosts:
+        mordred:
       children:
         homelab_backup_hosts:
           hosts:
