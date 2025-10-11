@@ -105,19 +105,19 @@
   roles:
     - node_exporter
 
-# - name: Install Tailscale.
-#   hosts: homelab_tailscale_hosts
-#   become: yes
-#   gather_facts: yes
-#   tags: [tailscale]
+- name: Install Tailscale.
+  hosts: homelab_tailscale_hosts
+  become: yes
+  gather_facts: yes
+  tags: [tailscale]
   
-#   tasks:
-#     - name: Force lsb_release_package to correct value for Ubuntu
-#       set_fact:
-#         lsb_release_package: lsb-release
+  tasks:
+    - name: Force lsb_release_package to correct value for Ubuntu
+      set_fact:
+        lsb_release_package: lsb-release
 
-#   roles:
-#     - artis3n.tailscale
+  roles:
+    - artis3n.tailscale
 
 # - name: Setup Docker hosts.
 #   hosts: homelab_docker_hosts
