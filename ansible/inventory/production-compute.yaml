@@ -237,6 +237,9 @@ all:
         host: polaris.docker.allanshomelab.com
         url: "https://{{ hostvars['polaris'].ansible_host }}:8006"
         scheme: https
+      - name: transmission
+        host: transmission.media.allanshomelab.com
+        url: "http://{{ hostvars['mordred'].ansible_host }}:9091"
     homelab_docker_gatus_https_endpoints:
       - name: "Mizar"
         group: "Healthchecks"
