@@ -14,7 +14,7 @@ variable "vm_list_ubuntu" {
     }
     pollux = {
       description       = "DevOps host for the production environment (managed by Terraform)"
-      proxmox_node      = "sirius"
+      proxmox_node      = "polaris"
       cpu_cores         = 2
       memory_dedicated  = 2048
       datastore_id      = "local-lvm"
