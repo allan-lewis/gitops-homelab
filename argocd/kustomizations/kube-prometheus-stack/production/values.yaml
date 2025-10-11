@@ -141,6 +141,11 @@ prometheus:
             regex: '192.168.86.112:9102'
             target_label: instance
             replacement: 'capella'
+          - action: replace
+            source_labels: ['__address__']
+            regex: '192.168.86.216:9100'
+            target_label: instance
+            replacement: 'mordred'
 
 grafana:
   grafana.ini:
