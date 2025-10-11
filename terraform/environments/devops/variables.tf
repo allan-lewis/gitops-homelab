@@ -3,7 +3,7 @@ variable "vm_list_ubuntu" {
   default = {
     castor = {
       description       = "DevOps host for the staging environment (managed by Terraform)"
-      proxmox_node      = "sirius"
+      proxmox_node      = "polaris"
       cpu_cores         = 2
       memory_dedicated  = 2048
       datastore_id      = "local-lvm"
@@ -28,3 +28,27 @@ variable "vm_list_ubuntu" {
 
 # Set this from an environment variable called TF_VAR_PROXMOX_VM_PUBLIC_KEY
 variable "PROXMOX_VM_PUBLIC_KEY" {}
+
+# Proxmox endpoints for each cluster (filled via TF_VAR_* or tfvars)
+variable "PROXMOX_VE_ENDPOINT_SIRIUS" {
+  type        = string
+  description = "API endpoint for the Sirius Proxmox cluster"
+}
+
+variable "PROXMOX_VE_ENDPOINT_POLARIS" {
+  type        = string
+  description = "API endpoint for the Polaris Proxmox cluster"
+}
+
+# NEW: per-alias passwords (mark sensitive)
+variable "PROXMOX_VE_PASSWORD_SIRIUS" {
+  type        = string
+  description = "Password for root@pam on Sirius"
+  sensitive   = true
+}
+
+variable "PROXMOX_VE_PASSWORD_POLARIS" {
+  type        = string
+  description = "Password for root@pam on Polaris"
+  sensitive   = true
+}
