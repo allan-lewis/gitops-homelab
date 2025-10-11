@@ -150,20 +150,20 @@ spec:
             claimName: jackett-config
         - name: jackett-downloads
           emptyDir: {}
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: "node-role"
-                    operator: "In"
-                    values:
-                      - "openvpn"
-      tolerations:
-      - key: "openvpn"
-        operator: "Equal"
-        value: "true"
-        effect: "NoSchedule"
+      # affinity:
+      #   nodeAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       nodeSelectorTerms:
+      #         - matchExpressions:
+      #             - key: "node-role"
+      #               operator: "In"
+      #               values:
+      #                 - "openvpn"
+      # tolerations:
+      # - key: "openvpn"
+      #   operator: "Equal"
+      #   value: "true"
+      #   effect: "NoSchedule"
 ---
 apiVersion: v1
 kind: Service
@@ -293,20 +293,20 @@ spec:
         - name: radarr-movies
           persistentVolumeClaim:
             claimName: movies-pvc
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: "node-role"
-                    operator: "In"
-                    values:
-                      - "openvpn"
-      tolerations:
-      - key: "openvpn"
-        operator: "Equal"
-        value: "true"
-        effect: "NoSchedule"
+      # affinity:
+      #   nodeAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       nodeSelectorTerms:
+      #         - matchExpressions:
+      #             - key: "node-role"
+      #               operator: "In"
+      #               values:
+      #                 - "openvpn"
+      # tolerations:
+      # - key: "openvpn"
+      #   operator: "Equal"
+      #   value: "true"
+      #   effect: "NoSchedule"
 ---
 apiVersion: v1
 kind: Service
@@ -365,20 +365,20 @@ spec:
         - name: sonarr-tv
           persistentVolumeClaim:
             claimName: tv-pvc
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: "node-role"
-                    operator: "In"
-                    values:
-                      - "openvpn"
-      tolerations:
-      - key: "openvpn"
-        operator: "Equal"
-        value: "true"
-        effect: "NoSchedule"
+      # affinity:
+      #   nodeAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       nodeSelectorTerms:
+      #         - matchExpressions:
+      #             - key: "node-role"
+      #               operator: "In"
+      #               values:
+      #                 - "openvpn"
+      # tolerations:
+      # - key: "openvpn"
+      #   operator: "Equal"
+      #   value: "true"
+      #   effect: "NoSchedule"
 ---
 apiVersion: v1
 kind: Service
