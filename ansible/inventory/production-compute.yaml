@@ -166,10 +166,12 @@ all:
           hosts:
             regulus:
         homelab_podman_hosts:
-          children:
-            homelab_podman_media_acquisition_hosts:
-              hosts:
-                mordred:
+          hosts:
+            mordred:
+          # children:
+          #   homelab_podman_media_acquisition_hosts:
+          #     hosts:
+          #       mordred:
         homelab_tailscale_hosts:
           hosts:
             mizar:
