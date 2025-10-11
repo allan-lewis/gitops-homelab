@@ -39,51 +39,51 @@
 #   - name: http
 #     targetPort: 7474
 #     port: 7474
-# ---
-# kind: Deployment
-# apiVersion: apps/v1
-# metadata:
-#   name: lidarr
-#   namespace: media
-#   labels:
-#     app: lidarr
-# spec:
-#   replicas: 1
-#   progressDeadlineSeconds: 600
-#   revisionHistoryLimit: 2
-#   strategy:
-#     type: Recreate
-#   selector:
-#     matchLabels:
-#       app: lidarr
-#   template:
-#     metadata:
-#       labels:
-#         app.kubernetes.io/name: lidarr
-#         app: lidarr
-#     spec:
-#       containers:
-#       - name: lidarr
-#         image: "lscr.io/linuxserver/lidarr:2.13.3"
-#         imagePullPolicy: "Always"
-#         env:
-#         volumeMounts:
-#           - mountPath: /config
-#             name: lidarr-config
-#           - mountPath: /downloads
-#             name: media-downloads
-#           - mountPath: /music
-#             name: lidarr-music
-#       volumes:
-#         - name: lidarr-config
-#           persistentVolumeClaim:
-#             claimName: lidarr-config
-#         - name: media-downloads
-#           persistentVolumeClaim:
-#             claimName: downloads-pvc
-#         - name: lidarr-music
-#           persistentVolumeClaim:
-#             claimName: music-pvc
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: lidarr
+  namespace: media
+  labels:
+    app: lidarr
+spec:
+  replicas: 1
+  progressDeadlineSeconds: 600
+  revisionHistoryLimit: 2
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: lidarr
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: lidarr
+        app: lidarr
+    spec:
+      containers:
+      - name: lidarr
+        image: "lscr.io/linuxserver/lidarr:2.13.3"
+        imagePullPolicy: "Always"
+        env:
+        volumeMounts:
+          - mountPath: /config
+            name: lidarr-config
+          - mountPath: /downloads
+            name: media-downloads
+          - mountPath: /music
+            name: lidarr-music
+      volumes:
+        - name: lidarr-config
+          persistentVolumeClaim:
+            claimName: lidarr-config
+        - name: media-downloads
+          persistentVolumeClaim:
+            claimName: downloads-pvc
+        - name: lidarr-music
+          persistentVolumeClaim:
+            claimName: music-pvc
 #       affinity:
 #         nodeAffinity:
 #           requiredDuringSchedulingIgnoredDuringExecution:
@@ -98,19 +98,19 @@
 #         operator: "Equal"
 #         value: "true"
 #         effect: "NoSchedule"
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: lidarr
-#   namespace: media
-# spec:
-#   selector:
-#     app: lidarr
-#   ports:
-#   - name: http
-#     targetPort: 8686
-#     port: 8686
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lidarr
+  namespace: media
+spec:
+  selector:
+    app: lidarr
+  ports:
+  - name: http
+    targetPort: 8686
+    port: 8686
 ---
 kind: Deployment
 apiVersion: apps/v1
