@@ -147,9 +147,6 @@ all:
         homelab_jellyfin_hosts:
           hosts:
             regulus:
-        # homelab_media_acquisition_hosts:
-        #   hosts:
-        #     mordred:
         homelab_node_exporter_hosts:
           hosts:
             alcor:
@@ -168,6 +165,11 @@ all:
         homelab_plex_hosts:
           hosts:
             regulus:
+        homelab_podman_hosts:
+          children:
+            homelab_podman_media_acquisition_hosts:
+              hosts:
+                mordred:
         homelab_tailscale_hosts:
           hosts:
             mizar:

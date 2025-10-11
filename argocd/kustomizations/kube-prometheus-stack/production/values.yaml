@@ -80,6 +80,7 @@ prometheus:
             - 192.168.86.167:9100
             - 192.168.86.112:9102
             - 192.168.86.210:9100
+            - 192.168.86.216:9100
         relabel_configs:
           - action: replace
             source_labels: ['__address__']
