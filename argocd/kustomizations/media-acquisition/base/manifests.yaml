@@ -39,78 +39,78 @@
 #   - name: http
 #     targetPort: 7474
 #     port: 7474
----
-kind: Deployment
-apiVersion: apps/v1
-metadata:
-  name: lidarr
-  namespace: media
-  labels:
-    app: lidarr
-spec:
-  replicas: 1
-  progressDeadlineSeconds: 600
-  revisionHistoryLimit: 2
-  strategy:
-    type: Recreate
-  selector:
-    matchLabels:
-      app: lidarr
-  template:
-    metadata:
-      labels:
-        app.kubernetes.io/name: lidarr
-        app: lidarr
-    spec:
-      containers:
-      - name: lidarr
-        image: "lscr.io/linuxserver/lidarr:2.13.3"
-        imagePullPolicy: "Always"
-        env:
-        volumeMounts:
-          - mountPath: /config
-            name: lidarr-config
-          - mountPath: /downloads
-            name: media-downloads
-          - mountPath: /music
-            name: lidarr-music
-      volumes:
-        - name: lidarr-config
-          persistentVolumeClaim:
-            claimName: lidarr-config
-        - name: media-downloads
-          persistentVolumeClaim:
-            claimName: downloads-pvc
-        - name: lidarr-music
-          persistentVolumeClaim:
-            claimName: music-pvc
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: "node-role"
-                    operator: "In"
-                    values:
-                      - "openvpn"
-      tolerations:
-      - key: "openvpn"
-        operator: "Equal"
-        value: "true"
-        effect: "NoSchedule"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: lidarr
-  namespace: media
-spec:
-  selector:
-    app: lidarr
-  ports:
-  - name: http
-    targetPort: 8686
-    port: 8686
+# ---
+# kind: Deployment
+# apiVersion: apps/v1
+# metadata:
+#   name: lidarr
+#   namespace: media
+#   labels:
+#     app: lidarr
+# spec:
+#   replicas: 1
+#   progressDeadlineSeconds: 600
+#   revisionHistoryLimit: 2
+#   strategy:
+#     type: Recreate
+#   selector:
+#     matchLabels:
+#       app: lidarr
+#   template:
+#     metadata:
+#       labels:
+#         app.kubernetes.io/name: lidarr
+#         app: lidarr
+#     spec:
+#       containers:
+#       - name: lidarr
+#         image: "lscr.io/linuxserver/lidarr:2.13.3"
+#         imagePullPolicy: "Always"
+#         env:
+#         volumeMounts:
+#           - mountPath: /config
+#             name: lidarr-config
+#           - mountPath: /downloads
+#             name: media-downloads
+#           - mountPath: /music
+#             name: lidarr-music
+#       volumes:
+#         - name: lidarr-config
+#           persistentVolumeClaim:
+#             claimName: lidarr-config
+#         - name: media-downloads
+#           persistentVolumeClaim:
+#             claimName: downloads-pvc
+#         - name: lidarr-music
+#           persistentVolumeClaim:
+#             claimName: music-pvc
+#       affinity:
+#         nodeAffinity:
+#           requiredDuringSchedulingIgnoredDuringExecution:
+#             nodeSelectorTerms:
+#               - matchExpressions:
+#                   - key: "node-role"
+#                     operator: "In"
+#                     values:
+#                       - "openvpn"
+#       tolerations:
+#       - key: "openvpn"
+#         operator: "Equal"
+#         value: "true"
+#         effect: "NoSchedule"
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: lidarr
+#   namespace: media
+# spec:
+#   selector:
+#     app: lidarr
+#   ports:
+#   - name: http
+#     targetPort: 8686
+#     port: 8686
 ---
 kind: Deployment
 apiVersion: apps/v1
@@ -177,77 +177,77 @@ spec:
   - name: http
     targetPort: 9117
     port: 9117
----
-kind: Deployment
-apiVersion: apps/v1
-metadata:
-  name: transmission
-  namespace: media
-  labels:
-    app: transmission
-spec:
-  replicas: 1
-  progressDeadlineSeconds: 600
-  revisionHistoryLimit: 2
-  strategy:
-    type: Recreate
-  selector:
-    matchLabels:
-      app: transmission
-  template:
-    metadata:
-      labels:
-        app.kubernetes.io/name: transmission
-        app: transmission
-    spec:
-      containers:
-      - name: transmission
-        image: "lscr.io/linuxserver/transmission:4.0.6"
-        imagePullPolicy: "Always"
-        env:
-        volumeMounts:
-          - mountPath: /config
-            name: transmission-config
-          - mountPath: /downloads
-            name: media-downloads
-          - mountPath: /watch
-            name: transmission-watch
-      volumes:
-        - name: transmission-config
-          persistentVolumeClaim:
-            claimName: transmission-config
-        - name: media-downloads
-          persistentVolumeClaim:
-            claimName: downloads-pvc
-        - name: transmission-watch
-          emptyDir: {}
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: "node-role"
-                    operator: "In"
-                    values:
-                      - "openvpn"
-      tolerations:
-      - key: "openvpn"
-        operator: "Equal"
-        value: "true"
-        effect: "NoSchedule"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: transmission
-  namespace: media
-spec:
-  selector:
-    app: transmission
-  ports:
-  - name: http
-    targetPort: 9091
-    port: 9091
+# ---
+# kind: Deployment
+# apiVersion: apps/v1
+# metadata:
+#   name: transmission
+#   namespace: media
+#   labels:
+#     app: transmission
+# spec:
+#   replicas: 1
+#   progressDeadlineSeconds: 600
+#   revisionHistoryLimit: 2
+#   strategy:
+#     type: Recreate
+#   selector:
+#     matchLabels:
+#       app: transmission
+#   template:
+#     metadata:
+#       labels:
+#         app.kubernetes.io/name: transmission
+#         app: transmission
+#     spec:
+#       containers:
+#       - name: transmission
+#         image: "lscr.io/linuxserver/transmission:4.0.6"
+#         imagePullPolicy: "Always"
+#         env:
+#         volumeMounts:
+#           - mountPath: /config
+#             name: transmission-config
+#           - mountPath: /downloads
+#             name: media-downloads
+#           - mountPath: /watch
+#             name: transmission-watch
+#       volumes:
+#         - name: transmission-config
+#           persistentVolumeClaim:
+#             claimName: transmission-config
+#         - name: media-downloads
+#           persistentVolumeClaim:
+#             claimName: downloads-pvc
+#         - name: transmission-watch
+#           emptyDir: {}
+#       affinity:
+#         nodeAffinity:
+#           requiredDuringSchedulingIgnoredDuringExecution:
+#             nodeSelectorTerms:
+#               - matchExpressions:
+#                   - key: "node-role"
+#                     operator: "In"
+#                     values:
+#                       - "openvpn"
+#       tolerations:
+#       - key: "openvpn"
+#         operator: "Equal"
+#         value: "true"
+#         effect: "NoSchedule"
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: transmission
+#   namespace: media
+# spec:
+#   selector:
+#     app: transmission
+#   ports:
+#   - name: http
+#     targetPort: 9091
+#     port: 9091
 ---
 kind: Deployment
 apiVersion: apps/v1

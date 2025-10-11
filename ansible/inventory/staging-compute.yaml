@@ -33,6 +33,7 @@ all:
             delta:
         homelab_tailscale_hosts:
           hosts:
+            delta:
             epsilon:
     homelab_talos_controlplane_nodes:
       hosts:

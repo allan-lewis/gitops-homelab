@@ -91,7 +91,6 @@ units:
       [Install]
       WantedBy=default.target
 
-units:
   - name: sonarr
     type: service
     content: |

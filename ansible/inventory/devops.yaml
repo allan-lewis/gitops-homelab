@@ -8,17 +8,9 @@ all:
       ansible_host: 192.168.86.135
       homelab_ansible_environment: "production-compute"
       gatus_slug: "(Production DevOps)"
-    delta:
-      ansible_host: 192.168.86.93
-      gatus_slug: "(Podman)"
-    epsilon:
-      ansible_host: 192.168.86.94
-      gatus_slug: "(Docker)"
 
   children:
     homelab_ansible_hosts:
-      hosts:
-        epsilon:
       children:
         homelab_devops_hosts:
           hosts:
@@ -28,16 +20,6 @@ all:
           hosts:
             castor:
             pollux:
-        homelab_podman_hosts:
-          hosts:
-            delta:
-          children:
-            homelab_podman_gatus_hosts:
-              hosts:
-                delta:
-            homelab_podman_media_acquisition_hosts:
-              hosts:
-                delta:
 
   vars:
     ansible_python_interpreter: "/usr/bin/python3.12"

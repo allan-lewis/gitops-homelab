@@ -156,14 +156,14 @@
 #   roles:
 #     - immich
 
-- name: Setup Gatus.
-  hosts: homelab_gatus_hosts
-  become: yes
-  gather_facts: yes
-  tags: [docker_gatus]
+# - name: Setup Gatus.
+#   hosts: homelab_gatus_hosts
+#   become: yes
+#   gather_facts: yes
+#   tags: [docker_gatus]
 
-  roles:
-    - gatus
+#   roles:
+#     - gatus
 
 # - name: Setup Traefik.
 #   hosts: homelab_traefik_hosts
@@ -253,11 +253,7 @@
           - "/home/lab/apps/media-acquisition/transmission/config"
           - "/home/lab/apps/media-acquisition/transmission/watch"
           - "/home/lab/apps/media-acquisition/sonarr/config"
-          - "/mnt/media-acquisition/tv"
-          - "/mnt/media-acquisition/downloads"
-          - "/mnt/media-acquisition/movies"
     - role: podman_units
       vars:
         pod_units_files:
           - vars/podman_units/media-acquisition.yaml
-
