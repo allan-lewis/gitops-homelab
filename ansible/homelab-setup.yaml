@@ -39,10 +39,16 @@
     - zsh_shell
 
 - name: Synchronize local state with remote servers.
-  hosts: homelab_ansible_hosts:&homelab_remote_volumes
+  hosts: homelab_ansible_hosts
   become: yes
   gather_facts: yes  
   tags: [baseline_setup]
+
+  pre_tasks:
+    - name: Skip this host if no remote volumes are defined
+      meta: end_host
+      when: homelab_remote_volumes is not defined
+            or (homelab_remote_volumes | length) == 0
 
   roles:
     - public_key
