@@ -50,3 +50,25 @@ units:
 
       [Install]
       WantedBy=default.target
+
+  - name: homelab-metrics
+    type: service
+    content: |
+      [Unit]
+      Description=Homelab Metrics (Podman, native)
+      After=network-online.target
+      Wants=network-online.target
+
+      [Service]
+      Restart=always
+      ExecStartPre=-/usr/bin/podman rm -f homelab-metrics
+      ExecStart=/usr/bin/podman run --name homelab-metrics --replace \
+        --userns=keep-id \
+        -p 9102:9102 \
+        {{ ('-e FORWARD_METRICS_URL=' ~ homelab_metrics_forward_url ~ ' ') if (homelab_metrics_forward_url is defined and homelab_metrics_forward_url | length > 0) else '' }}\
+        allanelewis/homelab-metrics:latest
+      ExecStop=/usr/bin/podman stop -t 10 homelab-metrics
+      TimeoutStopSec=30
+
+      [Install]
+      WantedBy=default.target
