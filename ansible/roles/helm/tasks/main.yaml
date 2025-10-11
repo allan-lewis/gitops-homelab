@@ -5,10 +5,10 @@
     dest: /tmp/get_helm.sh
     mode: '0755'
 
-- name: Run Helm install script.
+- name: Install/upgrade Helm (>= 3.18.10; recommended v3.19.x)
   command: /tmp/get_helm.sh
   environment:
-    DESIRED_VERSION: "v3.14.4"
+    DESIRED_VERSION: "v3.19.0"   # or newer stable 3.19.x
   args:
     creates: /usr/local/bin/helm
 
