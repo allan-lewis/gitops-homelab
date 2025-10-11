@@ -20,6 +20,10 @@ all:
     mordred:
       ansible_host: 192.168.86.216
       gatus_slug: "(Media Acquisition)"
+      homelab_mounts:
+        - src: "192.168.86.106:/mnt/pool1/media-acquisition"
+          path: "/mnt/media-acquisition"
+          options: "rw"
     ## KUBERNETES
     roland:
       ansible_host: 192.168.86.230
