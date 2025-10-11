@@ -18,7 +18,7 @@ all:
       gatus_enabled: false
     ## VIRTUAL MACHINES
     misery:
-      ansible_host: 192.168.86.116
+      ansible_host: 192.168.86.227
       gatus_slug: "(Media Server)"
     mordred:
       ansible_host: 192.168.86.216
