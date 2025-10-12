@@ -188,6 +188,7 @@ all:
                 mordred:
         homelab_tailscale_hosts:
           hosts:
+            flagg:
             mizar:
           vars:
             lsb_release_package: lsb-release
