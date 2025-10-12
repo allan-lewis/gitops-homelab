@@ -8,6 +8,11 @@ all:
     flagg:
       ansible_host: 192.168.86.205
       gatus_slug: "(Traefik/Pi-hole/Gatus)"
+      # homelab_remote_volumes:
+      #   - src: "/opt/allans-home-lab/gatus/"
+      #     dest: "/mnt/pool1/docker-volumes/gatus/"
+      #     host: procyon
+      #     user: allan  
     maturin:
       ansible_host: 192.168.86.200
       gatus_slug: "(Hypervisor)"
@@ -82,10 +87,6 @@ all:
       homelab_backup_hour: "*"
       homelab_metrics_forward_url: "http://{{hostvars['capella'].ansible_host}}:9100"
       homelab_remote_volumes:
-        - src: "/opt/allans-home-lab/gatus/"
-          dest: "/mnt/pool1/docker-volumes/gatus/"
-          host: procyon
-          user: allan  
         - src: "/opt/allans-home-lab/traefik/"
           dest: "/mnt/pool1/docker-volumes/traefik/"
           host: procyon
@@ -145,13 +146,6 @@ all:
           hosts:
             mizar:
             regulus:
-          children:
-            homelab_metrics_hosts:
-              hosts:
-                mizar:
-        homelab_gatus_hosts:
-          hosts:
-            mizar:
         homelab_immich_hosts:
           hosts:
             regulus:
@@ -232,7 +226,7 @@ all:
         url: "http://{{ hostvars['mizar'].ansible_host }}:30080"
       - name: gatus
         host: gatus.docker.allanshomelab.com
-        url: "http://{{ hostvars['mizar'].ansible_host }}:8080"
+        url: "http://{{ hostvars['flagg'].ansible_host }}:8080"
       - name: jellyfin
         host: jellyfin.docker.allanshomelab.com
         url: "http://{{ hostvars['regulus'].ansible_host }}:8096"
