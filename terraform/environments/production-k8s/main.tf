@@ -10,6 +10,14 @@ module "production_proxmox_talos_cluster" {
   node_name = "sirius"
 }
 
+# default config to satisfy anything that expects an unaliased provider
+provider "proxmox" {
+  endpoint = var.PROXMOX_VE_ENDPOINT_SIRIUS
+  username = "root@pam"
+  password = var.PROXMOX_VE_PASSWORD_SIRIUS
+  insecure = false   # or true if you must skip TLS validation
+}
+
 output "talosconfig" {
   value = module.production_proxmox_talos_cluster.talosconfig
   sensitive = true
