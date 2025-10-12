@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    proxmox = {
+      source  = "bpg/proxmox"
+      version = "0.84.0"
+    }
+  }
+}
+
 module "production_proxmox_talos_cluster" {
   source = "../../modules/proxmox_talos_cluster"
   
