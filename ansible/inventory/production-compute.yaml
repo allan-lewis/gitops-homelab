@@ -17,6 +17,9 @@ all:
       gatus_slug: "(Hypervisor)"
       gatus_enabled: false
     ## VIRTUAL MACHINES
+    cujo:
+      ansible_host: 192.168.86.226
+      gatus_slug: "(OpenVPN Server)"
     misery:
       ansible_host: 192.168.86.227
       gatus_slug: "(Media Server)"
@@ -45,9 +48,6 @@ all:
       ansible_host: 100.95.108.6
       gatus_slug: "(Remote Backup NAS)"
     ## OLD HOSTS
-    alcor:
-      ansible_host: 192.168.86.123
-      gatus_slug: "(OpenVPN Server)"
     antares:
       ansible_host: 192.168.86.167
       gatus_slug: "(Retro Gaming)"
@@ -152,10 +152,10 @@ all:
             regulus:
         homelab_node_exporter_hosts:
           hosts:
-            alcor:
+            cujo:
         homelab_openvpn_hosts:
           hosts:
-            alcor:
+            cujo:
           vars:
             homelab_openvpn_config: "/etc/openvpn/config.ovpn"
             homelab_openvpn_config_contents: "{{ lookup('env', 'OPEN_VPN_CONFIG') }}"
