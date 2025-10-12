@@ -1,14 +1,14 @@
 variable "vm_list_ubuntu" {
   description = "A list of Ubuntu VMs to create"
   default = {
-    alcor = {
+    cujo = {
       description       = "OpenVPN gateway host (managed by Terraform)"
-      proxmox_node      = "sirius"
+      proxmox_node      = "polaris"
       cpu_cores         = 2
       memory_dedicated  = 2048
       datastore_id      = "local-lvm"
       disk_size         = 64
-      ipv4_address      = "192.168.86.123/24"
+      ipv4_address      = "192.168.86.226/24"
       gateway           = "192.168.86.1"
       tags              = ["terraform", "production", "ubuntu", "openvpn"]
     }
@@ -23,15 +23,26 @@ variable "vm_list_ubuntu" {
       gateway           = "192.168.86.1"
       tags              = ["terraform", "production", "ubuntu", "media"]
     }
-    mordred = {
-      description       = "Media acquisition host (managed by Terraform)"
+    misery = {
+      description       = "Media host (managed by Terraform)"
       proxmox_node      = "sirius"
       cpu_cores         = 4
       memory_dedicated  = 8192
       datastore_id      = "local-lvm"
       disk_size         = 128
+      ipv4_address      = "192.168.86.227/24"
+      gateway           = "192.168.86.1"
+      tags              = ["terraform", "production", "ubuntu", "media"]
+    }
+    mordred = {
+      description       = "Media acquisition host (managed by Terraform)"
+      proxmox_node      = "polaris"
+      cpu_cores         = 4
+      memory_dedicated  = 8192
+      datastore_id      = "local-lvm"
+      disk_size         = 128
       ipv4_address      = "192.168.86.216/24"
-      gateway           = "192.168.86.123"
+      gateway           = "192.168.86.226"
       tags              = ["terraform", "production", "ubuntu", "media"]
     }
   }
