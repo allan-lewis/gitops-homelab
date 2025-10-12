@@ -63,7 +63,7 @@ prometheus:
         scheme: http
         static_configs:
           - targets:
-            - 192.168.86.112:8080
+            - 192.168.86.205:8080
       - job_name: 'node-exporter'
         scheme: http
         static_configs:
