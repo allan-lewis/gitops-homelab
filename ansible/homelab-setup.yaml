@@ -119,41 +119,42 @@
   roles:
     - artis3n.tailscale
 
-# - name: Setup Docker hosts.
-#   hosts: homelab_docker_hosts
-#   become: yes
-#   gather_facts: yes
+- name: Setup Docker hosts.
+  hosts: homelab_docker_hosts
+  become: yes
+  gather_facts: yes
+  tags: [docker]
 
-#   roles:
-#     - docker
-#     - docker_containers
+  roles:
+    - docker
+    - docker_containers
 
-# - name: Setup Plex.
-#   hosts: homelab_plex_hosts
-#   become: yes
-#   gather_facts: yes
-#   tags: [plex]
+- name: Setup Plex.
+  hosts: homelab_plex_hosts
+  become: yes
+  gather_facts: yes
+  tags: [docker_plex]
 
-#   roles:
-#     - plex
+  roles:
+    - plex
 
-# - name: Setup Jellyfin.
-#   hosts: homelab_jellyfin_hosts
-#   become: yes
-#   gather_facts: yes
-#   tags: [jellyfin]
+- name: Setup Jellyfin.
+  hosts: homelab_jellyfin_hosts
+  become: yes
+  gather_facts: yes
+  tags: [docker_jellyfin]
 
-#   roles:
-#     - jellyfin
+  roles:
+    - jellyfin
 
-# - name: Setup Immich.
-#   hosts: homelab_immich_hosts
-#   become: yes
-#   gather_facts: yes
-#   tags: [immich]
+- name: Setup Immich.
+  hosts: homelab_immich_hosts
+  become: yes
+  gather_facts: yes
+  tags: [docker_immich]
 
-#   roles:
-#     - immich
+  roles:
+    - immich
 
 - name: Setup Gatus.
   hosts: homelab_gatus_hosts
@@ -173,15 +174,15 @@
   roles:
     - traefik
 
-# - name: Setup Pi-Hole.
-#   hosts: homelab_pihole_hosts
-#   become: yes
-#   gather_facts: yes
-#   tags: [pihole]
+- name: Setup Pi-Hole.
+  hosts: homelab_pihole_hosts
+  become: yes
+  gather_facts: yes
+  tags: [docker_pihole]
 
-#   roles:
-#     - systemd_resolvd
-#     - pihole
+  roles:
+    - systemd_resolvd
+    - pihole
 
 - name: Setup Podman.
   hosts: homelab_podman_hosts
