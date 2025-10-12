@@ -177,7 +177,12 @@ all:
           hosts:
             regulus:
         homelab_podman_hosts:
+          hosts:
+            misery:
           children:
+            homelab_podman_gatus_hosts:
+              hosts:
+                flagg:
             homelab_podman_media_acquisition_hosts:
               hosts:
                 mordred:
