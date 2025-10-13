@@ -9,7 +9,7 @@ helmCharts:
 - name: mariadb
   repo: oci://registry-1.docker.io/bitnamicharts
   namespace: guacamole
-  version: 22.0.0
+  version: 23.0.5
   valuesFile: values.yaml
 
 patches:
