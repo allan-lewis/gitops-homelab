@@ -180,6 +180,9 @@ all:
             homelab_podman_media_acquisition_hosts:
               hosts:
                 mordred:
+            homelab_podman_traefik_hosts:
+              hosts:
+                flagg:
         homelab_tailscale_hosts:
           hosts:
             flagg:
@@ -207,6 +210,8 @@ all:
     homelab_telegram_id: "{{ lookup('env', 'TELEGRAM_ID') }}"
     tailscale_authkey: "{{ lookup('env', 'TAILSCALE_AUTH_KEY') }}"
     homelab_cloudflare_api_key: "{{ lookup('env', 'TRAEFIK_CF_API_KEY') }}"
+    traefik_letsencrypt_dir: "/home/lab/apps/traefik/letsencrypt"
+    traefik_config_dir: "/home/lab/apps/traefik/config"
     homelab_s3_buckets:
       - allans-home-lab-longhorn
       - allans-homelab-terraform-state-bucket

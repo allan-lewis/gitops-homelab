@@ -239,3 +239,29 @@
       vars:
         pod_units_files:
           - vars/podman_units/media-acquisition.yaml
+
+- name: Setup Traefik on Podman.
+  hosts: homelab_podman_traefik_hosts
+  become: yes
+  gather_facts: yes
+  tags: [podman_traefik]
+
+  roles:
+    - role: rootless_low_ports
+    - role: enforce_required_variables
+      vars:
+        required_variables:
+          - homelab_cloudflare_api_key
+    - role: podman_prepare
+      vars:
+        podprep_dirs:          
+          - "{{ traefik_letsencrypt_dir }}"
+          - "{{ traefik_config_dir }}"
+        podprep_templates:
+          - src: templates/traefik/traefik.yaml.j2
+            dest: "{{ traefik_config_dir }}/traefik.yaml"
+            mode: "0644"
+    - role: podman_units
+      vars:
+        pod_units_files:
+          - vars/podman_units/traefik.yaml

@@ -1,0 +1,9 @@
+---
+- name: "Check that all required variables are defined and non-empty"
+  vars:
+    # Lookup each variable dynamically
+    _var_value: "{{ lookup('vars', item, default='__undefined__') }}"
+  fail:
+    msg: "Required variable '{{ item }}' is not defined or is empty."
+  when: _var_value == '__undefined__' or (_var_value is string and _var_value | trim == '') or (_var_value is not string and _var_value | length == 0)
+  loop: "{{ required_variables | default([]) }}"
