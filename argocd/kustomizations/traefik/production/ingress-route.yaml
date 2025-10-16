@@ -512,18 +512,7 @@ spec:
         - name: traefik-endpoint-capella
           namespace:  traefik
           port: 80
-          scheme: http 
-    - match: Host(`procyon.hosts.allanshomelab.com`)
-      kind: Rule
-      # middlewares:
-      #   - name: traefik-custom-headers
-      #     namespace: default
-      priority: 10
-      services:
-        - name: traefik-service-procyon-local
-          namespace:  traefik
-          port: 80
-          scheme: http                             
+          scheme: http                           
     - match: Host(`photos.allanandvaia.com`)
       kind: Rule
       # middlewares:
