@@ -154,7 +154,7 @@
         homelab_docker_compose_prep_dirs:
           - "/home/lab/apps/gatus/config"
           - "/home/lab/apps/gatus/data"
-        homelab_docker_compose_project_src: "/tmp/docker-compose-monitoring"
+        homelab_docker_compose_project_src: "/tmp/docker-compose-gatus"
         homelab_docker_compose_templates:
           - src: "templates/docker_compose/gatus/gatus-config.yaml.j2"
             dest: "/home/lab/apps/gatus/config/config.yaml"
