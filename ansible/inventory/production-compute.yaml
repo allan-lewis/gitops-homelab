@@ -145,6 +145,9 @@ all:
             mizar:
             regulus:
           children:
+            homelab_docker_gatus_hosts:
+              hosts:
+                mizar:
             homelab_docker_media_acquisition_hosts:
               hosts:
                 mordred:
