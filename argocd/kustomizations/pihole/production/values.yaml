@@ -26,7 +26,6 @@ serviceDhcp:
 dnsmasq:
   customDnsEntries:
     - address=/homeassistant.local.allanshomelab.com/192.168.86.124
-    - address=/procyon.local.allanshomelab.com/192.168.86.106
     - address=/polaris.local.allanshomelab.com/192.168.86.101
     - address=/sirius.local.allanshomelab.com/192.168.86.105
     - address=/immich.local.allanshomelab.com/192.168.86.116
