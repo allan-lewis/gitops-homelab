@@ -2,7 +2,7 @@ services:
 
   node_exporter:
     container_name: "node-exporter"
-    image: "quay.io/prometheus/node-exporter:v1.9.1"
+    image: "quay.io/prometheus/node-exporter:latest"
     restart: "unless-stopped"
     ports: 
       - "9100:9100/tcp"
@@ -20,7 +20,7 @@ services:
 
   cadvisor:
     container_name: "cadvisor"
-    image: "gcr.io/cadvisor/cadvisor:v0.52.1"
+    image: "gcr.io/cadvisor/cadvisor:latest"
     restart: "unless-stopped"
     ports: 
       - "32800:8080/tcp"
@@ -32,7 +32,7 @@ services:
 
   docker_proxy:
     container_name: "docker_proxy"
-    image: "ghcr.io/tecnativa/docker-socket-proxy:v0.4.1"
+    image: "ghcr.io/tecnativa/docker-socket-proxy:latest"
     restart: "unless-stopped"
     ports: 
       - "2375:2375/tcp"
@@ -44,10 +44,21 @@ services:
 
   portainer_agent:
     container_name: "portainer_agent"
-    image: "portainer/agent:2.34.0"
+    image: "portainer/agent:latest"
     restart: "unless-stopped"
     ports: 
       - "9002:9001/tcp"
     volumes: 
       - /var/run/docker.sock:/var/run/docker.sock
       - /var/lib/docker/volumes:/var/lib/docker/volumes
+
+  homelab-metrics:
+    image: "allanelewis/homelab-metrics:latest"
+    container_name: "homelab-metrics"
+    restart: "unless-stopped"
+    ports: 
+      - "9102:9102/tcp"
+{% if homelab_metrics_forward_url is defined %}
+    environment: 
+      FORWARD_METRICS_URL: "{{ homelab_metrics_forward_url }}"
+{% endif %}

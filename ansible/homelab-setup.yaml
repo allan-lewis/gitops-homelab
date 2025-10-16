@@ -128,16 +128,38 @@
   roles:
     - docker
 
-# - name: Setup monitoring for Docker hosts.
-#   hosts: homelab_docker_hosts
-#   become: yes
-#   gather_facts: yes
-#   tags: [docker_monitoring]
+- name: Setup monitoring for Docker hosts.
+  hosts: homelab_docker_hosts
+  become: yes
+  gather_facts: yes
+  tags: [docker_monitoring]
 
-#   roles:
-#     - role: docker_compose
-#       vars:
-#         docker_compose_manifest: "vars/docker_compose/monitoring.yaml"
+  roles:
+    - role: docker_compose
+      vars:
+        homelab_docker_compose_project_src: "/tmp/docker-compose-monitoring"
+        homelab_docker_compose_templates:
+          - src: "templates/docker_compose/monitoring/docker-compose.yaml.j2"
+            dest: "{{ homelab_docker_compose_project_src }}/docker-compose.yml"
+
+- name: Setup Gatus.
+  hosts: homelab_docker_gatus_hosts
+  become: yes
+  gather_facts: yes
+  tags: [docker_gatus]
+
+  roles:
+    - role: docker_compose
+      vars:
+        homelab_docker_compose_prep_dirs:
+          - "/home/lab/apps/gatus/config"
+          - "/home/lab/apps/gatus/data"
+        homelab_docker_compose_project_src: "/tmp/docker-compose-monitoring"
+        homelab_docker_compose_templates:
+          - src: "templates/docker_compose/gatus/gatus-config.yaml.j2"
+            dest: "/home/lab/apps/gatus/config/config.yaml"
+          - src: "templates/docker_compose/gatus/docker-compose.yaml.j2"
+            dest: "{{ homelab_docker_compose_project_src }}/docker-compose.yml"
 
 - name: Setup Plex.
   hosts: homelab_plex_hosts

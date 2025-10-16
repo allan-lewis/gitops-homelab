@@ -1,0 +1,35 @@
+---
+- name: "Enforce that all required variables are defined and non-empty"
+  vars:
+    # Lookup each variable dynamically
+    _var_value: "{{ lookup('vars', item, default='__undefined__') }}"
+  fail:
+    msg: "Required variable '{{ item }}' is not defined or is empty."
+  when: _var_value == '__undefined__' or (_var_value is string and _var_value | trim == '') or (_var_value is not string and _var_value | length == 0)
+  loop: "{{ homelab_docker_compose_required_variables }}"
+
+- name: "Ensure directories exist."
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0755"
+  loop: "{{ homelab_docker_compose_prep_dirs }}"
+
+- name: Create the Docker Compose project source directory.
+  ansible.builtin.file:
+    path: "{{ homelab_docker_compose_project_src }}"
+    state: directory
+
+- name: Write files.
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items: "{{ homelab_docker_compose_templates }}"
+
+- name: Deploy the Docker Compose project.
+  community.docker.docker_compose_v2:
+    project_src: "{{ homelab_docker_compose_project_src }}"
+    pull: "always"
+    recreate: "always"
