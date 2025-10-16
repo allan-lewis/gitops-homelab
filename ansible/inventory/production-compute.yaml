@@ -223,7 +223,8 @@ all:
     homelab_docker_traefik_services:
       - name: "whoami"
         host: whoami.docker.allanshomelab.com
-        url: "http://{{hostvars['flagg'].ansible_host}}:8180"
+        url: "http://host.containers.internal:8180"
+        # url: "http://{{hostvars['flagg'].ansible_host}}:8180"
       - name: "traefik-dashboard"
         host: traefik.docker.allanshomelab.com
         url: "http://{{ hostvars['flagg'].ansible_host}}:8088"
