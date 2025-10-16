@@ -31,7 +31,6 @@ units:
         -v {{ traefik_config_dir }}:/traefik \
         {{ ('-e CF_API_EMAIL=' ~ homelab_cloudflare_email ~ ' ') if (homelab_cloudflare_email is defined and homelab_cloudflare_email | length > 0) else '' }}\
         {{ ('-e CF_API_KEY=' ~ homelab_cloudflare_api_key ~ ' ') if (homelab_cloudflare_api_key is defined and homelab_cloudflare_api_key | length > 0) else '' }}\
-        {{ ('-e CF_DNS_API_TOKEN=' ~ homelab_cloudflare_api_token ~ ' ') if (homelab_cloudflare_api_token is defined and homelab_cloudflare_api_token | length > 0) else '' }}\
         traefik:v3.5.3 \
           --api.insecure=true \
           --providers.file.directory=/traefik/ \
