@@ -139,13 +139,15 @@ all:
 
   children:
     homelab_ansible_hosts:
-      hosts:
-        mordred:
       children:
         homelab_docker_hosts:
           hosts:
             mizar:
             regulus:
+          children:
+            homelab_docker_media_acquisition_hosts:
+              hosts:
+                mordred:
         homelab_immich_hosts:
           hosts:
             regulus:
@@ -177,9 +179,6 @@ all:
             homelab_podman_gatus_hosts:
               hosts:
                 flagg:
-            homelab_podman_media_acquisition_hosts:
-              hosts:
-                mordred:
             homelab_podman_traefik_hosts:
               hosts:
                 flagg:
