@@ -129,6 +129,15 @@
     - docker
     - docker_containers
 
+- name: Setup monitoring for Docker hosts.
+  hosts: homelab_docker_hosts
+  become: yes
+  gather_facts: yes
+  tags: [docker_monitoring]
+
+  roles:
+    - docker_monitoring
+
 - name: Setup Plex.
   hosts: homelab_plex_hosts
   become: yes
