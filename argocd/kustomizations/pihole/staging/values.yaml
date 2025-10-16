@@ -28,7 +28,6 @@ dnsmasq:
     - address=/radarr.docker.allanshomelab.com/192.168.86.187
     - address=/sonarr.docker.allanshomelab.com/192.168.86.187
     - address=/docker.allanshomelab.com/192.168.86.112
-    - address=/procyon.hosts.allanshomelab.com/192.168.86.112
     - address=/hosts.allanshomelab.com/192.168.86.187
     - address=/k8s.allanshomelab.com/192.168.86.187
     - address=/syncthing.allanshomelab.com/192.168.86.187
