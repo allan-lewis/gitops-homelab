@@ -228,7 +228,7 @@ all:
         url: "http://{{hostvars['derry'].ansible_host}}:8000"
       - name: "procyon"
         host: procyon.hosts.allanshomelab.com
-        url: "http://{{hostvars['procyon'].ansible_host}}:8000"
+        url: "http://{{hostvars['procyon'].ansible_host}}:80"
       - name: "whoami"
         host: whoami.docker.allanshomelab.com
         url: "http://{{hostvars['mizar'].ansible_host}}:8180"
