@@ -223,10 +223,10 @@ all:
     homelab_docker_traefik_services:
       - name: "whoami"
         host: whoami.docker.allanshomelab.com
-        url: "http://{{hostvars['mizar'].ansible_host}}:8180"
+        url: "http://{{hostvars['flagg'].ansible_host}}:8180"
       - name: "traefik-dashboard"
         host: traefik.docker.allanshomelab.com
-        url: "http://{{ hostvars['mizar'].ansible_host}}:8088"
+        url: "http://{{ hostvars['flagg'].ansible_host}}:8088"
       - name: pihole
         host: dns.docker.allanshomelab.com
         url: "http://{{ hostvars['mizar'].ansible_host }}:30080"
