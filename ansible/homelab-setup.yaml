@@ -128,14 +128,16 @@
   roles:
     - docker
 
-- name: Setup monitoring for Docker hosts.
-  hosts: homelab_docker_hosts
-  become: yes
-  gather_facts: yes
-  tags: [docker_monitoring]
+# - name: Setup monitoring for Docker hosts.
+#   hosts: homelab_docker_hosts
+#   become: yes
+#   gather_facts: yes
+#   tags: [docker_monitoring]
 
-  roles:
-    - docker_monitoring
+#   roles:
+#     - role: docker_compose
+#       vars:
+#         docker_compose_manifest: "vars/docker_compose/monitoring.yaml"
 
 - name: Setup Plex.
   hosts: homelab_plex_hosts
@@ -183,93 +185,93 @@
     - systemd_resolvd
     - pihole
 
-- name: Setup Podman.
-  hosts: homelab_podman_hosts
-  become: yes
-  gather_facts: yes
-  tags: [podman]
+# - name: Setup Podman.
+#   hosts: homelab_podman_hosts
+#   become: yes
+#   gather_facts: yes
+#   tags: [podman]
 
-  roles:
-    - role: podman
+#   roles:
+#     - role: podman
 
-- name: Setup units common to all Podman hosts.
-  hosts: homelab_podman_hosts
-  become: yes
-  gather_facts: yes
-  tags: [podman_units]
+# - name: Setup units common to all Podman hosts.
+#   hosts: homelab_podman_hosts
+#   become: yes
+#   gather_facts: yes
+#   tags: [podman_units]
 
-  roles:
-    - role: podman_units
-      vars:
-        pod_units_files:
-          - vars/podman_units/monitoring.yaml
+#   roles:
+#     - role: podman_units
+#       vars:
+#         pod_units_files:
+#           - vars/podman_units/monitoring.yaml
 
-- name: Setup Gatus on Podman.
-  hosts: homelab_podman_gatus_hosts
-  become: yes
-  gather_facts: yes
-  tags: [podman_gatus]
+# - name: Setup Gatus on Podman.
+#   hosts: homelab_podman_gatus_hosts
+#   become: yes
+#   gather_facts: yes
+#   tags: [podman_gatus]
 
-  roles:
-    - role: host_icmp_sysctl
-    - role: podman_prepare
-      vars:
-        podprep_dirs:          
-          - /home/lab/apps/gatus/config
-          - /home/lab/apps/gatus/data
-        podprep_templates:
-          - src: templates/gatus/config.yaml.j2
-            dest: /home/lab/apps/gatus/config/config.yaml
-            mode: "0644"
-    - role: podman_units
-      vars:
-        pod_units_files:
-          - vars/podman_units/gatus.yaml
+#   roles:
+#     - role: host_icmp_sysctl
+#     - role: podman_prepare
+#       vars:
+#         podprep_dirs:          
+#           - /home/lab/apps/gatus/config
+#           - /home/lab/apps/gatus/data
+#         podprep_templates:
+#           - src: templates/gatus/config.yaml.j2
+#             dest: /home/lab/apps/gatus/config/config.yaml
+#             mode: "0644"
+#     - role: podman_units
+#       vars:
+#         pod_units_files:
+#           - vars/podman_units/gatus.yaml
 
-- name: Setup media acquisition stack on Podman.
-  hosts: homelab_podman_media_acquisition_hosts
-  become: yes
-  gather_facts: yes
-  tags: [podman_media_acquisition]
+# - name: Setup media acquisition stack on Podman.
+#   hosts: homelab_podman_media_acquisition_hosts
+#   become: yes
+#   gather_facts: yes
+#   tags: [podman_media_acquisition]
 
-  roles:
-    - role: getent
-    - role: podman_prepare
-      vars:
-        podprep_dirs:      
-          - "/home/lab/apps/media-acquisition/jackett/config"
-          - "/home/lab/apps/media-acquisition/jackett/downloads"
-          - "/home/lab/apps/media-acquisition/radarr/config"
-          - "/home/lab/apps/media-acquisition/transmission/config"
-          - "/home/lab/apps/media-acquisition/transmission/watch"
-          - "/home/lab/apps/media-acquisition/sonarr/config"
-    - role: podman_units
-      vars:
-        pod_units_files:
-          - vars/podman_units/media-acquisition.yaml
+#   roles:
+#     - role: getent
+#     - role: podman_prepare
+#       vars:
+#         podprep_dirs:      
+#           - "/home/lab/apps/media-acquisition/jackett/config"
+#           - "/home/lab/apps/media-acquisition/jackett/downloads"
+#           - "/home/lab/apps/media-acquisition/radarr/config"
+#           - "/home/lab/apps/media-acquisition/transmission/config"
+#           - "/home/lab/apps/media-acquisition/transmission/watch"
+#           - "/home/lab/apps/media-acquisition/sonarr/config"
+#     - role: podman_units
+#       vars:
+#         pod_units_files:
+#           - vars/podman_units/media-acquisition.yaml
 
-- name: Setup Traefik on Podman.
-  hosts: homelab_podman_traefik_hosts
-  become: yes
-  gather_facts: yes
-  tags: [podman_traefik]
+# - name: Setup Traefik on Podman.
+#   hosts: homelab_podman_traefik_hosts
+#   become: yes
+#   gather_facts: yes
+#   tags: [podman_traefik]
 
-  roles:
-    - role: rootless_low_ports
-    - role: enforce_required_variables
-      vars:
-        required_variables:
-          - homelab_cloudflare_api_key
-    - role: podman_prepare
-      vars:
-        podprep_dirs:          
-          - "{{ traefik_letsencrypt_dir }}"
-          - "{{ traefik_config_dir }}"
-        podprep_templates:
-          - src: templates/traefik/traefik.yaml.j2
-            dest: "{{ traefik_config_dir }}/traefik.yaml"
-            mode: "0644"
-    - role: podman_units
-      vars:
-        pod_units_files:
-          - vars/podman_units/traefik.yaml
+#   roles:
+#     - role: rootless_low_ports
+#     - role: enforce_required_variables
+#       vars:
+#         required_variables:
+#           - homelab_cloudflare_api_key
+#     - role: podman_prepare
+#       vars:
+#         podprep_dirs:          
+#           - "{{ traefik_letsencrypt_dir }}"
+#           - "{{ traefik_config_dir }}"
+#         podprep_templates:
+#           - src: templates/traefik/traefik.yaml.j2
+#             dest: "{{ traefik_config_dir }}/traefik.yaml"
+#             mode: "0644"
+#     - role: podman_units
+#       vars:
+#         pod_units_files:
+#           - vars/podman_units/traefik.yaml
