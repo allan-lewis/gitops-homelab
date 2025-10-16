@@ -223,6 +223,9 @@ all:
       - gitops-homelab-longhorn-staging
       - gitops-homelab-terraform
     homelab_docker_traefik_services:
+      - name: "derry"
+        host: derry.hosts.allanshomelab.com
+        url: "http://{{hostvars['derry'].ansible_host}}:8000"
       - name: "whoami"
         host: whoami.docker.allanshomelab.com
         url: "http://{{hostvars['mizar'].ansible_host}}:8180"
