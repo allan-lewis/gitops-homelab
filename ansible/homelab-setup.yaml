@@ -127,7 +127,6 @@
 
   roles:
     - docker
-    - docker_containers
 
 - name: Setup monitoring for Docker hosts.
   hosts: homelab_docker_hosts
