@@ -208,8 +208,8 @@ all:
     tailscale_authkey: "{{ lookup('env', 'TAILSCALE_AUTH_KEY') }}"
     homelab_cloudflare_api_key: "{{ lookup('env', 'TRAEFIK_CF_API_KEY') }}"
     homelab_cloudflare_email: "allan.e.lewis@gmail.com"
-    traefik_letsencrypt_dir: "/home/lab/apps/traefik/letsencrypt"
-    traefik_config_dir: "/home/lab/apps/traefik/config"
+    homelab_docker_traefik_letsencrypt_volume: "/home/lab/apps/traefik/letsencrypt"
+    homelab_docker_traefik_volume: "/home/lab/apps/traefik/config"
     homelab_s3_buckets:
       - allans-home-lab-longhorn
       - allans-homelab-terraform-state-bucket
