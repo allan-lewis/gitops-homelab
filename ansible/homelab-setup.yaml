@@ -161,6 +161,24 @@
           - src: "templates/docker_compose/gatus/docker-compose.yaml.j2"
             dest: "{{ homelab_docker_compose_project_src }}/docker-compose.yml"
 
+- name: Setup Media acquisition.
+  hosts: homelab_docker_media_acquisition_hosts
+  become: yes
+  gather_facts: yes
+  tags: [docker_media_acquisition]
+
+  roles:
+    - role: getent
+    - role: docker_compose
+      vars:
+        homelab_docker_compose_prep_dirs:
+          - "/home/lab/apps/transmission/config"
+          - "/home/lab/apps/transmission/watch"
+        homelab_docker_compose_project_src: "/tmp/docker-compose-media-acquisition"
+        homelab_docker_compose_templates:
+          - src: "templates/docker_compose/media-acquisition/docker-compose.yaml.j2"
+            dest: "{{ homelab_docker_compose_project_src }}/docker-compose.yml"
+
 - name: Setup Plex.
   hosts: homelab_plex_hosts
   become: yes

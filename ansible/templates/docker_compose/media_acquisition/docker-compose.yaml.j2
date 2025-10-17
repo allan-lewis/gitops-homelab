@@ -1,0 +1,16 @@
+services:
+
+  transmission:
+    image: lscr.io/linuxserver/transmission:latest
+    container_name: transmission
+    restart: unless-stopped
+    environment:
+      - PUID={{ homelab_user_id }}
+      - PGID={{ homelab_group_id }}
+      - TZ={{ pod_units_tz | default('America/New_York') }}
+    ports:
+      - "9091:9091"
+    volumes:
+      - /home/lab/apps/transmission/config:/config
+      - /home/lab/apps/transmission/watch:/watch
+      - /mnt/media-acquisition/downloads:/downloads
