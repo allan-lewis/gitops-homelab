@@ -11,8 +11,8 @@ services:
     ports:
       - "9117:9117"
     volumes:
-      - /home/lab/apps/media-acquisition/jackett/config:/config
-      - /home/lab/apps/media-acquisition/jackett/downloads:/downloads
+      - /home/lab/apps/jackett/config:/config
+      - /home/lab/apps/jackett/downloads:/downloads
 
   transmission:
     image: lscr.io/linuxserver/transmission:latest
