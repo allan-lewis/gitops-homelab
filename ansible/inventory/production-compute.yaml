@@ -94,11 +94,7 @@ all:
       homelab_backup_minute: 15
       homelab_backup_hour: "*"
       homelab_metrics_forward_url: "http://{{hostvars['capella'].ansible_host}}:9100"
-      homelab_remote_volumes:
-        - src: "/opt/allans-home-lab/traefik/"
-          dest: "/mnt/pool1/docker-volumes/traefik/"
-          host: procyon
-          user: allan  
+      homelab_remote_volumes: 
         - src: "/opt/allans-home-lab/pihole/"
           dest: "/mnt/pool1/docker-volumes/pihole/"
           host: procyon
