@@ -176,7 +176,7 @@
           - "/home/lab/apps/transmission/watch"
         homelab_docker_compose_project_src: "/tmp/docker-compose-media-acquisition"
         homelab_docker_compose_templates:
-          - src: "templates/docker_compose/media-acquisition/docker-compose.yaml.j2"
+          - src: "templates/docker_compose/media_acquisition/docker-compose.yaml.j2"
             dest: "{{ homelab_docker_compose_project_src }}/docker-compose.yml"
 
 - name: Setup Plex.
