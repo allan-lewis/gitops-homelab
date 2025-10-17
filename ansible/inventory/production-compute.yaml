@@ -151,7 +151,7 @@ all:
           children:
             homelab_docker_gatus_hosts:
               hosts:
-                mizar:
+                flagg:
             homelab_docker_media_acquisition_hosts:
               hosts:
                 mordred:
@@ -179,16 +179,6 @@ all:
         homelab_plex_hosts:
           hosts:
             regulus:
-        homelab_podman_hosts:
-          hosts:
-            misery:
-          children:
-            homelab_podman_gatus_hosts:
-              hosts:
-                flagg:
-            homelab_podman_traefik_hosts:
-              hosts:
-                flagg:
         homelab_tailscale_hosts:
           hosts:
             flagg:
