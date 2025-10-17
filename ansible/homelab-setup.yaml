@@ -142,6 +142,25 @@
           - src: "templates/docker_compose/monitoring/docker-compose.yaml.j2"
             dest: "{{ homelab_docker_compose_project_src }}/docker-compose.yml"
 
+- name: Setup Traefik.
+  hosts: homelab_docker_traefik_hosts
+  become: yes
+  gather_facts: yes
+  tags: [docker_traefik]
+
+  roles:
+    - role: docker_compose
+      vars:
+        homelab_docker_compose_prep_dirs:
+          - "{{ homelab_docker_traefik_volume }}"
+          - "{{ homelab_docker_traefik_letsencrypt_volume }}"
+        homelab_docker_compose_project_src: "/tmp/docker-compose-traefik"
+        homelab_docker_compose_templates:
+          - src: "templates/docker_compose/traefik/traefik.yaml.j2"
+            dest: "{{ homelab_docker_traefik_volume }}/traefik.yaml"
+          - src: "templates/docker_compose/traefik/docker-compose.yaml.j2"
+            dest: "{{ homelab_docker_compose_project_src }}/docker-compose.yml"
+
 - name: Setup Gatus.
   hosts: homelab_docker_gatus_hosts
   become: yes
@@ -208,15 +227,6 @@
 
   roles:
     - immich
-
-- name: Setup Traefik.
-  hosts: homelab_traefik_hosts
-  become: yes
-  gather_facts: yes
-  tags: [docker_traefik]
-
-  roles:
-    - traefik
 
 - name: Setup Pi-Hole.
   hosts: homelab_pihole_hosts
