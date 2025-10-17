@@ -253,6 +253,9 @@ all:
       - name: capella
         host: capella.hosts.allanshomelab.com
         url: "http://{{ hostvars['capella'].ansible_host }}"
+      - name: jackett
+        host: jackett.media.allanshomelab.com
+        url: "http://{{ hostvars['mordred'].ansible_host }}:9117"
       - name: transmission
         host: transmission.media.allanshomelab.com
         url: "http://{{ hostvars['mordred'].ansible_host }}:9091"
@@ -411,8 +414,8 @@ all:
         url: "https://alerts.k8s.allanshomelab.com"
         pattern: "*Alertmanager*"
       - name: Jackett
-        group: "Sites (K8s)"
-        url: "https://jackett.k8s.allanshomelab.com/health"
+        group: "Sites (Media)"
+        url: "https://jackett.media.allanshomelab.com/health"
         pattern: "*OK*"
       - name: Homepage
         group: "Sites (K8s)"

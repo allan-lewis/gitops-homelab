@@ -1,5 +1,19 @@
 services:
 
+  jackett:
+    image: lscr.io/linuxserver/jackett:latest
+    container_name: jackett
+    restart: unless-stopped
+    environment:
+      - PUID={{ homelab_user_id }}
+      - PGID={{ homelab_group_id }}
+      - TZ={{ pod_units_tz | default('America/New_York') }}
+    ports:
+      - "9117:9117"
+    volumes:
+      - /home/lab/apps/media-acquisition/jackett/config:/config
+      - /home/lab/apps/media-acquisition/jackett/downloads:/downloads
+
   transmission:
     image: lscr.io/linuxserver/transmission:latest
     container_name: transmission

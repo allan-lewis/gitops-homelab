@@ -117,28 +117,6 @@ spec:
           # See https://kubernetes.io/docs/concepts/services-networking/service/#externalname
           name: ak-outpost-authentik-embedded-outpost
           port: 9000
-    - match: Host(`transmission.media.allanshomelab.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: transmission
-          namespace: media
-          port: 9091
-          scheme: http 
-    - match: Host(`jackett.k8s.allanshomelab.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: jackett
-          namespace: media
-          port: 9117
-          scheme: http 
     - match: Host(`auth.allanandvaia.com`)
       kind: Rule
       middlewares:
