@@ -172,6 +172,7 @@
     - role: docker_compose
       vars:
         homelab_docker_compose_prep_dirs:
+          - "/home/lab/apps/sonarr/config"
           - "/home/lab/apps/transmission/config"
           - "/home/lab/apps/transmission/watch"
           - "/home/lab/apps/jackett/config"

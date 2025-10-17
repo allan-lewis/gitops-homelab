@@ -14,6 +14,21 @@ services:
       - /home/lab/apps/jackett/config:/config
       - /home/lab/apps/jackett/downloads:/downloads
 
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:4.0.15
+    container_name: sonarr
+    restart: unless-stopped
+    environment:
+      - PUID={{ homelab_user_id }}
+      - PGID={{ homelab_group_id }}
+      - TZ={{ pod_units_tz | default('America/New_York') }}
+    ports:
+      - "8989:8989"   # Sonarr web UI
+    volumes:
+      - /home/lab/apps/sonarr/config:/config
+      - /mnt/media-acquisition/downloads:/downloads
+      - /mnt/media-acquisition/tv:/tv
+
   transmission:
     image: lscr.io/linuxserver/transmission:latest
     container_name: transmission
