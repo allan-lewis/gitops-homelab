@@ -158,7 +158,6 @@ all:
             homelab_docker_traefik_hosts:
               hosts:
                 flagg:
-                mizar:
         homelab_immich_hosts:
           hosts:
             regulus:
