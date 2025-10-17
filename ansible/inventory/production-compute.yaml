@@ -8,11 +8,18 @@ all:
     flagg:
       ansible_host: 192.168.86.205
       gatus_slug: "(Traefik/Pi-hole/Gatus)"
-      # homelab_remote_volumes:
-      #   - src: "/opt/allans-home-lab/gatus/"
-      #     dest: "/mnt/pool1/docker-volumes/gatus/"
-      #     host: procyon
-      #     user: allan  
+      homelab_backup_healthcheck: "9701d224-6e9c-415a-bab1-21c98fb627ea"
+      homelab_backup_minute: 25
+      homelab_backup_hour: "*"
+      homelab_remote_volumes:
+        - src: "/home/lab/apps/traefik"
+          dest: "/mnt/pool1/docker-volumes/traefik/"
+          host: procyon
+          user: allan
+        - src: "/home/lab/apps/gatus"
+          dest: "/mnt/pool1/docker-volumes/gatus/"
+          host: procyon
+          user: allan 
     maturin:
       ansible_host: 192.168.86.200
       gatus_slug: "(Hypervisor)"
