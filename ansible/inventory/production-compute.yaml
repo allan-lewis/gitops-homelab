@@ -269,6 +269,10 @@ all:
         host: polaris.hosts.allanshomelab.com
         url: "https://{{ hostvars['polaris'].ansible_host }}:8006"
         scheme: https
+      - name: immich
+        host: photos.allanandvaia.com
+        url: "https://{{ hostvars['flagg'].ansible_host }}:2283"
+        scheme: http
     homelab_docker_gatus_https_endpoints:
       - name: "Mizar"
         group: "Healthchecks"
