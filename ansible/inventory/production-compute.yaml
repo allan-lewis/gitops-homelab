@@ -271,7 +271,7 @@ all:
         scheme: https
       - name: immich
         host: photos.allanandvaia.com
-        url: "https://{{ hostvars['flagg'].ansible_host }}:2283"
+        url: "https://{{ hostvars['regulus'].ansible_host }}:2283"
         scheme: http
     homelab_docker_gatus_https_endpoints:
       - name: "Mizar"
