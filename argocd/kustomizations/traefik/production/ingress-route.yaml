@@ -457,29 +457,7 @@ spec:
         - name: traefik-service-homeassistant-local
           namespace:  traefik
           port: 8123
-          scheme: http              
-    - match: Host(`polaris.hosts.allanshomelab.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: traefik-service-polaris-local
-          namespace:  traefik
-          port: 8006
-          scheme: https              
-    - match: Host(`sirius.hosts.allanshomelab.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: traefik-service-sirius-local
-          namespace:  traefik
-          port: 8006
-          scheme: https           
+          scheme: http                                     
     - match: Host(`capella.hosts.allanshomelab.com`)
       kind: Rule
       middlewares:
@@ -490,18 +468,7 @@ spec:
         - name: traefik-endpoint-capella
           namespace:  traefik
           port: 80
-          scheme: http                           
-    - match: Host(`photos.allanandvaia.com`)
-      kind: Rule
-      # middlewares:
-      #   - name: traefik-custom-headers
-      #     namespace: default
-      priority: 10
-      services:
-        - name: traefik-service-immich-local
-          namespace:  traefik
-          port: 2283
-          scheme: http        
+          scheme: http                                
     - match: Host(`radarr.docker.allanshomelab.com`)
       kind: Rule
       middlewares:
@@ -545,29 +512,7 @@ spec:
           # Or, to use an external Outpost, create an ExternalName service and reference that here.
           # See https://kubernetes.io/docs/concepts/services-networking/service/#externalname
           name: ak-outpost-authentik-embedded-outpost
-          port: 9000       
-    - match: Host(`one.kvm.allanshomelab.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: traefik-service-kvm1-local
-          namespace:  traefik
-          port: 80
-          scheme: http        
-    - match: Host(`two.kvm.allanshomelab.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: traefik-service-kvm2-local
-          namespace:  traefik
-          port: 80
-          scheme: http 
+          port: 9000            
     - match: Host(`lidarr.k8s.allanshomelab.com`)
       kind: Rule
       middlewares:
