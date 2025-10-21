@@ -446,18 +446,7 @@ spec:
           # Or, to use an external Outpost, create an ExternalName service and reference that here.
           # See https://kubernetes.io/docs/concepts/services-networking/service/#externalname
           name: ak-outpost-authentik-embedded-outpost
-          port: 9000
-    - match: Host(`home.allanandvaia.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: traefik-service-homeassistant-local
-          namespace:  traefik
-          port: 8123
-          scheme: http                                     
+          port: 9000                                    
     - match: Host(`capella.hosts.allanshomelab.com`)
       kind: Rule
       middlewares:
