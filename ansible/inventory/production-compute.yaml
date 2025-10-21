@@ -377,7 +377,7 @@ all:
         pattern: "*immich*"
       - name: "Immich API"
         group: "Sites (Allan & Vaia)"
-        url: "http://photos.allanandvaia.com/api/server/ping"
+        url: "https://photos.allanandvaia.com/api/server/ping"
         pattern: "*pong*"
       - name: "Memos"
         group: "Sites (Allan & Vaia)"
