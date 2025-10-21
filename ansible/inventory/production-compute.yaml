@@ -162,6 +162,9 @@ all:
             homelab_docker_media_acquisition_hosts:
               hosts:
                 mordred:
+            homelab_docker_pihole_hosts:
+              hosts:
+                flagg:
             homelab_docker_traefik_hosts:
               hosts:
                 flagg:
@@ -183,9 +186,6 @@ all:
             homelab_openvpn_network: "192.168.86.0/24"
             homelab_openvpn_username: "{{ lookup('env', 'OPEN_VPN_USERNAME') }}"
             homelab_openvpn_password: "{{ lookup('env', 'OPEN_VPN_PASSWORD') }}"
-        homelab_pihole_hosts:
-          hosts:
-            mizar:
         homelab_plex_hosts:
           hosts:
             regulus:
@@ -209,6 +209,7 @@ all:
     ansible_user: lab
     homelab_k8s_terraform_dir: "/home/lab/gitops-homelab/terraform/environments/production-k8s"
     homelab_pihole_admin_password: "{{ lookup('env', 'PIHOLE_ADMIN_PASSWORD') }}"
+    homelab_pihole_data_volume: "/home/lab/apps/pihole/data"
     homelab_telegram_bot_token: "{{ lookup('env', 'TELEGRAM_BOT_TOKEN') }}"
     homelab_telegram_id: "{{ lookup('env', 'TELEGRAM_ID') }}"
     tailscale_authkey: "{{ lookup('env', 'TAILSCALE_AUTH_KEY') }}"
@@ -493,3 +494,39 @@ all:
         group: "K8s Load Balancer IPs"
         url: "tcp://traefik.k8s.allanshomelab.com:443"
         ip: "192.168.86.187"
+    homelab_pihole_a_records:
+      - name: "docker.allanshomelab.com"
+        address: "192.168.86.205" 
+      - name: "media.allanshomelab.com"
+        address: "192.168.86.205" 
+      - name: "k8s.allanshomelab.com"
+        address: "192.168.86.187" 
+      - name: "kvm.allanshomelab.com"
+        address: "192.168.86.187"
+      - name: "pihole.k8s.allanshomelab.com"
+        address: "192.168.86.199"  
+      - name: "postgres.k8s.allanshomelab.com"
+        address: "192.168.86.196"     
+    homelab_pihole_cname_records:
+      - alias: "gatus.docker.allanshomelab.com"
+        target: "docker.allanshomelab.com"
+      - alias: "jellyfin.docker.allanshomelab.com"
+        target: "docker.allanshomelab.com"
+      - alias: "dns.docker.allanshomelab.com"
+        target: "docker.allanshomelab.com"
+      - alias: "plex.docker.allanshomelab.com"
+        target: "docker.allanshomelab.com"
+      - alias: "traefik.docker.allanshomelab.com"
+        target: "docker.allanshomelab.com"
+      - alias: "whoami.docker.allanshomelab.com"
+        target: "docker.allanshomelab.com"
+      - alias: "traefik.k8s.allanshomelab.com"
+        target: "k8s.allanshomelab.com"
+      - alias: "one.kvm.allanshomelab.com"
+        target: "kvm.allanshomelab.com"
+      - alias: "two.kvm.allanshomelab.com"
+        target: "kvm.allanshomelab.com"
+      - alias: "jackett.media.allanshomelab.com"
+        target: "media.allanshomelab.com"
+      - alias: "transmission.media.allanshomelab.com"
+        target: "media.allanshomelab.com"

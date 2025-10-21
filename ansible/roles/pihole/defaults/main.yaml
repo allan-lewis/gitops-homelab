@@ -1,3 +1,0 @@
----
-homelab_docker_pihole_data: "/opt/allans-home-lab/pihole" 
-homelab_docker_pihole_tmp: "/tmp/docker_pihole"

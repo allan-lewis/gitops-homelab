@@ -201,6 +201,34 @@
           - src: "templates/docker_compose/media_acquisition/docker-compose.yaml.j2"
             dest: "{{ homelab_docker_compose_project_src }}/docker-compose.yml"
 
+- name: Setup Pi-Hole.
+  hosts: homelab_docker_pihole_hosts
+  become: yes
+  gather_facts: yes
+  tags: [docker_pihole]
+
+  roles:
+    - role: pihole_pre
+    - role: docker_compose
+      vars:
+        homelab_pihole_upstreams:
+          - "1.1.1.1"
+          - "1.0.0.1"
+          - "9.9.9.9"
+          - "149.112.112.112"
+          - "2606:4700:4700::1111"
+          - "2606:4700:4700::1001"
+          - "2620:fe::fe"
+          - "2620:fe::9"
+        homelab_docker_compose_prep_dirs:
+          - "{{ homelab_pihole_data_volume }}"
+        homelab_docker_compose_project_src: "/tmp/docker-compose-pihole"
+        homelab_docker_compose_templates:
+          - src: "templates/docker_compose/pihole/docker-compose.yaml.j2"
+            dest: "{{ homelab_docker_compose_project_src }}/docker-compose.yml"
+    - role: pihole_post
+    - role: pihole_dns
+
 - name: Setup Plex.
   hosts: homelab_plex_hosts
   become: yes
@@ -227,104 +255,3 @@
 
   roles:
     - immich
-
-- name: Setup Pi-Hole.
-  hosts: homelab_pihole_hosts
-  become: yes
-  gather_facts: yes
-  tags: [docker_pihole]
-
-  roles:
-    - systemd_resolvd
-    - pihole
-
-# - name: Setup Podman.
-#   hosts: homelab_podman_hosts
-#   become: yes
-#   gather_facts: yes
-#   tags: [podman]
-
-#   roles:
-#     - role: podman
-
-# - name: Setup units common to all Podman hosts.
-#   hosts: homelab_podman_hosts
-#   become: yes
-#   gather_facts: yes
-#   tags: [podman_units]
-
-#   roles:
-#     - role: podman_units
-#       vars:
-#         pod_units_files:
-#           - vars/podman_units/monitoring.yaml
-
-# - name: Setup Gatus on Podman.
-#   hosts: homelab_podman_gatus_hosts
-#   become: yes
-#   gather_facts: yes
-#   tags: [podman_gatus]
-
-#   roles:
-#     - role: host_icmp_sysctl
-#     - role: podman_prepare
-#       vars:
-#         podprep_dirs:          
-#           - /home/lab/apps/gatus/config
-#           - /home/lab/apps/gatus/data
-#         podprep_templates:
-#           - src: templates/gatus/config.yaml.j2
-#             dest: /home/lab/apps/gatus/config/config.yaml
-#             mode: "0644"
-#     - role: podman_units
-#       vars:
-#         pod_units_files:
-#           - vars/podman_units/gatus.yaml
-
-# - name: Setup media acquisition stack on Podman.
-#   hosts: homelab_podman_media_acquisition_hosts
-#   become: yes
-#   gather_facts: yes
-#   tags: [podman_media_acquisition]
-
-#   roles:
-#     - role: getent
-#     - role: podman_prepare
-#       vars:
-#         podprep_dirs:      
-#           - "/home/lab/apps/media-acquisition/jackett/config"
-#           - "/home/lab/apps/media-acquisition/jackett/downloads"
-#           - "/home/lab/apps/media-acquisition/radarr/config"
-#           - "/home/lab/apps/media-acquisition/transmission/config"
-#           - "/home/lab/apps/media-acquisition/transmission/watch"
-#           - "/home/lab/apps/media-acquisition/sonarr/config"
-#     - role: podman_units
-#       vars:
-#         pod_units_files:
-#           - vars/podman_units/media-acquisition.yaml
-
-# - name: Setup Traefik on Podman.
-#   hosts: homelab_podman_traefik_hosts
-#   become: yes
-#   gather_facts: yes
-#   tags: [podman_traefik]
-
-#   roles:
-#     - role: rootless_low_ports
-#     - role: enforce_required_variables
-#       vars:
-#         required_variables:
-#           - homelab_cloudflare_api_key
-#     - role: podman_prepare
-#       vars:
-#         podprep_dirs:          
-#           - "{{ traefik_letsencrypt_dir }}"
-#           - "{{ traefik_config_dir }}"
-#         podprep_templates:
-#           - src: templates/traefik/traefik.yaml.j2
-#             dest: "{{ traefik_config_dir }}/traefik.yaml"
-#             mode: "0644"
-#     - role: podman_units
-#       vars:
-#         pod_units_files:
-#           - vars/podman_units/traefik.yaml
