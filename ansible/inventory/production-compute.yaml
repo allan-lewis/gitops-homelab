@@ -516,7 +516,7 @@ all:
       - name: "k8s.allanshomelab.com"
         address: "192.168.86.187" 
       - name: "kvm.allanshomelab.com"
-        address: "192.168.86.187"
+        address: "192.168.86.205"
       - name: "pihole.k8s.allanshomelab.com"
         address: "192.168.86.199"  
       - name: "postgres.k8s.allanshomelab.com"
