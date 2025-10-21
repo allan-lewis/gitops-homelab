@@ -273,6 +273,10 @@ all:
         host: photos.allanandvaia.com
         url: "http://{{ hostvars['regulus'].ansible_host }}:2283"
         scheme: http
+      - name: homeassistant
+        host: home.allanandvaia.com
+        url: "http://{{ hostvars['arcturus'].ansible_host }}:8123"
+        scheme: http
     homelab_docker_gatus_https_endpoints:
       - name: "Mizar"
         group: "Healthchecks"
