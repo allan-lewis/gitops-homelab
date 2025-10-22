@@ -95,18 +95,6 @@ all:
     mimosa:
       ansible_host: 192.168.86.163
       gatus_slug: "(Gaming Rig)" 
-    mizar:
-      ansible_host: 192.168.86.112
-      gatus_slug: "(Bare Metal Monitoring/Networking)"
-      homelab_backup_healthcheck: "64ffa8c0-3251-4048-87e6-f8ce0205c3ff"
-      homelab_backup_minute: 15
-      homelab_backup_hour: "*"
-      homelab_metrics_forward_url: "http://{{hostvars['capella'].ansible_host}}:9100"
-      homelab_remote_volumes: 
-        - src: "/opt/allans-home-lab/pihole/"
-          dest: "/mnt/pool1/docker-volumes/pihole/"
-          host: procyon
-          user: allan 
     peacock:
       ansible_host: 192.168.86.162
       gatus_slug: "(Daily Driver)"
@@ -154,7 +142,6 @@ all:
       children:
         homelab_docker_hosts:
           hosts:
-            mizar:
             regulus:
           children:
             homelab_docker_gatus_hosts:
@@ -193,7 +180,6 @@ all:
         homelab_tailscale_hosts:
           hosts:
             flagg:
-            mizar:
           vars:
             lsb_release_package: lsb-release
     homelab_talos_controlplane_nodes:
@@ -287,10 +273,6 @@ all:
         url: "http://192.168.86.248"
         scheme: http
     homelab_docker_gatus_https_endpoints:
-      - name: "Mizar"
-        group: "Healthchecks"
-        url: "https://healthchecks.io/b/2/e36ad4aa-1554-44c5-a356-522c56cd9650.json"
-        pattern: "*up*"
       - name: "Procyon Media Sync"
         group: "Healthchecks"
         url: "https://healthchecks.io/b/2/6839e095-2721-4dab-b892-f721dd2a3f04.json"
