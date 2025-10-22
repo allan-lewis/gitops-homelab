@@ -11,6 +11,7 @@ all:
       homelab_backup_healthcheck: "9701d224-6e9c-415a-bab1-21c98fb627ea"
       homelab_backup_minute: 55
       homelab_backup_hour: "*"
+      homelab_metrics_forward_url: "http://{{hostvars['gilead'].ansible_host}}:9100"
       homelab_remote_volumes:
         - src: "/home/lab/apps/traefik"
           dest: "/mnt/pool1/docker-volumes/traefik/"
