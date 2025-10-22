@@ -7,4 +7,4 @@ helmCharts:
   repo: https://argoproj.github.io/argo-helm
   releaseName: argocd-image-updater
   namespace: argocd
-  version: 0.12.3
+  version: 0.13.0
