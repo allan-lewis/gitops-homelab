@@ -277,6 +277,10 @@ all:
         host: home.allanandvaia.com
         url: "http://{{ hostvars['arcturus'].ansible_host }}:8123"
         scheme: http
+      - name: kvm1
+        host: one.kvm.allanshomelab.com
+        url: "http://192.168.86.247"
+        scheme: http
     homelab_docker_gatus_https_endpoints:
       - name: "Mizar"
         group: "Healthchecks"
