@@ -101,11 +101,6 @@ prometheus:
             replacement: 'cujo'
           - action: replace
             source_labels: ['__address__']
-            regex: '192.168.86.112:9100'
-            target_label: instance
-            replacement: 'mizar'
-          - action: replace
-            source_labels: ['__address__']
             regex: '192.168.86.116:9100'
             target_label: instance
             replacement: 'regulus'
@@ -151,7 +146,7 @@ prometheus:
             replacement: 'antares'
           - action: replace
             source_labels: ['__address__']
-            regex: '192.168.86.112:9102'
+            regex: '192.168.86.205:9102'
             target_label: instance
             replacement: 'capella'
           - action: replace
