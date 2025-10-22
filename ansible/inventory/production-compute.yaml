@@ -242,7 +242,7 @@ all:
         url: "http://{{ hostvars['flagg'].ansible_host}}:8088"
       - name: pihole
         host: dns.docker.allanshomelab.com
-        url: "http://{{ hostvars['mizar'].ansible_host }}:30080"
+        url: "http://{{ hostvars['flagg'].ansible_host }}:30080"
       - name: gatus
         host: gatus.docker.allanshomelab.com
         url: "http://{{ hostvars['flagg'].ansible_host }}:8080"
