@@ -281,6 +281,10 @@ all:
         host: one.kvm.allanshomelab.com
         url: "http://192.168.86.247"
         scheme: http
+      - name: kvm2
+        host: two.kvm.allanshomelab.com
+        url: "http://192.168.86.248"
+        scheme: http
     homelab_docker_gatus_https_endpoints:
       - name: "Mizar"
         group: "Healthchecks"
