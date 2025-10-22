@@ -243,11 +243,14 @@
   roles:
     - jellyfin
 
-- name: Setup Immich.
-  hosts: homelab_immich_hosts
+- name: Setup Immich (v2.x)
+  hosts: homelab_docker_immich2_hosts
   become: yes
   gather_facts: yes
-  tags: [docker_immich]
+  tags: [docker_immich2]
 
   roles:
-    - immich
+    - role: immich2
+      vars:
+        immich_upload_nfs_server: "{{ hostvars['procyon'].ansible_host }}"
+        immich_upload_nfs_path: "/mnt/pool1/immich"
