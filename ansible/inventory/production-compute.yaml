@@ -441,10 +441,6 @@ all:
       - name: Longhorn
         group: "Sites (K8s)"
         url: "https://longhorn.k8s.allanshomelab.com"
-      - name: "Pi-hole"
-        group: "Sites (K8s)"
-        url: "https://dns.k8s.allanshomelab.com/admin"
-        pattern: "*Pi-hole*"
       - name: Portainer
         group: "Sites (K8s)"
         url: "https://portainer.k8s.allanshomelab.com"
@@ -489,10 +485,6 @@ all:
         url: "https://two.kvm.allanshomelab.com"
         pattern: "*JetKVM*"
     homelab_docker_gatus_tcp_endpoints:
-      - name: "Pi-hole"
-        group: "K8s Load Balancer IPs"
-        url: "tcp://pihole.k8s.allanshomelab.com:53"
-        ip: "192.168.86.199"
       - name: "PostgreSQL"
         group: "K8s Load Balancer IPs"
         url: "tcp://postgres.k8s.allanshomelab.com:5432"
@@ -512,8 +504,6 @@ all:
         address: "192.168.86.187" 
       - name: "kvm.allanshomelab.com"
         address: "192.168.86.205"
-      - name: "pihole.k8s.allanshomelab.com"
-        address: "192.168.86.199"  
       - name: "postgres.k8s.allanshomelab.com"
         address: "192.168.86.196"     
     homelab_pihole_cname_records:
