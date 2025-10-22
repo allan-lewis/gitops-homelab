@@ -1,0 +1,41 @@
+---
+- name: Ensure upload mount point exists (do NOT chown/chmod on NFS here)
+  ansible.builtin.file:
+    path: "{{ immich_upload_location }}"
+    state: directory
+    mode: "0755"
+
+- name: Mount Immich upload NFS share (and persist in /etc/fstab)
+  ansible.posix.mount:
+    path: "{{ immich_upload_location }}"
+    src: "{{ immich_upload_nfs_server }}:{{ immich_upload_nfs_path }}"
+    fstype: nfs
+    opts: "{{ immich_upload_nfs_opts | default('rw,sync,hard,intr') }}"
+    state: mounted
+
+# - name: Ensure deployment base dir exists
+#   ansible.builtin.file:
+#     path: "{{ immich_base_dir }}"
+#     state: directory
+#     owner: root
+#     group: root
+#     mode: "0750"
+
+# - name: Check that immich_upload_location exists
+#   ansible.builtin.stat:
+#     path: "{{ immich_upload_location }}"
+#   register: immich_upload_stat
+
+# - name: Fail if immich_upload_location is missing
+#   ansible.builtin.fail:
+#     msg: >
+#       The Immich upload directory ({{ immich_upload_location }}) does not exist.
+#       This should be an existing NFS share. Please mount it before running this play.
+#   when: not immich_upload_stat.stat.exists
+
+# - name: Fail if immich_upload_location is not a directory
+#   ansible.builtin.fail:
+#     msg: >
+#       The Immich upload path ({{ immich_upload_location }}) exists but is not a directory.
+#   when: immich_upload_stat.stat.exists and not immich_upload_stat.stat.isdir
+

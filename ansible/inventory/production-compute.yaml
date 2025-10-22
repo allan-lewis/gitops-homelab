@@ -146,11 +146,13 @@ all:
       children:
         homelab_docker_hosts:
           hosts:
-            regulus:
           children:
             homelab_docker_gatus_hosts:
               hosts:
                 flagg:
+            homelab_docker_immich2_hosts:
+              hosts:
+                misery:
             homelab_docker_media_acquisition_hosts:
               hosts:
                 mordred:
@@ -160,9 +162,6 @@ all:
             homelab_docker_traefik_hosts:
               hosts:
                 flagg:
-        homelab_immich_hosts:
-          hosts:
-            regulus:
         homelab_jellyfin_hosts:
           hosts:
             regulus:

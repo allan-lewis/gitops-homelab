@@ -1,0 +1,20 @@
+---
+# --- Deployment location (compose + .env only; safe to rebuild) ---
+immich_base_dir: /opt/immich
+
+# --- Pinned Immich release tag (bump when you choose to upgrade) ---
+immich_version: v2.0.6
+immich_compose_url: "https://github.com/immich-app/immich/releases/download/{{ immich_version }}/docker-compose.yml"
+
+# --- Critical data you BACK UP (DB + uploads) ---
+immich_upload_location: "/mnt/immich"
+immich_db_dir: "/srv/immich/postgres"
+
+# --- Volatile data you DO NOT back up (Redis + model cache) ---
+immich_redis_dir: "/srv/immich/redis"
+immich_model_cache_dir: "/srv/immich/model-cache"
+
+# --- Database settings (match your migration/restore credentials) ---
+immich_db_username: postgres
+immich_db_name: immich
+immich_db_password: "{{ lookup('env', 'IMMICH_DB_PASSWORD') }}"  # or pull from secret manager
