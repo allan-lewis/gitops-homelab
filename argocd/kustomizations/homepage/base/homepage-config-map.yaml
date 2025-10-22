@@ -160,7 +160,7 @@ data:
             icon: gatus.png
             href: https://gatus.docker.allanshomelab.com
             description: Health dashboard
-            server: mizar
+            server: flagg
             container: gatus
             widget:
               type: gatus
@@ -235,7 +235,7 @@ data:
             icon: pi-hole.png
             href: https://dns.docker.allanshomelab.com/admin
             description: Backup DNS server
-            server: mizar
+            server: flagg
             container: pihole
             widget:
               type: pihole
@@ -255,7 +255,7 @@ data:
             icon: traefik.png
             href: https://traefik.docker.allanshomelab.com
             description: Reverse proxy/load balancer
-            server: mizar
+            server: flagg
             container: traefik
             widget:
               type: traefik
