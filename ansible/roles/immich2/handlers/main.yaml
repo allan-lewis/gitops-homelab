@@ -1,0 +1,9 @@
+---
+- name: restart immich stack
+  listen: restart immich stack
+  community.docker.docker_compose_v2:
+    project_src: "{{ immich_base_dir }}"
+    pull: always
+    recreate: always
+    remove_orphans: true
+    state: present

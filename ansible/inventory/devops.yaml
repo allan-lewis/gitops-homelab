@@ -21,6 +21,9 @@ all:
             homelab_docker_immich2_hosts:
               hosts:
                 misery:
+              vars:
+                immich_upload_nfs_server: "{{ hostvars['procyon'].ansible_host }}"
+                immich_upload_nfs_path: "/mnt/pool1/immich"
         homelab_devops_hosts:
           hosts:
             castor:

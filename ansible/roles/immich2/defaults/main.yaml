@@ -3,7 +3,7 @@
 immich_base_dir: /opt/immich
 
 # --- Pinned Immich release tag (bump when you choose to upgrade) ---
-immich_version: v2.0.6
+immich_version: v2.1.0
 immich_compose_url: "https://github.com/immich-app/immich/releases/download/{{ immich_version }}/docker-compose.yml"
 
 # --- Critical data you BACK UP (DB + uploads) ---

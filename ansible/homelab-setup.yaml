@@ -251,6 +251,3 @@
 
   roles:
     - role: immich2
-      vars:
-        immich_upload_nfs_server: "{{ hostvars['procyon'].ansible_host }}"
-        immich_upload_nfs_path: "/mnt/pool1/immich"
