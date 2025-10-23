@@ -389,9 +389,12 @@ data:
           timeStyle: short
           hour12: false
   docker.yaml: |
-    mizar:
-      host: 192.168.86.112
+    flagg:
+      host: 192.168.86.205
       port: 2375
-    regulus:
-      host: 192.168.86.116
+    misery:
+      host: 192.168.86.227
+      port: 2375
+    misery:
+      host: 192.168.86.216
       port: 2375

@@ -1,0 +1,91 @@
+---
+- name: Ensure immich_db_password is defined and not empty
+  ansible.builtin.assert:
+    that:
+      - immich_db_password is defined
+      - immich_db_password | length > 0
+    fail_msg: "immich_db_password must be defined and non-empty. Set it in vars, defaults, or via your secret manager."
+    
+- name: Ensure upload mount point exists (no chown/chmod on NFS)
+  ansible.builtin.file:
+    path: "{{ immich_upload_location }}"
+    state: directory
+    mode: "0755"
+
+- name: Mount Immich upload NFS share (persist in /etc/fstab)
+  ansible.posix.mount:
+    path: "{{ immich_upload_location }}"
+    src: "{{ immich_upload_nfs_server }}:{{ immich_upload_nfs_path }}"
+    fstype: nfs
+    opts: "{{ immich_upload_nfs_opts | default('rw,sync,hard,intr') }}"
+    state: mounted
+
+- name: Verify path is an NFS mount
+  ansible.builtin.command: "findmnt -T {{ immich_upload_location }} -no FSTYPE,SOURCE"
+  register: immich_upload_findmnt
+  changed_when: false
+  failed_when: immich_upload_findmnt.rc != 0 or (immich_upload_findmnt.stdout is not regex('^(nfs|nfs4)\\s'))
+
+# --- Practical write test as root (matches TrueNAS `maproot=allan`) ---
+
+- name: Touch a temp file on the NFS mount as root
+  become: true
+  become_user: root
+  ansible.builtin.file:
+    path: "{{ immich_upload_location }}/.immich_writetest"
+    state: touch
+    mode: "0644"
+
+- name: Remove the temp file (cleanup) as root
+  become: true
+  become_user: root
+  ansible.builtin.file:
+    path: "{{ immich_upload_location }}/.immich_writetest"
+    state: absent
+
+- name: Ensure local Immich directories exist
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: directory
+    mode: "{{ item.mode | default('0755') }}"
+    owner: "{{ item.owner | default(omit) }}"
+    group: "{{ item.group | default(omit) }}"
+  loop:
+    # deployment metadata
+    - { path: "{{ immich_base_dir }}", mode: "0750", owner: "root", group: "root" }
+    # stateful local service dirs (containers will chown at init)
+    - { path: "{{ immich_db_dir }}" }          # postgres
+    - { path: "{{ immich_redis_dir }}" }       # redis
+    # local model cache (root can write; no chown unless non-root run)
+    - { path: "{{ immich_model_cache_dir }}" }
+
+- name: Render pinned .env
+  ansible.builtin.template:
+    src: env.j2
+    dest: "{{ immich_base_dir }}/.env"
+    owner: root
+    group: root
+    mode: "0640"
+  notify: restart immich stack
+
+- name: Download vendor docker-compose.yml for pinned version
+  ansible.builtin.get_url:
+    url: "{{ immich_compose_url }}"
+    dest: "{{ immich_base_dir }}/docker-compose.yml"
+    owner: root
+    group: root
+    mode: "0644"
+  register: _immich_compose_fetch
+  notify: restart immich stack
+
+- name: Ensure Immich stack is present
+  community.docker.docker_compose_v2:
+    project_src: "{{ immich_base_dir }}"
+    state: present
+    remove_orphans: true
+
+- name: Show compose status
+  ansible.builtin.command: docker compose ps
+  args:
+    chdir: "{{ immich_base_dir }}"
+  changed_when: false
