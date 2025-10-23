@@ -8,22 +8,10 @@ all:
       ansible_host: 192.168.86.135
       homelab_ansible_environment: "production-compute"
       gatus_slug: "(Production DevOps)"
-    misery:
-      ansible_host: 192.168.86.227
-    procyon:
-      ansible_host: 192.168.86.106
 
   children:
     homelab_ansible_hosts:
       children:
-        homelab_docker_hosts:
-          children:
-            homelab_docker_immich2_hosts:
-              hosts:
-                misery:
-              vars:
-                immich_upload_nfs_server: "{{ hostvars['procyon'].ansible_host }}"
-                immich_upload_nfs_path: "/mnt/pool1/immich"
         homelab_devops_hosts:
           hosts:
             castor:

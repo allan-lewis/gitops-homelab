@@ -128,7 +128,122 @@
   roles:
     - docker
 
-- name: Setup monitoring for Docker hosts.
+# - name: Setup monitoring for Docker hosts.
+#   hosts: homelab_docker_hosts
+#   become: yes
+#   gather_facts: yes
+#   tags: [docker_monitoring]
+
+#   roles:
+#     - role: docker_compose
+#       vars:
+#         homelab_docker_compose_project_src: "/tmp/docker-compose-monitoring"
+#         homelab_docker_compose_templates:
+#           - src: "templates/docker_compose/monitoring/docker-compose.yaml.j2"
+#             dest: "{{ homelab_docker_compose_project_src }}/docker-compose.yml"
+
+# - name: Setup Traefik.
+#   hosts: homelab_docker_traefik_hosts
+#   become: yes
+#   gather_facts: yes
+#   tags: [docker_traefik]
+
+#   roles:
+#     - role: docker_compose
+#       vars:
+#         homelab_docker_compose_prep_dirs:
+#           - "{{ homelab_docker_traefik_volume }}"
+#           - "{{ homelab_docker_traefik_letsencrypt_volume }}"
+#         homelab_docker_compose_project_src: "/tmp/docker-compose-traefik"
+#         homelab_docker_compose_templates:
+#           - src: "templates/docker_compose/traefik/traefik.yaml.j2"
+#             dest: "{{ homelab_docker_traefik_volume }}/traefik.yaml"
+#           - src: "templates/docker_compose/traefik/docker-compose.yaml.j2"
+#             dest: "{{ homelab_docker_compose_project_src }}/docker-compose.yml"
+
+# - name: Setup Gatus.
+#   hosts: homelab_docker_gatus_hosts
+#   become: yes
+#   gather_facts: yes
+#   tags: [docker_gatus]
+
+#   roles:
+#     - role: docker_compose
+#       vars:
+#         homelab_docker_compose_prep_dirs:
+#           - "/home/lab/apps/gatus/config"
+#           - "/home/lab/apps/gatus/data"
+#         homelab_docker_compose_project_src: "/tmp/docker-compose-gatus"
+#         homelab_docker_compose_templates:
+#           - src: "templates/docker_compose/gatus/gatus-config.yaml.j2"
+#             dest: "/home/lab/apps/gatus/config/config.yaml"
+#           - src: "templates/docker_compose/gatus/docker-compose.yaml.j2"
+#             dest: "{{ homelab_docker_compose_project_src }}/docker-compose.yml"
+
+# - name: Setup Media acquisition.
+#   hosts: homelab_docker_media_acquisition_hosts
+#   become: yes
+#   gather_facts: yes
+#   tags: [docker_media_acquisition]
+
+#   roles:
+#     - role: getent
+#     - role: docker_compose
+#       vars:
+#         homelab_docker_compose_prep_dirs:
+#           - "/home/lab/apps/sonarr/config"
+#           - "/home/lab/apps/transmission/config"
+#           - "/home/lab/apps/transmission/watch"
+#           - "/home/lab/apps/jackett/config"
+#           - "/home/lab/apps/jackett/downloads"
+#         homelab_docker_compose_project_src: "/tmp/docker-compose-media-acquisition"
+#         homelab_docker_compose_templates:
+#           - src: "templates/docker_compose/media_acquisition/docker-compose.yaml.j2"
+#             dest: "{{ homelab_docker_compose_project_src }}/docker-compose.yml"
+
+# - name: Setup Pi-Hole.
+#   hosts: homelab_docker_pihole_hosts
+#   become: yes
+#   gather_facts: yes
+#   tags: [docker_pihole]
+
+#   roles:
+#     - role: pihole_pre
+#     - role: docker_compose
+#       vars:
+#         homelab_pihole_upstreams:
+#           - "1.1.1.1"
+#           - "1.0.0.1"
+#           - "9.9.9.9"
+#           - "149.112.112.112"
+#         homelab_docker_compose_prep_dirs:
+#           - "{{ homelab_pihole_data_volume }}"
+#         homelab_docker_compose_project_src: "/tmp/docker-compose-pihole"
+#         homelab_docker_compose_templates:
+#           - src: "templates/docker_compose/pihole/docker-compose.yaml.j2"
+#             dest: "{{ homelab_docker_compose_project_src }}/docker-compose.yml"
+#     - role: pihole_post
+#     - role: pihole_dns
+
+# - name: Setup Plex.
+#   hosts: homelab_plex_hosts
+#   become: yes
+#   gather_facts: yes
+#   tags: [docker_plex]
+
+#   roles:
+#     - plex
+
+# - name: Setup Jellyfin.
+#   hosts: homelab_jellyfin_hosts
+#   become: yes
+#   gather_facts: yes
+#   tags: [docker_jellyfin]
+
+#   roles:
+#     - jellyfin
+
+- name: Setup monitoring
   hosts: homelab_docker_hosts
   become: yes
   gather_facts: yes
@@ -137,117 +252,72 @@
   roles:
     - role: docker_compose
       vars:
-        homelab_docker_compose_project_src: "/tmp/docker-compose-monitoring"
-        homelab_docker_compose_templates:
-          - src: "templates/docker_compose/monitoring/docker-compose.yaml.j2"
-            dest: "{{ homelab_docker_compose_project_src }}/docker-compose.yml"
+        compose_app_name: monitoring
+        compose_source_type: template
+        compose_template_src: "templates/docker-compose/monitoring.compose.yaml.j2"
 
-- name: Setup Traefik.
-  hosts: homelab_docker_traefik_hosts
-  become: yes
-  gather_facts: yes
-  tags: [docker_traefik]
-
+- name: Setup Cloudflare Tunnel(s)
+  hosts: homelab_docker_cloudflare_hosts
+  become: true
+  tags: [docker_cloudflare]
   roles:
     - role: docker_compose
       vars:
-        homelab_docker_compose_prep_dirs:
-          - "{{ homelab_docker_traefik_volume }}"
-          - "{{ homelab_docker_traefik_letsencrypt_volume }}"
-        homelab_docker_compose_project_src: "/tmp/docker-compose-traefik"
-        homelab_docker_compose_templates:
-          - src: "templates/docker_compose/traefik/traefik.yaml.j2"
-            dest: "{{ homelab_docker_traefik_volume }}/traefik.yaml"
-          - src: "templates/docker_compose/traefik/docker-compose.yaml.j2"
-            dest: "{{ homelab_docker_compose_project_src }}/docker-compose.yml"
-
-- name: Setup Gatus.
-  hosts: homelab_docker_gatus_hosts
-  become: yes
-  gather_facts: yes
-  tags: [docker_gatus]
-
-  roles:
-    - role: docker_compose
-      vars:
-        homelab_docker_compose_prep_dirs:
-          - "/home/lab/apps/gatus/config"
-          - "/home/lab/apps/gatus/data"
-        homelab_docker_compose_project_src: "/tmp/docker-compose-gatus"
-        homelab_docker_compose_templates:
-          - src: "templates/docker_compose/gatus/gatus-config.yaml.j2"
-            dest: "/home/lab/apps/gatus/config/config.yaml"
-          - src: "templates/docker_compose/gatus/docker-compose.yaml.j2"
-            dest: "{{ homelab_docker_compose_project_src }}/docker-compose.yml"
-
-- name: Setup Media acquisition.
-  hosts: homelab_docker_media_acquisition_hosts
-  become: yes
-  gather_facts: yes
-  tags: [docker_media_acquisition]
-
-  roles:
-    - role: getent
-    - role: docker_compose
-      vars:
-        homelab_docker_compose_prep_dirs:
-          - "/home/lab/apps/sonarr/config"
-          - "/home/lab/apps/transmission/config"
-          - "/home/lab/apps/transmission/watch"
-          - "/home/lab/apps/jackett/config"
-          - "/home/lab/apps/jackett/downloads"
-        homelab_docker_compose_project_src: "/tmp/docker-compose-media-acquisition"
-        homelab_docker_compose_templates:
-          - src: "templates/docker_compose/media_acquisition/docker-compose.yaml.j2"
-            dest: "{{ homelab_docker_compose_project_src }}/docker-compose.yml"
-
-- name: Setup Pi-Hole.
-  hosts: homelab_docker_pihole_hosts
-  become: yes
-  gather_facts: yes
-  tags: [docker_pihole]
-
-  roles:
-    - role: pihole_pre
-    - role: docker_compose
-      vars:
-        homelab_pihole_upstreams:
-          - "1.1.1.1"
-          - "1.0.0.1"
-          - "9.9.9.9"
-          - "149.112.112.112"
-        homelab_docker_compose_prep_dirs:
-          - "{{ homelab_pihole_data_volume }}"
-        homelab_docker_compose_project_src: "/tmp/docker-compose-pihole"
-        homelab_docker_compose_templates:
-          - src: "templates/docker_compose/pihole/docker-compose.yaml.j2"
-            dest: "{{ homelab_docker_compose_project_src }}/docker-compose.yml"
-    - role: pihole_post
-    - role: pihole_dns
-
-- name: Setup Plex.
-  hosts: homelab_plex_hosts
-  become: yes
-  gather_facts: yes
-  tags: [docker_plex]
-
-  roles:
-    - plex
-
-- name: Setup Jellyfin.
-  hosts: homelab_jellyfin_hosts
-  become: yes
-  gather_facts: yes
-  tags: [docker_jellyfin]
-
-  roles:
-    - jellyfin
+        compose_app_name: cloudflare
+        compose_source_type: file
+        compose_file_src: files/docker-compose/cloudflare.compose.yaml
+        compose_env:
+          CLOUDFLARE_TUNNEL_TOKEN: "{{ lookup('env','CLOUDFLARE_TUNNEL_TOKEN') }}"
 
 - name: Setup Immich (v2.x)
   hosts: homelab_docker_immich2_hosts
   become: yes
   gather_facts: yes
-  tags: [docker_immich2]
+  tags: [docker_immich]
 
   roles:
-    - role: immich2
+    - role: docker_compose
+      vars:
+        compose_app_name: immich
+        compose_immich_version: "v2.1.0"
+
+        # Use the vendor compose from the exact release tag
+        compose_source_type: url
+        compose_url: "https://github.com/immich-app/immich/releases/download/{{ compose_immich_version }}/docker-compose.yml"
+
+        # Everything here is auto-validated (undefined/empty => fail early)
+        compose_env:
+          IMMICH_VERSION: "{{ compose_immich_version }}"
+          UPLOAD_LOCATION: "/mnt/immich"
+          DB_DATA_LOCATION: "/srv/immich/postgres"
+          REDIS_DATA_LOCATION: "/srv/immich/redis"
+          MODEL_CACHE_LOCATION: "/srv/immich/model-cache"
+          COMPOSE_PROJECT_NAME: "immich"
+          DB_USERNAME: "postgres"
+          DB_DATABASE_NAME: "immich"
+          DB_PASSWORD: "{{ lookup('env', 'IMMICH_DB_PASSWORD') }}"
+
+        compose_paths:
+          # NFS uploads (do not chown from client; role will verify it's NFS-mounted)
+          - path: "/mnt/immich"
+            create: false
+            mode: "0755"
+            nfs: true
+            nfs_server: "{{ hostvars['procyon'].ansible_host }}"
+            nfs_path: "/mnt/immich"
+            nfs_opts: "rw,sync,hard,intr"
+
+          # Postgres data (local; container will chown on first init)
+          - path: "/srv/immich/postgres"
+            create: true
+            mode: "0755"
+
+          # Redis data (local; volatile)
+          - path: "/srv/immich/redis"
+            create: true
+            mode: "0755"
+
+          # Model cache (local; volatile) — leave root-owned
+          - path: "/srv/immich/model-cache"
+            create: true
+            mode: "0755"
