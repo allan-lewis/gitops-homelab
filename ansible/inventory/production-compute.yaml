@@ -147,6 +147,9 @@ all:
         homelab_docker_hosts:
           hosts:
           children:
+            homelab_docker_cloudflare_hosts:
+              hosts:
+                flagg:
             homelab_docker_gatus_hosts:
               hosts:
                 flagg:
