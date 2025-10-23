@@ -7,5 +7,5 @@ services:
     ports: 
       - "8080:8080/tcp"
     volumes: 
-      - "/home/lab/apps/gatus/data:/data"
-      - "/home/lab/apps/gatus/config:/config/"
+      - "/var/lib/gatus:/data"
+      - "/etc/gatus:/config"

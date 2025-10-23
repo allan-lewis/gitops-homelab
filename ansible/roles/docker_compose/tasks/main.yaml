@@ -112,6 +112,19 @@
   loop_control:
     label: "{{ item.item.path }}"
 
+# Render any extra templates
+- name: Render extra project templates
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.uid | default(0) }}"
+    group: "{{ item.gid | default(0) }}"
+    mode: "{{ item.mode | default('0644') }}"
+  loop: "{{ compose_extra_templates | default([]) }}"
+  loop_control:
+    label: "{{ item.dest }}"
+  notify: restart compose stack
+
 # --- Compose source (url | file | template) ---
 - name: Fetch compose from URL
   ansible.builtin.get_url:
