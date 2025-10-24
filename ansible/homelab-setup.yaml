@@ -363,7 +363,7 @@
             gid: 1000
             mode: "0755"
           - path: "/mnt/media-acquisition"
-            create: false
+            create: true
             mode: "0755"
             nfs: true
             nfs_server: "{{ hostvars['procyon'].ansible_host }}"

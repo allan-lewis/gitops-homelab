@@ -20,9 +20,7 @@
   ansible.builtin.set_fact:
     _compose_paths_create: "{{ (_compose_paths_create | default([])) + [item] }}"
   loop: "{{ compose_paths | default([]) }}"
-  when:
-    - (item.create | default(false) | bool)
-    - not (item.nfs | default(false) | bool)
+  when: (item.create | default(false) | bool)
   loop_control:
     label: "{{ item.path }}"
 
