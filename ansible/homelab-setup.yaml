@@ -128,30 +128,6 @@
   roles:
     - docker
 
-# - name: Setup monitoring for Docker hosts.
-#   hosts: homelab_docker_hosts
-#   become: yes
-#   gather_facts: yes
-#   tags: [docker_monitoring]
-
-#   roles:
-#     - role: docker_compose
-#       vars:
-#         homelab_docker_compose_project_src: "/tmp/docker-compose-monitoring"
-#         homelab_docker_compose_templates:
-#           - src: "templates/docker_compose/monitoring/docker-compose.yaml.j2"
-#             dest: "{{ homelab_docker_compose_project_src }}/docker-compose.yml"
-
-# - name: Setup Media acquisition.
-#   hosts: homelab_docker_media_acquisition_hosts
-#   become: yes
-#   gather_facts: yes
-#   tags: [docker_media_acquisition]
-
-#   roles:
-#     - role: getent
-#     - role: docker_compose
-#       vars:
 #         homelab_docker_compose_prep_dirs:
 #           - "/home/lab/apps/sonarr/config"
 #           - "/home/lab/apps/transmission/config"
@@ -162,25 +138,6 @@
 #         homelab_docker_compose_templates:
 #           - src: "templates/docker_compose/media_acquisition/docker-compose.yaml.j2"
 #             dest: "{{ homelab_docker_compose_project_src }}/docker-compose.yml"
-
-# - name: Setup Pi-Hole.
-#   hosts: homelab_docker_pihole_hosts
-#   become: yes
-#   gather_facts: yes
-#   tags: [docker_pihole]
-
-#   roles:
-#     - role: pihole_pre
-#     - role: docker_compose
-#       vars:
-#         homelab_docker_compose_prep_dirs:
-#           - "{{ homelab_pihole_data_volume }}"
-#         homelab_docker_compose_project_src: "/tmp/docker-compose-pihole"
-#         homelab_docker_compose_templates:
-#           - src: "templates/docker_compose/pihole/docker-compose.yaml.j2"
-#             dest: "{{ homelab_docker_compose_project_src }}/docker-compose.yml"
-#     - role: pihole_post
-#     - role: pihole_dns
 
 # - name: Setup Plex.
 #   hosts: homelab_plex_hosts
@@ -261,7 +218,7 @@
             mode: "0755"
             nfs: true
             nfs_server: "{{ hostvars['procyon'].ansible_host }}"
-            nfs_path: "/mnt/immich"
+            nfs_path: "/mnt/pool1/immich"
             nfs_opts: "rw,sync,hard,intr"
 
           # Postgres data (local; container will chown on first init)
@@ -367,3 +324,52 @@
             mode: "0755"
     - role: pihole_post
     - role: pihole_dns
+
+- name: setup media acquisition
+  hosts: homelab_docker_media_acquisition_hosts
+  become: yes
+  gather_facts: yes
+  tags: [docker_media_acquisition]
+
+  roles:
+    - role: docker_compose
+      vars:
+        compose_app_name: media_acquisition
+        compose_source_type: file
+        compose_file_src: files/docker-compose/media_acquisition.compose.yaml
+        compose_paths:
+          - path: "/etc/jackett"
+            create: true
+            uid: 1000
+            gid: 1000
+            mode: "0755"
+          - path: "/etc/lidarr"
+            create: true
+            uid: 1000
+            gid: 1000
+            mode: "0755"
+          - path: "/etc/radarr"
+            create: true
+            uid: 1000
+            gid: 1000
+            mode: "0755"
+          - path: "/etc/sonarr"
+            create: true
+            uid: 1000
+            gid: 1000
+            mode: "0755"
+          - path: "/etc/transmission"
+            create: true
+            uid: 1000
+            gid: 1000
+            mode: "0755"
+          - path: "/var/lib/jackett/downloads"
+            create: true
+            uid: 1000
+            gid: 1000
+            mode: "0755"
+          - path: "/var/lib/transmission/watch"
+            create: true
+            uid: 1000
+            gid: 1000
+            mode: "0755"
