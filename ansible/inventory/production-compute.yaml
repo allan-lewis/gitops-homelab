@@ -29,24 +29,6 @@ all:
       gatus_slug: "(Media Acquisition)"
       homelab_backup_healthcheck: "12e0891e-4a53-4b19-8bb2-63c6eafef97d"
       homelab_backup_minute: 5
-      homelab_backup_hour: "*"
-      # homelab_mounts:
-      #   - src: "192.168.86.106:/mnt/pool1/media-acquisition"
-      #     path: "/mnt/media-acquisition"
-      #     options: "rw"
-      homelab_remote_volumes:
-        - src: "/home/lab/apps/jackett"
-          dest: "/mnt/pool1/docker-volumes/jackett/"
-          host: procyon
-          user: allan 
-        - src: "/home/lab/apps/sonarr"
-          dest: "/mnt/pool1/docker-volumes/sonarr/"
-          host: procyon
-          user: allan 
-        - src: "/home/lab/apps/transmission"
-          dest: "/mnt/pool1/docker-volumes/transmission/"
-          host: procyon
-          user: allan 
     ## KUBERNETES
     roland:
       ansible_host: 192.168.86.230

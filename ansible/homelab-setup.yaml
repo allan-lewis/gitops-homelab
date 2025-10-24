@@ -376,3 +376,10 @@
             nfs_server: "{{ hostvars['procyon'].ansible_host }}"
             nfs_path: "/mnt/pool1/media-acquisition/tv"
             nfs_opts: "rw,sync,hard,intr"
+          - path: "/mnt/media_acquisition/movies"
+            create: false
+            mode: "0755"
+            nfs: true
+            nfs_server: "{{ hostvars['procyon'].ansible_host }}"
+            nfs_path: "/mnt/pool1/media-acquisition/movies"
+            nfs_opts: "rw,sync,hard,intr"
