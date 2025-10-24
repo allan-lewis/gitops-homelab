@@ -142,15 +142,7 @@
 #           - src: "templates/docker_compose/monitoring/docker-compose.yaml.j2"
 #             dest: "{{ homelab_docker_compose_project_src }}/docker-compose.yml"
 
-# - name: Setup Traefik.
-#   hosts: homelab_docker_traefik_hosts
-#   become: yes
-#   gather_facts: yes
-#   tags: [docker_traefik]
 
-#   roles:
-#     - role: docker_compose
-#       vars:
 #         homelab_docker_compose_prep_dirs:
 #           - "{{ homelab_docker_traefik_volume }}"
 #           - "{{ homelab_docker_traefik_letsencrypt_volume }}"
@@ -312,6 +304,8 @@
   roles:
     - role: docker_compose
       vars:
+        homelab_telegram_id: "{{ lookup('env', 'TELEGRAM_ID') }}"
+        homelab_telegram_bot_token: "{{ lookup('env', 'TELEGRAM_BOT_TOKEN') }}"
         compose_app_name: gatus
         compose_source_type: template
         compose_template_src: "templates/docker-compose/gatus.compose.yaml.j2"
@@ -327,6 +321,38 @@
             gid: 1000
             mode: "0755"
           - path: "/etc/gatus"
+            create: true
+            uid: 1000
+            gid: 1000
+            mode: "0755"
+
+- name: Setup Traefik
+  hosts: homelab_docker_traefik_hosts
+  become: yes
+  gather_facts: yes
+  tags: [docker_traefik]
+
+  roles:
+    - role: docker_compose
+      vars:
+        compose_app_name: traefik
+        compose_source_type: template
+        compose_template_src: "templates/docker-compose/traefik.compose.yaml.j2"
+        compose_env:
+          CF_API_EMAIL: "allan.e.lewis@gmail.com"
+          CF_API_KEY: "{{ lookup('env', 'TRAEFIK_CF_API_KEY') }}"
+        compose_extra_templates:
+          - src: "templates/docker-compose/traefik.config.yaml.j2"
+            dest: "/etc/traefik/traefik.yaml"
+            uid: 1000
+            gid: 1000
+        compose_paths:
+          - path: "/var/lib/traefik/acme"
+            create: true
+            uid: 1000
+            gid: 1000
+            mode: "0755"
+          - path: "/etc/traefik"
             create: true
             uid: 1000
             gid: 1000

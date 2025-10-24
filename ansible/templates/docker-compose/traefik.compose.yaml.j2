@@ -22,12 +22,9 @@ services:
       - "80:80"
       - "443:443"
       - "8088:8080"
-    environment:
-      - CF_API_EMAIL= allan.e.lewis@gmail.com
-      - CF_API_KEY= {{ homelab_cloudflare_api_key }}
     volumes:
-      - "{{ homelab_docker_traefik_letsencrypt_volume }}:/letsencrypt"
-      - "{{ homelab_docker_traefik_volume }}:/traefik"
+      - "/var/lib/traefik/acme:/letsencrypt"
+      - "/etc/traefik:/traefik"
       - "/var/run/docker.sock:/var/run/docker.sock"
 
   whoami:
