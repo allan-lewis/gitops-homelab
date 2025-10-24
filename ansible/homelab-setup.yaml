@@ -22,7 +22,7 @@
     - apt
     - mount
     - reboot
-    - backup
+    - backup_runner
 
 - name: Do basic setup on all hosts (as local user).
   hosts: homelab_ansible_hosts
@@ -349,3 +349,11 @@
             nfs_server: "{{ hostvars['procyon'].ansible_host }}"
             nfs_path: "/mnt/pool1/media-acquisition"
             nfs_opts: "rw,sync,hard,intr"
+
+- hosts: castor
+  become: yes
+  gather_facts: yes
+  tags: [backup_runner]
+
+  roles:
+    - backup_runner 

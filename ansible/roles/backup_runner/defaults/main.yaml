@@ -1,0 +1,7 @@
+---
+backup_runner_base_dir: /etc/gitops-homelab/backup
+backup_runner_script_path: /usr/local/bin/run-backups.sh
+backup_runner_log_path: /var/log/backup-run.log
+
+# Safe rsync defaults
+backup_runner_rsync_flags: "-aH --delete --partial --inplace --numeric-ids"

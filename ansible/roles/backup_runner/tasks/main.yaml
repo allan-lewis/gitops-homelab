@@ -1,0 +1,33 @@
+---
+- name: Ensure rsync is installed
+  ansible.builtin.package:
+    name: rsync
+    state: present
+
+- name: Create base, conf.d, and log dirs
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+  loop:
+    - "{{ backup_runner_base_dir }}"
+    - "{{ backup_runner_base_dir }}/backup.conf.d"
+    - "{{ backup_runner_log_path | dirname }}"
+
+- name: Render environment file
+  ansible.builtin.template:
+    src: backup.env.j2
+    dest: "{{ backup_runner_base_dir }}/backup.env"
+    owner: root
+    group: root
+    mode: "0640"
+
+- name: Install backup runner script
+  ansible.builtin.template:
+    src: run-backups.sh.j2
+    dest: "{{ backup_runner_script_path }}"
+    owner: root
+    group: root
+    mode: "0755"

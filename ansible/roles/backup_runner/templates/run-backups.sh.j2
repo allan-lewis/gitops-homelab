@@ -1,0 +1,113 @@
+{% raw %}#!/usr/bin/env bash
+set -uo pipefail
+
+# Load env (if present)
+if [[ -f "{% endraw %}{{ backup_runner_base_dir }}{% raw %}/backup.env" ]]; then
+  # shellcheck disable=SC1091
+  . "{% endraw %}{{ backup_runner_base_dir }}{% raw %}/backup.env"
+fi
+
+LOG_PATH="${LOG_PATH:-/var/log/backup-run.log}"
+CONF_DIR="${CONF_DIR:-{% endraw %}{{ backup_runner_base_dir }}{% raw %}/backup.conf.d}"
+HEALTHCHECKS_URL="${HEALTHCHECKS_URL:-}"
+RSYNC_FLAGS="${RSYNC_FLAGS:- -aH --delete --partial --inplace --numeric-ids }"
+
+timestamp() { date +"%Y-%m-%d %H:%M:%S%z"; }
+log() { echo "$(timestamp) | $*" | tee -a "$LOG_PATH"; }
+
+read_pairs() {
+  local -a lines=()
+  if [[ -d "$CONF_DIR" ]]; then
+    # Read all *.conf files in sorted order
+    while IFS= read -r -d '' f; do
+      while IFS= read -r line; do
+        # Skip comments/blank lines
+        [[ "$line" =~ ^[[:space:]]*(#|$) ]] && continue
+        lines+=("$line")
+      done < "$f"
+    done < <(find "$CONF_DIR" -type f -name '*.conf' -print0 | sort -z)
+  fi
+  # Print NUL-separated without trailing empty
+  ((${#lines[@]})) && printf '%s\0' "${lines[@]}"
+}
+
+run_pair() {
+  local src="$1" dest="$2"
+  local src_norm dest_norm
+  src_norm="${src%/}/"; dest_norm="${dest%/}/"
+
+  log "START  | rsync ${RSYNC_FLAGS} '${src_norm}' -> '${dest_norm}'"
+  # shellcheck disable=SC2086
+  rsync ${RSYNC_FLAGS} --human-readable --progress \
+    "${src_norm}" "${dest_norm}" 2>&1 | tee -a "$LOG_PATH"
+  local rc=${PIPESTATUS[0]}
+
+  if [[ $rc -eq 0 ]]; then
+    log "OK     | ${src_norm} -> ${dest_norm}"
+  else
+    log "ERROR  | ${src_norm} -> ${dest_norm} | exit=$rc"
+  fi
+  return $rc
+}
+
+main() {
+  log "===== Backup run started ====="
+  mapfile -d '' -t lines < <(read_pairs) || true
+
+  # Sanitize: remove empty/whitespace-only elements (covers zero-fragment case)
+  if ((${#lines[@]})); then
+    local -a cleaned=()
+    local l
+    for l in "${lines[@]}"; do
+      [[ -n "${l//[[:space:]]/}" ]] && cleaned+=("$l")
+    done
+    lines=("${cleaned[@]}")
+  fi
+
+  local pairs=${#lines[@]}
+
+  if [[ $pairs -eq 0 ]]; then
+    log "No backup pairs configured."
+    all_ok=1
+  else
+    local failures=0 idx=0
+    local line raw_src raw_dest src dest
+    for line in "${lines[@]}"; do
+      ((idx++))
+      IFS='::' read -r raw_src raw_dest <<< "$line" || true
+      # Trim
+      src="$(echo "${raw_src:-}"  | sed 's/[[:space:]]\+$//')"
+      dest="$(echo "${raw_dest:-}" | sed 's/^[[:space:]]\+//')"
+      # If somehow empty after trim, skip without counting as failure
+      if [[ -z "$src" && -z "$dest" ]]; then
+        log "INFO   | pair #$idx is empty after trim (skipping)"
+        continue
+      fi
+      if [[ -z "$src" || -z "$dest" ]]; then
+        log "WARN   | pair #$idx malformed: '$line' (skipping)"
+        ((failures++)); continue
+      fi
+      run_pair "$src" "$dest" || ((failures++))
+    done
+    all_ok=$(( failures == 0 ? 1 : 0 ))
+  fi
+
+  if [[ -n "$HEALTHCHECKS_URL" ]]; then
+    if [[ $all_ok -eq 1 ]]; then
+      curl -fsS --max-time 10 "$HEALTHCHECKS_URL" >/dev/null 2>&1 \
+        && log "PING   | Healthchecks success ping sent" \
+        || log "WARN   | Failed to ping Healthchecks"
+    else
+      log "SKIP   | Not pinging Healthchecks (one or more backups failed)"
+    fi
+  fi
+
+  if [[ $all_ok -eq 1 ]]; then
+    log "===== Backup run finished (OK) ====="; exit 0
+  else
+    log "===== Backup run finished (FAIL) ====="; exit 1
+  fi
+}
+
+main "$@"
+{% endraw %}
