@@ -128,17 +128,6 @@
   roles:
     - docker
 
-#         homelab_docker_compose_prep_dirs:
-#           - "/home/lab/apps/sonarr/config"
-#           - "/home/lab/apps/transmission/config"
-#           - "/home/lab/apps/transmission/watch"
-#           - "/home/lab/apps/jackett/config"
-#           - "/home/lab/apps/jackett/downloads"
-#         homelab_docker_compose_project_src: "/tmp/docker-compose-media-acquisition"
-#         homelab_docker_compose_templates:
-#           - src: "templates/docker_compose/media_acquisition/docker-compose.yaml.j2"
-#             dest: "{{ homelab_docker_compose_project_src }}/docker-compose.yml"
-
 # - name: Setup Plex.
 #   hosts: homelab_plex_hosts
 #   become: yes
@@ -373,3 +362,17 @@
             uid: 1000
             gid: 1000
             mode: "0755"
+          - path: "/mnt/media_acquisition/downloads"
+            create: false
+            mode: "0755"
+            nfs: true
+            nfs_server: "{{ hostvars['procyon'].ansible_host }}"
+            nfs_path: "/mnt/pool1/media-acquisition/downloads"
+            nfs_opts: "rw,sync,hard,intr"
+          - path: "/mnt/media_acquisition/tv"
+            create: false
+            mode: "0755"
+            nfs: true
+            nfs_server: "{{ hostvars['procyon'].ansible_host }}"
+            nfs_path: "/mnt/pool1/media-acquisition/tv"
+            nfs_opts: "rw,sync,hard,intr"
