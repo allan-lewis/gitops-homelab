@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: memos
-        image: neosmemo/memos:0.25.1
+        image: neosmemo/memos:0.25.2
         imagePullPolicy: "Always"        
         args: ["--port=5230"]           # <- enforce 5230 (overrides env)
         ports:
