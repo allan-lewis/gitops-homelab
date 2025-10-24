@@ -339,8 +339,8 @@
         compose_source_type: template
         compose_template_src: "templates/docker-compose/traefik.compose.yaml.j2"
         compose_env:
-          CF_API_EMAIL: "allan.e.lewis@gmail.com"
-          CF_API_KEY: "{{ lookup('env', 'TRAEFIK_CF_API_KEY') }}"
+          CLOUDFLARE_EMAIL: "allan.e.lewis@gmail.com"
+          CLOUDFLARE_API_KEY: "{{ lookup('env', 'TRAEFIK_CF_API_KEY') }}"
         compose_extra_templates:
           - src: "templates/docker-compose/traefik.config.yaml.j2"
             dest: "/etc/traefik/traefik.yaml"
