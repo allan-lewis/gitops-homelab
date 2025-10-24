@@ -22,6 +22,7 @@
     - apt
     - mount
     - reboot
+    - backup
 
 - name: Do basic setup on all hosts (as local user).
   hosts: homelab_ansible_hosts
@@ -37,27 +38,6 @@
     - public_key
     - private_key
     - zsh_shell
-
-- name: Synchronize local state with remote servers.
-  hosts: homelab_ansible_hosts
-  become: yes
-  gather_facts: yes  
-  tags: [baseline_setup]
-
-  pre_tasks:
-    - name: Skip this host if no remote volumes are defined
-      meta: end_host
-      when: homelab_remote_volumes is not defined
-            or (homelab_remote_volumes | length) == 0
-
-  roles:
-    - public_key
-    - private_key
-    - role: known_hosts
-      vars:
-        homelab_ssh_keys: "{{ hostvars | dict2items | map(attribute='value.homelab_remote_volumes') | select('defined') | flatten | map(attribute='host') | unique | list }}"
-    - restore
-    - backup
 
 - name: Get hosts ready to do DevOps work (as root).
   hosts: homelab_devops_hosts

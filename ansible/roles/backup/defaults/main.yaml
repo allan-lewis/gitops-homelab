@@ -1,5 +1,0 @@
----
-homelab_backup_log_dir: "/var/log/allans-home-lab"
-homelab_backup_log_file: "{{ homelab_backup_log_dir }}/backup.log"
-homelab_backup_script_dir: "/usr/local/bin/allans-home-lab"
-homelab_backup_script: "{{ homelab_backup_script_dir }}/backup.sh"
