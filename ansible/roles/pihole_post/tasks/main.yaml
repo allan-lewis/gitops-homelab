@@ -20,15 +20,6 @@
       (pihole_info.container.State.Health.Status | default('') == 'healthy')
     )
 
-# Optional: enforce admin password (works with any characters)
-- name: Set/overwrite Pi-hole admin password (optional)
-  shell: |
-    set -euo pipefail
-    printf '%s\n%s\n' "{{ pihole_webpassword | default('') | trim }}" "{{ pihole_webpassword | default('') | trim }}" \
-      | docker exec -i {{ _pihole_container }} bash -lc 'pihole -a -p'
-  when: (pihole_webpassword | default('') | trim | length) > 0
-  no_log: true
-
 # Sanity check inside the container (uses Pi-hole itself)
 - name: DNS test inside container
   command: bash -lc "docker exec {{ _pihole_container }} dig +short example.com @127.0.0.1"

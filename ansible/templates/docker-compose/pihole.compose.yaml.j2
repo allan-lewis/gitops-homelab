@@ -14,7 +14,7 @@ services:
       FTLCONF_dns_listeningMode: 'all'      
       FTLCONF_dns_upstreams: "{{ homelab_pihole_upstreams | join(';') }}"
     volumes:
-      - "{{ homelab_pihole_data_volume }}:/etc/pihole"
+      - "/var/lib/pihole:/etc/pihole"
     ports:
       - "53:53/tcp"
       - "53:53/udp"

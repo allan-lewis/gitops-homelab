@@ -142,17 +142,6 @@
 #           - src: "templates/docker_compose/monitoring/docker-compose.yaml.j2"
 #             dest: "{{ homelab_docker_compose_project_src }}/docker-compose.yml"
 
-
-#         homelab_docker_compose_prep_dirs:
-#           - "{{ homelab_docker_traefik_volume }}"
-#           - "{{ homelab_docker_traefik_letsencrypt_volume }}"
-#         homelab_docker_compose_project_src: "/tmp/docker-compose-traefik"
-#         homelab_docker_compose_templates:
-#           - src: "templates/docker_compose/traefik/traefik.yaml.j2"
-#             dest: "{{ homelab_docker_traefik_volume }}/traefik.yaml"
-#           - src: "templates/docker_compose/traefik/docker-compose.yaml.j2"
-#             dest: "{{ homelab_docker_compose_project_src }}/docker-compose.yml"
-
 # - name: Setup Media acquisition.
 #   hosts: homelab_docker_media_acquisition_hosts
 #   become: yes
@@ -184,11 +173,6 @@
 #     - role: pihole_pre
 #     - role: docker_compose
 #       vars:
-#         homelab_pihole_upstreams:
-#           - "1.1.1.1"
-#           - "1.0.0.1"
-#           - "9.9.9.9"
-#           - "149.112.112.112"
 #         homelab_docker_compose_prep_dirs:
 #           - "{{ homelab_pihole_data_volume }}"
 #         homelab_docker_compose_project_src: "/tmp/docker-compose-pihole"
@@ -357,3 +341,29 @@
             uid: 1000
             gid: 1000
             mode: "0755"
+
+- name: Setup Pi-Hole.
+  hosts: homelab_docker_pihole_hosts
+  become: yes
+  gather_facts: yes
+  tags: [docker_pihole]
+
+  roles:
+    - role: pihole_pre
+    - role: docker_compose
+      vars:    
+        homelab_pihole_admin_password: "{{ lookup('env', 'PIHOLE_ADMIN_PASSWORD') }}"
+        homelab_pihole_upstreams:
+          - "1.1.1.1"
+          - "1.0.0.1"
+          - "9.9.9.9"
+          - "149.112.112.112"
+        compose_app_name: pihole
+        compose_source_type: template
+        compose_template_src: "templates/docker-compose/pihole.compose.yaml.j2"
+        compose_paths:
+          - path: "/var/lib/pihole"
+            create: true
+            mode: "0755"
+    - role: pihole_post
+    - role: pihole_dns
