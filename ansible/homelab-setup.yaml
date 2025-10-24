@@ -362,7 +362,7 @@
             uid: 1000
             gid: 1000
             mode: "0755"
-          - path: "/mnt/media_acquisition/downloads"
+          - path: "/mnt/media_acquisition"
             create: false
             mode: "0755"
             nfs: true
