@@ -8,15 +8,7 @@ all:
     flagg:
       ansible_host: 192.168.86.205
       gatus_slug: "(Traefik/Pi-hole/Gatus)"
-      homelab_backup_healthcheck: "9701d224-6e9c-415a-bab1-21c98fb627ea"
-      homelab_backup_minute: 55
-      homelab_backup_hour: "*"
       homelab_metrics_forward_url: "http://{{hostvars['gilead'].ansible_host}}:9100"
-      homelab_remote_volumes:
-        - src: "/home/lab/apps/pihole"
-          dest: "/mnt/pool1/docker-volumes/pihole/"
-          host: procyon
-          user: allan 
     maturin:
       ansible_host: 192.168.86.200
       gatus_slug: "(Hypervisor)"
