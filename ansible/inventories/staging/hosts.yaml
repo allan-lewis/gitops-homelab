@@ -11,7 +11,7 @@ all:
           children:
             docker_gatus:
               hosts:
-                aplha:
+                alpha:
         tailscale:
           hosts:
             alpha:
