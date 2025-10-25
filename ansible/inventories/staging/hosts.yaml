@@ -5,9 +5,6 @@ all:
   children:
     ubuntu:
       children:
-        node_exporter:
-          hosts:
-            alpha:
         tailscale:
           hosts:
             alpha:
