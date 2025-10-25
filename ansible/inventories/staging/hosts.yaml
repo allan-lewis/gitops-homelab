@@ -12,6 +12,9 @@ all:
             docker_gatus:
               hosts:
                 alpha:
+            docker_immich:
+              hosts:
+                alpha:
         tailscale:
           hosts:
             alpha:

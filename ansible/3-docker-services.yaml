@@ -30,3 +30,12 @@
 
   roles:
     - docker_compose
+
+- name: Setup Immich
+  hosts: docker_immich
+  become: yes
+  gather_facts: yes
+  tags: [docker_immich]
+
+  roles:
+    - docker_compose
