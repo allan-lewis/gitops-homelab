@@ -1,7 +1,10 @@
 all:
   hosts:
     #### NEW HOSTS
-    ## BARE METAL HOSTS
+    ## BARE METAL
+    flagg:
+      ansible_host: 192.168.86.205
+    ## VIRTUAL MACHINES
     misery:
       ansible_host: 192.168.86.227
     #### OLD HOSTS
@@ -12,6 +15,9 @@ all:
       children:
         docker:
           children:
+            docker_gatus:
+              hosts:
+                flagg:
             docker_immich:
               hosts:
                 misery:
