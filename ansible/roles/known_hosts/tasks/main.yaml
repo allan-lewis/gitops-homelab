@@ -1,7 +1,7 @@
 ---
 - name: Determine list of SSH host targets
   set_fact:
-    homelab_target_hosts: "{{ homelab_ssh_keys | default(groups['homelab_ansible_hosts'], true) }}"
+    homelab_target_hosts: "{{ homelab_ssh_keys | default(groups['ubuntu'], true) }}"
 
 - name: Map hostnames to IPs if needed
   set_fact:
