@@ -5,6 +5,9 @@ all:
   children:
     ubuntu:
       children:
+        docker:
+          hosts:
+            aplha:
         tailscale:
           hosts:
             alpha:

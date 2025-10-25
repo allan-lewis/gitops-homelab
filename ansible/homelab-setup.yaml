@@ -1,22 +1,4 @@
 ---
-- name: Setup OpenVPN hosts.
-  hosts: homelab_openvpn_hosts
-  become: yes
-  gather_facts: yes
-  tags: [openvpn]
-
-  roles:
-    - openvpn
-
-- name: Setup Docker hosts.
-  hosts: homelab_docker_hosts
-  become: yes
-  gather_facts: yes
-  tags: [docker]
-
-  roles:
-    - docker
-
 # - name: Setup Plex.
 #   hosts: homelab_plex_hosts
 #   become: yes

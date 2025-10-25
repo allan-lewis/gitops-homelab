@@ -52,3 +52,21 @@
 
   roles:
     - artis3n.tailscale
+
+- name: Setup OpenVPN hosts.
+  hosts: openvpn
+  become: yes
+  gather_facts: yes
+  tags: [openvpn]
+
+  roles:
+    - openvpn
+
+- name: Setup Docker hosts.
+  hosts: docker
+  become: yes
+  gather_facts: yes
+  tags: [docker]
+
+  roles:
+    - docker
