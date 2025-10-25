@@ -1,6 +1,6 @@
 ---
 - name: Do basic setup on all hosts (as root).
-  hosts: managed
+  hosts: ubuntu
   become: yes
   gather_facts: yes
   tags: [baseline_setup_root]
@@ -16,7 +16,7 @@
     - backup_runner
 
 - name: Do basic setup on all hosts (as local user).
-  hosts: managed
+  hosts: ubuntu
   become: no
   gather_facts: yes  
   tags: [baseline_setup_lab]
