@@ -83,38 +83,6 @@
             create: true
             mode: "0755"
 
-- name: Setup Traefik
-  hosts: homelab_docker_traefik_hosts
-  become: yes
-  gather_facts: yes
-  tags: [docker_traefik]
-
-  roles:
-    - role: docker_compose
-      vars:
-        compose_app_name: traefik
-        compose_source_type: template
-        compose_template_src: "templates/docker-compose/traefik.compose.yaml.j2"
-        compose_env:
-          CLOUDFLARE_EMAIL: "allan.e.lewis@gmail.com"
-          CLOUDFLARE_API_KEY: "{{ lookup('env', 'TRAEFIK_CF_API_KEY') }}"
-        compose_extra_templates:
-          - src: "templates/docker-compose/traefik.config.yaml.j2"
-            dest: "/etc/traefik/traefik.yaml"
-            uid: 1000
-            gid: 1000
-        compose_paths:
-          - path: "/var/lib/traefik/acme"
-            create: true
-            uid: 1000
-            gid: 1000
-            mode: "0755"
-          - path: "/etc/traefik"
-            create: true
-            uid: 1000
-            gid: 1000
-            mode: "0755"
-
 - name: Setup Pi-Hole.
   hosts: homelab_docker_pihole_hosts
   become: yes

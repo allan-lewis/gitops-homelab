@@ -20,4 +20,13 @@
   tags: [docker_gatus]
 
   roles:
-    - role: docker_compose
+    - docker_compose
+
+- name: Setup Traefik
+  hosts: docker_traefik
+  become: yes
+  gather_facts: yes
+  tags: [docker_traefik]
+
+  roles:
+    - docker_compose
