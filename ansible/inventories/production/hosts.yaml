@@ -1,0 +1,17 @@
+all:
+  hosts:
+    #### NEW HOSTS
+    ## BARE METAL HOSTS
+    misery:
+      ansible_host: 192.168.86.227
+    #### OLD HOSTS
+    procyon:
+      ansible_host: 192.168.86.106
+  children:
+    ubuntu:
+      children:
+        docker:
+          children:
+            docker_immich:
+              hosts:
+                misery:
