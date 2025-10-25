@@ -7,7 +7,7 @@ all:
       children:
         docker:
           hosts:
-            aplha:
+            alpha:
         tailscale:
           hosts:
             alpha:
