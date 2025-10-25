@@ -1,0 +1,54 @@
+---
+- name: Do basic setup on all hosts (as root).
+  hosts: managed
+  become: yes
+  gather_facts: yes
+  tags: [baseline_setup_root]
+
+  roles:
+    - dependencies 
+    - tz
+    - user  
+    - ssh
+    - apt
+    - mount
+    - reboot
+    - backup_runner
+
+- name: Do basic setup on all hosts (as local user).
+  hosts: managed
+  become: no
+  gather_facts: yes  
+  tags: [baseline_setup_lab]
+
+  roles:
+    - role: known_hosts
+      vars:
+        homelab_ssh_keys: ['github.com']
+        homelab_ansible_translate_ip: no
+    - public_key
+    - private_key
+    - zsh_shell
+
+- name: Setup Node Exporter hosts.
+  hosts: node_exporter
+  become: yes
+  gather_facts: yes
+  tags: [node_exporter]
+
+  roles:
+    - node_exporter
+
+- name: Install Tailscale.
+  hosts: tailscale
+  become: yes
+  gather_facts: yes
+  tags: [tailscale]
+  
+  tasks:
+    - name: Force lsb_release_package to correct value for Ubuntu
+      set_fact:
+        lsb_release_package: lsb-release
+
+  roles:
+    - artis3n.tailscale

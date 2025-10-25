@@ -3,6 +3,7 @@
   hosts: localhost
   become: no
   gather_facts: yes
+  tags: [localhost_setup]
 
   roles:
     - known_hosts

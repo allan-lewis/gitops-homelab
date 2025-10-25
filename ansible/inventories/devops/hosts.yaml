@@ -1,0 +1,17 @@
+all:
+  hosts:
+    castor:
+      ansible_host: 192.168.86.125
+    pollux:
+      ansible_host: 192.168.86.135
+  children:
+    managed:
+      children:
+        devops:
+          hosts:
+            castor:
+            pollux:
+        node_exporter:
+          hosts:
+            castor:
+            pollux:

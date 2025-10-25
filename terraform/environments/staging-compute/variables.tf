@@ -1,25 +1,14 @@
 variable "vm_list_ubuntu" {
   description = "A list of Ubuntu VMs to create"
   default = {
-    delta = {
+    alpha = {
       description       = "Ubuntu Podman host (managed by Terraform)"
       proxmox_node      = "polaris"
-      cpu_cores         = 2
-      memory_dedicated  = 4096
+      cpu_cores         = 4
+      memory_dedicated  = 8096
       datastore_id      = "local-lvm"
       disk_size         = 64
-      ipv4_address      = "192.168.86.93/24"
-      gateway           = "192.168.86.1"
-      tags              = ["terraform", "staging", "ubuntu", "podman"]
-    }
-    epsilon = {
-      description       = "Ubuntu Docker host (managed by Terraform)"
-      proxmox_node      = "polaris"
-      cpu_cores         = 2
-      memory_dedicated  = 4096
-      datastore_id      = "local-lvm"
-      disk_size         = 64
-      ipv4_address      = "192.168.86.94/24"
+      ipv4_address      = "192.168.86.90/24"
       gateway           = "192.168.86.1"
       tags              = ["terraform", "staging", "ubuntu", "docker"]
     }

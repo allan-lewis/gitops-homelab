@@ -1,0 +1,3 @@
+---
+ansible_inentory_path: production
+gatus_slug: "(Production DevOps)"

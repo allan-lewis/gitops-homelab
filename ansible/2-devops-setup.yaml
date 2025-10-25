@@ -1,0 +1,28 @@
+---
+- name: Get hosts ready to do DevOps work (as root).
+  hosts: devops
+  become: yes
+  gather_facts: yes
+  tags: [devops_root]
+
+  roles:
+    - kustomize
+    - ansible
+    - terraform
+    - doppler
+    - aws
+    - kubectl
+    - talosctl
+    - helm
+
+- name: Get hosts ready to do DevOps work (as local user).
+  hosts: devops
+  become: no
+  gather_facts: yes
+  tags: [devops_lab]
+
+  roles: 
+    - public_key
+    - private_key
+    - devops
+    - tailscale
