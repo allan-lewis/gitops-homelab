@@ -1,3 +1,4 @@
+---
 - name: Setup monitoring on all Docker hosts
   hosts: docker
   become: yes
@@ -6,7 +7,17 @@
 
   roles:
     - role: docker_compose
+      # Declare vars here since the host group is docker, which might have additional compose tasks
       vars:
         compose_app_name: monitoring
         compose_source_type: template
         compose_template_src: "templates/docker-compose/monitoring.compose.yaml.j2"
+
+- name: Setup Gatus
+  hosts: docker_gatus
+  become: yes
+  gather_facts: yes
+  tags: [docker_gatus]
+
+  roles:
+    - role: docker_compose

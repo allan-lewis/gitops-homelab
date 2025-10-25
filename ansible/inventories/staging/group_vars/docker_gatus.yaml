@@ -1,0 +1,19 @@
+compose_app_name: gatus
+compose_source_type: template
+compose_template_src: "templates/docker-compose/gatus.compose.yaml.j2"
+compose_extra_templates:
+  - src: "templates/docker-compose/gatus.config.yaml.j2"
+    dest: "/etc/gatus/config.yaml"
+    uid: 1000
+    gid: 1000
+compose_paths:
+  - path: "/var/lib/gatus"
+    create: true
+    uid: 1000
+    gid: 1000
+    mode: "0755"
+  - path: "/etc/gatus"
+    create: true
+    uid: 1000
+    gid: 1000
+    mode: "0755"

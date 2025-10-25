@@ -4,22 +4,12 @@ storage:
 
 metrics: true
 
-{% if homelab_telegram_bot_token is defined %}
-alerting:
-  telegram:
-    token: "{{ homelab_telegram_bot_token }}"
-    id: "{{ homelab_telegram_id }}"
-{% endif %}
-
 endpoints:
 {% for host in groups['all']| default([]) %}
   - name: "{{ host  | capitalize }} {{ hostvars[host].gatus_slug | default('') }}"
     group: "Hosts"
     enabled: {{ hostvars[host].gatus_enabled | default(true) }}
     url: "icmp://{{ hostvars[host].ansible_host }}"
-#    alerts:
-#      - type: telegram
-#        send-on-resolved: true
     conditions:
       - "[CONNECTED] == true"
 {% endfor %}
@@ -27,9 +17,6 @@ endpoints:
   - name: {{ endpoint.name }}
     group: "{{ endpoint.group }}"
     url: "{{ endpoint.url }}"
-#    alerts:
-#      - type: telegram
-#        send-on-resolved: true
     conditions:
       - "[STATUS] == {{ endpoint.status | default(200) }}"
 {% if endpoint.check_cert | default(true) == true  %}
@@ -41,9 +28,6 @@ endpoints:
   - name: "{{ endpoint.name }} ({{ endpoint.ip }})"
     group: "{{ endpoint.group }}"
     url: "{{ endpoint.url }}"
-#    alerts:
-#      - type: telegram
-#        send-on-resolved: true
     conditions:
       - "[CONNECTED] == true"
 {% endfor %}

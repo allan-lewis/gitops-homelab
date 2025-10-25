@@ -8,6 +8,10 @@ all:
         docker:
           hosts:
             alpha:
+          children:
+            docker_gatus:
+              hosts:
+                aplha:
         tailscale:
           hosts:
             alpha:
