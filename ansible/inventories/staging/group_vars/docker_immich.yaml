@@ -9,7 +9,9 @@ compose_url: "https://github.com/immich-app/immich/releases/download/{{ compose_
 # Everything here is auto-validated (undefined/empty => fail early)
 compose_env:
   IMMICH_VERSION: "{{ compose_immich_version }}"
-  UPLOAD_LOCATION: "/mnt/immich"
+  # TODO: For PROD
+  # UPLOAD_LOCATION: "/mnt/immich"
+  UPLOAD_LOCATION: "/srv/immich/uploads"
   DB_DATA_LOCATION: "/srv/immich/postgres"
   REDIS_DATA_LOCATION: "/srv/immich/redis"
   MODEL_CACHE_LOCATION: "/srv/immich/model-cache"
@@ -19,14 +21,18 @@ compose_env:
   DB_PASSWORD: "{{ lookup('env', 'IMMICH_DB_PASSWORD') }}"
 
 compose_paths:
+  # TODO: For PROD
   # NFS uploads (do not chown from client; role will verify it's NFS-mounted)
-  - path: "/mnt/immich"
-    create: false
+  # - path: "/mnt/immich"
+  #   create: false
+  #   mode: "0755"
+  #   nfs: true
+  #   nfs_server: "{{ hostvars['procyon'].ansible_host }}"
+  #   nfs_path: "/mnt/pool1/immich"
+  #   nfs_opts: "rw,sync,hard,intr"
+  - path: "/srv/immich/uploads"
+    create: true
     mode: "0755"
-    nfs: true
-    nfs_server: "{{ hostvars['procyon'].ansible_host }}"
-    nfs_path: "/mnt/pool1/immich"
-    nfs_opts: "rw,sync,hard,intr"
 
   # Postgres data (local; container will chown on first init)
   - path: "/srv/immich/postgres"
