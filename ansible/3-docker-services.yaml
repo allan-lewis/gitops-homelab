@@ -1,0 +1,12 @@
+- name: Setup monitoring on all Docker hosts
+  hosts: docker
+  become: yes
+  gather_facts: yes
+  tags: [docker_monitoring]
+
+  roles:
+    - role: docker_compose
+      vars:
+        compose_app_name: monitoring
+        compose_source_type: template
+        compose_template_src: "templates/docker-compose/monitoring.compose.yaml.j2"

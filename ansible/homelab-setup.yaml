@@ -17,19 +17,6 @@
 #   roles:
 #     - jellyfin
 
-- name: Setup monitoring
-  hosts: homelab_docker_hosts
-  become: yes
-  gather_facts: yes
-  tags: [docker_monitoring]
-
-  roles:
-    - role: docker_compose
-      vars:
-        compose_app_name: monitoring
-        compose_source_type: template
-        compose_template_src: "templates/docker-compose/monitoring.compose.yaml.j2"
-
 - name: Setup Cloudflare Tunnel(s)
   hosts: homelab_docker_cloudflare_hosts
   become: true
