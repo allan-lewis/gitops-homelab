@@ -94,6 +94,7 @@
         compose_env:
           IMMICH_VERSION: "{{ compose_immich_version }}"
           UPLOAD_LOCATION: "/mnt/immich"
+          DB_DATA_LOCATION: "/srv/immich/postgres"  
           REDIS_DATA_LOCATION: "/srv/immich/redis"
           MODEL_CACHE_LOCATION: "/srv/immich/model-cache"
           COMPOSE_PROJECT_NAME: "immich"
