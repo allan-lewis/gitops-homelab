@@ -31,7 +31,7 @@ traefik_services:
     url: "http://{{ hostvars['mordred'].ansible_host }}:9117"
   - name: jellyfin
     host: jellyfin.media.allanshomelab.com
-    url: "http://{{ hostvars['mordred'].ansible_host }}:8096"
+    url: "http://{{ hostvars['misery'].ansible_host }}:8096"
   - name: transmission
     host: transmission.media.allanshomelab.com
     url: "http://{{ hostvars['mordred'].ansible_host }}:9091"
