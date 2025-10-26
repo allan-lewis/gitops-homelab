@@ -35,6 +35,8 @@
   ansible.builtin.file:
     path: "{{ item.path }}"
     state: directory
+    owner: "{{ item.uid | default(omit) }}"
+    group: "{{ item.gid | default(omit) }}"
     mode: "{{ item.mode | default('0755') }}"
   loop: "{{ _compose_paths_create | default([]) }}"
   loop_control:
