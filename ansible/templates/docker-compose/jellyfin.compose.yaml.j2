@@ -2,7 +2,7 @@ services:
   jellyfin:
     image: "jellyfin/jellyfin:2025090105"
     container_name: jellyfin
-    user: "{{ JELLYFIN_USER_UID }}:{{ JELLYFIN_GROUP_GID }}"
+    user: "{{ compose_env.JELLYFIN_USER_UID }}:{{ compose_env.JELLYFIN_GROUP_GID }}"
     network_mode: "host"
     volumes:
       - /srv/jellyfin/config:/config
@@ -10,6 +10,6 @@ services:
       - /mnt/media-library:/media-library:ro
     restart: unless-stopped
     environment:
-      - JELLYFIN_PublishedServerUrl={{ JELLYFIN_PUBLISHED_URL }}
+      - JELLYFIN_PublishedServerUrl={{ compose_env.JELLYFIN_PUBLISHED_URL }}
     extra_hosts:
       - "host.docker.internal:host-gateway"
