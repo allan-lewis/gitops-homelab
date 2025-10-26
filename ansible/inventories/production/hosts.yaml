@@ -65,3 +65,6 @@ all:
             docker_immich:
               hosts:
                 misery:
+            docker_media_acquisition:
+              hosts:
+                mordred:
