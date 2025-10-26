@@ -1,9 +1,0 @@
----
-# - name: Setup Plex.
-#   hosts: homelab_plex_hosts
-#   become: yes
-#   gather_facts: yes
-#   tags: [docker_plex]
-
-#   roles:
-#     - plex

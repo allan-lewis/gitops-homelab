@@ -85,3 +85,6 @@ all:
             docker_traefik:
               hosts:
                 flagg:
+        tailscale:
+          hosts:
+            flagg:
