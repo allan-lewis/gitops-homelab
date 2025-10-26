@@ -21,8 +21,8 @@ traefik_services:
     host: gatus.docker.allanshomelab.com
     url: "http://{{ hostvars['flagg'].ansible_host }}:8080"
   - name: plex
-    host: plex.docker.allanshomelab.com
-    url: "http://{{ hostvars['regulus'].ansible_host }}:32400"
+    host: plex.media.allanshomelab.com
+    url: "http://{{ hostvars['misery'].ansible_host }}:32400"
   - name: capella
     host: capella.hosts.allanshomelab.com
     url: "http://{{ hostvars['capella'].ansible_host }}"
@@ -45,7 +45,7 @@ traefik_services:
     scheme: https
   - name: immich
     host: photos.allanandvaia.com
-    url: "http://{{ hostvars['regulus'].ansible_host }}:2283"
+    url: "http://{{ hostvars['misery'].ansible_host }}:2283"
     scheme: http
   - name: homeassistant
     host: home.allanandvaia.com

@@ -1,6 +1,6 @@
 ---
 - name: install monitoring
-  hosts: docker
+  hosts: docker_monitoring
   become: yes
   gather_facts: yes
   tags: [docker_monitoring]

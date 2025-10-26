@@ -74,6 +74,11 @@ all:
             docker_media_acquisition:
               hosts:
                 mordred:
+            docker_monitoring:
+              hosts:
+                flagg:
+                misery:
+                mordred:
             docker_pihole:
               hosts:
                 flagg:
