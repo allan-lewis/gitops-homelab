@@ -1,18 +1,6 @@
 all:
   hosts:
     ## NEW HOSTS
-    ## VIRTUAL MACHINES
-    cujo:
-      ansible_host: 192.168.86.226
-      gatus_slug: "(OpenVPN Server)"
-    misery:
-      ansible_host: 192.168.86.227
-      gatus_slug: "(Media Server)"
-    mordred:
-      ansible_host: 192.168.86.216
-      gatus_slug: "(Media Acquisition)"
-      homelab_backup_healthcheck: "12e0891e-4a53-4b19-8bb2-63c6eafef97d"
-      homelab_backup_minute: 5
     ## KUBERNETES
     roland:
       ansible_host: 192.168.86.230
