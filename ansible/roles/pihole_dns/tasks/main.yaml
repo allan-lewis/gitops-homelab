@@ -4,14 +4,14 @@
     _hosts_list: []
 - set_fact:
     _hosts_list: "{{ _hosts_list + [ item.address ~ ' ' ~ item.name ] }}"
-  loop: "{{ homelab_pihole_a_records | default([]) }}"
+  loop: "{{ pihole_a_records | default([]) }}"
 
 - name: Build dns.cnameRecords array (["alias,target", ...])
   set_fact:
     _cname_list: []
 - set_fact:
     _cname_list: "{{ _cname_list + [ item.alias ~ ',' ~ item.target ] }}"
-  loop: "{{ homelab_pihole_cname_records | default([]) }}"
+  loop: "{{ pihole_cname_records | default([]) }}"
 
   # Show A/AAAA list
 - name: Show dns.hosts JSON payload
