@@ -222,15 +222,14 @@
   tags: [docker_jellyfin]
 
   roles:
-    - role: pihole_pre
     - role: docker_compose
       vars:   
         compose_app_name: jellyfin
         compose_source_type: template
-        compose_template_src: templates/docker-compose/jellyfin.compose.yml.j2
+        compose_template_src: templates/docker-compose/jellyfin.compose.yaml.j2
 
         compose_env:
-          JELLYFIN_PUBLISHED_URL: "https://jellyfin.docker.allanshomelab.com"
+          JELLYFIN_PUBLISHED_URL: "https://jellyfin.media.allanshomelab.com"
           JELLYFIN_USER_UID: "1000"
           JELLYFIN_GROUP_GID: "1000"
 
