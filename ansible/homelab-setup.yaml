@@ -7,12 +7,3 @@
 
 #   roles:
 #     - plex
-
-# - name: Setup Jellyfin.
-#   hosts: homelab_jellyfin_hosts
-#   become: yes
-#   gather_facts: yes
-#   tags: [docker_jellyfin]
-
-#   roles:
-#     - jellyfin

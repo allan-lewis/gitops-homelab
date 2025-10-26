@@ -83,6 +83,8 @@ prometheus:
             - 192.168.86.227:9100
             - 192.168.86.205:9100
             - 192.168.86.205:9102
+            # cloudflare
+            - 192.168.86.205:2000
         relabel_configs:
           - action: replace
             source_labels: ['__address__']
