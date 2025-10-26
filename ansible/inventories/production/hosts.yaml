@@ -26,9 +26,34 @@ all:
       ansible_host: 192.168.86.235
     susannah:
       ansible_host: 192.168.86.236
+    ## OFF PREMISES
+    gilead:
+      ansible_host: 100.95.108.6
     #### OLD HOSTS
+    antares:
+      ansible_host: 192.168.86.167
+    arcturus:
+      ansible_host: 192.168.86.124 
+    capella:
+      ansible_host: 100.95.108.6
+    castor:
+      ansible_host: 192.168.86.125
+    deneb:
+      ansible_host: 192.168.86.166
+    mimosa:
+      ansible_host: 192.168.86.163
+    peacock:
+      ansible_host: 192.168.86.162
+    polaris:
+      ansible_host: 192.168.86.101
+    pollux:
+      ansible_host: 192.168.86.135
     procyon:
       ansible_host: 192.168.86.106
+    regulus:
+      ansible_host: 192.168.86.116
+    sirius:
+      ansible_host: 192.168.86.105
   children:
     ubuntu:
       children:
