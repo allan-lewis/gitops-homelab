@@ -68,3 +68,6 @@ all:
             docker_media_acquisition:
               hosts:
                 mordred:
+            docker_traefik:
+              hosts:
+                flagg:
