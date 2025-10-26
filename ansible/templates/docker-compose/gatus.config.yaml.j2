@@ -13,7 +13,7 @@ endpoints:
     conditions:
       - "[CONNECTED] == true"
 {% endfor %}
-{% for endpoint in homelab_docker_gatus_https_endpoints | default([]) %}
+{% for endpoint in gatus_https_endpoints | default([]) %}
   - name: {{ endpoint.name }}
     group: "{{ endpoint.group }}"
     url: "{{ endpoint.url }}"
@@ -24,7 +24,7 @@ endpoints:
 {% endif %}
       - "[BODY] == pat({{ endpoint.pattern | default('*') }})"
 {% endfor %}
-{% for endpoint in homelab_docker_gatus_tcp_endpoints | default([]) %}
+{% for endpoint in gatus_tcp_endpoints | default([]) %}
   - name: "{{ endpoint.name }} ({{ endpoint.ip }})"
     group: "{{ endpoint.group }}"
     url: "{{ endpoint.url }}"
