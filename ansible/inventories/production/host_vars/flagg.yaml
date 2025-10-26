@@ -1,0 +1,2 @@
+gatus_slug: "(Traefik/Pi-hole/Gatus)"
+homelab_metrics_forward_url: "http://{{hostvars['gilead'].ansible_host}}:9100"
