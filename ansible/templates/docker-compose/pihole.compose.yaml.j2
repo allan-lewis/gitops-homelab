@@ -10,9 +10,9 @@ services:
       FTLCONF_ntp_ipv4_active: 'false'
       FTLCONF_ntp_ipv6_active: 'false'
       TZ: "America/New_York"
-      FTLCONF_webserver_api_password: '{{ homelab_pihole_admin_password }}'
+      FTLCONF_webserver_api_password: '{{ pihole_admin_password }}'
       FTLCONF_dns_listeningMode: 'all'      
-      FTLCONF_dns_upstreams: "{{ homelab_pihole_upstreams | join(';') }}"
+      FTLCONF_dns_upstreams: "{{ pihole_upstreams | join(';') }}"
     volumes:
       - "/var/lib/pihole:/etc/pihole"
     ports:

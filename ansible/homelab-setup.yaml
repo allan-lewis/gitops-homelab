@@ -30,32 +30,6 @@
         compose_env:
           CLOUDFLARE_TUNNEL_TOKEN: "{{ lookup('env','CLOUDFLARE_TUNNEL_TOKEN') }}"
 
-- name: Setup Pi-Hole.
-  hosts: homelab_docker_pihole_hosts
-  become: yes
-  gather_facts: yes
-  tags: [docker_pihole]
-
-  roles:
-    - role: pihole_pre
-    - role: docker_compose
-      vars:    
-        homelab_pihole_admin_password: "{{ lookup('env', 'PIHOLE_ADMIN_PASSWORD') }}"
-        homelab_pihole_upstreams:
-          - "1.1.1.1"
-          - "1.0.0.1"
-          - "9.9.9.9"
-          - "149.112.112.112"
-        compose_app_name: pihole
-        compose_source_type: template
-        compose_template_src: "templates/docker-compose/pihole.compose.yaml.j2"
-        compose_paths:
-          - path: "/var/lib/pihole"
-            create: true
-            mode: "0755"
-    - role: pihole_post
-    - role: pihole_dns
-
 - name: setup media acquisition
   hosts: homelab_docker_media_acquisition_hosts
   become: yes
