@@ -59,6 +59,9 @@ all:
       children:
         docker:
           children:
+            docker_cloudflare:
+              hosts:
+                flagg:
             docker_gatus:
               hosts:
                 flagg:

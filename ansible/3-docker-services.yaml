@@ -1,5 +1,5 @@
 ---
-- name: Setup monitoring on all Docker hosts
+- name: install monitoring
   hosts: docker
   become: yes
   gather_facts: yes
@@ -7,13 +7,12 @@
 
   roles:
     - role: docker_compose
-      # Declare vars here since the host group is docker, which might have additional compose tasks
       vars:
         compose_app_name: monitoring
         compose_source_type: template
         compose_template_src: "templates/docker-compose/monitoring.compose.yaml.j2"
 
-- name: Setup Gatus
+- name: install gatus
   hosts: docker_gatus
   become: yes
   gather_facts: yes
@@ -42,7 +41,7 @@
             gid: 1000
             mode: "0755"
 
-- name: Setup Traefik
+- name: install traefik
   hosts: docker_traefik
   become: yes
   gather_facts: yes
@@ -74,7 +73,7 @@
             gid: 1000
             mode: "0755"
 
-- name: Setup Immich
+- name: install immich
   hosts: docker_immich
   become: yes
   gather_facts: yes
@@ -127,7 +126,7 @@
             create: true
             mode: "0755"
 
-- name: Setup Pi-Hole
+- name: install pi-hole
   hosts: docker_pihole
   become: yes
   gather_facts: yes
@@ -146,3 +145,72 @@
             mode: "0755"
     - role: pihole_post
     - role: pihole_dns
+
+- name: install cloudflare tunnels
+  hosts: docker_cloudflare
+  become: true
+  tags: [docker_cloudflare]
+  roles:
+    - role: docker_compose
+      vars:
+        compose_app_name: cloudflare
+        compose_source_type: file
+        compose_file_src: files/docker-compose/cloudflare.compose.yaml
+        compose_env:
+          CLOUDFLARE_TUNNEL_TOKEN: "{{ lookup('env','CLOUDFLARE_TUNNEL_TOKEN') }}"
+
+- name: install media acquisition
+  hosts: docker_media_acquisition
+  become: yes
+  gather_facts: yes
+  tags: [docker_media_acquisition]
+
+  roles:
+    - role: docker_compose
+      vars:
+        compose_app_name: media_acquisition
+        compose_source_type: file
+        compose_file_src: files/docker-compose/media_acquisition.compose.yaml
+        compose_paths:
+          - path: "/etc/jackett"
+            create: true
+            uid: 1000
+            gid: 1000
+            mode: "0755"
+          - path: "/etc/lidarr"
+            create: true
+            uid: 1000
+            gid: 1000
+            mode: "0755"
+          - path: "/etc/radarr"
+            create: true
+            uid: 1000
+            gid: 1000
+            mode: "0755"
+          - path: "/etc/sonarr"
+            create: true
+            uid: 1000
+            gid: 1000
+            mode: "0755"
+          - path: "/etc/transmission"
+            create: true
+            uid: 1000
+            gid: 1000
+            mode: "0755"
+          - path: "/var/lib/jackett/downloads"
+            create: true
+            uid: 1000
+            gid: 1000
+            mode: "0755"
+          - path: "/var/lib/transmission/watch"
+            create: true
+            uid: 1000
+            gid: 1000
+            mode: "0755"
+          - path: "/mnt/media-acquisition"
+            create: true
+            mode: "0755"
+            nfs: true
+            nfs_server: "{{ hostvars['procyon'].ansible_host }}"
+            nfs_path: "/mnt/pool1/media-acquisition"
+            nfs_opts: "rw,sync,hard,intr"

@@ -1,5 +1,5 @@
 ---
-- name: Do basic setup on all hosts (as root).
+- name: do baseline setup on all hosts (as root)
   hosts: ubuntu
   become: yes
   gather_facts: yes
@@ -15,7 +15,7 @@
     - reboot
     - backup_runner
 
-- name: Do basic setup on all hosts (as local user).
+- name: do baseline setup on all hosts (as local user)
   hosts: ubuntu
   become: no
   gather_facts: yes  
@@ -30,7 +30,7 @@
     - private_key
     - zsh_shell
 
-- name: Setup Node Exporter hosts.
+- name: install node exporter
   hosts: node_exporter
   become: yes
   gather_facts: yes
@@ -39,7 +39,7 @@
   roles:
     - node_exporter
 
-- name: Install Tailscale.
+- name: install tailscale.
   hosts: tailscale
   become: yes
   gather_facts: yes
@@ -53,7 +53,7 @@
   roles:
     - artis3n.tailscale
 
-- name: Setup OpenVPN hosts.
+- name: install vpn services
   hosts: openvpn
   become: yes
   gather_facts: yes
@@ -62,7 +62,7 @@
   roles:
     - openvpn
 
-- name: Setup Docker hosts.
+- name: install docker and its dependencies
   hosts: docker
   become: yes
   gather_facts: yes

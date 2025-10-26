@@ -1,5 +1,5 @@
 ---
-- name: Get hosts ready to do DevOps work (as root).
+- name: get hosts ready for devops work (as root)
   hosts: devops
   become: yes
   gather_facts: yes
@@ -15,7 +15,7 @@
     - talosctl
     - helm
 
-- name: Get hosts ready to do DevOps work (as local user).
+- name: get hosts ready to do devops work (as local user)
   hosts: devops
   become: no
   gather_facts: yes
