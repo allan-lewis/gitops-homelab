@@ -35,3 +35,16 @@
 
   roles:
     - terraform_output
+
+- name: backup aws s3 buckets
+  hosts: localhost
+  gather_facts: no
+  become: no
+  tags: [s3_backup]
+
+  roles:
+    - role: known_hosts
+      vars:
+        homelab_ansible_translate_ip: false
+        homelab_ssh_keys: [ "{{ s3_backup_remote_host_ip | mandatory('Set s3_backup_remote_host_ip') }}" ]
+    - role: s3_backup

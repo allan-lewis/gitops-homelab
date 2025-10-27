@@ -1,32 +1,37 @@
 ---
-- name: Generate consistent timestamp
+- name: generate a consistent timestamp for file names
   set_fact:
     timestamp: "{{ lookup('pipe', 'date +%Y%m%d_%H%M%S') }}"
 
-- name: Sync each S3 bucket to local temp directory.
+- name: ensure that download directory exists
+  ansible.builtin.file:
+    path: "{{ s3_download_dir }}"
+    state: directory
+
+- name: sync each s3 bucket to download directory
   shell: |
-    mkdir -p "{{ download_dir }}/{{ item }}"
-    aws s3 sync s3://{{ item }} "{{ download_dir }}/{{ item }}"
-  loop: "{{ homelab_s3_buckets }}"
+    mkdir -p "{{ s3_download_dir }}/{{ item }}"
+    aws s3 sync s3://{{ item }} "{{ s3_download_dir }}/{{ item }}"
+  loop: "{{ s3_buckets }}"
   register: sync_results
   failed_when: sync_results.rc != 0
 
-- name: Gzip each bucket folder with timestamp.
+- name: gzip each bucket folder with timestamp
   shell: |
-    tar -czf "{{ download_dir }}/{{ item }}_{{ timestamp }}.tar.gz" -C "{{ download_dir }}" "{{ item }}"
-  loop: "{{ homelab_s3_buckets }}"
+    tar -czf "{{ s3_download_dir }}/{{ item }}_{{ timestamp }}.tar.gz" -C "{{ s3_download_dir }}" "{{ item }}"
+  loop: "{{ s3_buckets }}"
   register: tar_results
   failed_when: tar_results.rc != 0
 
-- name: Rsync gzipped backups to remote host.
-  shell: |
-    rsync -avz "{{ download_dir }}/{{ item }}_{{ timestamp }}.tar.gz" "{{ rsync_target }}/"
-  loop: "{{ homelab_s3_buckets }}"
-  register: rsync_results
-  failed_when: rsync_results.rc != 0
+# - name: Rsync gzipped backups to remote host.
+#   shell: |
+#     rsync -avz "{{ download_dir }}/{{ item }}_{{ timestamp }}.tar.gz" "{{ rsync_target }}/"
+#   loop: "{{ homelab_s3_buckets }}"
+#   register: rsync_results
+#   failed_when: rsync_results.rc != 0
 
-- name: Optionally clean up temporary files
+- name: clean up download directory
   file:
-    path: "{{ download_dir }}"
+    path: "{{ s3_download_dir }}"
     state: absent
-  when: cleanup_temp
+  when: s3_cleanup_download_dir
