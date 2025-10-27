@@ -1,4 +1,12 @@
 ---
 ansible_python_interpreter: "/usr/bin/python3.12"
 ansible_user: lab
-k8s_terraform_dir: "/home/lab/gitops-homelab/terraform/environments/staging-k8s"
+
+s3_backup_remote_user: allan
+s3_backup_remote_path: "/mnt/pool1/gitops-homelab/s3-backups/"
+s3_backup_remote_host_ip: "{{ hostvars['procyon'].ansible_host }}"
+s3_backup_buckets:
+  # Relatively small, good test subject
+  - gitops-homelab-terraform
+
+terraform_output_tf_dir: "/home/lab/gitops-homelab/terraform/environments/staging-k8s"
