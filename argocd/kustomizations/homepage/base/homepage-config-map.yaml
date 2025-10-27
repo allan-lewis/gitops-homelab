@@ -309,13 +309,13 @@ data:
               key: {{HOMEPAGE_VAR_LIDARR_KEY}}
         - Plex:
             icon: plex.png
-            href: https://plex.docker.allanshomelab.com
+            href: https://plex.media.allanshomelab.com
             description: Media server
             server: regulus
             container: plex
             widget:
               type: plex
-              url: https://plex.docker.allanshomelab.com
+              url: https://plex.media.allanshomelab.com
               key: {{HOMEPAGE_VAR_PLEX_KEY}}
         - Radarr:
             icon: radarr.png
