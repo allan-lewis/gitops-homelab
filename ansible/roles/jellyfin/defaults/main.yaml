@@ -1,4 +1,0 @@
----
-homelab_docker_jellyfin_tmp: "/tmp/jellyfin"
-homelab_docker_jellyfin_config: "/opt/allans-home-lab/jellyfin/config"
-homelab_docker_jellyfin_cache: "/opt/allans-home-lab/jellyfin/cache"

@@ -82,6 +82,9 @@ all:
             docker_pihole:
               hosts:
                 flagg:
+            docker_plex:
+              hosts:
+                misery:
             docker_traefik:
               hosts:
                 flagg:
