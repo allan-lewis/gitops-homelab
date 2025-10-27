@@ -7,7 +7,7 @@
   loop:
     - "{{ ansible_env.HOME }}/.kube"
     - "{{ ansible_env.HOME }}/.talos"
-  when: homelab_k8s_terraform_dir is defined
+  when: k8s_terraform_dir is defined
 
 - name: Set Terraform output values
   set_fact:
@@ -16,7 +16,7 @@
         path: "{{ ansible_env.HOME }}/.kube/config"
       - output: talosconfig
         path: "{{ ansible_env.HOME }}/.talos/talosconfig"
-  when: homelab_k8s_terraform_dir is defined
+  when: k8s_terraform_dir is defined
 
 - name: Extract Terraform output.
   shell: doppler run -- terraform output -raw {{ item.output }}
@@ -28,7 +28,7 @@
     - { output: "talosconfig", path: "{{ ansible_env.HOME }}/.talos/talosconfig" }
   loop_control:
     label: "{{ item.output }}"
-  when: homelab_k8s_terraform_dir is defined
+  when: k8s_terraform_dir is defined
 
 - name: Write Terraform output to files.
   copy:
@@ -38,4 +38,4 @@
   loop: "{{ terraform_output_result.results | default([]) }}"
   loop_control:
     label: "{{ item.item.output }}"
-  when: homelab_k8s_terraform_dir is defined
+  when: k8s_terraform_dir is defined
