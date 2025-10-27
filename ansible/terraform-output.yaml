@@ -1,8 +1,0 @@
----
-- name: Export Terraform outputs to disk.
-  hosts: localhost
-  become: no
-  gather_facts: yes
-
-  roles:
-    - terraform_output

@@ -26,3 +26,12 @@
       vars:
         talos_target_group: "{{ groups['homelab_talos_controlplane_nodes'] | default([]) }}"
       when: (groups['talos_controlplane_nodes'] | default([])) | length > 0
+
+- name: extract output variables from terraform and configure kubectl and talosctl
+  hosts: localhost
+  become: no
+  gather_facts: yes
+  tags: [terraform_output]
+
+  roles:
+    - terraform_output
