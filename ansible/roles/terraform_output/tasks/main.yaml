@@ -21,7 +21,7 @@
 - name: Extract Terraform output.
   shell: doppler run -- terraform output -raw {{ item.output }}
   args:
-    chdir: "{{ homelab_k8s_terraform_dir }}"
+    chdir: "{{ k8s_terraform_dir }}"
   register: terraform_output_result
   loop:
     - { output: "kubeconfig", path: "{{ ansible_env.HOME }}/.kube/config" }
