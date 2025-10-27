@@ -6,6 +6,8 @@ all:
       ansible_host: 192.168.86.91
     gamma:
       ansible_host: 192.168.86.92
+    procyon:
+      ansible_host: 192.168.86.106
   children:
     talos:
       children:
