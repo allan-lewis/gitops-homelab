@@ -35,9 +35,6 @@ variable "worker_list" {
 # Set this from an environment variable called TF_VAR_PROXMOX_VM_PUBLIC_KEY
 variable "PROXMOX_VM_PUBLIC_KEY" {}
 
-# Set this from an environment variable called TF_VAR_PROXMOX_VM_PUBLIC_KEY
-variable "PROXMOX_VM_PUBLIC_KEY" {}
-
 # Proxmox endpoints for each cluster (filled via TF_VAR_* or tfvars)
 variable "PROXMOX_VE_ENDPOINT_SIRIUS" {
   type        = string
