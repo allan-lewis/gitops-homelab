@@ -6,8 +6,7 @@
   tags: [ubuntu_shutdown]
 
   tasks:
-    - name: Shut down the host
-      ansible.builtin.command: shutdown -h now "Shutting down via Ansible"
-      async: 0
-      poll: 0
-      ignore_errors: true
+    - name: shut down with a delay and custom message
+      community.general.shutdown:
+        delay: 300
+        msg: "System will shut down in 5 minutes (initiated by Ansible). Please save your work."
