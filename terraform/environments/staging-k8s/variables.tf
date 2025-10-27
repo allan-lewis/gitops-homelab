@@ -1,14 +1,14 @@
 variable "controlplane_list" {
   description = "A list of Talos Control Plane VMs to create"
   default = {
-    alpha = {
+    beta = {
       description       = "Talos Linux control plane node (managed by Terraform)"
       proxmox_node      = "polaris"
       cpu_cores         = 4
       memory_dedicated  = 4096
       datastore_id      = "local-ssd"
       disk_size         = 64
-      ipv4_address      = "192.168.86.90"
+      ipv4_address      = "192.168.86.91"
       gateway           = "192.168.86.1"
       tags              = ["terraform", "staging", "talos", "controlplane"]
     }
@@ -18,17 +18,6 @@ variable "controlplane_list" {
 variable "worker_list" {
   description = "A list of Talos Control Plane VMs to create"
   default = {
-    beta = {
-      description       = "Talos Linux worker node (managed by Terraform)"
-      proxmox_node      = "polaris"
-      cpu_cores         = 4
-      memory_dedicated  = 8192
-      datastore_id      = "local-ssd"
-      disk_size         = 256
-      ipv4_address      = "192.168.86.91"
-      gateway           = "192.168.86.1"
-      tags              = ["terraform", "staging", "talos", "worker"]
-    }
     gamma = {
       description       = "Talos Linux worker node (managed by Terraform)"
       proxmox_node      = "polaris"

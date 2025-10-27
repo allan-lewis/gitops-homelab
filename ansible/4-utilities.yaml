@@ -1,5 +1,5 @@
 ---
-- name: shut down all ubuntu hosts
+- name: gracefully shut down ubuntu hosts
   hosts: ubuntu
   become: true
   gather_facts: false
@@ -10,3 +10,19 @@
       community.general.shutdown:
         delay: 300
         msg: "System will shut down in 5 minutes (initiated by Ansible). Please save your work."
+
+- name: gracefully cordon and shut down talos nodes
+  hosts: localhost
+  gather_facts: no
+  become: no
+  tags: [talos_shutdown]
+
+  roles:
+    - role: talos_shutdown
+      vars:
+        talos_target_group: "{{ groups['homelab_talos_worker_nodes'] | default([]) }}"
+      when: (groups['talos_worker_nodes'] | default([])) | length > 0
+    - role: talos_shutdown
+      vars:
+        talos_target_group: "{{ groups['homelab_talos_controlplane_nodes'] | default([]) }}"
+      when: (groups['talos_controlplane_nodes'] | default([])) | length > 0
