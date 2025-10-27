@@ -1,4 +1,13 @@
 ---
+- name: install docker and its dependencies
+  hosts: docker
+  become: yes
+  gather_facts: yes
+  tags: [docker]
+
+  roles:
+    - docker
+
 - name: install monitoring
   hosts: docker_monitoring
   become: yes
