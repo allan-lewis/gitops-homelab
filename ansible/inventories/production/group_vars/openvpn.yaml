@@ -1,0 +1,6 @@
+---
+homelab_openvpn_config: "/etc/openvpn/config.ovpn"
+homelab_openvpn_config_contents: "{{ lookup('env', 'OPEN_VPN_CONFIG') }}"
+homelab_openvpn_network: "192.168.86.0/24"
+homelab_openvpn_username: "{{ lookup('env', 'OPEN_VPN_USERNAME') }}"
+homelab_openvpn_password: "{{ lookup('env', 'OPEN_VPN_PASSWORD') }}"
