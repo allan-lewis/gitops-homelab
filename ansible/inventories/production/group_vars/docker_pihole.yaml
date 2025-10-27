@@ -76,3 +76,5 @@ pihole_cname_records:
     target: "media.allanshomelab.com"
   - alias: "plex.media.allanshomelab.com"
     target: "docker.allanshomelab.com"
+  - alias: "plex.docker.allanshomelab.com"
+    target: "docker.allanshomelab.com"
