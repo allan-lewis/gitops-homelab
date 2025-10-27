@@ -49,32 +49,6 @@ all:
     procyon:
       ansible_host: 192.168.86.106
       gatus_slug: "(Primary NAS)"
-    regulus:
-      ansible_host: 192.168.86.116
-      gatus_slug: "(Media Server)"
-      homelab_backup_healthcheck: "99213ad8-529f-4bd2-a244-c7754a4e6d2f"
-      homelab_backup_minute: 35
-      homelab_backup_hour: "*"
-      homelab_mounts:
-        - src: "192.168.86.106:/mnt/pool1/immich"
-          path: "/mnt/immich"
-          options: "rw"
-        - src: "192.168.86.106:/mnt/pool1/media-library"
-          path: "/mnt/media-library"
-          options: "ro"
-      homelab_remote_volumes:
-        - src: "/opt/allans-home-lab/immich/"
-          dest: "/mnt/pool1/docker-volumes/immich/"
-          host: procyon
-          user: allan
-        - src: "/opt/allans-home-lab/plex/"
-          dest: "/mnt/pool1/docker-volumes/plex/"
-          host: procyon
-          user: allan
-        - src: "/opt/allans-home-lab/jellyfin/"
-          dest: "/mnt/pool1/docker-volumes/jellyfin/"
-          host: procyon
-          user: allan
     sirius:
       ansible_host: 192.168.86.105
       gatus_slug: "(Hypervisor)"
@@ -103,9 +77,6 @@ all:
             homelab_docker_traefik_hosts:
               hosts:
                 flagg:
-        homelab_jellyfin_hosts:
-          hosts:
-            regulus:
         homelab_node_exporter_hosts:
           hosts:
             cujo:
@@ -118,9 +89,6 @@ all:
             homelab_openvpn_network: "192.168.86.0/24"
             homelab_openvpn_username: "{{ lookup('env', 'OPEN_VPN_USERNAME') }}"
             homelab_openvpn_password: "{{ lookup('env', 'OPEN_VPN_PASSWORD') }}"
-        homelab_plex_hosts:
-          hosts:
-            regulus:
         homelab_tailscale_hosts:
           hosts:
             flagg:

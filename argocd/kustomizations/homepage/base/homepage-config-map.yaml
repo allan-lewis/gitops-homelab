@@ -265,7 +265,7 @@ data:
             icon: immich.png
             href: https://photos.allanandvaia.com
             description: Photo and video management
-            server: regulus
+            server: misery
             container: immich_server
             widget:
               type: immich
@@ -285,7 +285,7 @@ data:
             icon: jellyfin.png
             href: https://jellyfin.docker.allanshomelab.com
             description: Media server
-            server: regulus
+            server: misery
             container: jellyfin
             widget:
               type: jellyfin
@@ -311,7 +311,7 @@ data:
             icon: plex.png
             href: https://plex.media.allanshomelab.com
             description: Media server
-            server: regulus
+            server: misery
             container: plex
             widget:
               type: plex

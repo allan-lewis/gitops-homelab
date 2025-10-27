@@ -50,8 +50,6 @@ all:
       ansible_host: 192.168.86.135
     procyon:
       ansible_host: 192.168.86.106
-    regulus:
-      ansible_host: 192.168.86.116
     sirius:
       ansible_host: 192.168.86.105
   children:
