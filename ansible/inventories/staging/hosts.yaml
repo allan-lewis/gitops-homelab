@@ -2,7 +2,19 @@ all:
   hosts:
     alpha:
       ansible_host: 192.168.86.90
+    beta:
+      ansible_host: 192.168.86.91
+    gamma:
+      ansible_host: 192.168.86.92
   children:
+    talos:
+      children:
+        talos_controlplanes:
+          hosts:
+            beta:
+        talos_workers:
+          hosts:
+            gamma:
     ubuntu:
       children:
         docker:
