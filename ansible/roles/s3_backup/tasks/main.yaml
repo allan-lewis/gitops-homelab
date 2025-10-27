@@ -5,33 +5,33 @@
 
 - name: ensure that download directory exists
   ansible.builtin.file:
-    path: "{{ s3_download_dir }}"
+    path: "{{ s3_backup_download_dir }}"
     state: directory
 
 - name: sync each s3 bucket to download directory
   shell: |
-    mkdir -p "{{ s3_download_dir }}/{{ item }}"
-    aws s3 sync s3://{{ item }} "{{ s3_download_dir }}/{{ item }}"
-  loop: "{{ s3_buckets }}"
+    mkdir -p "{{ s3_backup_download_dir }}/{{ item }}"
+    aws s3 sync s3://{{ item }} "{{ s3_backup_download_dir }}/{{ item }}"
+  loop: "{{ s3_backup_buckets }}"
   register: sync_results
   failed_when: sync_results.rc != 0
 
 - name: gzip each bucket folder with timestamp
   shell: |
-    tar -czf "{{ s3_download_dir }}/{{ item }}_{{ timestamp }}.tar.gz" -C "{{ s3_download_dir }}" "{{ item }}"
-  loop: "{{ s3_buckets }}"
+    tar -czf "{{ s3_backup_download_dir }}/{{ item }}_{{ timestamp }}.tar.gz" -C "{{ s3_backup_download_dir }}" "{{ item }}"
+  loop: "{{ s3_backup_buckets }}"
   register: tar_results
   failed_when: tar_results.rc != 0
 
-# - name: Rsync gzipped backups to remote host.
-#   shell: |
-#     rsync -avz "{{ download_dir }}/{{ item }}_{{ timestamp }}.tar.gz" "{{ rsync_target }}/"
-#   loop: "{{ homelab_s3_buckets }}"
-#   register: rsync_results
-#   failed_when: rsync_results.rc != 0
+- name: rsync gzipped backups to remote host
+  shell: |
+    rsync -avz "{{ s3_backup_download_dir }}/{{ item }}_{{ timestamp }}.tar.gz" "{{ s3_backup_rsync_target }}/"
+  loop: "{{ s3_backup_buckets }}"
+  register: rsync_results
+  failed_when: rsync_results.rc != 0
 
 - name: clean up download directory
   file:
-    path: "{{ s3_download_dir }}"
+    path: "{{ s3_backup_download_dir }}"
     state: absent
-  when: s3_cleanup_download_dir
+  when: s3_backup_cleanup_download_dir
