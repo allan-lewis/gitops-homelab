@@ -1,9 +1,0 @@
-podman_users: ["lab"]
-enable_podman_socket_root: false
-enable_podman_socket_user: true
-install_docker_compat: false
-install_podman_compose: false
-default_registries:
-  - "quay.io"
-  - "docker.io"
-  - "ghcr.io"

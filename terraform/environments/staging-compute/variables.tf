@@ -2,7 +2,7 @@ variable "vm_list_ubuntu" {
   description = "A list of Ubuntu VMs to create"
   default = {
     alpha = {
-      description       = "Ubuntu Podman host (managed by Terraform)"
+      description       = "Ubuntu Docker host (managed by Terraform)"
       proxmox_node      = "polaris"
       cpu_cores         = 4
       memory_dedicated  = 8096
