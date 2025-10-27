@@ -23,7 +23,7 @@ traefik_services:
   - name: plex
     host: plex.media.allanshomelab.com
     url: "http://{{ hostvars['misery'].ansible_host }}:32400"
-  - name: plex
+  - name: plex2
     host: plex.docker.allanshomelab.com
     url: "http://{{ hostvars['misery'].ansible_host }}:32400"
   - name: capella
