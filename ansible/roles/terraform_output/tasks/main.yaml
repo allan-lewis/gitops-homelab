@@ -25,7 +25,7 @@
   register: terraform_output_result
   loop:
     - { output: "kubeconfig", path: "{{ ansible_env.HOME }}/.kube/config" }
-    - { output: "talosconfig", path: "{{ ansible_env.HOME }}/.talos/talosconfig" }
+    - { output: "talosconfig", path: "{{ ansible_env.HOME }}/.talos/config" }
   loop_control:
     label: "{{ item.output }}"
   when: terraform_output_tf_dir is defined
