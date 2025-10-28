@@ -1,5 +1,9 @@
 all:
   hosts:
+    alpha:
+      ansible_host: 192.168.86.90
+      backup_runner_cron_hour: "*"
+      backup_runner_cron_minute: "5"
     castor:
       ansible_host: 192.168.86.125
     pollux:
@@ -8,6 +12,8 @@ all:
       ansible_host: 192.168.86.106
   children:
     ubuntu:
+      hosts:
+        alpha:
       children:
         devops:
           hosts:

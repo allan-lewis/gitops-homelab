@@ -47,3 +47,16 @@
     name: "backup_runner"
     user: root
     state: absent
+
+- name: Ensure logrotate is installed
+  ansible.builtin.package:
+    name: logrotate
+    state: present
+
+- name: Install logrotate policy for backup-run
+  ansible.builtin.template:
+    src: logrotate-backup-run.j2
+    dest: /etc/logrotate.d/backup-run
+    owner: root
+    group: root
+    mode: "0644"
