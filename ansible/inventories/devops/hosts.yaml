@@ -21,6 +21,11 @@ all:
           hosts:
             castor:
             pollux:
+        docker:
+          children:
+            docker_gatus:
+              hosts:
+                alpha:
         node_exporter:
           hosts:
             castor:

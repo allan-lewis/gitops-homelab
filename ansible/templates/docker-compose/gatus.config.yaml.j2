@@ -12,6 +12,15 @@ endpoints:
     url: "icmp://{{ hostvars[host].ansible_host }}"
     conditions:
       - "[CONNECTED] == true"
+{% if hostvars[host].backup_runner_healthchecks_status is defined %}
+  - name: "{{ host  | capitalize }}"
+    group: "Healthchecks"
+    enabled: {{ hostvars[host].gatus_enabled | default(true) }}
+    url: "{{ hostvars[host].backup_runner_healthchecks_status }}"
+    conditions:
+      - "[STATUS] == 200"
+      - "[BODY] == pat(*up*)"
+{% endif %}
 {% endfor %}
 {% for endpoint in gatus_https_endpoints | default([]) %}
   - name: {{ endpoint.name }}
