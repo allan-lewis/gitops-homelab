@@ -28,6 +28,17 @@
   become: no
   tags: [talos_shutdown]
 
+  vars_prompt:
+    - name: talos_confirm
+      prompt: "type 'yes' to confirm shutdown of all talos hosts"
+      private: no
+
+  pre_tasks:
+    - name: abort if confirmation was not 'yes'
+      ansible.builtin.fail:
+        msg: "Shutdown aborted — you must type 'yes' to proceed."
+      when: talos_confirm != "yes"
+
   roles:
     - role: talos_shutdown
       vars:
@@ -44,6 +55,17 @@
   gather_facts: yes
   tags: [terraform_output]
 
+  vars_prompt:
+    - name: terraform_confirm
+      prompt: "type 'yes' to confirm updating kubectl and talosctl configs"
+      private: no
+
+  pre_tasks:
+    - name: abort if confirmation was not 'yes'
+      ansible.builtin.fail:
+        msg: "Shutdown aborted — you must type 'yes' to proceed."
+      when: terraform_confirm != "yes"
+
   roles:
     - terraform_output
 
@@ -52,6 +74,17 @@
   gather_facts: no
   become: no
   tags: [s3_backup]
+
+  vars_prompt:
+    - name: s3_confirm
+      prompt: "type 'yes' to confirm backing up s3 buckets"
+      private: no
+
+  pre_tasks:
+    - name: abort if confirmation was not 'yes'
+      ansible.builtin.fail:
+        msg: "Shutdown aborted — you must type 'yes' to proceed."
+      when: s3_confirm != "yes"
 
   roles:
     - role: known_hosts
