@@ -5,6 +5,17 @@
   gather_facts: false
   tags: [ubuntu_shutdown]
 
+  vars_prompt:
+    - name: ubuntu_confirm
+      prompt: "type 'yes' to confirm shutdown of all ubuntu hosts"
+      private: no
+
+  pre_tasks:
+    - name: abort if confirmation was not 'yes'
+      ansible.builtin.fail:
+        msg: "Shutdown aborted — you must type 'yes' to proceed."
+      when: ubuntu_confirm != "yes"
+
   tasks:
     - name: shut down with a delay and custom message
       community.general.shutdown:
