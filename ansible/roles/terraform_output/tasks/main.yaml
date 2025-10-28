@@ -40,11 +40,7 @@
     label: "{{ item.item.output }}"
   when: terraform_output_tf_dir is defined
 
-- name: set talosctl default node to first control plane
-  hosts: localhost
-  gather_facts: no
-  tasks:
-    - name: configure talosctl node
-      ansible.builtin.command: >
-        talosctl config node {{ groups['talos_controlplanes'] | first }}
-      when: (groups['talos_controlplanes'] | default([])) | length > 0
+- name: configure talosctl node
+  ansible.builtin.command: >
+    talosctl config node {{ groups['talos_controlplanes'] | first }}
+  when: (groups['talos_controlplanes'] | default([])) | length > 0
