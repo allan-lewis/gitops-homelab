@@ -5,22 +5,26 @@
   gather_facts: false
   tags: [ubuntu_shutdown]
 
-  vars_prompt:
-    - name: ubuntu_confirm
-      prompt: "type 'yes' to confirm shutdown of all ubuntu hosts"
-      private: no
-
   pre_tasks:
+    - name: confirm shutdown of all ubuntu hosts
+      ansible.builtin.pause:
+        prompt: "type 'yes' to confirm shutdown of all ubuntu hosts"
+      register: ubuntu_confirm
+      run_once: true
+      delegate_to: localhost
+
     - name: abort if confirmation was not 'yes'
       ansible.builtin.fail:
-        msg: "Shutdown aborted — you must type 'yes' to proceed."
-      when: ubuntu_confirm != "yes"
+        msg: "shutdown aborted — you must type 'yes' to proceed."
+      when: ubuntu_confirm.user_input != "yes"
+      run_once: true
+      delegate_to: localhost
 
   tasks:
     - name: shut down with a delay and custom message
       community.general.shutdown:
         delay: 300
-        msg: "System will shut down in 5 minutes (initiated by Ansible). Please save your work."
+        msg: "system will shut down in 5 minutes (initiated by ansible). please save your work."
 
 - name: gracefully cordon and shut down talos nodes
   hosts: localhost
@@ -28,16 +32,23 @@
   become: no
   tags: [talos_shutdown]
 
-  vars_prompt:
-    - name: talos_confirm
-      prompt: "type 'yes' to confirm shutdown of all talos hosts"
-      private: no
-
   pre_tasks:
+    - name: determine whether there are talos targets
+      ansible.builtin.set_fact:
+        talos_targets_present: >-
+          {{ (groups['talos_workers'] | default([])) | length > 0
+             or (groups['talos_controlplanes'] | default([])) | length > 0 }}
+
+    - name: confirm talos cordon/shutdown
+      ansible.builtin.pause:
+        prompt: "type 'yes' to confirm cordon and shutdown of talos nodes"
+      register: talos_confirm
+      when: talos_targets_present
+
     - name: abort if confirmation was not 'yes'
       ansible.builtin.fail:
-        msg: "Shutdown aborted — you must type 'yes' to proceed."
-      when: talos_confirm != "yes"
+        msg: "talos shutdown aborted — you must type 'yes' to proceed."
+      when: talos_targets_present and talos_confirm.user_input != "yes"
 
   roles:
     - role: talos_shutdown
@@ -55,16 +66,16 @@
   gather_facts: yes
   tags: [terraform_output]
 
-  vars_prompt:
-    - name: terraform_confirm
-      prompt: "type 'yes' to confirm updating kubectl and talosctl configs"
-      private: no
-
   pre_tasks:
+    - name: confirm terraform outputs + kube/talos config update
+      ansible.builtin.pause:
+        prompt: "type 'yes' to confirm updating kubectl and talosctl configs"
+      register: terraform_confirm
+
     - name: abort if confirmation was not 'yes'
       ansible.builtin.fail:
-        msg: "Shutdown aborted — you must type 'yes' to proceed."
-      when: terraform_confirm != "yes"
+        msg: "terraform output step aborted — you must type 'yes' to proceed."
+      when: terraform_confirm.user_input != "yes"
 
   roles:
     - terraform_output
@@ -75,20 +86,20 @@
   become: no
   tags: [s3_backup]
 
-  vars_prompt:
-    - name: s3_confirm
-      prompt: "type 'yes' to confirm backing up s3 buckets"
-      private: no
-
   pre_tasks:
+    - name: confirm s3 backup
+      ansible.builtin.pause:
+        prompt: "type 'yes' to confirm backing up s3 buckets"
+      register: s3_confirm
+
     - name: abort if confirmation was not 'yes'
       ansible.builtin.fail:
-        msg: "Shutdown aborted — you must type 'yes' to proceed."
-      when: s3_confirm != "yes"
+        msg: "s3 backup aborted — you must type 'yes' to proceed."
+      when: s3_confirm.user_input != "yes"
 
   roles:
     - role: known_hosts
       vars:
         homelab_ansible_translate_ip: false
-        homelab_ssh_keys: [ "{{ s3_backup_remote_host_ip | mandatory('Set s3_backup_remote_host_ip') }}" ]
+        homelab_ssh_keys: [ "{{ s3_backup_remote_host_ip | mandatory('set s3_backup_remote_host_ip') }}" ]
     - role: s3_backup
