@@ -43,4 +43,6 @@
 - name: configure talosctl node
   ansible.builtin.command: >
     talosctl config node {{ groups['talos_controlplanes'] | first }}
-  when: (groups['talos_controlplanes'] | default([])) | length > 0
+  when:
+    - terraform_output_tf_dir is defined
+    - (groups['talos_controlplanes'] | default([])) | length > 0
