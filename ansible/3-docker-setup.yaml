@@ -296,7 +296,7 @@
             mode: "0755"
 
           - path: "/mnt/media-library"
-            create: true
+            create: false
             mode: "0755"
             nfs: true
             nfs_server: "{{ hostvars['procyon'].ansible_host }}"
