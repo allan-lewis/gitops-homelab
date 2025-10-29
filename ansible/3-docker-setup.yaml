@@ -96,6 +96,20 @@
             gid: 1000
             mode: "0755"
 
+  post_tasks:
+    - name: setup backup fragments for traefik
+      include_tasks: "playbooks/includes/setup_backups.yml"
+      vars:
+        backup_known_hosts: ['procyon']
+        backup_fragments:
+          - name: "docker-traefik.conf"
+            header: "traefik config and acme state"
+            pairs:
+              - { src: "/var/lib/traefik/acme",
+                  dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/traefik/acme" }
+              - { src: "/etc/traefik",
+                  dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/traefik/config" }
+
 - name: install immich
   hosts: docker_immich
   become: yes
@@ -168,6 +182,18 @@
             mode: "0755"
     - role: pihole_post
     - role: pihole_dns
+
+  post_tasks:
+    - name: setup backup fragments for traefik
+      include_tasks: "playbooks/includes/setup_backups.yml"
+      vars:
+        backup_known_hosts: ['procyon']
+        backup_fragments:
+          - name: "docker-pihole.conf"
+            header: "pihole config and data"
+            pairs:
+              - { src: "/var/lib/pihole",
+                  dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/pihole/data" }
 
 - name: install cloudflare tunnels
   hosts: docker_cloudflare
