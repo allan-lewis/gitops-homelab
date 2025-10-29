@@ -98,7 +98,7 @@
 
   post_tasks:
     - name: setup backup fragments for traefik
-      include_tasks: "playbooks/includes/setup_backups.yml"
+      include_tasks: "playbooks/includes/setup_backups.yaml"
       vars:
         backup_known_hosts: ['procyon']
         backup_fragments:
@@ -185,7 +185,7 @@
 
   post_tasks:
     - name: setup backup fragments for traefik
-      include_tasks: "playbooks/includes/setup_backups.yml"
+      include_tasks: "playbooks/includes/setup_backups.yaml"
       vars:
         backup_known_hosts: ['procyon']
         backup_fragments:
