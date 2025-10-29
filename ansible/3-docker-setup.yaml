@@ -50,14 +50,19 @@
             gid: 1000
             mode: "0755"
 
-    - role: backup_runner
-      tasks_from: add_fragment
+  post_tasks:
+    - name: setup backup fragments for gatus
+      include_tasks: "playbooks/includes/backup_fragments.yaml"
       vars:
-        backup_fragment_name: "docker-gatus.conf"
-        backup_fragment_header: "gatus config and data"
-        backup_fragment_pairs:
-          - { src: "/etc/gatus",     dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/gatus/config" }
-          - { src: "/var/lib/gatus", dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/gatus/data" }
+        backup_known_hosts: ['procyon']
+        backup_fragments:
+          - name: "docker-gatus.conf"
+            header: "gatus config and data"
+            pairs:
+              - { src: "/etc/gatus",
+                  dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/gatus/config" }
+              - { src: "/var/lib/gatus",
+                  dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/gatus/data" }
 
 - name: install traefik
   hosts: docker_traefik

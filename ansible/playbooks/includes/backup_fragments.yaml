@@ -1,0 +1,26 @@
+---
+# Ensure SSH identity is present (so rsync can auth)
+- name: import private key
+  import_role:
+    name: private_key
+
+# Ensure remote host keys are trusted
+- name: ensure remote host keys are present in known_hosts
+  import_role:
+    name: known_hosts
+  vars:
+    homelab_ssh_keys: "{{ backup_known_hosts | default([]) }}"
+
+# Create/update all requested backup fragments
+- name: Add backup fragments
+  when: (backup_fragments | default([])) | length > 0
+  loop: "{{ backup_fragments }}"
+  loop_control:
+    label: "{{ item.name }}"
+  include_role:
+    name: backup_runner
+    tasks_from: add_fragment
+  vars:
+    backup_fragment_name: "{{ item.name }}"
+    backup_fragment_header: "{{ item.header | default('') }}"
+    backup_fragment_pairs: "{{ item.pairs }}"
