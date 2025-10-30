@@ -15,6 +15,9 @@ all:
     cujo:
       ansible_host: 192.168.86.226
   children:
+    expressvpn:
+      hosts:
+        cujo:
     ubuntu:
       hosts:
         cujo:

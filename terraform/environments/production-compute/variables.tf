@@ -4,13 +4,13 @@ variable "vm_list_ubuntu" {
     cujo = {
       description       = "OpenVPN gateway host (managed by Terraform)"
       proxmox_node      = "polaris"
-      cpu_cores         = 2
-      memory_dedicated  = 2048
+      cpu_cores         = 4
+      memory_dedicated  = 8192
       datastore_id      = "local-lvm"
-      disk_size         = 64
+      disk_size         = 128
       ipv4_address      = "192.168.86.226/24"
       gateway           = "192.168.86.1"
-      tags              = ["terraform", "production", "ubuntu", "openvpn"]
+      tags              = ["terraform", "production", "ubuntu", "openvpn", "media"]
     }
     regulus = {
       description       = "Media host (managed by Terraform)"

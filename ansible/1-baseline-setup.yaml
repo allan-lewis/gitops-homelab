@@ -54,18 +54,18 @@
   tags: [tailscale]
   
   tasks:
-    - name: Force lsb_release_package to correct value for Ubuntu
+    - name: force lsb_release_package to correct value for ubuntu
       set_fact:
         lsb_release_package: lsb-release
 
   roles:
     - artis3n.tailscale
 
-# - name: install vpn services
-#   hosts: openvpn
-#   become: yes
-#   gather_facts: yes
-#   tags: [openvpn]
+- name: install vpn services
+  hosts: expressvpn
+  become: yes
+  gather_facts: yes
+  tags: [expressvpn]
 
-#   roles:
-#     - openvpn
+  roles:
+    - expressvpn
