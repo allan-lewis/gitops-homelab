@@ -14,13 +14,15 @@
   loop_control:
     label: "{{ item.key }}"
 
-# --- Prepare/mount paths (including NFS if specified) ---
+# --- Prepare local paths ---
 # Build a list of paths that should be created
-- name: Collect paths that should be created
+- name: Collect paths that should be created (non-NFS only)
   ansible.builtin.set_fact:
     _compose_paths_create: "{{ (_compose_paths_create | default([])) + [item] }}"
   loop: "{{ compose_paths | default([]) }}"
-  when: (item.create | default(false) | bool)
+  when:
+    - (item.create | default(false) | bool)
+    - not (item.nfs | default(false) | bool)
   loop_control:
     label: "{{ item.path }}"
 
@@ -62,7 +64,7 @@
   loop_control:
     label: "{{ item.path }}"
 
-# Sanity: mountpoint must exist and be a directory (we are not creating NFS mountpoints here)
+# Check current state of mountpoints
 - name: Stat NFS mountpoints
   ansible.builtin.stat:
     path: "{{ item.path }}"
@@ -72,13 +74,25 @@
   loop_control:
     label: "{{ item.path }}"
 
-- name: Fail if NFS mountpoint is missing or not a directory
-  ansible.builtin.fail:
-    msg: "NFS mountpoint {{ item.item.path }} is {{ 'missing' if (not item.stat.exists) else 'not a directory' }}. Create it first."
+# Create mountpoints ONLY when missing (no ownership/perm changes on existing/mounted paths)
+- name: Create missing NFS mountpoints (no chown/chmod on existing)
+  ansible.builtin.file:
+    path: "{{ item.item.path }}"
+    state: directory
+    mode: "{{ item.item.mode | default('0755') }}"
   loop: "{{ _nfs_stats.results | default([]) }}"
-  when: (not item.stat.exists) or (not item.stat.isdir)
   loop_control:
     label: "{{ item.item.path }}"
+  when: not item.stat.exists
+
+# Fail only if the path exists but is not a directory
+- name: Fail if NFS mountpoint exists but is not a directory
+  ansible.builtin.fail:
+    msg: "NFS mountpoint {{ item.item.path }} exists but is not a directory."
+  loop: "{{ _nfs_stats.results | default([]) }}"
+  loop_control:
+    label: "{{ item.item.path }}"
+  when: item.stat.exists and not item.stat.isdir
 
 # Mount (and persist in /etc/fstab)
 - name: Mount NFS paths
@@ -106,11 +120,12 @@
   ansible.builtin.fail:
     msg: >-
       {{ item.item.path }} is not an active NFS mount (findmnt output: {{ item.stdout | default('') }}).
-      Expected {{ item.item.nfs_server }}:{{ item.item.nfs_path }}.
+      Expected {{ ( _compose_paths_nfs | selectattr('path','equalto', item.item.path) | first ).nfs_server }}:
+              {{ ( _compose_paths_nfs | selectattr('path','equalto', item.item.path) | first ).nfs_path }}.
   loop: "{{ _nfs_findmnt.results | default([]) }}"
-  when: item.stdout is not regex('^(nfs|nfs4)\\s')
   loop_control:
     label: "{{ item.item.path }}"
+  when: item.stdout is not regex('^(nfs|nfs4)\\s')
 
 # Render any extra templates
 - name: Render extra project templates
