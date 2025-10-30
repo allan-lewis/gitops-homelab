@@ -71,9 +71,10 @@ all:
                 misery:
             docker_media_acquisition:
               hosts:
-                mordred:
+                cujo:
             docker_monitoring:
               hosts:
+                cujo:
                 flagg:
                 misery:
                 mordred:
@@ -86,9 +87,6 @@ all:
             docker_traefik:
               hosts:
                 flagg:
-        node_exporter:
-          hosts:
-            cujo:
         openvpn:
           hosts:
             cujo:

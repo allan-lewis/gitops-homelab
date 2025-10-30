@@ -141,8 +141,6 @@
         compose_paths:
           # NFS uploads (do not chown from client; role will verify it's NFS-mounted)
           - path: "/mnt/immich"
-            create: false
-            mode: "0755"
             nfs: true
             nfs_server: "{{ hostvars['procyon'].ansible_host }}"
             nfs_path: "/mnt/pool1/immich"
@@ -257,8 +255,6 @@
             gid: 1000
             mode: "0755"
           - path: "/mnt/media-acquisition"
-            create: false
-            mode: "0755"
             nfs: true
             nfs_server: "{{ hostvars['procyon'].ansible_host }}"
             nfs_path: "/mnt/pool1/media-acquisition"
@@ -296,8 +292,6 @@
             mode: "0755"
 
           - path: "/mnt/media-library"
-            create: false
-            mode: "0755"
             nfs: true
             nfs_server: "{{ hostvars['procyon'].ansible_host }}"
             nfs_path: "/mnt/pool1/media-library"
@@ -335,8 +329,6 @@
             mode: "0755"
 
           - path: "/mnt/media-library"
-            create: true
-            mode: "0755"
             nfs: true
             nfs_server: "{{ hostvars['procyon'].ansible_host }}"
             nfs_path: "/mnt/pool1/media-library"
