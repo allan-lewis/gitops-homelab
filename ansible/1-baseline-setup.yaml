@@ -61,11 +61,11 @@
   roles:
     - artis3n.tailscale
 
-- name: install vpn services
-  hosts: openvpn
-  become: yes
-  gather_facts: yes
-  tags: [openvpn]
+# - name: install vpn services
+#   hosts: openvpn
+#   become: yes
+#   gather_facts: yes
+#   tags: [openvpn]
 
-  roles:
-    - openvpn
+#   roles:
+#     - openvpn

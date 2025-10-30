@@ -12,9 +12,12 @@ all:
       ansible_host: 192.168.86.135
     procyon:
       ansible_host: 192.168.86.106
+    cujo:
+      ansible_host: 192.168.86.226
   children:
     ubuntu:
       hosts:
+        cujo:
         alpha:
       children:
         devops:
@@ -22,6 +25,8 @@ all:
             castor:
             pollux:
         docker:
+          hosts:
+            cujo:
           children:
             docker_gatus:
               hosts:
