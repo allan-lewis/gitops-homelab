@@ -1,0 +1,7 @@
+---
+vpn_config: "{{ lookup('env', 'EXPRESSVPN_CONFIG') | default('', true) }}"
+vpn_user: "{{ lookup('env', 'EXPRESSVPN_USER') | default('', true) }}"
+vpn_pass: "{{ lookup('env', 'EXPRESSVPN_PASS') | default('', true) }}"
+
+vpn_config_path: /etc/openvpn/client/expressvpn.conf
+vpn_creds_path: /etc/openvpn/client/credentials

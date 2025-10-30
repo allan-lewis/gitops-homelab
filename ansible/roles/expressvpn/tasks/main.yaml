@@ -1,0 +1,40 @@
+---
+- name: fail if required variables are missing
+  fail:
+    msg: "missing required variable: {{ item }}"
+  when: (lookup('vars', item) | length) == 0
+  loop:
+    - vpn_config
+    - vpn_user
+    - vpn_pass
+    - dont_exist
+
+- name: ensure openvpn is installed
+  apt:
+    name: openvpn
+    state: present
+    update_cache: yes
+
+- name: write expressvpn config file with correct creds path
+  copy:
+    content: "{{ vpn_config | regex_replace('^auth-user-pass.*', 'auth-user-pass ' ~ vpn_creds_path, multiline=True) }}"
+    dest: "{{ vpn_config_path }}"
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: write credentials file
+  copy:
+    content: |
+      {{ vpn_user }}
+      {{ vpn_pass }}
+    dest: "{{ vpn_creds_path }}"
+    owner: root
+    group: root
+    mode: '0600'
+
+# - name: enable and start openvpn client service
+#   systemd:
+#     name: "openvpn-client@expressvpn.service"
+#     enabled: true
+#     state: started
