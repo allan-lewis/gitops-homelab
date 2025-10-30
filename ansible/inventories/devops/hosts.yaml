@@ -31,6 +31,9 @@ all:
           hosts:
             cujo:
           children:
+            docker_monitoring:
+              hosts:
+                cujo:
             docker_gatus:
               hosts:
                 alpha:

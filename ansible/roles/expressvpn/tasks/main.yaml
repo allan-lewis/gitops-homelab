@@ -32,8 +32,8 @@
     group: root
     mode: '0600'
 
-# - name: enable and start openvpn client service
-#   systemd:
-#     name: "openvpn-client@expressvpn.service"
-#     enabled: true
-#     state: started
+- name: enable and start openvpn client service
+  systemd:
+    name: "openvpn-client@expressvpn.service"
+    enabled: true
+    state: started
