@@ -1,0 +1,11 @@
+---
+lan_if: "eth0"
+wan_if: "eth0"
+lan_net: "192.168.86.0/24"
+dns_ip: "192.168.86.205"
+
+openvpn_unit: "openvpn-client@expressvpn.service"
+openvpn_conf: "/etc/openvpn/client/expressvpn.conf"
+
+# override if you want to force a port; otherwise we read it from the config
+vpn_port: ""

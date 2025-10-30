@@ -1,0 +1,44 @@
+flush ruleset
+
+table inet filter {
+  set vpn_servers_v4 {
+    type ipv4_addr
+    elements = { {% for ip in vpn_server_ips %}{{ ip }}{% if not loop.last %}, {% endif %}{% endfor %} }
+  }
+
+  chain input {
+    type filter hook input priority 0;
+    policy accept
+  }
+
+  chain forward {
+    type filter hook forward priority 0;
+    policy drop
+    meta nfproto ipv6 drop
+  }
+
+  chain output {
+    type filter hook output priority 0;
+    policy drop
+
+    ct state { established, related } accept
+    oifname "lo" accept
+    oifname "tun0" accept
+
+    ip daddr {{ lan_net }} accept
+
+    oifname "{{ wan_if }}" ip daddr @vpn_servers_v4 udp dport {{ effective_vpn_port }} accept
+    oifname "{{ wan_if }}" udp dport 67 accept
+    oifname "{{ wan_if }}" udp sport 67 accept
+
+    meta nfproto ipv6 drop
+  }
+}
+
+table ip nat {
+  chain prerouting { type nat hook prerouting priority -100; }
+  chain postrouting {
+    type nat hook postrouting priority 100;
+    oifname "tun0" masquerade
+  }
+}
