@@ -60,13 +60,3 @@
 
   roles:
     - artis3n.tailscale
-
-- name: install vpn services
-  hosts: expressvpn
-  become: yes
-  gather_facts: yes
-  tags: [expressvpn]
-
-  roles:
-    - expressvpn
-    - vpn_killswitch_nft
