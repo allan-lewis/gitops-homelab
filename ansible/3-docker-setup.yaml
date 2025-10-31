@@ -262,7 +262,7 @@
 
   post_tasks:
     - name: setup backup fragments for media acquisition
-      include_tasks: "playbooks/includes/setup_backups.yaml"
+      include_tasks: "playbooks/includes/backup_fragments.yaml"
       vars:
         backup_known_hosts: ['procyon']
         backup_fragments:
