@@ -14,6 +14,8 @@ all:
       ansible_host: 192.168.86.106
     cujo:
       ansible_host: 192.168.86.226
+      vpn_lan_net: "192.168.86.0/24"
+      vpn_dns_ip: "192.168.86.205"
   children:
     expressvpn:
       hosts:
@@ -33,7 +35,7 @@ all:
           children:
             docker_monitoring:
               hosts:
-                cujo:
+                alpha:
             docker_gatus:
               hosts:
                 alpha:

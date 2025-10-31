@@ -5,28 +5,50 @@
     state: present
     update_cache: yes
 
-# 1) read the conf
+# optional: set docker daemon DNS to LAN resolver
+- name: ensure docker daemon json exists (when managing dns)
+  ansible.builtin.copy:
+    dest: "{{ docker_daemon_path }}"
+    content: "{{ {'dns': docker_dns} | to_nice_json }}"
+    owner: root
+    group: root
+    mode: '0644'
+  when: manage_docker_dns | bool
+  notify: restart docker
+
 - name: read openvpn conf
   ansible.builtin.slurp:
     src: "{{ openvpn_conf }}"
   register: ovpn_raw
 
-# 2) decode
 - name: decode openvpn conf
   ansible.builtin.set_fact:
     ovpn_text: "{{ ovpn_raw.content | b64decode }}"
 
-# 3) extract all 'remote <host> <port>' pairs (first one wins)
-- name: extract remote pairs
+# optional overrides you can set in inventory/vars if parsing ever fails:
+#   override_remote_host: "uk-east-london-ca-version-2.expressnetw.com"
+#   override_vpn_port: "1195"
+- name: apply optional overrides
   ansible.builtin.set_fact:
-    remote_pairs: "{{ ovpn_text | regex_findall('^remote\\s+(\\S+)\\s+(\\d+)', multiline=True) }}"
+    parsed_remote_host: "{{ override_remote_host | default('', true) }}"
+    parsed_remote_port: "{{ override_vpn_port | default('', true) }}"
+  when: override_remote_host is defined or override_vpn_port is defined
 
-# 4) pick the first pair and validate
-- name: select and validate remote host/port
+- name: extract remote pairs (first match wins)
   ansible.builtin.set_fact:
-    parsed_remote_host: "{{ (remote_pairs | first | default(['','']))[0] }}"
-    parsed_remote_port: "{{ (remote_pairs | first | default(['','']))[1] }}"
-  when: (remote_pairs | length) > 0
+    remote_pairs: "{{ ovpn_text | regex_findall('(?m)^\\s*remote\\s+(\\S+)\\s+(\\d+)') }}"
+  when: (parsed_remote_host | default('') | length) == 0 or (parsed_remote_port | default('') | length) == 0
+
+- name: select parsed remote host/port (from config)
+  ansible.builtin.set_fact:
+    parsed_remote_host: "{{ (remote_pairs | first | default(['','']))[0] if (parsed_remote_host | default('') | length) == 0 else parsed_remote_host }}"
+    parsed_remote_port: "{{ (remote_pairs | first | default(['','']))[1] if (parsed_remote_port | default('') | length) == 0 else parsed_remote_port }}"
+  when: (parsed_remote_host | default('') | length) == 0 or (parsed_remote_port | default('') | length) == 0
+
+- name: show candidate remote lines when parsing fails
+  ansible.builtin.debug:
+    msg: "{{ ovpn_text.splitlines() | select('match', '^\\s*remote\\b') | list }}"
+  when: parsed_remote_host | default('') | length == 0 or parsed_remote_port | default('') | length == 0
 
 - name: fail if we cannot parse a remote host/port
   ansible.builtin.fail:
@@ -55,7 +77,7 @@
   ansible.builtin.template:
     src: nftables.conf.j2
     dest: /etc/nftables.conf
-    mode: "0644"
+    mode: '0644'
   notify: restart nftables
 
 - name: ensure nftables is running

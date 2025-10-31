@@ -68,5 +68,5 @@
   tags: [expressvpn]
 
   roles:
-    # - expressvpn
+    - expressvpn
     - vpn_killswitch_nft

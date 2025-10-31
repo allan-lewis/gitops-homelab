@@ -1,11 +1,23 @@
 ---
+# interfaces & lan
 lan_if: "eth0"
 wan_if: "eth0"
-lan_net: "192.168.86.0/24"
-dns_ip: "192.168.86.205"
+lan_net: "{{ vpn_lan_net }}" # "192.168.86.0/24"
+dns_ip: "{{ vpn_dns_ip }}" #"192.168.86.205"
 
+# openvpn service + conf
 openvpn_unit: "openvpn-client@expressvpn.service"
 openvpn_conf: "/etc/openvpn/client/expressvpn.conf"
 
-# override if you want to force a port; otherwise we read it from the config
+# optional override; if empty we use the port parsed from the openvpn conf
 vpn_port: ""
+
+# docker integration
+docker_bridge_if: "docker0"
+docker_br_wildcard: "br-*"
+veth_wildcard: "veth*"
+
+# optionally set Docker’s daemon.json DNS to your LAN resolver
+manage_docker_dns: true
+docker_dns: ["{{ dns_ip }}"]
+docker_daemon_path: "/etc/docker/daemon.json"
