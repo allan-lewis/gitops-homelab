@@ -1,6 +1,0 @@
-backup_runner_cron_hour: "*"
-backup_runner_cron_minute: "25"
-backup_runner_healthchecks_url: "https://hc-ping.com/a6097639-b43d-457d-9c33-62121bd3096a"
-backup_runner_healthchecks_status: "https://healthchecks.io/b/2/729714b9-13ff-41ea-9315-0f1f0ebb9456.json"
-
-gatus_slug: "(Media Acquisition)"

@@ -12,17 +12,6 @@ variable "vm_list_ubuntu" {
       gateway           = "192.168.86.1"
       tags              = ["terraform", "production", "ubuntu", "openvpn", "media"]
     }
-    regulus = {
-      description       = "Media host (managed by Terraform)"
-      proxmox_node      = "sirius"
-      cpu_cores         = 4
-      memory_dedicated  = 8192
-      datastore_id      = "local-lvm"
-      disk_size         = 128
-      ipv4_address      = "192.168.86.116/24"
-      gateway           = "192.168.86.1"
-      tags              = ["terraform", "production", "ubuntu", "media"]
-    }
     misery = {
       description       = "Media host (managed by Terraform)"
       proxmox_node      = "sirius"
@@ -32,17 +21,6 @@ variable "vm_list_ubuntu" {
       disk_size         = 128
       ipv4_address      = "192.168.86.227/24"
       gateway           = "192.168.86.1"
-      tags              = ["terraform", "production", "ubuntu", "media"]
-    }
-    mordred = {
-      description       = "Media acquisition host (managed by Terraform)"
-      proxmox_node      = "polaris"
-      cpu_cores         = 4
-      memory_dedicated  = 8192
-      datastore_id      = "local-lvm"
-      disk_size         = 128
-      ipv4_address      = "192.168.86.216/24"
-      gateway           = "192.168.86.226"
       tags              = ["terraform", "production", "ubuntu", "media"]
     }
   }

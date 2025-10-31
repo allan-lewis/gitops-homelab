@@ -395,6 +395,3 @@ data:
     misery:
       host: 192.168.86.227
       port: 2375
-    misery:
-      host: 192.168.86.216
-      port: 2375

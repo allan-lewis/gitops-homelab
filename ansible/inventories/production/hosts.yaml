@@ -15,8 +15,6 @@ all:
       ansible_host: 192.168.86.226
     misery:
       ansible_host: 192.168.86.227
-    mordred:
-      ansible_host: 192.168.86.216
     ## KUBERNETES
     roland:
       ansible_host: 192.168.86.230 
@@ -77,7 +75,6 @@ all:
                 cujo:
                 flagg:
                 misery:
-                mordred:
             docker_pihole:
               hosts:
                 flagg:
@@ -164,9 +161,6 @@ all:
 #             homelab_docker_immich2_hosts:
 #               hosts:
 #                 misery:
-#             homelab_docker_media_acquisition_hosts:
-#               hosts:
-#                 mordred:
 #             homelab_docker_pihole_hosts:
 #               hosts:
 #                 flagg:
