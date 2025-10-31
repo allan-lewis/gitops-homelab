@@ -2,7 +2,7 @@ variable "vm_list_ubuntu" {
   description = "A list of Ubuntu VMs to create"
   default = {
     cujo = {
-      description       = "OpenVPN gateway host (managed by Terraform)"
+      description       = "OpenVPN/Media Acquisition (managed by Terraform)"
       proxmox_node      = "polaris"
       cpu_cores         = 4
       memory_dedicated  = 8192

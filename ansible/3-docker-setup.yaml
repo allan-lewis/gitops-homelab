@@ -260,6 +260,30 @@
             nfs_path: "/mnt/pool1/media-acquisition"
             nfs_opts: "rw,sync,hard,intr"
 
+  post_tasks:
+    - name: setup backup fragments for media acquisition
+      include_tasks: "playbooks/includes/setup_backups.yml"
+      vars:
+        backup_known_hosts: ['procyon']
+        backup_fragments:
+          - name: "docker-mediaapps.conf"
+            header: "jackett/lidarr/radarr/sonarr/transmission config (+ selected data)"
+            pairs:
+              # - { src: "/etc/jackett",
+              #     dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/jackett/config" }
+              # - { src: "/etc/lidarr",
+              #     dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/lidarr/config" }
+              # - { src: "/etc/radarr",
+              #     dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/radarr/config" }
+              # - { src: "/etc/sonarr",
+              #     dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/sonarr/config" }
+              - { src: "/etc/transmission",
+                  dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/transmission/config" }
+              # - { src: "/var/lib/jackett/downloads",
+              #     dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/jackett/downloads" }
+              - { src: "/var/lib/transmission/watch",
+                  dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/transmission/watch" }
+
 - name: install jellyfin
   hosts: docker_jellyfin
   become: yes
