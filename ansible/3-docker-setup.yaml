@@ -124,7 +124,7 @@
 
         # Use the vendor compose from the exact release tag
         compose_source_type: url
-        compose_url: "https://github.com/immich-app/immich/releases/download/{{ compose_immich_version }}/docker-compose.yaml"
+        compose_url: "https://github.com/immich-app/immich/releases/download/{{ compose_immich_version }}/docker-compose.yml"
 
         # Everything here is auto-validated (undefined/empty => fail early)
         compose_env:
@@ -262,12 +262,12 @@
 
   post_tasks:
     - name: setup backup fragments for media acquisition
-      include_tasks: "playbooks/includes/setup_backups.yml"
+      include_tasks: "playbooks/includes/setup_backups.yaml"
       vars:
         backup_known_hosts: ['procyon']
         backup_fragments:
           - name: "docker-mediaapps.conf"
-            header: "jackett/lidarr/radarr/sonarr/transmission config (+ selected data)"
+            header: "media acquisition config and data"
             pairs:
               # - { src: "/etc/jackett",
               #     dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/jackett/config" }
