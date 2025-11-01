@@ -23,9 +23,6 @@ traefik_services:
   - name: plex
     host: plex.media.allanshomelab.com
     url: "http://{{ hostvars['misery'].ansible_host }}:32400"
-  - name: capella
-    host: capella.hosts.allanshomelab.com
-    url: "http://{{ hostvars['capella'].ansible_host }}"
   - name: jackett
     host: jackett.media.allanshomelab.com
     url: "http://{{ hostvars['cujo'].ansible_host }}:9117"

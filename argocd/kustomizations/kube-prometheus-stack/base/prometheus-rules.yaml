@@ -77,8 +77,8 @@ spec:
         - alert: HomelabHighMemoryUsage
           expr: |
             100 - (
-              (node_memory_MemAvailable_bytes{job="node-exporter", instance!~"procyon|capella"} * 100)
-              / node_memory_MemTotal_bytes{job="node-exporter", instance!~"procyon|capella"}
+              (node_memory_MemAvailable_bytes{job="node-exporter", instance!~"procyon|gilead"} * 100)
+              / node_memory_MemTotal_bytes{job="node-exporter", instance!~"procyon|gilead"}
             ) > 90
           for: 5m
           labels:

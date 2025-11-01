@@ -40,10 +40,6 @@ gatus_https_endpoints:
     url: "http://procyon.hosts.allanshomelab.com/ui/"
     pattern: "*ix-root*"
     check_cert: false
-  - name: "Capella"
-    group: "Sites (Hosts)"
-    url: "https://capella.hosts.allanshomelab.com/ui/"
-    pattern: "*ix-root*"
   - name: "Gilead"
     group: "Sites (Hosts)"
     url: "https://gilead.hosts.allanshomelab.com/ui/"

@@ -69,9 +69,9 @@ data:
             href: https://developer.mend.io/github/allan-lewis
   services.yaml: |
     - Home Lab Management:
-        - Capella:
+        - Gilead:
             icon: truenas.png
-            href: https://capella.hosts.allanshomelab.com
+            href: https://gilead.hosts.allanshomelab.com
             description: NAS (offsite backup)
             namespace:
             app:
@@ -79,7 +79,7 @@ data:
             container:
             widget:
               type: truenas
-              url: https://capella.hosts.allanshomelab.com
+              url: https://gilead.hosts.allanshomelab.com
               username: truenas_admin
               password: "{{HOMEPAGE_VAR_TRUENAS_PASSWORD}}"
         - Derry:

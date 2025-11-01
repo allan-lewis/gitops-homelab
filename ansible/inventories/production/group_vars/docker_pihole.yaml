@@ -22,8 +22,6 @@ pihole_cname_records:
     target: "docker.allanshomelab.com"
   - alias: "dns.docker.allanshomelab.com"
     target: "docker.allanshomelab.com"
-  - alias: "capella.hosts.allanshomelab.com"
-    target: "hosts.allanshomelab.com"
   - alias: "derry.hosts.allanshomelab.com"
     target: "hosts.allanshomelab.com"
   - alias: "gilead.hosts.allanshomelab.com"
