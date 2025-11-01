@@ -17,13 +17,13 @@ all:
       ansible_host: 192.168.86.227
     ## KUBERNETES
     roland:
-      ansible_host: 192.168.86.230 
+      ansible_host: 192.168.86.151 
     eddie:
-      ansible_host: 192.168.86.234
+      ansible_host: 192.168.86.152
     jake:
-      ansible_host: 192.168.86.235
+      ansible_host: 192.168.86.153
     susannah:
-      ansible_host: 192.168.86.236
+      ansible_host: 192.168.86.154
     ## OFF PREMISES
     gilead:
       ansible_host: 100.95.108.6

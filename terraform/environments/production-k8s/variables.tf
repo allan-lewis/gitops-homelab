@@ -8,7 +8,7 @@ variable "controlplane_list" {
       memory_dedicated  = 8192
       datastore_id      = "ssd0"
       disk_size         = 128
-      ipv4_address      = "192.168.86.230"
+      ipv4_address      = "192.168.86.151"
       gateway           = "192.168.86.1"
       tags              = ["terraform", "production", "talos", "controlplane"]
     }
@@ -25,7 +25,7 @@ variable "worker_list" {
       memory_dedicated  = 12288
       datastore_id      = "ssd0"
       disk_size         = 640
-      ipv4_address      = "192.168.86.234"
+      ipv4_address      = "192.168.86.152"
       gateway           = "192.168.86.1"
       tags              = ["terraform", "production", "talos", "worker"]
     }
@@ -36,7 +36,7 @@ variable "worker_list" {
       memory_dedicated  = 12288
       datastore_id      = "ssd0"
       disk_size         = 640
-      ipv4_address      = "192.168.86.235"
+      ipv4_address      = "192.168.86.153"
       gateway           = "192.168.86.1"
       tags              = ["terraform", "production", "talos", "worker"]
     }
@@ -47,7 +47,7 @@ variable "worker_list" {
       memory_dedicated  = 12288
       datastore_id      = "ssd0"
       disk_size         = 640
-      ipv4_address      = "192.168.86.236"
+      ipv4_address      = "192.168.86.154"
       gateway           = "192.168.86.1"
       tags              = ["terraform", "production", "talos", "worker"]
     }
