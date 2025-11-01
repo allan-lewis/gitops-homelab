@@ -49,6 +49,16 @@ all:
     sirius:
       ansible_host: 192.168.86.105
   children:
+    talos:
+      children:
+        talos_controlplanes:
+          hosts:
+            roland:
+        talos_workers:
+          hosts:
+            eddie:
+            jake:
+            susannah:
     ubuntu:
       children:
         docker:
