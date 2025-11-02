@@ -275,8 +275,8 @@
               #     dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/lidarr/config" }
               # - { src: "/etc/radarr",
               #     dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/radarr/config" }
-              # - { src: "/etc/sonarr",
-              #     dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/sonarr/config" }
+              - { src: "/etc/sonarr",
+                  dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/sonarr/config" }
               - { src: "/etc/transmission",
                   dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/transmission/config" }
               - { src: "/var/lib/jackett/downloads",
