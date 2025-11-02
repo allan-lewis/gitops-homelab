@@ -114,72 +114,14 @@
 #   - name: http
 #     targetPort: 7878
 #     port: 7878
-# ---
-# kind: Deployment
-# apiVersion: apps/v1
-# metadata:
-#   name: sonarr
-#   namespace: media
-#   labels:
-#     app: sonarr
-# spec:
-#   replicas: 1
-#   progressDeadlineSeconds: 600
-#   revisionHistoryLimit: 2
-#   strategy:
-#     type: Recreate
-#   selector:
-#     matchLabels:
-#       app: sonarr
-#   template:
-#     metadata:
-#       labels:
-#         app.kubernetes.io/name: sonarr
-#         app: sonarr
-#     spec:
-#       containers:
-#       - name: sonarr
-#         image: "lscr.io/linuxserver/sonarr:latest"
-#         imagePullPolicy: "Always"
-#         env:
-#         volumeMounts:
-#           - mountPath: /config
-#             name: sonarr-config
-#           - mountPath: /downloads
-#             name: media-downloads
-#           - mountPath: /tv
-#             name: sonarr-tv
-#       volumes:
-#         - name: sonarr-config
-#           persistentVolumeClaim:
-#             claimName: sonarr-config
-#         - name: media-downloads
-#           persistentVolumeClaim:
-#             claimName: downloads-pvc
-#         - name: sonarr-tv
-#           persistentVolumeClaim:
-#             claimName: tv-pvc
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: sonarr
-#   namespace: media
-# spec:
-#   selector:
-#     app: sonarr
-#   ports:
-#   - name: http
-#     targetPort: 8989
-#     port: 8989
 ---
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: jackett
+  name: sonarr
   namespace: media
   labels:
-    app: jackett
+    app: sonarr
 spec:
   replicas: 1
   progressDeadlineSeconds: 600
@@ -188,53 +130,45 @@ spec:
     type: Recreate
   selector:
     matchLabels:
-      app: jackett
+      app: sonarr
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: jackett
-        app: jackett
+        app.kubernetes.io/name: sonarr
+        app: sonarr
     spec:
       containers:
-      - name: jackett
-        image: "lscr.io/linuxserver/jackett:0.22.1951"
+      - name: sonarr
+        image: "lscr.io/linuxserver/sonarr:latest"
         imagePullPolicy: "Always"
         env:
         volumeMounts:
           - mountPath: /config
-            name: jackett-config
+            name: sonarr-config
           - mountPath: /downloads
-            name: jackett-downloads
+            name: media-downloads
+          - mountPath: /tv
+            name: sonarr-tv
       volumes:
-        - name: jackett-config
+        - name: sonarr-config
           persistentVolumeClaim:
-            claimName: jackett-config
-        - name: jackett-downloads
-          emptyDir: {}
-      # affinity:
-      #   nodeAffinity:
-      #     requiredDuringSchedulingIgnoredDuringExecution:
-      #       nodeSelectorTerms:
-      #         - matchExpressions:
-      #             - key: "node-role"
-      #               operator: "In"
-      #               values:
-      #                 - "openvpn"
-      # tolerations:
-      # - key: "openvpn"
-      #   operator: "Equal"
-      #   value: "true"
-      #   effect: "NoSchedule"
+            claimName: sonarr-config
+        - name: media-downloads
+          persistentVolumeClaim:
+            claimName: downloads-pvc
+        - name: sonarr-tv
+          persistentVolumeClaim:
+            claimName: tv-pvc
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: jackett
+  name: sonarr
   namespace: media
 spec:
   selector:
-    app: jackett
+    app: sonarr
   ports:
   - name: http
-    targetPort: 9117
-    port: 9117
+    targetPort: 8989
+    port: 8989
