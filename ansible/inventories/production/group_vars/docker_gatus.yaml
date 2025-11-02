@@ -166,6 +166,14 @@ gatus_https_endpoints:
     group: "Sites (Media)"
     url: "https://sonarr.media.allanshomelab.com/ping"
     pattern: "*OK*"
+  - name: Radarr
+    group: "Sites (Media)"
+    url: "https://radarr.media.allanshomelab.com/ping"
+    pattern: "*OK*"
+  - name: Lidarr
+    group: "Sites (Media)"
+    url: "https://lidarr.media.allanshomelab.com/ping"
+    pattern: "*OK*"
   - name: "Tautulli"
     group: "Sites (K8s)"
     url: "https://tautulli.k8s.allanshomelab.com"

@@ -26,6 +26,12 @@ traefik_services:
   - name: jackett
     host: jackett.media.allanshomelab.com
     url: "http://{{ hostvars['cujo'].ansible_host }}:9117"
+  - name: lidarr
+    host: lidarr.media.allanshomelab.com
+    url: "http://{{ hostvars['cujo'].ansible_host }}:8686"
+  - name: radarr
+    host: radarr.media.allanshomelab.com
+    url: "http://{{ hostvars['cujo'].ansible_host }}:7878"
   - name: sonarr
     host: sonarr.media.allanshomelab.com
     url: "http://{{ hostvars['cujo'].ansible_host }}:8989"
