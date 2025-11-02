@@ -269,8 +269,8 @@
           - name: "docker-mediaapps.conf"
             header: "media acquisition config and data"
             pairs:
-              # - { src: "/etc/jackett",
-              #     dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/jackett/config" }
+              - { src: "/etc/jackett",
+                  dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/jackett/config" }
               # - { src: "/etc/lidarr",
               #     dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/lidarr/config" }
               # - { src: "/etc/radarr",
@@ -279,8 +279,8 @@
               #     dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/sonarr/config" }
               - { src: "/etc/transmission",
                   dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/transmission/config" }
-              # - { src: "/var/lib/jackett/downloads",
-              #     dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/jackett/downloads" }
+              - { src: "/var/lib/jackett/downloads",
+                  dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/jackett/downloads" }
               - { src: "/var/lib/transmission/watch",
                   dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/transmission/watch" }
 
