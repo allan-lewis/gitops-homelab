@@ -4,6 +4,7 @@ services:
     image: lscr.io/linuxserver/jackett:latest
     container_name: jackett
     restart: unless-stopped
+    networks: [media]
     environment:
       - PUID=1000
       - PGID=1000
@@ -18,6 +19,7 @@ services:
     image: lscr.io/linuxserver/lidarr:latest
     container_name: lidarr
     restart: unless-stopped
+    networks: [media]
     environment:
       - PUID=1000
       - PGID=1000
@@ -33,6 +35,7 @@ services:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
     restart: unless-stopped
+    networks: [media]
     environment:
       - PUID=1000
       - PGID=1000
