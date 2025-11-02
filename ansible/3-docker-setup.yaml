@@ -144,7 +144,7 @@
             nfs: true
             nfs_server: "{{ hostvars['procyon'].ansible_host }}"
             nfs_path: "/mnt/pool1/immich"
-            nfs_opts: "rw,sync,hard,intr"
+            nfs_opts: "rw"
 
           # Postgres data (local; container will chown on first init)
           - path: "/srv/immich/postgres"
@@ -258,7 +258,7 @@
             nfs: true
             nfs_server: "{{ hostvars['procyon'].ansible_host }}"
             nfs_path: "/mnt/pool1/media-acquisition"
-            nfs_opts: "rw,sync,hard,intr"
+            nfs_opts: "rw"
 
   post_tasks:
     - name: setup backup fragments for media acquisition
@@ -319,7 +319,7 @@
             nfs: true
             nfs_server: "{{ hostvars['procyon'].ansible_host }}"
             nfs_path: "/mnt/pool1/media-library"
-            nfs_opts: "ro,sync,hard,intr"
+            nfs_opts: "ro"
 
 - name: install plex
   hosts: docker_plex
@@ -356,4 +356,4 @@
             nfs: true
             nfs_server: "{{ hostvars['procyon'].ansible_host }}"
             nfs_path: "/mnt/pool1/media-library"
-            nfs_opts: "ro,sync,hard,intr"
+            nfs_opts: "ro"
