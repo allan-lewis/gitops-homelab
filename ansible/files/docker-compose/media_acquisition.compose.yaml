@@ -73,3 +73,12 @@ services:
       - /etc/transmission:/config
       - /var/lib/transmission/watch:/watch
       - /mnt/media-acquisition/downloads:/downloads
+
+networks:
+  media: {}
+
+services:
+  transmission:
+    networks: [media]
+  sonarr:
+    networks: [media]
