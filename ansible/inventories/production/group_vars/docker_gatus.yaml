@@ -162,6 +162,10 @@ gatus_https_endpoints:
     group: "Sites (K8s)"
     url: "https://sonarr.k8s.allanshomelab.com"
     pattern: "*authentik*"
+  - name: Sonarr
+    group: "Sites (Media)"
+    url: "https://sonarr.media.allanshomelab.com"
+    pattern: "*Sonarr*"
   - name: "Tautulli"
     group: "Sites (K8s)"
     url: "https://tautulli.k8s.allanshomelab.com"

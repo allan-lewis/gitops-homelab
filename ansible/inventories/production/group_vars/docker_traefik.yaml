@@ -26,6 +26,9 @@ traefik_services:
   - name: jackett
     host: jackett.media.allanshomelab.com
     url: "http://{{ hostvars['cujo'].ansible_host }}:9117"
+  - name: sonarr
+    host: sonarr.media.allanshomelab.com
+    url: "http://{{ hostvars['cujo'].ansible_host }}:8989"
   - name: jellyfin
     host: jellyfin.media.allanshomelab.com
     url: "http://{{ hostvars['misery'].ansible_host }}:8096"
