@@ -19,7 +19,7 @@ resource "proxmox_virtual_environment_vm" "vm_talos" {
   description = each.value.description
 
   tags    = each.value.tags
-  on_boot = true
+  on_boot = false
 
   cpu {
     cores = each.value.cpu_cores

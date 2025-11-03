@@ -61,7 +61,7 @@ resource "proxmox_virtual_environment_vm" "vm_ubuntu_sirius" {
   network_device { bridge = "vmbr0" }
 
   tags    = each.value.tags
-  on_boot = true
+  on_boot = false
 }
 
 # VMs that should use the "polaris" alias
@@ -112,5 +112,5 @@ resource "proxmox_virtual_environment_vm" "vm_ubuntu_polaris" {
   network_device { bridge = "vmbr0" }
 
   tags    = each.value.tags
-  on_boot = true
+  on_boot = false
 }
