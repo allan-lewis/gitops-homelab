@@ -160,6 +160,26 @@
           - path: "/srv/immich/model-cache"
             create: true
             mode: "0755"
+    - role: postgres_db_backup
+      vars:
+        postgres_db_container: immich_postgres
+        postgres_db_name: "immich"
+        postgres_db_user: "postgres"
+        postgres_db_password: "{{ lookup('env', 'IMMICH_DB_PASSWORD') }}"
+
+  post_tasks:
+    - name: setup backup fragments for immich
+      include_tasks: "playbooks/includes/backup_fragments.yaml"
+      vars:
+        backup_known_hosts: ['procyon']
+        backup_fragments:
+          - name: "docker-immich.conf"
+            header: "immich: postgres volume + dumps (skip NFS uploads, redis, model-cache)"
+            pairs:
+              - { src: "/srv/immich/postgres",
+                  dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/immich/postgres-volume" }
+              - { src: "{{ postgres_db_backup_dir }}",
+                  dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/immich/db-dumps" }
 
 - name: install pi-hole
   hosts: docker_pihole
@@ -321,6 +341,18 @@
             nfs_path: "/mnt/pool1/media-library"
             nfs_opts: "ro"
 
+  post_tasks:
+    - name: setup backup fragments for jellyfin
+      include_tasks: "playbooks/includes/backup_fragments.yaml"
+      vars:
+        backup_known_hosts: ['procyon']
+        backup_fragments:
+          - name: "docker-jellyfin.conf"
+            header: "jellyfin config (exclude cache and NFS media library)"
+            pairs:
+              - { src: "/srv/jellyfin/config",
+                  dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/jellyfin/config" }
+
 - name: install plex
   hosts: docker_plex
   become: yes
@@ -357,3 +389,15 @@
             nfs_server: "{{ hostvars['procyon'].ansible_host }}"
             nfs_path: "/mnt/pool1/media-library"
             nfs_opts: "ro"
+
+  post_tasks:
+    - name: setup backup fragments for plex
+      include_tasks: "playbooks/includes/backup_fragments.yaml"
+      vars:
+        backup_known_hosts: ['procyon']
+        backup_fragments:
+          - name: "docker-plex.conf"
+            header: "plex config (skip NFS media and transcode)"
+            pairs:
+              - { src: "/srv/plex/config",
+                  dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/plex/config" }

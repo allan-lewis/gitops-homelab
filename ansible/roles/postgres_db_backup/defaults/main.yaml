@@ -1,0 +1,21 @@
+# Where to store dumps on the host
+postgres_db_backup_dir: /var/lib/postgres-db-dumps
+
+# Docker container name running Postgres
+# postgres_db_container: immich_postgres
+
+# Database connection info
+# postgres_db_name: immich
+# postgres_db_user: postgres
+# postgres_db_password: ""
+
+# Retention (days of dumps to keep)
+postgres_db_backup_keep_days: 14
+
+postgres_db_backup_log_path: /var/log/postgres-db-backup.log
+
+# Cron schedule (defaults to 03:30 daily)
+postgres_db_backup_cron:
+  enabled: true
+  minute: "30"
+  hour: "3"

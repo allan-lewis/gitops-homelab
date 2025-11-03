@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+BACKUP_DIR="{{ postgres_db_backup_dir }}"
+KEEP_DAYS="{{ postgres_db_backup_keep_days }}"
+CONTAINER="{{ postgres_db_container }}"
+DB="{{ postgres_db_name }}"
+USER="{{ postgres_db_user }}"
+PASS="{{ postgres_db_password }}"
+
+timestamp=$(date +"%Y%m%d-%H%M%S")
+outfile="$BACKUP_DIR/${DB}-${timestamp}.dump"
+
+mkdir -p "$BACKUP_DIR"
+
+export PGPASSWORD="$PASS"
+
+echo "$(date) | Starting Postgres DB dump..."
+docker exec -e PGPASSWORD="$PASS" "$CONTAINER" \
+  pg_dump -U "$USER" -d "$DB" -Fc > "$outfile"
+
+echo "$(date) | Dump complete: $outfile"
+
+# Prune old dumps (older than KEEP_DAYS)
+find "$BACKUP_DIR" -type f -name "${DB}-*.dump" -mtime +$KEEP_DAYS -print -delete || true
