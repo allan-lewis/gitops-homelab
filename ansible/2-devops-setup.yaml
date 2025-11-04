@@ -26,6 +26,18 @@
       when:
         - postgres_db_backup_enabled | default(false)
 
+  post_tasks:
+    - name: setup backup fragments for devops hosts
+      include_tasks: "playbooks/includes/backup_fragments.yaml"
+      vars:
+        backup_known_hosts: ['procyon']
+        backup_fragments:
+          - name: "devops-hosts.conf"
+            header: "devops backups of databases and s3 buckets"
+            pairs:
+              - { src: "{{ postgres_db_backup_dir }}",
+                  dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/db-dumps" }
+
 - name: get hosts ready to do devops work (as local user)
   hosts: devops
   become: no

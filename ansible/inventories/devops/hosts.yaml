@@ -4,6 +4,9 @@ all:
       ansible_host: 192.168.86.225
     callahan:
       ansible_host: 192.168.86.215
+    # needed for backups
+    procyon:
+      ansible_host: 192.168.86.106
   children:
     ubuntu:
       children:

@@ -6,7 +6,7 @@ postgres_db_backup_keep_days: 14
 postgres_db_backup_cron:
   enabled: true
   minute: "30"
-  hour: "*"
+  hour: "3"
 
 # DB params
 # postgres_db_name: immich
