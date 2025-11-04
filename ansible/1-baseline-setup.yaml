@@ -37,15 +37,6 @@
     - private_key
     - zsh_shell
 
-- name: install node exporter
-  hosts: node_exporter
-  become: yes
-  gather_facts: yes
-  tags: [node_exporter]
-
-  roles:
-    - node_exporter
-
 - name: install tailscale.
   hosts: tailscale
   become: yes
