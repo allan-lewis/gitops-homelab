@@ -11,7 +11,6 @@
     - user  
     - ssh
     - apt
-    - mount
     - reboot
 
 - name: setup automated backups on all hosts (as root)

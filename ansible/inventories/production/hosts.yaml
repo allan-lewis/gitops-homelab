@@ -11,6 +11,10 @@ all:
     shardik:
       ansible_host: 192.168.86.201
     ## VIRTUAL MACHINES
+    barlow:
+      ansible_host: 192.168.86.225
+    callahan:
+      ansible_host: 192.168.86.215
     cujo:
       ansible_host: 192.168.86.226
     misery:
@@ -32,8 +36,6 @@ all:
       ansible_host: 192.168.86.167
     arcturus:
       ansible_host: 192.168.86.124 
-    castor:
-      ansible_host: 192.168.86.125
     deneb:
       ansible_host: 192.168.86.166
     mimosa:
@@ -42,8 +44,6 @@ all:
       ansible_host: 192.168.86.162
     polaris:
       ansible_host: 192.168.86.101
-    pollux:
-      ansible_host: 192.168.86.135
     procyon:
       ansible_host: 192.168.86.106
     sirius:

@@ -1,17 +1,19 @@
 all:
   hosts:
-    castor:
-      ansible_host: 192.168.86.125
-    pollux:
-      ansible_host: 192.168.86.135
+    barlow:
+      ansible_host: 192.168.86.215
+    callahan:
+      ansible_host: 192.168.86.225
   children:
     ubuntu:
       children:
         devops:
           hosts:
-            castor:
-            pollux:
-        node_exporter:
-          hosts:
-            castor:
-            pollux:
+            barlow:
+            callahan:
+        docker:
+          children:
+            docker_monitoring:
+              hosts:
+                barlow:
+                callahan:
