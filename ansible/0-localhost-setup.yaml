@@ -1,5 +1,5 @@
 ---
-- name: get the local host ready to run ansible playbooks
+- name: get host keys for all ubuntu hosts
   hosts: localhost
   become: no
   gather_facts: yes
@@ -7,4 +7,3 @@
 
   roles:
     - known_hosts
-    - tailscale
