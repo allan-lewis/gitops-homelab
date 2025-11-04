@@ -367,7 +367,7 @@
         compose_template_src: templates/docker-compose/plex.compose.yaml.j2
 
         compose_env:
-          PLEX_TZ: "America/New_York"
+          PLEX_TZ: "{{ gitops_tz }}"
           PLEX_PUID: 1000
           PLEX_PGID: 1000
 

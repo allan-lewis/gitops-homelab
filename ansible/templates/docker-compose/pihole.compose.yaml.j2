@@ -9,7 +9,7 @@ services:
       FTLCONF_ntp_sync_active: 'false'
       FTLCONF_ntp_ipv4_active: 'false'
       FTLCONF_ntp_ipv6_active: 'false'
-      TZ: "America/New_York"
+      TZ: "{{ gitops_tz }}"
       FTLCONF_webserver_api_password: '{{ pihole_admin_password }}'
       FTLCONF_dns_listeningMode: 'all'      
       FTLCONF_dns_upstreams: "{{ pihole_upstreams | join(';') }}"

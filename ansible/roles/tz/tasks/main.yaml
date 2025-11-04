@@ -1,4 +1,4 @@
 ---
 - name: Set the time zone.
   community.general.timezone:
-    name: "America/New_York"
+    name: "{{ gitops_tz }}"
