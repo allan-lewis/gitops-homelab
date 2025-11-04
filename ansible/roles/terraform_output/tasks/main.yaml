@@ -1,48 +1,141 @@
 ---
-- name: Ensure required config directories exist.
-  file:
-    path: "{{ item }}"
+# Expect: terraform_output_tf_dir is the path to your TF project directory
+# Run the play/role with: become: yes
+
+- name: Fail early if terraform_output_tf_dir is not provided
+  ansible.builtin.fail:
+    msg: "Set terraform_output_tf_dir to the directory containing your Terraform state/outputs."
+  when: terraform_output_tf_dir is not defined
+
+# Resolve original (non-root) user and root
+- name: Resolve export users (original user + root)
+  ansible.builtin.set_fact:
+    primary_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id) }}"
+    export_users: "{{ [ansible_env.SUDO_USER | default(ansible_user_id), 'root'] | unique }}"
+
+# Discover each user's home dir
+- name: Discover home directory for each export user
+  ansible.builtin.command: bash -lc 'eval echo ~{{ item }}'
+  changed_when: false
+  register: user_homes
+  loop: "{{ export_users }}"
+
+- name: Build a username -> homedir map
+  ansible.builtin.set_fact:
+    user_home_map: "{{ (user_home_map | default({})) | combine({ item.item: item.stdout }) }}"
+  loop: "{{ user_homes.results }}"
+
+- name: Show resolved home directories
+  ansible.builtin.debug:
+    var: user_home_map
+
+# Map TF outputs to relative paths (NOTE: talos path fixed to .talos/config)
+- name: Define output-to-path mapping
+  ansible.builtin.set_fact:
+    export_map:
+      - { output: "kubeconfig",  relpath: ".kube/config" }
+      - { output: "talosconfig", relpath: ".talos/config" }
+
+# Ensure destination dirs for EACH user
+- name: Ensure required config directories exist for each user
+  ansible.builtin.file:
+    path: "{{ user_home_map[item.0] }}/{{ item.1.relpath | dirname }}"
     state: directory
     mode: '0700'
-  loop:
-    - "{{ ansible_env.HOME }}/.kube"
-    - "{{ ansible_env.HOME }}/.talos"
-  when: terraform_output_tf_dir is defined
+    owner: "{{ item.0 }}"
+    group: "{{ item.0 }}"
+  loop: "{{ export_users | product(export_map) | list }}"
 
-- name: Set Terraform output values
-  set_fact:
-    items:
-      - output: kubeconfig
-        path: "{{ ansible_env.HOME }}/.kube/config"
-      - output: talosconfig
-        path: "{{ ansible_env.HOME }}/.talos/talosconfig"
-  when: terraform_output_tf_dir is defined
-
-- name: Extract Terraform output.
-  shell: doppler run -- terraform output -raw {{ item.output }}
+# Read Terraform outputs once per output (from your TF dir)
+- name: Extract Terraform outputs (raw)
+  become: no
+  ansible.builtin.shell: |
+    doppler run -- terraform output -raw {{ item.output }}
   args:
     chdir: "{{ terraform_output_tf_dir }}"
-  register: terraform_output_result
-  loop:
-    - { output: "kubeconfig", path: "{{ ansible_env.HOME }}/.kube/config" }
-    - { output: "talosconfig", path: "{{ ansible_env.HOME }}/.talos/config" }
+    executable: /bin/bash
+  register: tf_output_results
+  loop: "{{ export_map }}"
   loop_control:
     label: "{{ item.output }}"
-  when: terraform_output_tf_dir is defined
 
-- name: Write Terraform output to files.
-  copy:
-    content: "{{ item.stdout }}"
-    dest: "{{ item.item.path }}"
+# Build output_name -> value map, marking the task as no_log
+- name: Build output_name -> value map (sensitive)
+  ansible.builtin.set_fact:
+    tf_output_map: "{{ (tf_output_map | default({})) | combine({ item.item.output: item.stdout }) }}"
+  loop: "{{ tf_output_results.results }}"
+  no_log: true
+
+- name: Write Terraform outputs to user files
+  ansible.builtin.copy:
+    content: "{{ tf_output_map[item.1.output] }}"
+    dest: "{{ user_home_map[item.0] }}/{{ item.1.relpath }}"
     mode: '0600'
-  loop: "{{ terraform_output_result.results | default([]) }}"
+    owner: "{{ item.0 }}"
+    group: "{{ item.0 }}"
+  loop: "{{ export_users | product(export_map) | list }}"
   loop_control:
-    label: "{{ item.item.output }}"
-  when: terraform_output_tf_dir is defined
+    label: "{{ item.0 }} -> {{ item.1.output }}"
+  no_log: true
 
-- name: configure talosctl node
+# Run talosctl as all users (root + non-root)
+- name: Configure talosctl node for each user
+  become: true
+  become_user: "{{ item.key }}"
+  environment:
+    HOME: "{{ item.value }}"
   ansible.builtin.command: >
-    talosctl config node {{ groups['talos_controlplanes'] | first }}
-  when:
-    - terraform_output_tf_dir is defined
-    - (groups['talos_controlplanes'] | default([])) | length > 0
+    talosctl config node {{ terraform_output_config_node }}
+  loop: "{{ user_home_map | dict2items }}"
+  loop_control:
+    label: "{{ item.key }}"
+
+# Sanity-check kubectl for both root and non-root users
+- name: Verify kubectl get nodes works for each user
+  become: true
+  become_user: "{{ item.key }}"
+  environment:
+    HOME: "{{ item.value }}"
+  ansible.builtin.command: kubectl get nodes --no-headers
+  register: _kubectl_checks
+  changed_when: false
+  failed_when: _kubectl_checks.rc != 0
+  no_log: true
+  loop: "{{ user_home_map | dict2items }}"
+  loop_control:
+    label: "{{ item.key }}"
+
+# Sanity-check kubectl for just non-root user
+- name: Verify talosctl health works for non-root user
+  become: true
+  become_user: "{{ item.key }}"
+  environment:
+    HOME: "{{ item.value }}"
+  ansible.builtin.command: talosctl health
+  register: _talosctl_checks
+  changed_when: false
+  failed_when: _talosctl_checks.rc != 0
+  # no_log: true
+  loop: "{{ user_home_map | dict2items }}"
+  loop_control:
+    label: "{{ item.key }}"
+
+# Summarize kubectl get nodes checks (only entries that actually ran)
+- name: Summarize kubectl results
+  ansible.builtin.debug:
+    msg:
+      - "✅ kubectl reachable for {{ item.item.key }}: {{ item.rc == 0 }}"
+  loop: "{{ (_kubectl_checks.results | default([])) | selectattr('rc', 'defined') | list }}"
+  loop_control:
+    label: "{{ item.item.key }}"
+  when: _kubectl_checks is defined
+
+# Summarize talosctl health checks (only entries that actually ran)
+- name: Summarize talosctl health results
+  ansible.builtin.debug:
+    msg:
+      - "✅ talosctl healthy for {{ item.item.key }}: {{ item.rc == 0 }}"
+  loop: "{{ (_talosctl_checks.results | default([])) | selectattr('rc', 'defined') | list }}"
+  loop_control:
+    label: "{{ item.item.key }}"
+  when: _talosctl_checks is defined

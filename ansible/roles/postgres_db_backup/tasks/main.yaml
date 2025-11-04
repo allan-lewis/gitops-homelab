@@ -7,6 +7,14 @@
     group: root
     mode: "0750"
 
+- name: Ensure backup log exists
+  ansible.builtin.file:
+    path: "{{ postgres_db_backup_log_path }}"
+    state: touch
+    owner: root
+    group: root
+    mode: "0640"
+
 - name: Install Postgres DB dump script
   ansible.builtin.template:
     src: dump-postgres-db.sh.j2
@@ -14,14 +22,6 @@
     owner: root
     group: root
     mode: "0755"
-
-- name: Ensure postgres backup log file exists
-  ansible.builtin.file:
-    path: "{{ postgres_db_backup_log_path }}"
-    state: touch
-    owner: root
-    group: root
-    mode: "0640"
 
 - name: Add cron job for Postgres DB dump
   when: postgres_db_backup_cron.enabled

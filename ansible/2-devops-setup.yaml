@@ -15,6 +15,17 @@
     - talosctl
     - helm
 
+- name: setup automated backups for s3 and postgres
+  hosts: devops
+  become: yes
+  gather_facts: yes
+  tags: [devops_backup]
+
+  roles:
+    - role: postgres_db_backup
+      when:
+        - postgres_db_backup_enabled | default(false)
+
 - name: get hosts ready to do devops work (as local user)
   hosts: devops
   become: no

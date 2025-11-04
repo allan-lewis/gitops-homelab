@@ -10,5 +10,3 @@ s3_backup_buckets:
   - gitops-homelab-longhorn-attic
   - gitops-homelab-longhorn-staging
   - gitops-homelab-terraform
-
-terraform_output_tf_dir: "/home/lab/gitops-homelab/terraform/environments/production-k8s"
