@@ -65,3 +65,7 @@ traefik_services:
     host: two.kvm.allanshomelab.com
     url: "http://192.168.86.248"
     scheme: http
+  - name: proxmox
+    host: proxmox.allanshomelab.com
+    url: "https://{{ hostvars['polaris'].ansible_host }}:8006"
+    scheme: https
