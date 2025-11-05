@@ -6,6 +6,7 @@ metrics: true
 
 endpoints:
 {% for host in groups['all']| default([]) %}
+{% if hostvars[host].ansible_host is defined %}
   - name: "{{ host  | capitalize }} {{ hostvars[host].gatus_slug | default('') }}"
     group: "Hosts"
     enabled: {{ hostvars[host].gatus_enabled | default(true) }}
@@ -20,6 +21,7 @@ endpoints:
     conditions:
       - "[STATUS] == 200"
       - "[BODY] == pat(*up*)"
+{% endif %}
 {% endif %}
 {% endfor %}
 {% for endpoint in gatus_https_endpoints | default([]) %}
