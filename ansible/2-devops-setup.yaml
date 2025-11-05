@@ -22,9 +22,9 @@
   tags: [devops_backup]
 
   roles:
-    # - role: postgres_db_backup
-    #   when:
-    #     - postgres_db_backup_enabled | default(false)
+    - role: postgres_db_backup
+      when:
+        - postgres_db_backup_enabled | default(false)
     - role: s3_local_mirror
 
   post_tasks:
@@ -38,6 +38,8 @@
             pairs:
               - { src: "{{ postgres_db_backup_dir }}",
                   dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/db-dumps" }
+              - { src: "{{ s3_mirror_base_dir }}",
+                  dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/s3-mirror" }
 
 - name: get hosts ready to do devops work (as local user)
   hosts: devops
