@@ -120,7 +120,7 @@
     - role: docker_compose
       vars:
         compose_app_name: immich
-        compose_immich_version: "v2.1.0"
+        compose_immich_version: "v2.2.2"
 
         # Use the vendor compose from the exact release tag
         compose_source_type: url
