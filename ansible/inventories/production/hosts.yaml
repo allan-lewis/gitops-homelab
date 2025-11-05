@@ -1,15 +1,21 @@
+---
 all:
   hosts:
     #### NEW HOSTS
     ## BARE METAL
+    christine:
+      ansible_host: 192.168.86.212 
     derry:
       ansible_host: 192.168.86.210
     flagg:
       ansible_host: 192.168.86.205
+    gan:
+      ansible_host: 192.168.86.211
     maturin:
       ansible_host: 192.168.86.200
     shardik:
       ansible_host: 192.168.86.201
+    tak: # mac laptop using dhcp
     ## VIRTUAL MACHINES
     barlow:
       ansible_host: 192.168.86.225
