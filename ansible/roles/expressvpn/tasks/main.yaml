@@ -37,3 +37,11 @@
     name: "openvpn-client@expressvpn.service"
     enabled: true
     state: started
+
+- name: restart vpn service nightly at midnight
+  ansible.builtin.cron:
+    name: "restart vpn service"
+    user: root
+    minute: "0"
+    hour: "0"
+    job: "systemctl restart openvpn-client@expressvpn.service"
