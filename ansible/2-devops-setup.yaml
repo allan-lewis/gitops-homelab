@@ -22,9 +22,10 @@
   tags: [devops_backup]
 
   roles:
-    - role: postgres_db_backup
-      when:
-        - postgres_db_backup_enabled | default(false)
+    # - role: postgres_db_backup
+    #   when:
+    #     - postgres_db_backup_enabled | default(false)
+    - role: s3_local_mirror
 
   post_tasks:
     - name: setup backup fragments for devops hosts

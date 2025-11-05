@@ -82,27 +82,3 @@
 
   roles:
     - terraform_output
-
-- name: backup aws s3 buckets
-  hosts: localhost
-  gather_facts: no
-  become: no
-  tags: [s3_backup]
-
-  pre_tasks:
-    - name: confirm s3 backup
-      ansible.builtin.pause:
-        prompt: "type 'yes' to confirm backing up s3 buckets"
-      register: s3_confirm
-
-    - name: abort if confirmation was not 'yes'
-      ansible.builtin.fail:
-        msg: "s3 backup aborted — you must type 'yes' to proceed."
-      when: s3_confirm.user_input != "yes"
-
-  roles:
-    - role: known_hosts
-      vars:
-        homelab_ansible_translate_ip: false
-        homelab_ssh_keys: [ "{{ s3_backup_remote_host_ip | mandatory('set s3_backup_remote_host_ip') }}" ]
-    - role: s3_backup

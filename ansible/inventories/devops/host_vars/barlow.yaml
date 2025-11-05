@@ -10,5 +10,13 @@ postgres_db_name: authentik
 postgres_db_user: authentik
 postgres_db_password: "{{ lookup('env','AUTHENTIK_POSTGRESQL_PASSWORD') }}"
 
+s3_mirror_buckets:
+  - allans-home-lab-longhorn
+  - allans-homelab-terraform-state-bucket
+  - gitops-homelab-longhorn
+  - gitops-homelab-longhorn-attic
+  - gitops-homelab-longhorn-staging
+  - gitops-homelab-terraform
+
 terraform_output_config_node: "roland"
 terraform_output_tf_dir: "/home/lab/gitops-homelab/terraform/environments/production-k8s"
