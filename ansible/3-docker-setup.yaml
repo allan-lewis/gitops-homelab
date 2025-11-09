@@ -421,3 +421,15 @@
             uid: 1000
             gid: 1000
             mode: "0755"
+
+  post_tasks:
+    - name: setup backup fragments for tautulli
+      include_tasks: "playbooks/includes/backup_fragments.yaml"
+      vars:
+        backup_known_hosts: ['procyon']
+        backup_fragments:
+          - name: "docker-tautulli.conf"
+            header: "tautulli config"
+            pairs:
+              - { src: "/etc/tautulli",
+                  dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/tautulli/config" }
