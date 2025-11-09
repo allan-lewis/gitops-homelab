@@ -216,17 +216,6 @@ spec:
           namespace: ngb
           port: 8080
           scheme: http 
-    - match: Host(`tautulli.k8s.allanshomelab.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: tautulli
-          namespace: tautulli
-          port: 8181
-          scheme: http 
     - match: Host(`rancher.k8s.allanshomelab.com`)
       kind: Rule
       middlewares:

@@ -339,13 +339,13 @@ data:
               key: {{HOMEPAGE_VAR_SONARR_KEY}}
         - Tautulli:
             icon: tautulli.png
-            href: https://tautulli.k8s.allanshomelab.com
+            href: https://tautulli.media.allanshomelab.com
             description: Plex monitoring and analytics
             namespace: tautulli
             app: tautulli
             widget:
               type: tautulli
-              url: https://tautulli.k8s.allanshomelab.com
+              url: https://tautulli.media.allanshomelab.com
               key: {{HOMEPAGE_VAR_TAUTULLI_KEY}}
         - Transmission:
             icon: transmission.png

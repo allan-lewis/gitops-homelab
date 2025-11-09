@@ -53,6 +53,10 @@ traefik_services:
     host: photos.allanandvaia.com
     url: "http://{{ hostvars['misery'].ansible_host }}:2283"
     scheme: http
+  - name: tautulli
+    host: tautulli.media.allanandvaia.com
+    url: "http://{{ hostvars['misery'].ansible_host }}:8181"
+    scheme: http
   - name: homeassistant
     host: home.allanandvaia.com
     url: "http://{{ hostvars['arcturus'].ansible_host }}:8123"
