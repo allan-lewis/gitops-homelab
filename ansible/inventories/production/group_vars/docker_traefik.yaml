@@ -54,7 +54,7 @@ traefik_services:
     url: "http://{{ hostvars['misery'].ansible_host }}:2283"
     scheme: http
   - name: tautulli
-    host: tautulli.media.allanandvaia.com
+    host: tautulli.media.allanshomelab.com
     url: "http://{{ hostvars['misery'].ansible_host }}:8181"
     scheme: http
   - name: homeassistant
