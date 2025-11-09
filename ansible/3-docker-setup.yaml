@@ -401,3 +401,23 @@
             pairs:
               - { src: "/srv/plex/config",
                   dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/plex/config" }
+
+- name: install tautulli
+  hosts: docker_tautulli
+  become: yes
+  gather_facts: yes
+  tags: [docker_tautulli]
+
+  roles:
+    - role: docker_compose
+      vars:  
+        compose_app_name: tautulli
+        compose_source_type: template
+        compose_template_src: templates/docker-compose/tautulli.compose.yaml.j2
+
+        compose_paths:
+          - path: "/etc/tautulli"
+            create: true
+            uid: 1000
+            gid: 1000
+            mode: "0755"
