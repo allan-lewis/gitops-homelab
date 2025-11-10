@@ -75,5 +75,5 @@ traefik_services:
     scheme: https
   - name: tools
     host: tools.docker.allanshomelab.com
-    url: "http://{{ hostvars['misery'].ansible_host }}:8386"
+    url: "http://{{ hostvars['carrie'].ansible_host }}:8386"
     scheme: http
