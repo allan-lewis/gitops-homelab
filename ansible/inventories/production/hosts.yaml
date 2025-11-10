@@ -21,6 +21,8 @@ all:
       ansible_host: 192.168.86.225
     callahan:
       ansible_host: 192.168.86.215
+    carrie:
+      ansible_host: 192.168.86.228
     cujo:
       ansible_host: 192.168.86.226
     misery:
@@ -82,7 +84,7 @@ all:
                 misery:
             docker_it_tools:
               hosts:
-                misery:
+                carrie:
             docker_jellyfin:
               hosts:
                 misery:
@@ -91,6 +93,7 @@ all:
                 cujo:
             docker_monitoring:
               hosts:
+                carrie:
                 cujo:
                 flagg:
                 misery:
