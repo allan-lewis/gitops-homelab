@@ -80,6 +80,9 @@ all:
             docker_immich:
               hosts:
                 misery:
+            docker_it_tools:
+              hosts:
+                misery:
             docker_jellyfin:
               hosts:
                 misery:
