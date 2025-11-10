@@ -73,3 +73,7 @@ traefik_services:
     host: proxmox.allanshomelab.com
     url: "https://{{ hostvars['polaris'].ansible_host }}:8006"
     scheme: https
+  - name: tools
+    host: tools.docker.allanshomelab.com
+    url: "http://{{ hostvars['misery'].ansible_host }}:8386"
+    scheme: http
