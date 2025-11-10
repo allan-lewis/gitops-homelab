@@ -433,3 +433,16 @@
             pairs:
               - { src: "/etc/tautulli",
                   dest: "allan@{{ hostvars['procyon'].ansible_host }}:/mnt/pool1/gitops-homelab/backup-runner/{{ inventory_hostname }}/tautulli/config" }
+
+- name: install it tools
+  hosts: docker_tools
+  become: yes
+  gather_facts: yes
+  tags: [docker_tools]
+
+  roles:
+    - role: docker_compose
+      vars:  
+        compose_app_name: tools
+        compose_source_type: file
+        compose_template_src: files/docker-compose/it-tools.compose.yaml.j2
