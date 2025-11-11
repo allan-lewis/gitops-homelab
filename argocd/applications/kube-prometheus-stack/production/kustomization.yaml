@@ -23,6 +23,8 @@ patches:
         path: /spec/syncPolicy/syncOptions
         value:
           - ServerSideApply=true
+      - op: remove
+        path: /spec/syncPolicy/automated
       - op: add
         path: /spec/ignoreDifferences
         value:
