@@ -266,7 +266,7 @@ data:
             icon: jackett.png
             href: https://jackett.media.allanshomelab.com
             description: Tracker proxy server
-            server: misery
+            server: cujo
             container: jackett
             widget:
               type: jackett
@@ -291,7 +291,7 @@ data:
             icon: lidarr.png
             href: https://lidarr.k8s.allanshomelab.com
             description: Music management
-            server: misery
+            server: cujo
             container: lidarr
             widget:
               type: lidarr
@@ -301,7 +301,7 @@ data:
             icon: plex.png
             href: https://plex.media.allanshomelab.com
             description: Media server
-            server: misery
+            server: cujo
             container: plex
             widget:
               type: plex
@@ -311,7 +311,7 @@ data:
             icon: radarr.png
             href: https://radarr.k8s.allanshomelab.com
             description: Movie management
-            server: misery
+            server: cujo
             container: radarr
             widget:
               type: radarr
@@ -321,7 +321,7 @@ data:
             icon: sonarr.png
             href: https://sonarr.k8s.allanshomelab.com
             description: Show management
-            server: misery
+            server: cujo
             container: sonarr
             widget:
               type: sonarr
@@ -331,8 +331,8 @@ data:
             icon: tautulli.png
             href: https://tautulli.media.allanshomelab.com
             description: Plex monitoring and analytics
-            namespace: tautulli
-            app: tautulli
+            server: misery
+            container: tautulli
             widget:
               type: tautulli
               url: https://tautulli.media.allanshomelab.com
@@ -341,7 +341,7 @@ data:
             icon: transmission.png
             href: https://transmission.media.allanshomelab.com
             description: Torrent download client
-            server: misery
+            server: cujo
             container: transmission
             widget:
               type: transmission
