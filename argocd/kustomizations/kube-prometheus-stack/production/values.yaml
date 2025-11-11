@@ -81,6 +81,7 @@ prometheus:
             - 192.168.86.227:9100
             - 192.168.86.205:9100
             - 192.168.86.205:9102
+            - 192.168.86.228:9100
             # cloudflare
             - 192.168.86.205:2000
         relabel_configs:
@@ -109,6 +110,11 @@ prometheus:
             regex: '192.168.86.215:9100'
             target_label: instance
             replacement: 'callahan'
+          - action: replace
+            source_labels: ['__address__']
+            regex: '192.168.86.228:9100'
+            target_label: instance
+            replacement: 'carrie'
           - action: replace
             source_labels: ['__address__']
             regex: '192.168.86.225:9100'
