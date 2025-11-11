@@ -289,7 +289,7 @@ data:
               expandOneStreamToTwoRows: false # optional, defaults to true
         - Lidarr:
             icon: lidarr.png
-            href: https://lidarr.k8s.allanshomelab.com
+            href: https://lidarr.media.allanshomelab.com
             description: Music management
             server: cujo
             container: lidarr
@@ -309,7 +309,7 @@ data:
               key: {{HOMEPAGE_VAR_PLEX_KEY}}
         - Radarr:
             icon: radarr.png
-            href: https://radarr.k8s.allanshomelab.com
+            href: https://radarr.media.allanshomelab.com
             description: Movie management
             server: cujo
             container: radarr
@@ -319,7 +319,7 @@ data:
               key: {{HOMEPAGE_VAR_RADARR_KEY}}
         - Sonarr:
             icon: sonarr.png
-            href: https://sonarr.k8s.allanshomelab.com
+            href: https://sonarr.media.allanshomelab.com
             description: Show management
             server: cujo
             container: sonarr
