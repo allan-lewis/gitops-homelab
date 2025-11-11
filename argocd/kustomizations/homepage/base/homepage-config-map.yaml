@@ -214,23 +214,13 @@ data:
             icon: cloudflare.png
             href: {{HOMEPAGE_VAR_CLOUDFLARE_URL}}
             description: Zero trust tunnel
+            server: flagg
+            container: cloudflare-cloudflared-1
             widget:
               type: cloudflared
               key: {{HOMEPAGE_VAR_CLOUDFLARE_KEY}}
               accountid: {{HOMEPAGE_VAR_CLOUDFLARE_ACCOUTNT_ID}}
               tunnelid: {{HOMEPAGE_VAR_CLOUDFLARE_TUNNEL_ID}}
-        - Pi-hole (k8s):
-            icon: pi-hole.png
-            href: https://dns.k8s.allanshomelab.com/admin
-            description: Primary DNS server
-            namespace: pihole
-            app: pihole
-            podSelector: app = pihole
-            widget:
-              type: pihole
-              url: https://dns.k8s.allanshomelab.com
-              version: 6
-              key: {{HOMEPAGE_VAR_PIHOLE_KEY}}
         - Pi-hole (Docker):
             icon: pi-hole.png
             href: https://dns.docker.allanshomelab.com/admin
