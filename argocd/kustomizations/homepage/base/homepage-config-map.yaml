@@ -301,7 +301,7 @@ data:
             icon: plex.png
             href: https://plex.media.allanshomelab.com
             description: Media server
-            server: cujo
+            server: misery
             container: plex
             widget:
               type: plex
