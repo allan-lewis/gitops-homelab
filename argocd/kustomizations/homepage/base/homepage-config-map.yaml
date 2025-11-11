@@ -273,13 +273,13 @@ data:
               url: https://jackett.media.allanshomelab.com
         - Jellyfin:
             icon: jellyfin.png
-            href: https://jellyfin.docker.allanshomelab.com
+            href: https://jellyfin.media.allanshomelab.com
             description: Media server
             server: misery
             container: jellyfin
             widget:
               type: jellyfin
-              url: https://jellyfin.docker.allanshomelab.com
+              url: https://jellyfin.media.allanshomelab.com
               key: {{HOMEPAGE_VAR_JELLYFIN_KEY}}
               enableBlocks: true # optional, defaults to false
               enableNowPlaying: true # optional, defaults to true
