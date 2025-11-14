@@ -27,8 +27,6 @@ all:
       ansible_host: 192.168.86.226
     misery:
       ansible_host: 192.168.86.227
-    mordred:
-      ansible_host: 192.168.86.221
     ## KUBERNETES
     roland:
       ansible_host: 192.168.86.151 
