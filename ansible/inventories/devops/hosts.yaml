@@ -4,9 +4,10 @@ all:
       ansible_host: 192.168.86.225
     callahan:
       ansible_host: 192.168.86.215
-    # needed for backups
-    procyon:
+    procyon: # needed for backups
       ansible_host: 192.168.86.106
+    todash:
+      ansible_host: 192.168.86.69
   children:
     ubuntu:
       children:
@@ -20,3 +21,4 @@ all:
               hosts:
                 barlow:
                 callahan:
+                todash:
