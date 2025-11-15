@@ -46,10 +46,6 @@ all:
       ansible_host: 192.168.86.124 
     deneb:
       ansible_host: 192.168.86.166
-    mimosa:
-      ansible_host: 192.168.86.163
-    peacock:
-      ansible_host: 192.168.86.162
     polaris:
       ansible_host: 192.168.86.101
     procyon:
