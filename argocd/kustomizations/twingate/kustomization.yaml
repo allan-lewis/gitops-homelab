@@ -6,12 +6,12 @@ resources:
 - external-secret.yaml
 
 helmCharts:
-- name: connector
-  repo: https://twingate.github.io/helm-charts
-  releaseName: valiant-stingray
-  namespace: twingate
-  version: 0.1.31
-  valuesFile: values-valiant-stingray.yaml
+# - name: connector
+#   repo: https://twingate.github.io/helm-charts
+#   releaseName: valiant-stingray
+#   namespace: twingate
+#   version: 0.1.31
+#   valuesFile: values-valiant-stingray.yaml
 - name: connector
   repo: https://twingate.github.io/helm-charts
   releaseName: modest-anteater
