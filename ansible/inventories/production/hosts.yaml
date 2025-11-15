@@ -103,6 +103,9 @@ all:
             docker_traefik:
               hosts:
                 flagg:
+            docker_twingate:
+              hosts:
+                flagg:
         expressvpn:
           hosts:
             cujo:
