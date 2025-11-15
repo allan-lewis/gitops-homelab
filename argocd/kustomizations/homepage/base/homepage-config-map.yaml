@@ -266,7 +266,7 @@ data:
             href: https://allanshomelab.twingate.com/networks/overview
             descripion: Zero-trust access
             server: flagg
-            container: twingate
+            container: valiant_stingray
     - Media:
         - Immich:
             icon: immich.png
