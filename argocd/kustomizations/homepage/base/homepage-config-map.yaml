@@ -40,23 +40,25 @@ data:
   custom.css: ""
   custom.js: ""
   bookmarks.yaml: |
-    - Documentation:
-        - Argo CD:
-          - abbr: ACD
-            href: https://argo-cd.readthedocs.io/en/stable/
-        - Argo CD Image Updater:
-          - abbr: AIU
-            href: https://argocd-image-updater.readthedocs.io/en/stable/    
-        - Homepage:
-          - abbr: HPG
-            href: https://gethomepage.dev/
     - GitHub:
         - Allan's Home Lab:
           - abbr: AHL
             href: https://github.com/allan-lewis/allans-home-lab
+        - Dotfiles:
+          - abbr: DFS
+            href: https://github.com/allan-lewis/dotfiles
         - Gitops Home Lab:
           - abbr: GHL
             href: https://github.com/allan-lewis/gitops-homelab
+        - Gitops Home Lab Orchestrator:
+          - abbr: GHO
+            href: https://github.com/allan-lewis/gitops-homelab-orchestrator
+        - Homelab Metrics:
+          - abbr: HLM
+            href: https://github.com/allan-lewis/homelab-metrics
+        - No Geeks Brewing:
+          - abbr: NGB
+            href: https://github.com/allan-lewis/no-geeks-brewing-go
     - GitOps:
         - Docker Hub:
           - abbr: DHB
@@ -67,6 +69,10 @@ data:
         - Renovate:
           - abbr: REN
             href: https://developer.mend.io/github/allan-lewis
+    - Documentation:  
+        - Homepage:
+          - abbr: HPG
+            href: https://gethomepage.dev/
   services.yaml: |
     - Home Lab Management:
         - Gilead:
