@@ -32,9 +32,9 @@ data:
       Home Automation:
         style: "row"
         columns: 4
-      Documentation:
       GitHub:
       GitOps:
+      Documentation:
     theme: "dark"
     color: "slate"
   custom.css: ""
@@ -69,7 +69,7 @@ data:
         - Renovate:
           - abbr: RV
             href: https://developer.mend.io/github/allan-lewis
-    - Misc:  
+    - Documentation:  
         - Homepage:
           - abbr: HP
             href: https://gethomepage.dev/
