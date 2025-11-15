@@ -232,6 +232,10 @@ data:
               url: https://dns.docker.allanshomelab.com
               version: 6
               key: {{HOMEPAGE_VAR_PIHOLE_KEY_DOCKER}}
+        - Tailscale:
+            icon: tailscale.png
+            href: https://login.tailscale.com/admin/machines
+            description: Mesh VPN
         - Traefik (k8s):
             icon: traefik.png
             href: https://traefik.k8s.allanshomelab.com
@@ -250,6 +254,12 @@ data:
             widget:
               type: traefik
               url: https://traefik.docker.allanshomelab.com
+        - Twingate:
+            icon: twingate.png
+            href: https://allanshomelab.twingate.com/networks/overview
+            descripion: Zero-trust access
+            server: flagg
+            container: twingate
     - Media:
         - Immich:
             icon: immich.png
