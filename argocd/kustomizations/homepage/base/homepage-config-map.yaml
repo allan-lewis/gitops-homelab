@@ -69,7 +69,7 @@ data:
         - Renovate:
           - abbr: RV
             href: https://developer.mend.io/github/allan-lewis
-    - Documentation:  
+    - Misc:  
         - Homepage:
           - abbr: HP
             href: https://gethomepage.dev/
