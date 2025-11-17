@@ -34,6 +34,17 @@ variable "vm_list_ubuntu" {
       gateway           = "192.168.86.1"
       tags              = ["terraform", "production", "ubuntu", "docker", "apps"]
     }
+    sheemie = {
+      description       = "Local GitHub runner (managed by Terraform)"
+      proxmox_node      = "polaris"
+      cpu_cores         = 4
+      memory_dedicated  = 8192
+      datastore_id      = "local-lvm"
+      disk_size         = 96
+      ipv4_address      = "192.168.86.229/24"
+      gateway           = "192.168.86.1"
+      tags              = ["terraform", "production", "ubuntu", "github"]
+    }
   }
 }
 

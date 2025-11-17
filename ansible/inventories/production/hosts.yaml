@@ -27,6 +27,8 @@ all:
       ansible_host: 192.168.86.226
     misery:
       ansible_host: 192.168.86.227
+    sheemie:
+      ansible_host: 192.168.86.229
     ## KUBERNETES
     roland:
       ansible_host: 192.168.86.151 
@@ -64,6 +66,8 @@ all:
             jake:
             susannah:
     ubuntu:
+      hosts:
+        sheemie:
       children:
         docker:
           children:
