@@ -23,17 +23,6 @@ variable "vm_list_ubuntu" {
       gateway           = "192.168.86.1"
       tags              = ["terraform", "devops", "ubuntu"]
     }
-    todash = {
-      description       = "host for tinkering and testing (managed by terraform)"
-      proxmox_node      = "polaris"
-      cpu_cores         = 4
-      memory_dedicated  = 4096
-      datastore_id      = "local-lvm"
-      disk_size         = 128
-      ipv4_address      = "192.168.86.69/24"
-      gateway           = "192.168.86.1"
-      tags              = ["terraform", "tinker", "ubuntu"]
-    }
   }
 }
 
