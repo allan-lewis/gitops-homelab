@@ -7,5 +7,5 @@ helmCharts:
   repo: https://portainer.github.io/k8s/
   releaseName: portainer
   namespace: portainer
-  version: 2.33.3
+  version: 2.33.5
   valuesFile: values.yaml
