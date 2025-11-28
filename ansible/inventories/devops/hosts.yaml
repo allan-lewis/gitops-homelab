@@ -2,6 +2,9 @@ all:
   hosts:
     barlow:
       ansible_host: 192.168.86.225
+    blaine:
+      ansible_host: 192.168.86.98
+      ansible_python_interpreter: "/usr/bin/python3.13"
     callahan:
       ansible_host: 192.168.86.215
     procyon: # needed for backups
@@ -12,6 +15,7 @@ all:
         devops:
           hosts:
             barlow:
+            blaine:
             callahan:
         docker:
           children:

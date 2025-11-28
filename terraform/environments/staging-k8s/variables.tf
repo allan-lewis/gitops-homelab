@@ -1,7 +1,7 @@
 variable "controlplane_list" {
   description = "A list of Talos Control Plane VMs to create"
   default = {
-    beta = {
+    alpha = {
       description       = "Talos Linux control plane node (managed by Terraform)"
       proxmox_node      = "polaris"
       cpu_cores         = 4
@@ -18,7 +18,7 @@ variable "controlplane_list" {
 variable "worker_list" {
   description = "A list of Talos Control Plane VMs to create"
   default = {
-    gamma = {
+    beta = {
       description       = "Talos Linux worker node (managed by Terraform)"
       proxmox_node      = "polaris"
       cpu_cores         = 4

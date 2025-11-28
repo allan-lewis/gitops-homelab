@@ -1,0 +1,7 @@
+---
+ansible_inentory_path: staging
+gatus_slug: "(Staging DevOps)"
+
+terraform_output_tf_dir: "/home/lab/gitops-homelab/terraform/environments/staging-k8s"
+
+terraform_output_config_node: "beta"
