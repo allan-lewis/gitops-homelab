@@ -194,28 +194,6 @@ spec:
           namespace: kube-prometheus-stack
           port: 9093
           scheme: http
-    - match: Host(`nogeeksbrewing.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: no-geeks-brewing-go
-          namespace: ngb
-          port: 8080
-          scheme: http  
-    - match: Host(`www.nogeeksbrewing.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: no-geeks-brewing-go
-          namespace: ngb
-          port: 8080
-          scheme: http 
     - match: Host(`rancher.k8s.allanshomelab.com`)
       kind: Rule
       middlewares:

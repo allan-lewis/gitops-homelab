@@ -9,6 +9,9 @@ all:
       ansible_host: 192.168.86.215
     procyon: # needed for backups
       ansible_host: 192.168.86.106
+    todash:
+      ansible_host: 192.168.86.69
+      ansible_python_interpreter: "/usr/bin/python3.13"
   children:
     ubuntu:
       children:
@@ -23,3 +26,6 @@ all:
               hosts:
                 barlow:
                 callahan:
+            docker_ngb:
+              hosts:
+                todash:
