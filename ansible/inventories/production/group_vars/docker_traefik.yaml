@@ -77,3 +77,11 @@ traefik_services:
     host: tools.docker.allanshomelab.com
     url: "http://{{ hostvars['carrie'].ansible_host }}:8386"
     scheme: http
+  - name: ngb1
+    host: nogeeksbrewing.com
+    url: "http://{{ hostvars['carrie'].ansible_host }}:8080"
+    scheme: http
+  - name: ngb2
+    host: www.nogeeksbrewing.com
+    url: "http://{{ hostvars['carrie'].ansible_host }}:8080"
+    scheme: http

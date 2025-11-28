@@ -95,6 +95,9 @@ all:
                 cujo:
                 flagg:
                 misery:
+            docker_ngb:
+              hosts:
+                carrie:
             docker_pihole:
               hosts:
                 flagg:

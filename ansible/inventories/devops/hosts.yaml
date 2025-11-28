@@ -26,6 +26,3 @@ all:
               hosts:
                 barlow:
                 callahan:
-            docker_ngb:
-              hosts:
-                todash:
