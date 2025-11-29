@@ -16,5 +16,5 @@ helmCharts:
   repo: https://twingate.github.io/helm-charts
   releaseName: modest-anteater
   namespace: twingate
-  version: 0.1.31
+  version: 0.1.32
   valuesFile: values-modest-anteater.yaml
