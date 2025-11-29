@@ -151,10 +151,6 @@ gatus_https_endpoints:
     group: "Sites (K8s)"
     url: "https://prometheus.k8s.allanshomelab.com"
     pattern: "*Prometheus*"
-  - name: Rancher
-    group: "Sites (K8s)"
-    url: "https://rancher.k8s.allanshomelab.com"
-    pattern: "*rancher*"
   - name: Sonarr
     group: "Sites (Media)"
     url: "https://sonarr.media.allanshomelab.com/ping"

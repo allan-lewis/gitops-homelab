@@ -1,4 +1,0 @@
-hostname: rancher.k8s.allanshomelab.com
-tls: external
-ingress:
-  enabled: false

@@ -128,13 +128,6 @@ data:
               url: https://procyon.hosts.allanshomelab.com
               username: truenas_admin
               password: "{{HOMEPAGE_VAR_TRUENAS_PASSWORD}}"
-        - Rancher:
-            icon: rancher.png
-            href: https://rancher.k8s.allanshomelab.com
-            description: Kubernetes management platform
-            namespace: cattle-system
-            app: rancher
-            podSelector: app = rancher
         - Sirius:
             icon: proxmox.png
             href: https://sirius.hosts.allanshomelab.com

@@ -54,8 +54,6 @@ pihole_cname_records:
     target: "k8s.allanshomelab.com"
   - alias: "radarr.k8s.allanshomelab.com"
     target: "k8s.allanshomelab.com"
-  - alias: "rancher.k8s.allanshomelab.com"
-    target: "k8s.allanshomelab.com"
   - alias: "sonarr.k8s.allanshomelab.com"
     target: "k8s.allanshomelab.com"
   - alias: "one.kvm.allanshomelab.com"
