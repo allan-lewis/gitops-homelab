@@ -95,6 +95,7 @@ all:
                 cujo:
                 flagg:
                 misery:
+                sheemie:
             docker_ngb:
               hosts:
                 carrie:
