@@ -1,17 +1,17 @@
 ---
-- name: do baseline setup on all hosts (as root)
-  hosts: ubuntu
-  become: yes
-  gather_facts: yes
-  tags: [baseline_setup_root]
+# - name: do baseline setup on all hosts (as root)
+#   hosts: ubuntu
+#   become: yes
+#   gather_facts: yes
+#   tags: [baseline_setup_root]
 
-  roles:
-    - dependencies 
-    - tz
-    - user  
-    - ssh
-    - apt
-    - reboot
+#   roles:
+#     - dependencies 
+#     - tz
+#     - user  
+#     - ssh
+#     - apt
+#     - reboot
 
 - name: setup automated backups on all hosts (as root)
   hosts: ubuntu
@@ -22,20 +22,20 @@
   roles:
     - backup_runner
 
-- name: do baseline setup on all hosts (as local user)
-  hosts: ubuntu
-  become: no
-  gather_facts: yes  
-  tags: [baseline_setup_lab]
+# - name: do baseline setup on all hosts (as local user)
+#   hosts: ubuntu
+#   become: no
+#   gather_facts: yes  
+#   tags: [baseline_setup_lab]
 
-  roles:
-    - role: known_hosts
-      vars:
-        homelab_ssh_keys: ['github.com']
-        homelab_ansible_translate_ip: no
-    - public_key
-    - private_key
-    - zsh_shell
+#   roles:
+#     - role: known_hosts
+#       vars:
+#         homelab_ssh_keys: ['github.com']
+#         homelab_ansible_translate_ip: no
+#     - public_key
+#     - private_key
+#     - zsh_shell
 
 - name: install tailscale.
   hosts: tailscale
