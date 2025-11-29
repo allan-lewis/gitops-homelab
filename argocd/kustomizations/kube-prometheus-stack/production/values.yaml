@@ -83,6 +83,7 @@ prometheus:
             - 192.168.86.205:9102
             - 192.168.86.228:9100
             - 192.168.86.229:9100 # github runner
+            - 192.168.86.229:9102 # github runner
             # cloudflare
             - 192.168.86.205:2000
         relabel_configs:
@@ -151,6 +152,16 @@ prometheus:
             regex: '192.168.86.205:9102'
             target_label: instance
             replacement: 'gilead'
+          - action: replace
+            source_labels: ['__address__']
+            regex: '192.168.86.229:9100'
+            target_label: instance
+            replacement: 'sheemie'
+          - action: replace
+            source_labels: ['__address__']
+            regex: '192.168.86.229:9102'
+            target_label: instance
+            replacement: 'sheemie'
 
 grafana:
   grafana.ini:
