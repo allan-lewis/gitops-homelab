@@ -5,8 +5,6 @@ all:
     blaine:
       ansible_host: 192.168.86.98
       ansible_python_interpreter: "/usr/bin/python3.13"
-    callahan:
-      ansible_host: 192.168.86.215
     procyon: # needed for backups
       ansible_host: 192.168.86.106
     todash:
@@ -19,10 +17,8 @@ all:
           hosts:
             barlow:
             blaine:
-            callahan:
         docker:
           children:
             docker_monitoring:
               hosts:
                 barlow:
-                callahan:
