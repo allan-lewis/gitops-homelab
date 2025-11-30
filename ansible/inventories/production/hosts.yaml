@@ -31,16 +31,16 @@ all:
       ansible_host: 192.168.86.229
     ## ORCHESTRATOR VIRTUAL MACHINES
     blaine:
-      ansible_host: 192.168.86.40
+      ansible_host: 192.168.86.98
       gatus_slug: "(Staging Dev Ops)"
     patricia:
-      ansible_host: 192.168.86.41
+      ansible_host: 192.168.86.99
       gatus_slug: "(Production Dev Ops)"
     langolier:
-      ansible_host: 192.168.86.50
+      ansible_host: 192.168.86.70
       gatus_slug: "(Ubuntu Sandbox)"
     todash:
-      ansible_host: 192.168.86.42
+      ansible_host: 192.168.86.69
       gatus_slug: "(Arch Sandbox, BTW)"
     ## KUBERNETES
     roland:
