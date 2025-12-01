@@ -17,8 +17,6 @@ all:
       ansible_host: 192.168.86.201
     tak: # mac laptop using dhcp
     ## VIRTUAL MACHINES
-    barlow:
-      ansible_host: 192.168.86.225
     carrie:
       ansible_host: 192.168.86.228
     cujo:
