@@ -4,12 +4,12 @@ all:
       ansible_host: 192.168.86.225
     blaine:
       ansible_host: 192.168.86.98
-      ansible_python_interpreter: "/usr/bin/python3.13"
+      ansible_python_interpreter: "/usr/bin/python3"
+    patricia:
+      ansible_host: 192.168.86.99
+      ansible_python_interpreter: "/usr/bin/python3"
     procyon: # needed for backups
       ansible_host: 192.168.86.106
-    todash:
-      ansible_host: 192.168.86.69
-      ansible_python_interpreter: "/usr/bin/python3.13"
   children:
     ubuntu:
       children:
@@ -17,6 +17,7 @@ all:
           hosts:
             barlow:
             blaine:
+            patricia:
         docker:
           children:
             docker_monitoring:

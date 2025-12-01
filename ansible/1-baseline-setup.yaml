@@ -13,14 +13,14 @@
 #     - apt
 #     - reboot
 
-- name: setup automated backups on all hosts (as root)
-  hosts: ubuntu
-  become: yes
-  gather_facts: yes
-  tags: [baseline_setup_backup]
+# - name: setup automated backups on all hosts (as root)
+#   hosts: ubuntu
+#   become: yes
+#   gather_facts: yes
+#   tags: [baseline_setup_backup]
 
-  roles:
-    - backup_runner
+#   roles:
+#     - backup_runner
 
 # - name: do baseline setup on all hosts (as local user)
 #   hosts: ubuntu
