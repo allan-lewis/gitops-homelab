@@ -37,7 +37,6 @@ all:
       gatus_slug: "(DevOps)"
     cujo:
       ansible_host: 192.168.86.217
-      gatus_slug: "(Arch Sandbox, BTW)"
     todash:
       ansible_host: 192.168.86.218
       gatus_slug: "(Ubuntu Sandbox)"
