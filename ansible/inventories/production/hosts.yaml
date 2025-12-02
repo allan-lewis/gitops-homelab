@@ -19,25 +19,28 @@ all:
     ## VIRTUAL MACHINES
     carrie:
       ansible_host: 192.168.86.228
-    cujo:
-      ansible_host: 192.168.86.226
+    # cujo:
+    #   ansible_host: 192.168.86.226
     misery:
       ansible_host: 192.168.86.227
     sheemie:
       ansible_host: 192.168.86.229
     ## ORCHESTRATOR VIRTUAL MACHINES
     blaine:
-      ansible_host: 192.168.86.98
-      gatus_slug: "(Staging Dev Ops)"
+      ansible_host: 192.168.86.223
+      gatus_slug: "(OpenVPN Gateway)"
     patricia:
-      ansible_host: 192.168.86.99
-      gatus_slug: "(Production Dev Ops)"
+      ansible_host: 192.168.86.224
+      gatus_slug: "(Media Acquisition)"
     langolier:
-      ansible_host: 192.168.86.70
-      gatus_slug: "(Ubuntu Sandbox)"
-    todash:
-      ansible_host: 192.168.86.69
+      ansible_host: 192.168.86.216
+      gatus_slug: "(DevOps)"
+    cujo:
+      ansible_host: 192.168.86.217
       gatus_slug: "(Arch Sandbox, BTW)"
+    todash:
+      ansible_host: 192.168.86.218
+      gatus_slug: "(Ubuntu Sandbox)"
     ## KUBERNETES
     roland:
       ansible_host: 192.168.86.151 
@@ -95,13 +98,13 @@ all:
             docker_jellyfin:
               hosts:
                 misery:
-            docker_media_acquisition:
-              hosts:
-                cujo:
+            # docker_media_acquisition:
+            #   hosts:
+            #     cujo:
             docker_monitoring:
               hosts:
                 carrie:
-                cujo:
+                # cujo:
                 flagg:
                 misery:
                 sheemie:
@@ -123,9 +126,9 @@ all:
             docker_twingate:
               hosts:
                 flagg:
-        expressvpn:
-          hosts:
-            cujo:
+        # expressvpn:
+        #   hosts:
+        #     cujo:
         tailscale:
           hosts:
             flagg:
