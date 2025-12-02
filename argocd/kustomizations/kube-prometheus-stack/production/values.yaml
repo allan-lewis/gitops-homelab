@@ -68,8 +68,6 @@ prometheus:
         scheme: http
         static_configs:
           - targets:
-            - 192.168.86.226:9100
-            - 192.168.86.226:9102
             - 192.168.86.124:9100
             - 192.168.86.105:9100
             - 192.168.86.106:9100
@@ -82,14 +80,16 @@ prometheus:
             - 192.168.86.228:9100
             - 192.168.86.229:9100 # github runner
             - 192.168.86.229:9102 # github runner
-            - 192.168.86.98:9100
-            - 192.168.86.98:9102
-            - 192.168.86.99:9100
-            - 192.168.86.99:9102
-            - 192.168.86.69:9100
-            - 192.168.86.69:9102
-            - 192.168.86.70:9100
-            - 192.168.86.70:9102
+            - 192.168.86.223:9100
+            - 192.168.86.223:9102
+            - 192.168.86.224:9100
+            - 192.168.86.224:9102
+            - 192.168.86.218:9100
+            - 192.168.86.218:9102
+            - 192.168.86.216:9100
+            - 192.168.86.216:9102
+            - 192.168.86.217:9100
+            - 192.168.86.217:9102
             # cloudflare
             - 192.168.86.205:2000
         relabel_configs:
@@ -103,11 +103,6 @@ prometheus:
             regex: '192.168.86.205:9100'
             target_label: instance
             replacement: 'flagg'
-          - action: replace
-            source_labels: ['__address__']
-            regex: '192.168.86.226:9100'
-            target_label: instance
-            replacement: 'cujo'
           - action: replace
             source_labels: ['__address__']
             regex: '192.168.86.124:9100'
@@ -160,24 +155,29 @@ prometheus:
             replacement: 'sheemie'
           - action: replace
             source_labels: ['__address__']
-            regex: '192\.168\.86\.98.*'
+            regex: '192\.168\.86\.223.*'
             target_label: instance
             replacement: 'blaine'
           - action: replace
             source_labels: ['__address__']
-            regex: '192\.168\.86\.99.*'
+            regex: '192\.168\.86\.224.*'
             target_label: instance
             replacement: 'patricia'
           - action: replace
             source_labels: ['__address__']
-            regex: '192\.168\.86\.69.*'
+            regex: '192\.168\.86\.218.*'
             target_label: instance
             replacement: 'todash'
           - action: replace
             source_labels: ['__address__']
-            regex: '192\.168\.86\.70.*'
+            regex: '192\.168\.86\.216.*'
             target_label: instance
             replacement: 'langolier'
+          - action: replace
+            source_labels: ['__address__']
+            regex: '192\.168\.86\.217.*'
+            target_label: instance
+            replacement: 'cujo'
 
 grafana:
   grafana.ini:
