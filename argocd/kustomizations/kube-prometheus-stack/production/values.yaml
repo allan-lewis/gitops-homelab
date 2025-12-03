@@ -68,6 +68,7 @@ prometheus:
         scheme: http
         static_configs:
           - targets:
+            - 192.168.86.226:9100
             - 192.168.86.124:9100
             - 192.168.86.105:9100
             - 192.168.86.106:9100
@@ -173,9 +174,14 @@ prometheus:
             regex: '192\.168\.86\.216.*'
             target_label: instance
             replacement: 'langolier'
+          # - action: replace
+          #   source_labels: ['__address__']
+          #   regex: '192\.168\.86\.217.*'
+          #   target_label: instance
+          #   replacement: 'cujo'
           - action: replace
             source_labels: ['__address__']
-            regex: '192\.168\.86\.217.*'
+            regex: '192\.168\.86\.226.*'
             target_label: instance
             replacement: 'cujo'
 
