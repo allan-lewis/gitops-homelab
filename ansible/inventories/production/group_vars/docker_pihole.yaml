@@ -60,7 +60,7 @@ pihole_cname_records:
     target: "kvm.allanshomelab.com"
   - alias: "two.kvm.allanshomelab.com"
     target: "kvm.allanshomelab.com"
-  - alias: "jackett.media.allanshomelab.com"
+  - alias: "prowlarr.media.allanshomelab.com"
     target: "media.allanshomelab.com"
   - alias: "lidarr.media.allanshomelab.com"
     target: "media.allanshomelab.com"
