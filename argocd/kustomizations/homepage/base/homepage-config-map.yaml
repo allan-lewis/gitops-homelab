@@ -398,9 +398,6 @@ data:
     carrie:
       host: 192.168.86.228
       port: 2375
-    cujo:
-      host: 192.168.86.226
-      port: 2375
     flagg:
       host: 192.168.86.205
       port: 2375
