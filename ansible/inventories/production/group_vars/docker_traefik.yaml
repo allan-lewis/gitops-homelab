@@ -23,9 +23,9 @@ traefik_services:
   - name: plex
     host: plex.media.allanshomelab.com
     url: "http://{{ hostvars['misery'].ansible_host }}:32400"
-  - name: jackett
-    host: jackett.media.allanshomelab.com
-    url: "http://{{ hostvars['patricia'].ansible_host }}:9117"
+  - name: prowlarr
+    host: prowlarr.media.allanshomelab.com
+    url: "http://{{ hostvars['patricia'].ansible_host }}:9696"
   - name: lidarr
     host: lidarr.media.allanshomelab.com
     url: "http://{{ hostvars['patricia'].ansible_host }}:8686"

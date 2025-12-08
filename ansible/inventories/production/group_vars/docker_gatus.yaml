@@ -132,9 +132,9 @@ gatus_https_endpoints:
     group: "Sites (K8s)"
     url: "https://alerts.k8s.allanshomelab.com"
     pattern: "*Alertmanager*"
-  - name: Jackett
+  - name: Prowlarr
     group: "Sites (Media)"
-    url: "https://jackett.media.allanshomelab.com/health"
+    url: "https://prowlarr.media.allanshomelab.com/ping"
     pattern: "*OK*"
   - name: Homepage
     group: "Sites (K8s)"
