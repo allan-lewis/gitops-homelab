@@ -2,5 +2,5 @@ gatus_slug: "(Arch Sandbox, BTW)"
 
 backup_runner_cron_hour: "*"
 backup_runner_cron_minute: "45"
-backup_runner_healthchecks_url: "https://hc-ping.com/dc76e9a3-61ac-41ab-b609-df385ef69e29"
-backup_runner_healthchecks_status: "https://healthchecks.io/b/2/280d2b18-81e3-4b55-a3b4-570d60ce8335.json"
+# backup_runner_healthchecks_url: "https://hc-ping.com/dc76e9a3-61ac-41ab-b609-df385ef69e29"
+# backup_runner_healthchecks_status: "https://healthchecks.io/b/2/280d2b18-81e3-4b55-a3b4-570d60ce8335.json"
