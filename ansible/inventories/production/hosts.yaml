@@ -55,8 +55,6 @@ all:
       ansible_host: 192.168.86.167
     arcturus:
       ansible_host: 192.168.86.124 
-    deneb:
-      ansible_host: 192.168.86.166
     polaris:
       ansible_host: 192.168.86.101
     procyon:
