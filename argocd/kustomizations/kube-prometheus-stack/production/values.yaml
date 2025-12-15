@@ -71,7 +71,7 @@ prometheus:
             - 192.168.86.124:9100
             - 192.168.86.105:9100
             - 192.168.86.106:9100
-            - 192.168.86.101:9100
+            - 192.168.86.201:9100
             - 192.168.86.167:9100
             - 192.168.86.210:9100
             - 192.168.86.227:9100
@@ -113,9 +113,9 @@ prometheus:
             replacement: 'carrie'
           - action: replace
             source_labels: ['__address__']
-            regex: '192.168.86.101:9100'
+            regex: '192.168.86.201:9100'
             target_label: instance
-            replacement: 'polaris'
+            replacement: 'shardik'
           - action: replace
             source_labels: ['__address__']
             regex: '192.168.86.210:9100'
