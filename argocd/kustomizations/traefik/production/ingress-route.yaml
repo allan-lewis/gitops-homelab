@@ -305,8 +305,8 @@ spec:
       services:
         - name: nginx-external
           namespace: nginx
-          port: 80
-          scheme: http     
+          port: 443
+          scheme: https     
     - kind: Rule
       match: "Host(`allanshomelab.com`) && PathPrefix(`/outpost.goauthentik.io/`)"
       priority: 15
@@ -327,8 +327,8 @@ spec:
       services:
         - name: nginx-external
           namespace: nginx
-          port: 80
-          scheme: http      
+          port: 443
+          scheme: https  
     - kind: Rule
       match: "Host(`www.allanshomelab.com`) && PathPrefix(`/outpost.goauthentik.io/`)"
       priority: 15
