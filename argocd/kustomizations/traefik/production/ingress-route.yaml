@@ -29,84 +29,7 @@ spec:
         - name: longhorn-frontend
           namespace: longhorn-system
           port: 80
-          scheme: http 
-    - match: Host(`lidarr-homepage.k8s.allanshomelab.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: lidarr
-          namespace: media
-          port: 8686
-          scheme: http 
-    - match: Host(`radarr-homepage.k8s.allanshomelab.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: radarr
-          namespace: media
-          port: 7878
-          scheme: http   
-    - match: Host(`sonarr-homepage.k8s.allanshomelab.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: sonarr
-          namespace: media
-          port: 8989
-          scheme: http  
-    - match: Host(`radarr.k8s.allanshomelab.com`)
-      kind: Rule
-      middlewares:
-        - name: authentik
-          namespace: default
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: radarr
-          namespace:  media
-          port: 7878
-          scheme: http        
-    - kind: Rule
-      match: "Host(`radarr.k8s.allanshomelab.com`) && PathPrefix(`/outpost.goauthentik.io/`)"
-      priority: 15
-      services:
-        - kind: Service
-          # Or, to use an external Outpost, create an ExternalName service and reference that here.
-          # See https://kubernetes.io/docs/concepts/services-networking/service/#externalname
-          name: ak-outpost-authentik-embedded-outpost
-          port: 9000
-    - match: Host(`sonarr.k8s.allanshomelab.com`)
-      kind: Rule
-      middlewares:
-        - name: authentik
-          namespace: default
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: sonarr
-          namespace:  media
-          port: 8989
-          scheme: http        
-    - kind: Rule
-      match: "Host(`sonarr.k8s.allanshomelab.com`) && PathPrefix(`/outpost.goauthentik.io/`)"
-      priority: 15
-      services:
-        - kind: Service
-          # Or, to use an external Outpost, create an ExternalName service and reference that here.
-          # See https://kubernetes.io/docs/concepts/services-networking/service/#externalname
-          name: ak-outpost-authentik-embedded-outpost
-          port: 9000
+          scheme: http                
     - match: Host(`auth.allanandvaia.com`)
       kind: Rule
       middlewares:
@@ -138,17 +61,6 @@ spec:
       services:
         - name: authentik-server
           namespace: authentik
-          port: 80
-          scheme: http 
-    - match: Host(`dns.k8s.allanshomelab.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: pihole-web
-          namespace: pihole
           port: 80
           scheme: http 
     - match: Host(`grafana.allanshomelab.com`)
@@ -184,17 +96,6 @@ spec:
           namespace: kube-prometheus-stack
           port: 9093
           scheme: http
-    - match: Host(`rancher.k8s.allanshomelab.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: rancher
-          namespace: cattle-system
-          port: 80
-          scheme: http 
     - match: Host(`gitops.allanshomelab.com`)
       kind: Rule
       middlewares:
@@ -215,10 +116,10 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: nginx
-          namespace:  nginx
+        - name: nginx-external
+          namespace: nginx
           port: 80
-          scheme: http        
+          scheme: http       
     - kind: Rule
       match: "Host(`129monroe.com`) && PathPrefix(`/outpost.goauthentik.io/`)"
       priority: 15
@@ -237,10 +138,10 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: nginx
-          namespace:  nginx
+        - name: nginx-external
+          namespace: nginx
           port: 80
-          scheme: http        
+          scheme: http      
     - kind: Rule
       match: "Host(`www.129monroe.com`) && PathPrefix(`/outpost.goauthentik.io/`)"
       priority: 15
@@ -259,10 +160,10 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: nginx
-          namespace:  nginx
+        - name: nginx-external
+          namespace: nginx
           port: 80
-          scheme: http        
+          scheme: http      
     - kind: Rule
       match: "Host(`www.allanandvaia.com`) && PathPrefix(`/outpost.goauthentik.io/`)"
       priority: 15
@@ -281,10 +182,10 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: nginx
-          namespace:  nginx
+        - name: nginx-external
+          namespace: nginx
           port: 80
-          scheme: http        
+          scheme: http       
     - kind: Rule
       match: "Host(`allanandvaia.com`) && PathPrefix(`/outpost.goauthentik.io/`)"
       priority: 15
@@ -337,17 +238,4 @@ spec:
           # Or, to use an external Outpost, create an ExternalName service and reference that here.
           # See https://kubernetes.io/docs/concepts/services-networking/service/#externalname
           name: ak-outpost-authentik-embedded-outpost
-          port: 9000                                                                  
-    - match: Host(`radarr.docker.allanshomelab.com`)
-      kind: Rule
-      middlewares:
-        - name: authentik
-          namespace: default
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: traefik-endpoint-radarr
-          namespace:  traefik
-          port: 31300
-          scheme: http        
+          port: 9000                                                                        
