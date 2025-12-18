@@ -1,3 +1,4 @@
+---
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
@@ -40,17 +41,6 @@ spec:
           namespace: media
           port: 8686
           scheme: http 
-    # - match: Host(`autobrr.k8s.allanshomelab.com`)
-    #   kind: Rule
-    #   middlewares:
-    #     - name: traefik-custom-headers
-    #       namespace: default
-    #   priority: 10
-    #   services:
-    #     - name: autobrr
-    #       namespace: media
-    #       port: 7474
-    #       scheme: http 
     - match: Host(`radarr-homepage.k8s.allanshomelab.com`)
       kind: Rule
       middlewares:
@@ -205,50 +195,6 @@ spec:
           namespace: cattle-system
           port: 80
           scheme: http 
-    - match: Host(`vault.allanshomelab.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: vaultwarden
-          namespace: vaultwarden
-          port: 35550
-          scheme: http 
-    - match: Host(`vault.129monroe.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: vaultwarden
-          namespace: vaultwarden
-          port: 35550
-          scheme: http 
-    - match: Host(`vault.allanandvaia.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: vaultwarden
-          namespace: vaultwarden
-          port: 35550
-          scheme: http 
-    - match: Host(`portainer.k8s.allanshomelab.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: portainer
-          namespace: portainer
-          port: 9000
-          scheme: http 
     - match: Host(`gitops.allanshomelab.com`)
       kind: Rule
       middlewares:
@@ -357,10 +303,10 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: nginx
-          namespace:  nginx
+        - name: nginx-external
+          namespace: nginx
           port: 80
-          scheme: http        
+          scheme: http     
     - kind: Rule
       match: "Host(`allanshomelab.com`) && PathPrefix(`/outpost.goauthentik.io/`)"
       priority: 15
@@ -379,10 +325,10 @@ spec:
           namespace: default
       priority: 10
       services:
-        - name: nginx
-          namespace:  nginx
+        - name: nginx-external
+          namespace: nginx
           port: 80
-          scheme: http        
+          scheme: http      
     - kind: Rule
       match: "Host(`www.allanshomelab.com`) && PathPrefix(`/outpost.goauthentik.io/`)"
       priority: 15
@@ -405,3 +351,27 @@ spec:
           namespace:  traefik
           port: 31300
           scheme: http        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-external
+  namespace: nginx
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: nginx-external
+  namespace: nginx
+subsets:
+  - addresses:
+      - ip: 192.168.86.228
+    ports:
+      - name: http
+        port: 8885
+        protocol: TCP
