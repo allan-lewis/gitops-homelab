@@ -143,7 +143,7 @@ prometheus:
             replacement: 'gilead'
           - action: replace
             source_labels: ['__address__']
-            regex: '192.168.86.229:9102'
+            regex: '192\.168\.86\.229.*'
             target_label: instance
             replacement: 'sheemie'
           - action: replace
