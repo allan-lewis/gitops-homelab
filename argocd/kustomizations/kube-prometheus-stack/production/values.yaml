@@ -75,25 +75,28 @@ prometheus:
             - 192.168.86.167:9100
             - 192.168.86.210:9100
             - 192.168.86.227:9100
+            - 192.168.86.227:9102
             - 192.168.86.205:9100
             - 192.168.86.205:9102
             - 192.168.86.228:9100
+            - 192.168.86.228:9102
             - 192.168.86.223:9100
             - 192.168.86.224:9100
             - 192.168.86.224:9102
-            - 192.168.86.218:9100
-            - 192.168.86.218:9102
+            - 192.168.86.215:9100
+            - 192.168.86.215:9102
             - 192.168.86.216:9100
-            - 192.168.86.217:9100
-            - 192.168.86.217:9102
-            - 192.168.86.229:9100
-            - 192.168.86.229:9102
+            - 192.168.86.216:9102
+            - 192.168.86.214:9100
+            - 192.168.86.214:9102
+            - 192.168.86.213:9100
+            - 192.168.86.213:9102
             # cloudflare
             - 192.168.86.205:2000
         relabel_configs:
           - action: replace
             source_labels: ['__address__']
-            regex: '192.168.86.227:9100'
+            regex: '192\.168\.86\.227.*'
             target_label: instance
             replacement: 'misery'
           - action: replace
@@ -108,7 +111,7 @@ prometheus:
             replacement: 'arcturus'
           - action: replace
             source_labels: ['__address__']
-            regex: '192.168.86.228:9100'
+            regex: '192\.168\.86\.228.*'
             target_label: instance
             replacement: 'carrie'
           - action: replace
@@ -143,9 +146,9 @@ prometheus:
             replacement: 'gilead'
           - action: replace
             source_labels: ['__address__']
-            regex: '192\.168\.86\.229.*'
+            regex: '192\.168\.86\.214.*'
             target_label: instance
-            replacement: 'sheemie'
+            replacement: 'callahan'
           - action: replace
             source_labels: ['__address__']
             regex: '192\.168\.86\.223.*'
@@ -158,9 +161,9 @@ prometheus:
             replacement: 'patricia'
           - action: replace
             source_labels: ['__address__']
-            regex: '192\.168\.86\.218.*'
+            regex: '192\.168\.86\.213.*'
             target_label: instance
-            replacement: 'todash'
+            replacement: 'barlow'
           - action: replace
             source_labels: ['__address__']
             regex: '192\.168\.86\.216.*'
@@ -168,7 +171,7 @@ prometheus:
             replacement: 'langolier'
           - action: replace
             source_labels: ['__address__']
-            regex: '192\.168\.86\.217.*'
+            regex: '192\.168\.86\.215.*'
             target_label: instance
             replacement: 'cujo'
 
