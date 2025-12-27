@@ -1,3 +1,0 @@
-connector:
-  network: allanshomelab
-  existingSecret: twingate-valiant-stingray-secret
