@@ -179,6 +179,9 @@ prometheus:
             replacement: 'cujo'
 
 grafana:
+  service:
+    type: LoadBalancer
+    loadBalancerIP: 192.168.86.185
   grafana.ini:
     server:
       root_url: https://grafana.allanshomelab.com
@@ -201,6 +204,9 @@ grafana:
     existingClaim: grafana
 
 alertmanager:
+  service:
+    type: LoadBalancer
+    loadBalancerIP: 192.168.86.184
   alertmanagerSpec:
     alertmanagerConfigSelector:
       matchLabels:
