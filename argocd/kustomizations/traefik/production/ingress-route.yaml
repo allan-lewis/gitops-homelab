@@ -8,17 +8,6 @@ spec:
   entryPoints:
     - websecure
   routes: 
-    - match: Host(`homepage.k8s.allanshomelab.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: homepage
-          namespace: default
-          port: 3000
-          scheme: http 
     - match: Host(`longhorn.k8s.allanshomelab.com`)
       kind: Rule
       middlewares:
