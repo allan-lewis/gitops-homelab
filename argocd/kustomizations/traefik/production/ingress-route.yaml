@@ -19,39 +19,6 @@ spec:
           namespace: longhorn-system
           port: 80
           scheme: http                
-    - match: Host(`auth.allanandvaia.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: authentik-server
-          namespace: authentik
-          port: 80
-          scheme: http 
-    - match: Host(`auth.129monroe.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: authentik-server
-          namespace: authentik
-          port: 80
-          scheme: http 
-    - match: Host(`auth.allanshomelab.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: authentik-server
-          namespace: authentik
-          port: 80
-          scheme: http 
     - match: Host(`grafana.allanshomelab.com`)
       kind: Rule
       middlewares:
