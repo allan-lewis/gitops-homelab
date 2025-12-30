@@ -30,28 +30,6 @@ spec:
           namespace: kube-prometheus-stack
           port: 80
           scheme: http 
-    - match: Host(`prometheus.k8s.allanshomelab.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: kube-prometheus-stack-prometheus
-          namespace: kube-prometheus-stack
-          port: 9090
-          scheme: http
-    - match: Host(`alerts.k8s.allanshomelab.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: kube-prometheus-stack-alertmanager
-          namespace: kube-prometheus-stack
-          port: 9093
-          scheme: http
     - match: Host(`gitops.allanshomelab.com`)
       kind: Rule
       middlewares:
