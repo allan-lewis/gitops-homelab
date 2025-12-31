@@ -1,6 +1,8 @@
 server:
   insecure: true
   service:
+    type: LoadBalancer
+    loadBalancerIP: 192.168.86.182 
     ports:
       https: null
   extraArgs:
