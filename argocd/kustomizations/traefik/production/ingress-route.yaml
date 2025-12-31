@@ -7,15 +7,4 @@ metadata:
 spec:
   entryPoints:
     - websecure
-  routes: 
-    - match: Host(`gitops.allanshomelab.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-custom-headers
-          namespace: default
-      priority: 10
-      services:
-        - name: argocd-server
-          namespace: argocd
-          port: 443
-          scheme: https    
+  routes: []  
