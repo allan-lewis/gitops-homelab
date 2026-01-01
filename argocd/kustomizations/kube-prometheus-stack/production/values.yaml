@@ -7,9 +7,6 @@ kubeControllerManager:
 kubeProxy:
   enabled: false
 
-grafana:
-  enabled: false
-
 defaultRules:
   create: true
   rules:
@@ -182,6 +179,7 @@ prometheus:
             replacement: 'cujo'
 
 grafana:
+  enabled: false
   service:
     type: LoadBalancer
     loadBalancerIP: 192.168.86.185
