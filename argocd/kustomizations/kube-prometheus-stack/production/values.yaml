@@ -7,6 +7,9 @@ kubeControllerManager:
 kubeProxy:
   enabled: false
 
+grafana:
+  enabled: false
+
 defaultRules:
   create: true
   rules:
